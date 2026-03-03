@@ -4,25 +4,25 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | AML & Compliance Portfolio</title>
-<meta name="description" content="Bhishek Shibdeen — AML, Compliance, Risk. Education, experience, certifications, roadmap, and contact." />
+<meta name="description" content="Bhishek Shibdeen — Compliance, AML & Risk portfolio. Education, experience, certifications, roadmap, and contact." />
 
 <style>
   :root{
-    /* Grey / black / white — not too dark */
-    --bg1:#1c1f24;
-    --bg2:#2a2f36;
-    --bg3:#171a1f;
+    /* Sleek corporate greys (not too dark) */
+    --bgA:#242a31;
+    --bgB:#2f3640;
+    --bgC:#1f242b;
 
-    --card:rgba(255,255,255,0.08);
+    --card:rgba(255,255,255,0.09);
     --card2:rgba(255,255,255,0.06);
     --border:rgba(255,255,255,0.14);
     --border2:rgba(255,255,255,0.22);
 
-    --text:rgba(255,255,255,0.92);
-    --muted:rgba(255,255,255,0.70);
+    --text:rgba(255,255,255,0.93);
+    --muted:rgba(255,255,255,0.72);
     --muted2:rgba(255,255,255,0.56);
 
-    --shadow:0 22px 65px rgba(0,0,0,0.45);
+    --shadow:0 22px 65px rgba(0,0,0,0.40);
     --radius:18px;
   }
 
@@ -34,27 +34,26 @@
     color:var(--text);
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     background:
-      radial-gradient(900px 700px at 12% 10%, rgba(255,255,255,0.12), transparent 55%),
-      radial-gradient(1000px 750px at 88% 18%, rgba(255,255,255,0.08), transparent 60%),
-      linear-gradient(135deg, var(--bg2) 0%, var(--bg1) 35%, var(--bg3) 100%);
+      radial-gradient(900px 700px at 12% 10%, rgba(255,255,255,0.11), transparent 58%),
+      radial-gradient(1000px 750px at 88% 16%, rgba(255,255,255,0.08), transparent 62%),
+      linear-gradient(135deg, var(--bgB) 0%, var(--bgA) 38%, var(--bgC) 100%);
     overflow-x:hidden;
   }
 
-  /* Subtle background “designs” */
+  /* Subtle corporate background designs */
   .bg-design{
     position:fixed;
-    inset:-200px;
+    inset:-250px;
     pointer-events:none;
-    opacity:0.35;
-    filter: blur(0px);
+    opacity:0.22;
     background:
-      linear-gradient(120deg, rgba(255,255,255,0.05) 0%, transparent 60%) 0 0/900px 700px no-repeat,
-      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 55%) 0 0/100% 100% no-repeat,
-      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05), transparent 60%) 0 0/100% 100% no-repeat;
+      radial-gradient(circle at 16% 18%, rgba(255,255,255,0.16), transparent 52%),
+      radial-gradient(circle at 86% 14%, rgba(255,255,255,0.12), transparent 58%),
+      linear-gradient(120deg, rgba(255,255,255,0.10) 0%, transparent 55%);
     mix-blend-mode: overlay;
+    filter: blur(0px);
   }
 
-  /* A faint diagonal grid */
   .grid{
     position:fixed;
     inset:0;
@@ -62,18 +61,18 @@
     opacity:0.10;
     background:
       repeating-linear-gradient(135deg,
-        rgba(255,255,255,0.08) 0px,
-        rgba(255,255,255,0.08) 1px,
+        rgba(255,255,255,0.14) 0px,
+        rgba(255,255,255,0.14) 1px,
         transparent 1px,
-        transparent 18px
+        transparent 22px
       );
-    mask-image: radial-gradient(circle at 50% 10%, black 0%, transparent 70%);
+    mask-image: radial-gradient(circle at 50% 10%, black 0%, transparent 72%);
   }
 
   .wrap{
     width:min(1100px, 92vw);
     margin:0 auto;
-    padding:18px 0 80px;
+    padding:18px 0 84px;
   }
 
   /* Sticky top menu */
@@ -87,10 +86,10 @@
     gap:12px;
     padding:12px 14px;
     border:1px solid var(--border);
-    background:rgba(20,22,26,0.70);
+    background:rgba(30,34,40,0.72);
     backdrop-filter: blur(10px);
     border-radius:999px;
-    box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.32);
   }
 
   .brand{
@@ -102,15 +101,15 @@
 
   .mark{
     width:12px;height:12px;border-radius:999px;
-    background:linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.25));
-    border:1px solid rgba(255,255,255,0.22);
+    background:linear-gradient(135deg, rgba(255,255,255,0.96), rgba(255,255,255,0.25));
+    border:1px solid rgba(255,255,255,0.24);
   }
 
   .brand .name{
-    font-weight:750;
+    font-weight:800;
     letter-spacing:0.2px;
     font-size:14px;
-    color:rgba(255,255,255,0.90);
+    color:rgba(255,255,255,0.92);
   }
 
   .navlinks{
@@ -136,9 +135,51 @@
     transform: translateY(-1px);
   }
 
+  /* Cards */
+  .card{
+    border:1px solid var(--border);
+    background: linear-gradient(180deg, var(--card), var(--card2));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover{
+    transform: translateY(-4px);
+    border-color: var(--border2);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.46);
+  }
+
+  /* About section above */
+  .about-top{
+    margin-top:16px;
+  }
+  .section-head{
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,0.10);
+    background: rgba(0,0,0,0.10);
+  }
+  .section-head h2{
+    margin:0;
+    font-size:14px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+    font-weight: 850;
+  }
+  .section-body{
+    padding:16px 18px 20px;
+    color: var(--muted);
+    font-size:14px;
+    line-height: 1.85;
+  }
+
   /* Hero */
   header{
-    padding:34px 6px 10px;
+    padding:22px 6px 10px;
   }
 
   h1{
@@ -150,11 +191,11 @@
     font-weight: 650;
   }
 
-  /* “Kaizen” below name */
+  /* Kaizen */
   #kaizen{
     margin-top:10px;
     font-style: italic;
-    color: rgba(255,255,255,0.80);
+    color: rgba(255,255,255,0.82);
     font-size: 14px;
     letter-spacing: 0.4px;
     display:inline-block;
@@ -164,11 +205,9 @@
     background: rgba(255,255,255,0.05);
     transition: 0.25s ease;
   }
-
-  /* Highlight effect when “In progress” is clicked */
   #kaizen.kaizen-highlight{
-    border-color: rgba(255,255,255,0.38);
-    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.40);
+    background: rgba(255,255,255,0.16);
     box-shadow: 0 0 0 8px rgba(255,255,255,0.06);
     transform: translateY(-1px);
   }
@@ -183,20 +222,6 @@
   @media (max-width: 920px){
     .hero{ grid-template-columns: 1fr; }
     .brand{ min-width: auto; }
-  }
-
-  .card{
-    border:1px solid var(--border);
-    background: linear-gradient(180deg, var(--card), var(--card2));
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow:hidden;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  }
-  .card:hover{
-    transform: translateY(-4px);
-    border-color: var(--border2);
-    box-shadow: 0 28px 80px rgba(0,0,0,0.50);
   }
 
   .hero-main{ padding:22px; }
@@ -224,9 +249,9 @@
   .lead{
     margin: 0;
     color: var(--muted);
-    line-height: 1.8;
+    line-height: 1.85;
     font-size: 15px;
-    max-width: 85ch;
+    max-width: 90ch;
   }
 
   .pills{
@@ -240,7 +265,7 @@
     border-radius:999px;
     border:1px solid rgba(255,255,255,0.14);
     background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.78);
+    color: rgba(255,255,255,0.80);
     font-size: 13px;
   }
 
@@ -263,8 +288,8 @@
     margin-bottom:6px;
   }
   .v{
-    color: rgba(255,255,255,0.88);
-    font-weight: 700;
+    color: rgba(255,255,255,0.90);
+    font-weight: 780;
     font-size: 14px;
     line-height: 1.55;
   }
@@ -272,28 +297,6 @@
   /* Sections */
   .section{
     margin-top:16px;
-  }
-  .section-head{
-    padding:16px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,0.10);
-    background: rgba(0,0,0,0.10);
-  }
-  .section-head h2{
-    margin:0;
-    font-size:14px;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.80);
-    font-weight: 800;
-  }
-  .section-body{
-    padding:16px 18px 20px;
-    color: var(--muted);
-    font-size:14px;
-    line-height: 1.85;
   }
 
   .two-col{
@@ -306,7 +309,7 @@
   ul{ margin:10px 0 0; padding-left: 18px; }
   li{ margin:6px 0; }
 
-  /* Certificate rows */
+  /* Rows */
   .row{
     display:flex;
     align-items:flex-start;
@@ -323,8 +326,8 @@
     border-color: rgba(255,255,255,0.20);
   }
   .row .title{
-    font-weight: 800;
-    color: rgba(255,255,255,0.90);
+    font-weight: 850;
+    color: rgba(255,255,255,0.92);
     margin-bottom: 4px;
   }
   .row .meta{
@@ -341,10 +344,11 @@
     background: rgba(255,255,255,0.07);
     color: rgba(255,255,255,0.92);
     text-decoration:none;
-    font-weight: 750;
+    font-weight: 780;
     font-size: 13px;
     transition: 0.18s ease;
     cursor:pointer;
+    white-space:nowrap;
   }
   .row .action a:hover, .row .action button:hover{
     background: rgba(255,255,255,0.11);
@@ -361,8 +365,8 @@
     border-radius:999px;
     border:1px dashed rgba(255,255,255,0.22);
     background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.82);
-    font-weight: 750;
+    color: rgba(255,255,255,0.84);
+    font-weight: 800;
     font-size: 13px;
     user-select:none;
   }
@@ -378,7 +382,7 @@
     100%{ box-shadow: 0 0 0 0 rgba(255,255,255,0.0); }
   }
 
-  /* LinkedIn logo button */
+  /* LinkedIn */
   .li-btn{
     display:inline-flex;
     align-items:center;
@@ -389,7 +393,7 @@
     background: rgba(255,255,255,0.07);
     color: rgba(255,255,255,0.92);
     text-decoration:none;
-    font-weight: 800;
+    font-weight: 850;
     font-size: 13px;
     transition: 0.18s ease;
   }
@@ -398,21 +402,16 @@
     border-color: rgba(255,255,255,0.22);
     transform: translateY(-1px);
   }
-  .li-icon{
-    width:18px;
-    height:18px;
-    display:inline-block;
-  }
+  .li-icon{ width:18px; height:18px; display:inline-block; }
 
   footer{
     margin-top: 24px;
     text-align:center;
-    color: rgba(255,255,255,0.50);
+    color: rgba(255,255,255,0.52);
     font-size: 13px;
     padding: 14px 0 0;
   }
 
-  /* Anchor offset so sticky nav doesn't cover section titles */
   .anchor{ scroll-margin-top: 90px; }
 </style>
 </head>
@@ -429,8 +428,8 @@
       <span class="mark"></span>
       <span class="name">Bhishek Shibdeen</span>
     </div>
-
     <div class="navlinks">
+      <a href="#about">About</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
@@ -439,6 +438,21 @@
       <a href="#contact">Contact</a>
     </div>
   </div>
+
+  <!-- ABOUT ABOVE -->
+  <section class="card about-top section anchor" id="about">
+    <div class="section-head"><h2>About</h2></div>
+    <div class="section-body">
+      <p style="margin:0;">
+        I’m building my path in <strong>Compliance, AML, and Risk</strong> within the financial sector, combining academic foundations
+        with hands-on exposure in a regulated fintech environment. I value operational precision, institutional transparency, and
+        strong governance as the basis for sustainable financial ecosystems.
+      </p>
+      <p style="margin:10px 0 0; color:var(--muted2); font-size:13px;">
+        Alternate About version is available in “Version 2” below (swap it in if you prefer).
+      </p>
+    </div>
+  </section>
 
   <!-- HERO -->
   <header>
@@ -478,14 +492,13 @@
           <div class="v">Controls mindset, accuracy, and governance discipline</div>
         </div>
         <div class="mini">
-          <div class="k">Connect</div>
+          <div class="k">LinkedIn</div>
           <div class="v">
             <a class="li-btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-              <!-- Simple LinkedIn logo (white) -->
               <svg class="li-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="rgba(255,255,255,0.92)" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
               </svg>
-              LinkedIn
+              linkedin.com/in/bhishekshibdeen ↗
             </a>
           </div>
         </div>
@@ -541,7 +554,8 @@
     <div class="section-head"><h2>Professional Experience</h2></div>
     <div class="section-body">
       <div class="mini">
-        <div class="v">KYC & Compliance Operations Intern — ARIE Finance                    Dec 2025 - April 2026</div>
+        <div class="v">KYC & Compliance Operations Intern — ARIE Finance</div>
+        <div class="k" style="margin-top:6px;">Dec 2025 – April 2026</div>
         <ul>
           <li>Led risk-based KYC & CDD reviews for 50+ corporate and retail clients, ensuring full alignment with AML frameworks and internal controls.</li>
           <li>Conducted enhanced due diligence, including sanctions, PEP, and adverse media screening, mitigating high-risk exposures and protecting institutional integrity.</li>
@@ -617,9 +631,6 @@
           <a href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View Certificate ↗</a>
         </div>
       </div>
-
-      <p style="margin-top:14px; color:var(--muted2); font-size:13px;">
-      </p>
     </div>
   </section>
 
@@ -632,14 +643,14 @@
           <div class="k">Direction</div>
           <div class="v">Compliance & Financial Crime Risk Management</div>
           <div class="k" style="margin-top:12px;">Near-Term Focus</div>
-          <div class="v">Deepen AML/CFT expertise, improve risk-based onboarding practice, and build measurable compliance outcomes.</div>
+          <div class="v">Deepen AML/CFT expertise, strengthen risk-based onboarding, and build measurable compliance outcomes.</div>
         </div>
 
         <div class="mini">
           <div class="k">Long-Term Objective</div>
           <div class="v">Progress toward senior compliance responsibilities and potentially a future MLRO pathway.</div>
           <div class="k" style="margin-top:12px;">Approach</div>
-          <div class="v">Documentation excellence, strong controls, continuous learning, and alignment with international AML expectations.</div>
+          <div class="v">Documentation excellence, strong controls, continuous improvement, and alignment with international AML expectations.</div>
         </div>
       </div>
     </div>
@@ -653,14 +664,13 @@
         <div class="mini">
           <div class="k">Email</div>
           <div class="v"><a href="mailto:bhishek.shibdeen@icloud.com" style="color:rgba(255,255,255,0.92); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.18);">bhishek.shibdeen@icloud.com</a></div>
-
           <div class="k" style="margin-top:12px;">Phone</div>
           <div class="v">+230 55024085</div>
         </div>
 
         <div class="mini">
           <div class="k">LinkedIn</div>
-          <div class="v" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <div class="v">
             <a class="li-btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
               <svg class="li-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="rgba(255,255,255,0.92)" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
@@ -668,7 +678,6 @@
               linkedin.com/in/bhishekshibdeen ↗
             </a>
           </div>
-
           <div class="k" style="margin-top:14px;">Location</div>
           <div class="v">Mauritius</div>
         </div>
@@ -676,9 +685,7 @@
     </div>
   </section>
 
-  <footer>
-    © 2026 Bhishek Shibdeen
-  </footer>
+  <footer>© 2026 Bhishek Shibdeen</footer>
 
 </div>
 
@@ -694,7 +701,6 @@
 
   btn?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // Slight delay so highlight triggers after scroll begins
     setTimeout(highlightKaizen, 350);
   });
 </script>
