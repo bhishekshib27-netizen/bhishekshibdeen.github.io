@@ -11,30 +11,46 @@
     --bg:#ffffff;
     --panel:#ffffff;
     --text:#050505;
-    --muted:#2b2b2b;
-    --line:#e9e9e9;
+    --muted:#1f1f1f;
+    --line:#ececec;
 
     --radius:18px;
-    --radius2:0px;
-
     --shadow: 0 20px 60px rgba(0,0,0,0.08);
     --shadow2: 0 10px 30px rgba(0,0,0,0.06);
 
+    --soft:#f6f6f6;
     --accent:#000000;
-    --soft:#f5f5f5;
   }
 
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
-
   body{
     margin:0;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     color:var(--text);
     background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ===== Premium motion background (white + black) ===== */
+  /* ===== Scroll progress bar ===== */
+  .progress{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:4px;
+    z-index:999;
+    background: transparent;
+  }
+  .progress > span{
+    display:block;
+    height:100%;
+    width:0%;
+    background: #000;
+    transform-origin: left;
+  }
+
+  /* ===== Motion background (white + black) ===== */
   .bg-stage{
     position:fixed;
     inset:0;
@@ -42,36 +58,32 @@
     overflow:hidden;
     z-index:0;
   }
-
-  /* soft moving blobs */
   .blob{
     position:absolute;
     width:520px;height:520px;
     border-radius: 50%;
     filter: blur(30px);
-    opacity: 0.10;
+    opacity: 0.08;
     background: radial-gradient(circle at 30% 30%, #000 0%, transparent 60%);
     animation: drift 14s ease-in-out infinite;
     transform: translate3d(0,0,0);
   }
-  .blob.b1{ left:-200px; top:-180px; animation-delay: -2s; }
-  .blob.b2{ right:-240px; top:-120px; width:620px; height:620px; opacity:0.08; animation-delay: -6s; }
-  .blob.b3{ left:20%; bottom:-320px; width:700px; height:700px; opacity:0.07; animation-delay: -10s; }
-
+  .blob.b1{ left:-220px; top:-190px; animation-delay: -2s; }
+  .blob.b2{ right:-260px; top:-140px; width:640px; height:640px; opacity:0.06; animation-delay: -7s; }
+  .blob.b3{ left:18%; bottom:-340px; width:740px; height:740px; opacity:0.05; animation-delay: -11s; }
   @keyframes drift{
     0%{ transform: translate(0px,0px) scale(1); }
-    50%{ transform: translate(40px,26px) scale(1.06); }
+    50%{ transform: translate(42px,28px) scale(1.05); }
     100%{ transform: translate(0px,0px) scale(1); }
   }
 
-  /* animated line-grid (very subtle) */
   .grid{
     position:absolute; inset:0;
-    opacity:0.20;
+    opacity:0.18;
     background:
       linear-gradient(#00000010 1px, transparent 1px) 0 0/56px 56px,
       linear-gradient(90deg, #00000010 1px, transparent 1px) 0 0/56px 56px;
-    mask-image: radial-gradient(circle at 50% 22%, black 0%, transparent 70%);
+    mask-image: radial-gradient(circle at 50% 22%, black 0%, transparent 72%);
     animation: gridFloat 10s ease-in-out infinite;
   }
   @keyframes gridFloat{
@@ -80,17 +92,15 @@
     100%{ transform: translateY(0px); }
   }
 
-  /* geometric shapes (crisp, minimal) */
   .shape{
     position:absolute;
     border: 2px solid #000;
-    opacity:0.10;
+    opacity:0.08;
     animation: shapeFloat 12s ease-in-out infinite;
   }
   .shape.s1{ width:120px;height:120px; left:8%; top:18%; transform: rotate(12deg); animation-delay:-2s; }
-  .shape.s2{ width:160px;height:90px; right:10%; top:26%; transform: rotate(-8deg); animation-delay:-6s; }
-  .shape.s3{ width:110px;height:110px; right:18%; bottom:14%; border-radius: 999px; animation-delay:-9s; }
-
+  .shape.s2{ width:170px;height:92px; right:10%; top:26%; transform: rotate(-8deg); animation-delay:-6s; }
+  .shape.s3{ width:112px;height:112px; right:18%; bottom:14%; border-radius: 999px; animation-delay:-9s; }
   @keyframes shapeFloat{
     0%{ transform: translateY(0px) rotate(var(--r,0deg)); }
     50%{ transform: translateY(14px) rotate(var(--r,0deg)); }
@@ -126,11 +136,11 @@
     display:flex;
     align-items:center;
     gap:10px;
-    font-weight:900;
+    font-weight: 850;
     letter-spacing:0.2px;
   }
   .brand-badge{
-    width:12px;height:12px;border-radius:999px;
+    width:10px;height:10px;border-radius:999px;
     background: #000;
   }
   .navlinks{
@@ -141,14 +151,14 @@
   }
   .nav a{
     text-decoration:none;
-    color: #111;
-    font-weight:800;
+    color:#000;
+    font-weight:750;
     font-size:12px;
     padding: 9px 11px;
     border-radius: 999px;
     border:1px solid transparent;
     transition: 0.18s ease;
-    opacity:0.75;
+    opacity:0.72;
   }
   .nav a:hover{
     opacity:1;
@@ -171,32 +181,20 @@
     box-shadow: 0 26px 70px rgba(0,0,0,0.10);
   }
 
-  /* ===== Hero (motion-driven) ===== */
-  .hero{
-    margin-top: 18px;
-    position:relative;
-  }
-
+  /* ===== Hero ===== */
+  .hero{ margin-top: 18px; }
   .hero-main{
-    padding: 26px;
+    padding: 28px;
     display:grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 16px;
   }
 
-  .headline{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-
-  /* Header = name (as you requested) */
   h1{
     margin:0;
-    font-size: clamp(34px, 4.2vw, 54px);
-    letter-spacing: -1px;
+    font-size: clamp(36px, 4.4vw, 56px);
+    letter-spacing: -1.2px;
     line-height: 1.02;
-    font-weight: 950;
+    font-weight: 900;
   }
 
   .motto-row{
@@ -205,7 +203,6 @@
     gap:10px;
     flex-wrap:wrap;
   }
-
   .kaizen-pill{
     display:inline-flex;
     align-items:center;
@@ -214,35 +211,37 @@
     border-radius: 999px;
     border: 1px solid #000;
     background:#fff;
-    font-weight: 950;
-    letter-spacing: 0.6px;
+    font-weight: 850;
+    letter-spacing: 0.7px;
     text-transform: uppercase;
     font-size: 12px;
   }
   .kaizen-dot{
-    width:10px;height:10px;border-radius:999px;
+    width:9px;height:9px;border-radius:999px;
     background:#000;
-    box-shadow: 0 0 0 rgba(0,0,0,0.20);
+    box-shadow: 0 0 0 rgba(0,0,0,0.22);
     animation: pulse 1.6s infinite;
   }
   @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.18); }
+    0%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.16); }
     70%{ box-shadow: 0 0 0 14px rgba(0,0,0,0.0); }
     100%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.0); }
   }
 
+  /* Modern slim text */
   .subtitle{
-    margin: 0;
-    color: #1a1a1a;
+    margin:0;
+    color:#0d0d0d;
     line-height: 1.75;
     font-size: 15px;
-    font-weight: 650;
-    opacity:0.92;
-    max-width: 78ch;
+    font-weight: 560;
+    opacity:0.90;
+    max-width: 84ch;
   }
+  .subtitle strong{ font-weight: 820; }
 
   .cta{
-    margin-top: 6px;
+    margin-top: 4px;
     display:flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -257,30 +256,22 @@
     border: 1px solid var(--line);
     background: #fff;
     color: var(--text);
-    font-weight: 900;
+    font-weight: 780;
     font-size: 13px;
     transition: 0.18s ease;
   }
-  .btn:hover{
-    background: var(--soft);
-    transform: translateY(-1px);
-  }
+  .btn:hover{ background: var(--soft); transform: translateY(-1px); }
   .btn.primary{
-    background: #000;
-    color: #fff;
-    border-color: #000;
+    background:#000;
+    color:#fff;
+    border-color:#000;
   }
-  .btn.primary:hover{
-    background: #111;
-  }
-  .icon{
-    width:18px;height:18px;
-    display:inline-block;
-  }
+  .btn.primary:hover{ background:#111; }
+  .icon{ width:18px;height:18px; display:inline-block; }
 
-  /* ===== "Drive to scroll" strip + scroll icon ===== */
+  /* Drive to scroll */
   .scroll-drive{
-    margin-top: 14px;
+    margin-top: 10px;
     padding: 14px 16px;
     border: 1px solid var(--line);
     border-radius: 16px;
@@ -292,16 +283,14 @@
     overflow:hidden;
     position:relative;
   }
-
   .scroll-drive::before{
     content:"";
     position:absolute;
     inset:-40px;
     background:
-      radial-gradient(circle at 18% 30%, rgba(0,0,0,0.07), transparent 50%),
-      radial-gradient(circle at 78% 10%, rgba(0,0,0,0.05), transparent 55%);
-    opacity:0.55;
-    transform: translateY(0);
+      radial-gradient(circle at 18% 30%, rgba(0,0,0,0.06), transparent 50%),
+      radial-gradient(circle at 78% 10%, rgba(0,0,0,0.04), transparent 55%);
+    opacity:0.65;
     animation: driveGlow 6s ease-in-out infinite;
   }
   @keyframes driveGlow{
@@ -309,26 +298,16 @@
     50%{ transform: translateY(8px); }
     100%{ transform: translateY(0px); }
   }
-
   .scroll-drive > *{ position:relative; z-index:1; }
 
-  .drive-text{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
-  .drive-text .top{
-    font-weight: 950;
-    letter-spacing: 0.4px;
-  }
+  .drive-text{ display:flex; flex-direction:column; gap:2px; }
+  .drive-text .top{ font-weight: 850; letter-spacing: 0.2px; }
   .drive-text .sub{
-    color:#222;
-    font-weight: 700;
+    color:#111;
+    font-weight: 560;
     font-size: 13px;
-    opacity:0.75;
+    opacity:0.70;
   }
-
-  /* scroll button */
   .scroll-btn{
     display:inline-flex;
     align-items:center;
@@ -338,22 +317,15 @@
     color:#fff;
     padding: 10px 14px;
     border-radius: 999px;
-    font-weight: 950;
+    font-weight: 850;
     text-decoration:none;
     transition: 0.18s ease;
     white-space:nowrap;
   }
-  .scroll-btn:hover{
-    background:#111;
-    transform: translateY(-1px);
-  }
+  .scroll-btn:hover{ background:#111; transform: translateY(-1px); }
 
-  /* animated scroll icon below hero */
-  .scroll-icon-wrap{
-    margin-top: 12px;
-    display:flex;
-    justify-content:center;
-  }
+  /* Scroll icon below hero */
+  .scroll-icon-wrap{ margin-top: 12px; display:flex; justify-content:center; }
   .scroll-icon{
     width:34px;height:52px;
     border:2px solid #000;
@@ -379,92 +351,6 @@
     100%{ transform: translate(-50%, 0); opacity:1; }
   }
 
-  /* ===== "Peek" teaser (entices clicks) ===== */
-  .peek{
-    margin-top: 16px;
-    position:relative;
-  }
-
-  .peek-card{
-    border-radius: var(--radius);
-    border:1px solid var(--line);
-    background:#fff;
-    box-shadow: var(--shadow2);
-    overflow:hidden;
-  }
-
-  .peek-head{
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-  }
-  .peek-head .label{
-    font-weight: 950;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-  .peek-head .hint{
-    font-size: 12px;
-    font-weight: 850;
-    opacity:0.70;
-  }
-
-  .peek-body{
-    padding: 16px 18px 18px;
-    color:#121212;
-    font-size: 14.5px;
-    line-height: 1.85;
-    font-weight: 650;
-  }
-
-  /* show only a "peak" by default */
-  .peek-window{
-    max-height: 132px;
-    overflow:hidden;
-    position:relative;
-  }
-  .peek-window::after{
-    content:"";
-    position:absolute;
-    left:0; right:0; bottom:0;
-    height:70px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,1));
-  }
-
-  .peek-actions{
-    padding: 14px 18px 18px;
-    border-top: 1px solid var(--line);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-  }
-
-  .peek-actions .micro{
-    font-size: 12.5px;
-    font-weight: 850;
-    opacity:0.72;
-  }
-
-  .peek-actions a{
-    text-decoration:none;
-    font-weight: 950;
-    color:#000;
-    border:1px solid #000;
-    background:#fff;
-    padding: 10px 14px;
-    border-radius: 999px;
-    transition: 0.18s ease;
-  }
-  .peek-actions a:hover{
-    background: var(--soft);
-    transform: translateY(-1px);
-  }
-
   /* ===== Sections ===== */
   .section{ margin-top: 16px; }
   .section-head{
@@ -481,16 +367,15 @@
     letter-spacing: 2.2px;
     text-transform: uppercase;
     color: var(--text);
-    font-weight: 950;
+    font-weight: 900;
   }
 
   .section-body{
     padding: 16px 18px 20px;
-    color: #1b1b1b;
+    color:#0f0f0f;
     line-height: 1.85;
     font-size: 14.5px;
-    border-radius: var(--radius2);
-    font-weight: 650;
+    font-weight: 560;
   }
 
   .two-col{
@@ -502,32 +387,26 @@
     .two-col{ grid-template-columns: 1fr; }
   }
 
-  ul{ margin: 10px 0 0; padding-left: 18px; }
-  li{ margin: 6px 0; }
-
   .mini{
     border: 1px solid var(--line);
-    border-radius: var(--radius2);
+    border-radius: 0px;
     background: #fff;
     padding: 14px;
     transition: transform 0.18s ease, background 0.18s ease;
   }
-  .mini:hover{
-    transform: translateY(-2px);
-    background: var(--soft);
-  }
+  .mini:hover{ transform: translateY(-2px); background: var(--soft); }
 
   .k{
     text-transform: uppercase;
     letter-spacing: 1.6px;
     font-size: 12px;
-    color: #111;
-    opacity:0.70;
+    color:#000;
+    opacity:0.62;
     margin-bottom: 6px;
-    font-weight: 950;
+    font-weight: 850;
   }
   .v{
-    font-weight: 950;
+    font-weight: 850;
     color: var(--text);
     line-height: 1.5;
     font-size: 14px;
@@ -540,24 +419,123 @@
     gap:12px;
     padding: 14px;
     border: 1px solid var(--line);
-    border-radius: var(--radius2);
+    border-radius: 0px;
     background: #fff;
     transition: transform 0.18s ease, background 0.18s ease;
   }
-  .row:hover{
-    transform: translateY(-2px);
-    background: var(--soft);
+  .row:hover{ transform: translateY(-2px); background: var(--soft); }
+  .row .title{ font-weight: 880; color: var(--text); margin-bottom: 4px; }
+  .row .meta{ color:#000; opacity:0.65; font-size: 13px; font-weight: 600; }
+
+  ul{ margin: 10px 0 0; padding-left: 18px; }
+  li{ margin: 6px 0; }
+
+  /* ===== Case Study 3 cards ===== */
+  .case-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
   }
-  .row .title{
-    font-weight: 950;
-    color: var(--text);
-    margin-bottom: 4px;
+  @media (max-width: 900px){
+    .case-grid{ grid-template-columns: 1fr; }
   }
-  .row .meta{
-    color: #111;
-    opacity:0.70;
+  .case-card{
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius: 0px;
+    padding: 16px;
+    transition: transform 0.18s ease, background 0.18s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .case-card:hover{ transform: translateY(-3px); background: var(--soft); }
+  .case-card::before{
+    content:"";
+    position:absolute;
+    inset:-60px;
+    background: radial-gradient(circle at 20% 20%, rgba(0,0,0,0.06), transparent 55%);
+    opacity:0.55;
+    transform: translateY(0px);
+    transition: 0.18s ease;
+  }
+  .case-card:hover::before{ transform: translateY(8px); }
+  .case-card > *{ position:relative; z-index:1; }
+
+  .case-label{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity:0.75;
+    margin-bottom: 10px;
+  }
+  .case-h{
+    margin:0 0 8px;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: -0.2px;
+  }
+  .case-p{
+    margin:0;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 560;
+    opacity:0.90;
+  }
+
+  /* ===== Timeline Experience ===== */
+  .timeline{
+    position:relative;
+    padding-left: 18px;
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:7px; top:6px; bottom:6px;
+    width:2px;
+    background: #00000020;
+  }
+  .t-item{
+    position:relative;
+    border:1px solid var(--line);
+    border-radius: 0px;
+    background:#fff;
+    padding: 14px 14px 14px 18px;
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .t-item:hover{ transform: translateY(-2px); background: var(--soft); }
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:-2px; top:18px;
+    width:12px;height:12px;
+    border-radius:999px;
+    background:#000;
+    box-shadow: 0 0 0 6px rgba(0,0,0,0.07);
+  }
+
+  .t-title{
+    font-weight: 900;
+    letter-spacing: -0.2px;
+    margin:0 0 6px;
+  }
+  .t-meta{
+    font-weight: 600;
+    opacity:0.65;
     font-size: 13px;
-    font-weight: 750;
+    margin:0 0 10px;
+  }
+  .t-bullets{
+    margin:0;
+    padding-left: 18px;
+    font-weight: 560;
+    opacity:0.92;
   }
 
   .anchor{ scroll-margin-top: 90px; }
@@ -565,11 +543,11 @@
   footer{
     margin-top: 24px;
     text-align:center;
-    color: #111;
-    opacity:0.70;
+    color:#000;
+    opacity:0.62;
     font-size: 13px;
     padding: 14px 0 0;
-    font-weight: 850;
+    font-weight: 700;
   }
 
   /* subtle reveal */
@@ -582,7 +560,8 @@
 </head>
 
 <body>
-  <!-- background motion stage -->
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
   <div class="bg-stage" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
@@ -603,6 +582,7 @@
     </div>
     <div class="navlinks">
       <a href="#about">About</a>
+      <a href="#case-study">Case Study</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
@@ -615,121 +595,97 @@
   <!-- HERO -->
   <div class="hero">
     <section class="card hero-main">
-      <div class="headline">
-        <h1>Bhishek Shibdeen</h1>
+      <h1>Bhishek Shibdeen</h1>
 
-        <div class="motto-row">
-          <span class="kaizen-pill">
-            <span class="kaizen-dot"></span>
-            Kaizen
-          </span>
-          <span style="font-weight:900; opacity:0.75;">Compliance • AML/CFT • Risk</span>
+      <div class="motto-row">
+        <span class="kaizen-pill">
+          <span class="kaizen-dot"></span>
+          Kaizen
+        </span>
+        <span style="font-weight:750; opacity:0.70;">Compliance • AML/CFT • Risk</span>
+      </div>
+
+      <p class="subtitle">
+        I focus on risk-based onboarding and financial crime controls — KYC governance, EDD support, sanctions/PEP screening,
+        and audit-ready documentation discipline within a regulated fintech environment.
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
+        <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="scroll-drive">
+        <div class="drive-text">
+          <div class="top">Scroll for the case-study summary</div>
+          <div class="sub">Problem → actions → outcome, in a recruiter-friendly format.</div>
         </div>
+        <a class="scroll-btn" href="#case-study">Go ↓</a>
+      </div>
 
-        <p class="subtitle">
-          Building my path in <strong>Compliance</strong>, <strong>AML/CFT</strong>, and <strong>risk-based governance</strong> within the financial sector —
-          with hands-on exposure to KYC operations, EDD support, sanctions/PEP screening, and audit-ready documentation discipline.
-        </p>
-
-        <div class="cta">
-          <a class="btn primary" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
-
-          <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-            </svg>
-            LinkedIn
-          </a>
-        </div>
-
-        <!-- DRIVE TO SCROLL -->
-        <div class="scroll-drive">
-          <div class="drive-text">
-            <div class="top">Scroll to see my strongest work 🖤</div>
-            <div class="sub">A short case-study style About section — risk mindset, real responsibilities, real direction.</div>
-          </div>
-          <a class="scroll-btn" href="#about">
-            Scroll now ↓
-          </a>
-        </div>
-
-        <!-- animated scroll icon -->
-        <div class="scroll-icon-wrap">
-          <a href="#about" aria-label="Scroll to About" style="text-decoration:none;">
-            <div class="scroll-icon"></div>
-          </a>
-        </div>
+      <div class="scroll-icon-wrap">
+        <a href="#case-study" aria-label="Scroll to Case Study" style="text-decoration:none;">
+          <div class="scroll-icon"></div>
+        </a>
       </div>
     </section>
-
-    <!-- PEAK / TEASER -->
-    <div class="peek">
-      <div class="peek-card">
-        <div class="peek-head">
-          <div class="label">Case Study Preview</div>
-          <div class="hint">This is where most people click 👇</div>
-        </div>
-
-        <div class="peek-body peek-window">
-          —🙋‍♂️ Hi, I’m Bhishek and I’m building my path in Compliance, AML, and Risk within the financial sector.<br><br>
-          🎓 Business Management (Finance) student with hands-on experience in KYC, AML, and compliance operations within a regulated fintech environment.<br><br>
-          ✅ Risk-based KYC and Customer Due Diligence (CDD) within a regulated fintech framework.<br>
-          ✅ Supported Enhanced Due Diligence (EDD), sanctions screening, PEP checks, and adverse media reviews.<br>
-          ✅ Corporate ownership structure reviews and UBO identification aligned with regulatory standards.<br><br>
-          ⚖️ My interests lie at the intersection of financial integrity, risk management, and regulatory governance...
-        </div>
-
-        <div class="peek-actions">
-          <div class="micro">Tap to read the full “About” 🔍</div>
-          <a href="#about">Open full About →</a>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- ABOUT -->
+  <!-- ABOUT (compact, no emojis) -->
   <section class="card section anchor" id="about">
     <div class="section-head"><h2>About</h2></div>
     <div class="section-body">
       <p style="margin:0;">
-        —🙋‍♂️ Hi, I’m Bhishek and I’m building my path in Compliance, AML, and Risk within the financial sector.
+        I’m building a long-term path in Compliance, AML/CFT, and risk-based governance within the financial sector.
       </p>
-
-      <p style="margin:12px 0 0;">
-        🎓 Business Management (Finance) student with hands-on experience in KYC, AML, and compliance operations within a regulated fintech environment.
+      <p style="margin:10px 0 0;">
+        I’ve worked across KYC and due diligence workflows in a regulated fintech environment, supporting screening (sanctions/PEP/adverse media),
+        ownership and UBO analysis, documentation validation, and audit-ready record keeping.
       </p>
-
-      <p style="margin:12px 0 0;">
-        ✅ Risk-based KYC and Customer Due Diligence (CDD) within a regulated fintech framework.<br>
-        ✅ Supported Enhanced Due Diligence (EDD), sanctions screening, PEP checks, and adverse media reviews.<br>
-        ✅ Corporate ownership structure reviews and UBO identification aligned with regulatory standards.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        ⚖️ My interests lie at the intersection of financial integrity, risk management, and regulatory governance. I am particularly drawn to how evolving AML frameworks, cross-border compliance standards, and RegTech solutions are reshaping financial systems. Through both academic study and professional exposure, I apply structured, risk-based thinking to real-world compliance challenges.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        ✨ Jurisdictional and source-of-funds risk assessments to support risk-based onboarding decisions.<br>
-        ✨ Validate regulatory documentation and maintain audit-ready records in line with internal compliance policies.<br>
-        ✨ Support operational compliance processes with precision, governance awareness, and structured risk analysis.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        I value operational precision, institutional transparency, and strong governance as foundations for sustainable financial ecosystems.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        📈 Building toward long-term specialization in Compliance, AML, and Risk within financial institutions, fintech, and regulatory environments.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        Core areas of interest include Anti-Money Laundering (AML) & Financial Crime Prevention, Risk Assessment & Regulatory Compliance, Financial Markets & Governance, and FinTech & Digital Financial Services.
+      <p style="margin:10px 0 0;">
+        My focus is practical: structured risk thinking, disciplined documentation, and controls that hold up under review.
       </p>
     </div>
   </section>
 
-  <!-- EDUCATION (fixed wording) -->
+  <!-- CASE STUDY (3 cards) -->
+  <section class="card section anchor" id="case-study">
+    <div class="section-head"><h2>Case Study</h2></div>
+    <div class="section-body">
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-label">Problem</div>
+          <h3 class="case-h">Onboarding risk needs structure</h3>
+          <p class="case-p">
+            Corporate and retail onboarding requires consistent risk logic, reliable documentation, and defensible screening outcomes—especially when ownership and jurisdiction add complexity.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-label">What I did</div>
+          <h3 class="case-h">Applied risk-based controls</h3>
+          <p class="case-p">
+            Supported KYC/CDD reviews, EDD escalation inputs, sanctions/PEP/adverse media checks, and UBO identification—while validating documents and keeping records audit-ready.
+          </p>
+        </div>
+
+        <div class="case-card">
+          <div class="case-label">Outcome</div>
+          <h3 class="case-h">Cleaner files, faster decisions</h3>
+          <p class="case-p">
+            Reduced onboarding friction by resolving discrepancies early, improving documentation quality, and helping maintain consistent governance standards across the onboarding process.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION (no “graduated”) -->
   <section class="card section anchor" id="education">
     <div class="section-head"><h2>Education</h2></div>
     <div class="section-body">
@@ -737,11 +693,11 @@
         <div class="mini">
           <div class="k">St. Joseph’s College, Mauritius</div>
           <div class="v">Cambridge International A Levels (Higher School Certificate)</div>
-          <div style="margin-top:8px;color:#111;opacity:0.70;font-size:14px;font-weight:800;">
+          <div style="margin-top:8px;color:#000;opacity:0.65;font-size:14px;font-weight:600;">
             Business • Economics • French • Feb 2018 – Nov 2025
           </div>
-          <div style="margin-top:10px;color:#111;opacity:0.75;font-size:14px;font-weight:850;">
-            <strong>Next:</strong> BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)
+          <div style="margin-top:10px;color:#000;opacity:0.75;font-size:14px;font-weight:700;">
+            Next: BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)
           </div>
         </div>
         <div class="mini">
@@ -757,20 +713,22 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCE (Timeline, Big-4 style) -->
   <section class="card section anchor" id="experience">
     <div class="section-head"><h2>Experience</h2></div>
     <div class="section-body">
-      <div class="mini">
-        <div class="v">KYC & Compliance Operations Intern — ARIE Finance</div>
-        <div class="k" style="margin-top:6px;">Dec 2025 – April 2026</div>
-        <ul>
-          <li>Led risk-based KYC & CDD reviews for 50+ corporate and retail clients, ensuring alignment with AML frameworks and internal controls.</li>
-          <li>Conducted enhanced due diligence, including sanctions, PEP, and adverse media screening, mitigating high-risk exposures.</li>
-          <li>Analysed corporate ownership structures to identify UBOs and support risk-based onboarding decisions.</li>
-          <li>Validated documentation and resolved discrepancies, reducing onboarding delays by approximately 15–20%.</li>
-          <li>Maintained audit-ready KYC records and supported internal monitoring processes.</li>
-        </ul>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-title">KYC & Compliance Operations Intern — ARIE Finance</div>
+          <div class="t-meta">Dec 2025 – April 2026 • Ébène, Mauritius</div>
+          <ul class="t-bullets">
+            <li>Supported risk-based KYC & CDD reviews across corporate and retail onboarding within a regulated framework.</li>
+            <li>Conducted screening inputs including sanctions, PEP checks, and adverse media reviews to support risk decisions.</li>
+            <li>Reviewed ownership structures to support UBO identification and jurisdiction/source-of-funds risk considerations.</li>
+            <li>Validated documentation and resolved discrepancies to reduce onboarding delays and improve file quality.</li>
+            <li>Maintained audit-ready records aligned with internal controls and monitoring expectations.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -780,16 +738,14 @@
     <div class="section-head"><h2>Projects</h2></div>
     <div class="section-body">
       <p style="margin:0 0 10px;">
-        Selected portfolio projects are currently being refined and packaged into formal case-study PDFs.
+        Selected projects are being refined into formal case-study PDFs.
       </p>
-
       <div class="row">
         <div>
           <div class="title">Portfolio Projects</div>
-          <div class="meta">Status: In Progress (interactive)</div>
+          <div class="meta">Status: In Progress</div>
         </div>
-
-        <a class="btn" href="#about">See core story →</a>
+        <a class="btn" href="#case-study">View case-study format →</a>
       </div>
     </div>
   </section>
@@ -821,7 +777,7 @@
       <div class="row">
         <div>
           <div class="title">DELF B2 — Diplôme d’Études en Langue Française</div>
-          <div class="meta">Issued Mar 2025 • Skills: Business / Professional French</div>
+          <div class="meta">Issued Mar 2025</div>
         </div>
         <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
       </div>
@@ -836,15 +792,15 @@
         <div class="mini">
           <div class="k">Direction</div>
           <div class="v">Compliance & Financial Crime Risk Management</div>
-          <div style="margin-top:8px;color:#111;opacity:0.70;font-size:14px;font-weight:800;">
-            Deepen AML/CFT expertise, strengthen risk-based onboarding practice, and build measurable compliance outcomes.
+          <div style="margin-top:8px;color:#000;opacity:0.65;font-size:14px;font-weight:600;">
+            Deepen AML/CFT capability, improve risk articulation, and build measurable compliance outcomes.
           </div>
         </div>
         <div class="mini">
           <div class="k">Long-Term Target</div>
           <div class="v">MLRO-level leadership pathway</div>
-          <div style="margin-top:8px;color:#111;opacity:0.70;font-size:14px;font-weight:800;">
-            Build governance readiness, documentation excellence, and alignment with international AML expectations.
+          <div style="margin-top:8px;color:#000;opacity:0.65;font-size:14px;font-weight:600;">
+            Strong governance readiness, documentation standards, and alignment with international AML expectations.
           </div>
         </div>
       </div>
@@ -858,7 +814,11 @@
       <div class="two-col">
         <div class="mini">
           <div class="k">Email</div>
-          <div class="v"><a href="mailto:bhishek.shibdeen@icloud.com" style="color:var(--text);text-decoration:none;font-weight:950;">bhishek.shibdeen@icloud.com</a></div>
+          <div class="v">
+            <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000;text-decoration:none;font-weight:850;">
+              bhishek.shibdeen@icloud.com
+            </a>
+          </div>
           <div class="k" style="margin-top:12px;">Phone</div>
           <div class="v">+230 55024085</div>
         </div>
@@ -880,6 +840,23 @@
 
   <footer>© 2026 Bhishek Shibdeen</footer>
 </div>
+
+<script>
+  // Scroll progress bar
+  (function(){
+    const bar = document.getElementById("bar");
+    function update(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width = pct.toFixed(2) + "%";
+    }
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  })();
+</script>
 
 </body>
 </html>
