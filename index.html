@@ -15,14 +15,17 @@
     --line:#e6e8ef;
     --shadow: 0 18px 50px rgba(16,24,40,0.08);
     --shadow2: 0 10px 30px rgba(16,24,40,0.08);
-    --radius:18px;
-    --radius2:14px;
-    --accent:#111827; /* sleek black */
+
+    --radius:18px;     /* outer cards */
+    --radius2:0px;     /* squared inner description boxes */
+
+    --accent:#111827;
     --soft:#f1f3f8;
   }
 
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
+
   body{
     margin:0;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -33,36 +36,63 @@
       linear-gradient(180deg, #f7f8fc 0%, #f4f6fb 50%, #f7f8fc 100%);
   }
 
-  /* subtle background “design” like the reference */
+  /* Background designs to make it pop */
+  .bg-blobs{
+    position:fixed;
+    inset:-250px;
+    pointer-events:none;
+    opacity:0.55;
+    background:
+      radial-gradient(circle at 14% 12%, rgba(17,24,39,0.10), transparent 55%),
+      radial-gradient(circle at 86% 18%, rgba(17,24,39,0.08), transparent 60%),
+      radial-gradient(circle at 48% 92%, rgba(17,24,39,0.07), transparent 55%);
+    filter: blur(0px);
+  }
+
   .bg-lines{
     position:fixed;
-    inset:-100px;
+    inset:-120px;
     pointer-events:none;
-    opacity:0.18;
+    opacity:0.16;
     background:
       repeating-linear-gradient(135deg,
-        rgba(16,24,40,0.09) 0px,
-        rgba(16,24,40,0.09) 1px,
+        rgba(16,24,40,0.10) 0px,
+        rgba(16,24,40,0.10) 1px,
         transparent 1px,
         transparent 22px
       );
     mask-image: radial-gradient(circle at 50% 10%, black 0%, transparent 70%);
   }
-  .bg-blobs{
+
+  .bg-grid{
     position:fixed;
-    inset:-200px;
+    inset:0;
     pointer-events:none;
-    opacity:0.35;
+    opacity:0.10;
     background:
-      radial-gradient(circle at 15% 18%, rgba(16,24,40,0.10), transparent 58%),
-      radial-gradient(circle at 85% 22%, rgba(16,24,40,0.08), transparent 60%),
-      radial-gradient(circle at 50% 95%, rgba(16,24,40,0.06), transparent 55%);
+      linear-gradient(rgba(16,24,40,0.08) 1px, transparent 1px) 0 0/44px 44px,
+      linear-gradient(90deg, rgba(16,24,40,0.08) 1px, transparent 1px) 0 0/44px 44px;
+    mask-image: radial-gradient(circle at 50% 20%, black 0%, transparent 65%);
+  }
+
+  /* soft rings */
+  .bg-rings{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0.18;
+    background:
+      radial-gradient(circle at 18% 30%, transparent 0 120px, rgba(16,24,40,0.08) 121px 122px, transparent 123px 100%),
+      radial-gradient(circle at 82% 26%, transparent 0 140px, rgba(16,24,40,0.07) 141px 142px, transparent 143px 100%),
+      radial-gradient(circle at 55% 88%, transparent 0 180px, rgba(16,24,40,0.06) 181px 182px, transparent 183px 100%);
+    filter: blur(0px);
   }
 
   .wrap{
     width:min(1120px, 92vw);
     margin:0 auto;
     padding: 22px 0 80px;
+    position:relative;
   }
 
   /* top nav */
@@ -75,7 +105,7 @@
     justify-content:space-between;
     gap:14px;
     padding: 12px 14px;
-    background: rgba(255,255,255,0.86);
+    background: rgba(255,255,255,0.88);
     border: 1px solid var(--line);
     border-radius: 999px;
     backdrop-filter: blur(10px);
@@ -161,10 +191,6 @@
     box-shadow: 0 18px 45px rgba(16,24,40,0.20);
     border: 6px solid #fff;
   }
-  /* If you want, later: replace with your real photo.
-     Put your image in the repo as "profile.jpg" and uncomment below:
-  .avatar{ background: url('profile.jpg') center/cover no-repeat; }
-  */
 
   h1{
     margin:0;
@@ -173,7 +199,7 @@
     line-height: 1.08;
   }
 
-  /* Kaizen anchor + highlight using :target (no JS) */
+  /* Kaizen target wrapper + highlight using :target (no JS) */
   .kaizen{
     display:inline-block;
     margin-top: 10px;
@@ -194,7 +220,7 @@
 
   .subtitle{
     margin: 10px 0 0;
-    color: var(--muted);
+    color:var(--muted);
     line-height: 1.75;
     font-size: 14.5px;
   }
@@ -243,6 +269,8 @@
     flex-direction: column;
     gap: 12px;
   }
+
+  /* Squared inner description boxes */
   .mini{
     border: 1px solid var(--line);
     border-radius: var(--radius2);
@@ -254,6 +282,7 @@
     transform: translateY(-2px);
     background: var(--soft);
   }
+
   .k{
     text-transform: uppercase;
     letter-spacing: 1.6px;
@@ -287,11 +316,14 @@
     text-transform: uppercase;
     color: var(--text);
   }
+
+  /* squared bodies */
   .section-body{
     padding: 16px 18px 20px;
     color: var(--muted);
     line-height: 1.85;
     font-size: 14.5px;
+    border-radius: var(--radius2);
   }
 
   .two-col{
@@ -309,6 +341,7 @@
   }
   li{ margin: 6px 0; }
 
+  /* squared rows */
   .row{
     display:flex;
     align-items:flex-start;
@@ -375,10 +408,8 @@
     padding: 14px 0 0;
   }
 
-  /* subtle “section reveal” animation (CSS only) */
-  .card{
-    animation: floatIn 0.6s ease both;
-  }
+  /* subtle reveal */
+  .card{ animation: floatIn 0.55s ease both; }
   @keyframes floatIn{
     from{ opacity:0; transform: translateY(10px); }
     to{ opacity:1; transform: translateY(0); }
@@ -389,6 +420,8 @@
 <body>
 <div class="bg-blobs"></div>
 <div class="bg-lines"></div>
+<div class="bg-grid"></div>
+<div class="bg-rings"></div>
 
 <div class="wrap" id="top">
 
@@ -399,59 +432,17 @@
       <span>Bhishek Shibdeen</span>
     </div>
     <div class="navlinks">
-      <a href="#about">About</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#certifications">Certifications</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#contact">Contact</a>
+      <a href="#about">About</a>
     </div>
   </div>
 
-  <!-- ABOUT (ABOVE) -->
-  <section class="card section anchor" id="about">
-    <div class="section-head"><h2>About</h2></div>
-    <div class="section-body">
-      <p style="margin:0;">
-        —🙋‍♂️ Hi, I’m Bhishek and I’m building my path in <strong>Compliance, AML, and Risk</strong> within the financial sector.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        🎓 Business Management (Finance) student with hands-on experience in KYC, AML, and compliance operations within a regulated fintech environment.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        ✅ Risk-based KYC and Customer Due Diligence (CDD) within a regulated fintech framework.<br>
-        ✅ Supported Enhanced Due Diligence (EDD), sanctions screening, PEP checks, and adverse media reviews.<br>
-        ✅ Corporate ownership structure reviews and UBO identification aligned with regulatory standards.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        ⚖️ My interests lie at the intersection of financial integrity, risk management, and regulatory governance. I am particularly drawn to how evolving AML frameworks, cross-border compliance standards, and RegTech solutions are reshaping financial systems. Through both academic study and professional exposure, I apply structured, risk-based thinking to real-world compliance challenges.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        ✨ Jurisdictional and source-of-funds risk assessments to support risk-based onboarding decisions.<br>
-        ✨ Validate regulatory documentation and maintain audit-ready records in line with internal compliance policies.<br>
-        ✨ Support operational compliance processes with precision, governance awareness, and structured risk analysis.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        I value operational precision, institutional transparency, and strong governance as foundations for sustainable financial ecosystems.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        📈 Building toward long-term specialization in Compliance, AML, and Risk within financial institutions, fintech, and regulatory environments.
-      </p>
-
-      <p style="margin:12px 0 0;">
-        Core areas of interest include Anti-Money Laundering (AML) & Financial Crime Prevention, Risk Assessment & Regulatory Compliance, Financial Markets & Governance, and FinTech & Digital Financial Services.
-      </p>
-    </div>
-  </section>
-
-  <!-- HERO -->
+  <!-- HERO (NOW ABOVE ABOUT) -->
   <div class="hero">
 
     <div class="card hero-main">
@@ -460,7 +451,6 @@
       <div>
         <h1>Bhishek Shibdeen</h1>
 
-        <!-- Kaizen target wrapper -->
         <div id="kaizen">
           <span class="kaizen"><em>Kaizen</em></span>
         </div>
@@ -500,6 +490,48 @@
     </div>
 
   </div>
+
+  <!-- ABOUT (NOW BELOW NAME SECTION) -->
+  <section class="card section anchor" id="about">
+    <div class="section-head"><h2>About</h2></div>
+    <div class="section-body">
+      <p style="margin:0;">
+        —🙋‍♂️ Hi, I’m Bhishek and I’m building my path in Compliance, AML, and Risk within the financial sector.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        🎓 Business Management (Finance) student with hands-on experience in KYC, AML, and compliance operations within a regulated fintech environment.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        ✅ Risk-based KYC and Customer Due Diligence (CDD) within a regulated fintech framework.<br>
+        ✅ Supported Enhanced Due Diligence (EDD), sanctions screening, PEP checks, and adverse media reviews.<br>
+        ✅ Corporate ownership structure reviews and UBO identification aligned with regulatory standards.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        ⚖️ My interests lie at the intersection of financial integrity, risk management, and regulatory governance. I am particularly drawn to how evolving AML frameworks, cross-border compliance standards, and RegTech solutions are reshaping financial systems. Through both academic study and professional exposure, I apply structured, risk-based thinking to real-world compliance challenges.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        ✨ Jurisdictional and source-of-funds risk assessments to support risk-based onboarding decisions.<br>
+        ✨ Validate regulatory documentation and maintain audit-ready records in line with internal compliance policies.<br>
+        ✨ Support operational compliance processes with precision, governance awareness, and structured risk analysis.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        I value operational precision, institutional transparency, and strong governance as foundations for sustainable financial ecosystems.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        📈 Building toward long-term specialization in Compliance, AML, and Risk within financial institutions, fintech, and regulatory environments.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        Core areas of interest include Anti-Money Laundering (AML) & Financial Crime Prevention, Risk Assessment & Regulatory Compliance, Financial Markets & Governance, and FinTech & Digital Financial Services.
+      </p>
+    </div>
+  </section>
 
   <!-- EDUCATION -->
   <section class="card section anchor" id="education">
@@ -559,7 +591,6 @@
           <div class="meta">Status: In Progress (interactive)</div>
         </div>
 
-        <!-- Clicking this jumps near the top AND highlights Kaizen (CSS :target) -->
         <a class="tag" href="#kaizen" aria-label="In progress — go to Kaizen">
           <span class="pulse"></span>
           In progress
@@ -605,7 +636,6 @@
       </div>
 
       <p style="margin:12px 0 0; font-size:13px; color:var(--muted);">
-        Make sure these PDFs are uploaded to your repo with the exact filenames shown above.
       </p>
     </div>
   </section>
