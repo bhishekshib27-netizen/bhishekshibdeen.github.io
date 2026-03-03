@@ -3,112 +3,94 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bhishek Shibdeen | AML & Compliance Portfolio</title>
-<meta name="description" content="Bhishek Shibdeen — Compliance, AML & Risk portfolio. Education, experience, certifications, roadmap, and contact." />
+<title>Bhishek Shibdeen | Compliance • AML • Risk</title>
+<meta name="description" content="Bhishek Shibdeen — Compliance, AML & Risk portfolio. About, Education, Experience, Projects, Certifications, Roadmap, Contact." />
 
 <style>
   :root{
-    /* LIGHTER luxury greys (not too dark) */
-    --bgA:#4a4f57;   /* mid grey */
-    --bgB:#6a707a;   /* light steel grey */
-    --bgC:#3b4048;   /* charcoal grey */
-
-    --card:rgba(15,15,16,0.55);   /* sleek charcoal glass */
-    --card2:rgba(15,15,16,0.38);
-    --border:rgba(255,255,255,0.18);
-    --border2:rgba(255,255,255,0.28);
-
-    --text:rgba(255,255,255,0.93);
-    --muted:rgba(255,255,255,0.74);
-    --muted2:rgba(255,255,255,0.58);
-
-    --shadow:0 20px 60px rgba(0,0,0,0.28);
+    --bg:#f6f7fb;
+    --panel:#ffffff;
+    --text:#101828;
+    --muted:#667085;
+    --line:#e6e8ef;
+    --shadow: 0 18px 50px rgba(16,24,40,0.08);
+    --shadow2: 0 10px 30px rgba(16,24,40,0.08);
     --radius:18px;
+    --radius2:14px;
+    --accent:#111827; /* sleek black */
+    --soft:#f1f3f8;
   }
 
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
-
   body{
     margin:0;
-    color:var(--text);
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color:var(--text);
     background:
-      radial-gradient(900px 700px at 12% 10%, rgba(255,255,255,0.18), transparent 56%),
-      radial-gradient(1000px 750px at 88% 16%, rgba(255,255,255,0.12), transparent 62%),
-      linear-gradient(135deg, var(--bgB) 0%, var(--bgA) 40%, var(--bgC) 100%);
-    overflow-x:hidden;
+      radial-gradient(900px 600px at 12% 10%, rgba(17,24,39,0.06), transparent 60%),
+      radial-gradient(900px 600px at 90% 18%, rgba(17,24,39,0.05), transparent 62%),
+      linear-gradient(180deg, #f7f8fc 0%, #f4f6fb 50%, #f7f8fc 100%);
   }
 
-  /* Premium background design: soft lines + glow */
-  .bg-design{
+  /* subtle background “design” like the reference */
+  .bg-lines{
     position:fixed;
-    inset:-220px;
+    inset:-100px;
     pointer-events:none;
-    opacity:0.20;
-    background:
-      radial-gradient(circle at 16% 18%, rgba(255,255,255,0.22), transparent 54%),
-      radial-gradient(circle at 86% 14%, rgba(255,255,255,0.16), transparent 60%),
-      linear-gradient(120deg, rgba(255,255,255,0.18) 0%, transparent 52%);
-    mix-blend-mode: overlay;
-  }
-
-  .grid{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:0.11;
+    opacity:0.18;
     background:
       repeating-linear-gradient(135deg,
-        rgba(255,255,255,0.20) 0px,
-        rgba(255,255,255,0.20) 1px,
+        rgba(16,24,40,0.09) 0px,
+        rgba(16,24,40,0.09) 1px,
         transparent 1px,
-        transparent 26px
+        transparent 22px
       );
-    mask-image: radial-gradient(circle at 50% 12%, black 0%, transparent 72%);
+    mask-image: radial-gradient(circle at 50% 10%, black 0%, transparent 70%);
+  }
+  .bg-blobs{
+    position:fixed;
+    inset:-200px;
+    pointer-events:none;
+    opacity:0.35;
+    background:
+      radial-gradient(circle at 15% 18%, rgba(16,24,40,0.10), transparent 58%),
+      radial-gradient(circle at 85% 22%, rgba(16,24,40,0.08), transparent 60%),
+      radial-gradient(circle at 50% 95%, rgba(16,24,40,0.06), transparent 55%);
   }
 
   .wrap{
-    width:min(1100px, 92vw);
+    width:min(1120px, 92vw);
     margin:0 auto;
-    padding:18px 0 84px;
+    padding: 22px 0 80px;
   }
 
-  /* Sticky top menu */
+  /* top nav */
   .nav{
     position:sticky;
     top:14px;
-    z-index:50;
+    z-index:20;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
-    padding:12px 14px;
-    border:1px solid var(--border);
-    background:rgba(20,20,22,0.42);
-    backdrop-filter: blur(12px);
-    border-radius:999px;
-    box-shadow: 0 14px 40px rgba(0,0,0,0.22);
+    gap:14px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.86);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow2);
   }
-
   .brand{
     display:flex;
     align-items:center;
     gap:10px;
-    min-width: 220px;
-  }
-
-  .mark{
-    width:12px;height:12px;border-radius:999px;
-    background:linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.28));
-    border:1px solid rgba(255,255,255,0.30);
-  }
-
-  .brand .name{
-    font-weight:850;
+    font-weight:800;
     letter-spacing:0.2px;
-    font-size:14px;
-    color:rgba(255,255,255,0.95);
+  }
+  .brand-badge{
+    width:12px;height:12px;border-radius:999px;
+    background: linear-gradient(135deg, #111827, #6b7280);
   }
 
   .navlinks{
@@ -117,307 +99,304 @@
     gap:6px;
     justify-content:flex-end;
   }
-
   .nav a{
     text-decoration:none;
     color:var(--muted);
     font-size:13px;
-    padding:9px 11px;
-    border-radius:999px;
+    padding: 9px 11px;
+    border-radius: 999px;
     border:1px solid transparent;
     transition: 0.18s ease;
   }
   .nav a:hover{
     color:var(--text);
-    background:rgba(255,255,255,0.10);
-    border-color:rgba(255,255,255,0.16);
+    background: var(--soft);
+    border-color: var(--line);
     transform: translateY(-1px);
   }
 
-  /* Cards */
+  /* layout */
+  .hero{
+    margin-top: 18px;
+    display:grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  @media (max-width: 900px){
+    .hero{ grid-template-columns: 1fr; }
+  }
+
   .card{
-    border:1px solid var(--border);
-    background: linear-gradient(180deg, var(--card), var(--card2));
+    background: var(--panel);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow:hidden;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
   }
   .card:hover{
     transform: translateY(-4px);
-    border-color: var(--border2);
-    box-shadow: 0 26px 70px rgba(0,0,0,0.30);
+    box-shadow: 0 22px 55px rgba(16,24,40,0.10);
   }
 
-  /* Section headers */
-  .section-head{
-    padding:16px 18px;
-    display:flex;
+  .hero-main{
+    padding: 22px;
+    display:grid;
+    grid-template-columns: 150px 1fr;
+    gap: 18px;
     align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,0.14);
-    background: rgba(255,255,255,0.05);
   }
-  .section-head h2{
-    margin:0;
-    font-size:14px;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.86);
-    font-weight: 900;
-  }
-  .section-body{
-    padding:16px 18px 20px;
-    color: var(--muted);
-    font-size:14px;
-    line-height: 1.9;
+  @media (max-width: 700px){
+    .hero-main{ grid-template-columns: 1fr; }
   }
 
-  /* Hero */
-  header{ padding:22px 6px 10px; }
+  .avatar{
+    width:150px;height:150px;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 35% 25%, rgba(17,24,39,0.12), transparent 60%),
+      linear-gradient(135deg, #111827 0%, #6b7280 100%);
+    position:relative;
+    box-shadow: 0 18px 45px rgba(16,24,40,0.20);
+    border: 6px solid #fff;
+  }
+  /* If you want, later: replace with your real photo.
+     Put your image in the repo as "profile.jpg" and uncomment below:
+  .avatar{ background: url('profile.jpg') center/cover no-repeat; }
+  */
 
   h1{
     margin:0;
-    font-size: clamp(34px, 4.2vw, 56px);
-    line-height:1.02;
-    letter-spacing:-0.7px;
-    font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-    font-weight: 680;
+    font-size: clamp(28px, 3.6vw, 42px);
+    letter-spacing: -0.5px;
+    line-height: 1.08;
   }
 
-  /* Kaizen */
-  #kaizen{
-    margin-top:10px;
-    font-style: italic;
-    color: rgba(255,255,255,0.86);
-    font-size: 14px;
-    letter-spacing: 0.5px;
+  /* Kaizen anchor + highlight using :target (no JS) */
+  .kaizen{
     display:inline-block;
-    padding:6px 10px;
+    margin-top: 10px;
+    font-style: italic;
+    color: var(--muted);
+    padding: 6px 10px;
     border-radius: 999px;
-    border:1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.07);
-    transition: 0.25s ease;
+    border: 1px solid var(--line);
+    background: #fff;
+    transition: 0.2s ease;
   }
-  #kaizen.kaizen-highlight{
-    border-color: rgba(255,255,255,0.45);
-    background: rgba(255,255,255,0.18);
-    box-shadow: 0 0 0 9px rgba(255,255,255,0.10);
-    transform: translateY(-1px);
-  }
-
-  .hero{
-    margin-top:18px;
-    display:grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap:16px;
-    align-items: stretch;
-  }
-  @media (max-width: 920px){
-    .hero{ grid-template-columns: 1fr; }
-    .brand{ min-width: auto; }
+  #kaizen:target .kaizen{
+    background: #111827;
+    color: #fff;
+    border-color: #111827;
+    box-shadow: 0 0 0 10px rgba(17,24,39,0.10);
   }
 
-  .hero-main{ padding:22px; }
-  .hero-side{ padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .subtitle{
+    margin: 10px 0 0;
+    color: var(--muted);
+    line-height: 1.75;
+    font-size: 14.5px;
+  }
 
-  .badge{
+  .cta{
+    margin-top: 14px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    padding:10px 12px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.08);
-    color: var(--muted);
+    padding: 10px 12px;
+    border-radius: 12px;
+    text-decoration:none;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    font-weight: 700;
     font-size: 13px;
-    margin-bottom: 14px;
-    width: fit-content;
+    transition: 0.18s ease;
   }
-  .dot{
-    width:8px;height:8px;border-radius:99px;
-    background: rgba(255,255,255,0.96);
-    box-shadow: 0 0 0 10px rgba(255,255,255,0.08);
+  .btn:hover{
+    background: var(--soft);
+    transform: translateY(-1px);
+  }
+  .btn.primary{
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .btn.primary:hover{
+    background: #0b1220;
+  }
+  .icon{
+    width:18px;height:18px;
+    display:inline-block;
   }
 
-  .lead{
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.9;
-    font-size: 15px;
-    max-width: 90ch;
-  }
-
-  .pills{
+  .hero-side{
+    padding: 18px;
     display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:14px;
+    flex-direction: column;
+    gap: 12px;
   }
-  .pill{
-    padding:9px 10px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.82);
-    font-size: 13px;
-  }
-
   .mini{
-    padding:14px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,0.14);
-    background: rgba(255,255,255,0.06);
-    transition: 0.22s ease;
+    border: 1px solid var(--line);
+    border-radius: var(--radius2);
+    background: #fff;
+    padding: 14px;
+    transition: transform 0.18s ease, background 0.18s ease;
   }
   .mini:hover{
     transform: translateY(-2px);
-    border-color: rgba(255,255,255,0.22);
+    background: var(--soft);
   }
   .k{
-    font-size:12px;
-    letter-spacing: 1.6px;
     text-transform: uppercase;
-    color: var(--muted2);
-    margin-bottom:6px;
+    letter-spacing: 1.6px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
   }
   .v{
-    color: rgba(255,255,255,0.92);
-    font-weight: 820;
+    font-weight: 750;
+    color: var(--text);
+    line-height: 1.5;
     font-size: 14px;
-    line-height: 1.55;
   }
 
-  .section{ margin-top:16px; }
+  /* section blocks */
+  .section{
+    margin-top: 16px;
+  }
+  .section-head{
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .section-head h2{
+    margin:0;
+    font-size: 14px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .section-body{
+    padding: 16px 18px 20px;
+    color: var(--muted);
+    line-height: 1.85;
+    font-size: 14.5px;
+  }
 
   .two-col{
     display:grid;
     grid-template-columns: 1fr 1fr;
-    gap:14px;
+    gap: 14px;
   }
-  @media (max-width: 920px){ .two-col{ grid-template-columns: 1fr; } }
+  @media (max-width: 900px){
+    .two-col{ grid-template-columns: 1fr; }
+  }
 
-  ul{ margin:10px 0 0; padding-left: 18px; }
-  li{ margin:6px 0; }
+  ul{
+    margin: 10px 0 0;
+    padding-left: 18px;
+  }
+  li{ margin: 6px 0; }
 
-  /* Rows */
   .row{
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
     gap:12px;
-    padding:14px;
-    border:1px solid rgba(255,255,255,0.14);
-    border-radius:14px;
-    background: rgba(255,255,255,0.06);
-    transition: 0.22s ease;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius2);
+    background: #fff;
+    transition: transform 0.18s ease, background 0.18s ease;
   }
   .row:hover{
     transform: translateY(-2px);
-    border-color: rgba(255,255,255,0.24);
+    background: var(--soft);
   }
   .row .title{
-    font-weight: 900;
-    color: rgba(255,255,255,0.94);
+    font-weight: 850;
+    color: var(--text);
     margin-bottom: 4px;
   }
   .row .meta{
-    color: rgba(255,255,255,0.64);
+    color: var(--muted);
     font-size: 13px;
   }
-  .row .action a, .row .action button{
+
+  .tag{
     display:inline-flex;
     align-items:center;
     gap:8px;
-    padding:10px 12px;
-    border-radius: 12px;
-    border:1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.94);
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px dashed rgba(16,24,40,0.22);
+    background: #fff;
+    font-weight: 800;
+    color: var(--text);
+    font-size: 13px;
     text-decoration:none;
-    font-weight: 850;
-    font-size: 13px;
     transition: 0.18s ease;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .row .action a:hover, .row .action button:hover{
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.26);
-    transform: translateY(-1px);
-  }
-
-  /* In-progress badge */
-  .inprogress{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 12px;
-    border-radius:999px;
-    border:1px dashed rgba(255,255,255,0.26);
-    background: rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.88);
-    font-weight: 880;
-    font-size: 13px;
     user-select:none;
   }
-  .inprogress .pulse{
-    width:8px;height:8px;border-radius:99px;
-    background: rgba(255,255,255,0.98);
-    box-shadow: 0 0 0 rgba(255,255,255,0.52);
+  .tag:hover{
+    background: var(--soft);
+    transform: translateY(-1px);
+  }
+  .pulse{
+    width:8px;height:8px;border-radius:999px;
+    background: var(--text);
+    box-shadow: 0 0 0 rgba(16,24,40,0.25);
     animation: pulse 1.8s infinite;
   }
   @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(255,255,255,0.30); }
-    70%{ box-shadow: 0 0 0 12px rgba(255,255,255,0.0); }
-    100%{ box-shadow: 0 0 0 0 rgba(255,255,255,0.0); }
+    0%{ box-shadow: 0 0 0 0 rgba(16,24,40,0.18); }
+    70%{ box-shadow: 0 0 0 12px rgba(16,24,40,0.0); }
+    100%{ box-shadow: 0 0 0 0 rgba(16,24,40,0.0); }
   }
 
-  /* LinkedIn */
-  .li-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 12px;
-    border-radius: 12px;
-    border:1px solid rgba(255,255,255,0.18);
-    background: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.94);
-    text-decoration:none;
-    font-weight: 900;
-    font-size: 13px;
-    transition: 0.18s ease;
-  }
-  .li-btn:hover{
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.26);
-    transform: translateY(-1px);
-  }
-  .li-icon{ width:18px; height:18px; display:inline-block; }
+  .anchor{ scroll-margin-top: 90px; }
 
   footer{
     margin-top: 24px;
     text-align:center;
-    color: rgba(255,255,255,0.62);
+    color: var(--muted);
     font-size: 13px;
     padding: 14px 0 0;
   }
 
-  .anchor{ scroll-margin-top: 90px; }
+  /* subtle “section reveal” animation (CSS only) */
+  .card{
+    animation: floatIn 0.6s ease both;
+  }
+  @keyframes floatIn{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
 </style>
 </head>
 
 <body>
-<div class="bg-design"></div>
-<div class="grid"></div>
+<div class="bg-blobs"></div>
+<div class="bg-lines"></div>
 
 <div class="wrap" id="top">
 
-  <!-- TOP MENU -->
+  <!-- NAV -->
   <div class="nav">
     <div class="brand">
-      <span class="mark"></span>
-      <span class="name">Bhishek Shibdeen</span>
+      <span class="brand-badge"></span>
+      <span>Bhishek Shibdeen</span>
     </div>
     <div class="navlinks">
       <a href="#about">About</a>
@@ -430,69 +409,97 @@
     </div>
   </div>
 
-  <!-- ABOUT ABOVE -->
-  <section class="card section anchor" id="about" style="margin-top:16px;">
+  <!-- ABOUT (ABOVE) -->
+  <section class="card section anchor" id="about">
     <div class="section-head"><h2>About</h2></div>
     <div class="section-body">
       <p style="margin:0;">
-        I’m building my path in <strong>Compliance, AML, and Risk</strong> within the financial sector, combining academic foundations
-        with hands-on exposure in a regulated fintech environment. I value operational precision, institutional transparency, and
-        strong governance as the basis for sustainable financial ecosystems.
+        —🙋‍♂️ Hi, I’m Bhishek and I’m building my path in <strong>Compliance, AML, and Risk</strong> within the financial sector.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        🎓 Business Management (Finance) student with hands-on experience in KYC, AML, and compliance operations within a regulated fintech environment.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        ✅ Risk-based KYC and Customer Due Diligence (CDD) within a regulated fintech framework.<br>
+        ✅ Supported Enhanced Due Diligence (EDD), sanctions screening, PEP checks, and adverse media reviews.<br>
+        ✅ Corporate ownership structure reviews and UBO identification aligned with regulatory standards.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        ⚖️ My interests lie at the intersection of financial integrity, risk management, and regulatory governance. I am particularly drawn to how evolving AML frameworks, cross-border compliance standards, and RegTech solutions are reshaping financial systems. Through both academic study and professional exposure, I apply structured, risk-based thinking to real-world compliance challenges.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        ✨ Jurisdictional and source-of-funds risk assessments to support risk-based onboarding decisions.<br>
+        ✨ Validate regulatory documentation and maintain audit-ready records in line with internal compliance policies.<br>
+        ✨ Support operational compliance processes with precision, governance awareness, and structured risk analysis.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        I value operational precision, institutional transparency, and strong governance as foundations for sustainable financial ecosystems.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        📈 Building toward long-term specialization in Compliance, AML, and Risk within financial institutions, fintech, and regulatory environments.
+      </p>
+
+      <p style="margin:12px 0 0;">
+        Core areas of interest include Anti-Money Laundering (AML) & Financial Crime Prevention, Risk Assessment & Regulatory Compliance, Financial Markets & Governance, and FinTech & Digital Financial Services.
       </p>
     </div>
   </section>
 
   <!-- HERO -->
-  <header>
-    <h1>Bhishek Shibdeen</h1>
-    <div id="kaizen"><em>Kaizen</em></div>
+  <div class="hero">
 
-    <div class="hero">
-      <div class="card hero-main">
-        <div class="badge">
-          <span class="dot"></span>
-          <span>AML / CFT • KYC • Risk-Based Governance</span>
+    <div class="card hero-main">
+      <div class="avatar" aria-label="Profile placeholder"></div>
+
+      <div>
+        <h1>Bhishek Shibdeen</h1>
+
+        <!-- Kaizen target wrapper -->
+        <div id="kaizen">
+          <span class="kaizen"><em>Kaizen</em></span>
         </div>
 
-        <p class="lead">
-          I completed my Cambridge International A Levels at <strong>St. Joseph’s College, Mauritius</strong>, where I built strong
-          foundations in Business, Economics, and analytical reasoning. Through leadership roles and early regulatory exposure,
-          I developed a clear interest in <strong>financial governance</strong>, <strong>risk management</strong>, and <strong>compliance excellence</strong>.
-          I am pursuing a <strong>BA (Hons) Business Management (Finance)</strong> at Middlesex University Mauritius starting <strong>April 2026</strong>,
-          with a long-term goal of specialising in Compliance and Financial Crime Risk Management.
+        <p class="subtitle">
+          Cambridge International A Levels graduate from <strong>St. Joseph’s College, Mauritius</strong>.
+          Pursuing <strong>BA (Hons) Business Management (Finance)</strong> at Middlesex University Mauritius starting <strong>April 2026</strong>.
+          Focused on Compliance, AML/CFT, and risk-based governance within the financial sector.
         </p>
 
-        <div class="pills">
-          <span class="pill">KYC • CDD • EDD</span>
-          <span class="pill">Sanctions • PEP • Adverse Media</span>
-          <span class="pill">UBO & Ownership Analysis</span>
-          <span class="pill">Audit-Ready Documentation</span>
-        </div>
-      </div>
+        <div class="cta">
+          <a class="btn primary" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
 
-      <div class="card hero-side">
-        <div class="mini">
-          <div class="k">Current Track</div>
-          <div class="v">Fintech Compliance → AML Specialisation</div>
-        </div>
-        <div class="mini">
-          <div class="k">Strength</div>
-          <div class="v">Controls mindset, accuracy, and governance discipline</div>
-        </div>
-        <div class="mini">
-          <div class="k">LinkedIn</div>
-          <div class="v">
-            <a class="li-btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-              <svg class="li-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="rgba(255,255,255,0.94)" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-              </svg>
-              linkedin.com/in/bhishekshibdeen ↗
-            </a>
-          </div>
+          <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+            </svg>
+            LinkedIn
+          </a>
         </div>
       </div>
     </div>
-  </header>
+
+    <div class="card hero-side">
+      <div class="mini">
+        <div class="k">Current Focus</div>
+        <div class="v">Compliance • AML/CFT • KYC Operations</div>
+      </div>
+      <div class="mini">
+        <div class="k">Strength</div>
+        <div class="v">Accuracy, documentation discipline, governance mindset</div>
+      </div>
+      <div class="mini">
+        <div class="k">Goal</div>
+        <div class="v">Specialize in Compliance and potentially progress toward an MLRO path</div>
+      </div>
+    </div>
+
+  </div>
 
   <!-- EDUCATION -->
   <section class="card section anchor" id="education">
@@ -500,32 +507,20 @@
     <div class="section-body">
       <div class="two-col">
         <div class="mini">
-          <div class="k">Institution</div>
-          <div class="v">St. Joseph’s College, Mauritius</div>
-          <div class="k" style="margin-top:12px;">Qualification</div>
+          <div class="k">St. Joseph’s College, Mauritius</div>
           <div class="v">Cambridge International A Levels (Higher School Certificate)</div>
-          <div class="k" style="margin-top:12px;">Fields</div>
-          <div class="v">Business • Economics • French</div>
-          <div class="k" style="margin-top:12px;">Dates</div>
-          <div class="v">Feb 2018 – Nov 2025</div>
-          <div class="k" style="margin-top:12px;">Upcoming</div>
-          <div class="v">BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:14px;">Business • Economics • French • Feb 2018 – Nov 2025</div>
+          <div style="margin-top:10px;color:var(--muted);font-size:14px;">
+            <strong>Upcoming:</strong> BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)
+          </div>
         </div>
-
         <div class="mini">
-          <div class="k">Activities & Leadership</div>
+          <div class="k">Activities & Achievements</div>
           <ul>
             <li>Secretary, Student Council (2025)</li>
             <li>Student Delegate – Mauritius Revenue Authority Educational Event (2025)</li>
             <li>Captain, School Football Team (2025)</li>
-          </ul>
-          <div class="k" style="margin-top:14px;">Key Achievements & Learnings</div>
-          <ul>
-            <li>Completed A Levels with strong foundations in financial principles, market structures, and economic theory.</li>
-            <li>Ranked 1st in English Language (2023), demonstrating strong communication and analytical comprehension.</li>
-            <li>Strengthened analytical thinking, quantitative reasoning, and problem-solving skills through coursework.</li>
-            <li>Built leadership and stakeholder communication through council, delegation, and captaincy.</li>
-            <li>Participated in initiatives promoting financial literacy and student engagement.</li>
+            <li>Ranked 1st in English Language (2023)</li>
           </ul>
         </div>
       </div>
@@ -534,7 +529,7 @@
 
   <!-- EXPERIENCE -->
   <section class="card section anchor" id="experience">
-    <div class="section-head"><h2>Professional Experience</h2></div>
+    <div class="section-head"><h2>Experience</h2></div>
     <div class="section-body">
       <div class="mini">
         <div class="v">KYC & Compliance Operations Intern — ARIE Finance</div>
@@ -554,48 +549,49 @@
   <section class="card section anchor" id="projects">
     <div class="section-head"><h2>Projects</h2></div>
     <div class="section-body">
-      <p style="margin:0 0 12px;">Selected portfolio projects are currently being refined and packaged into formal case-study PDFs.</p>
-      <div class="row" style="margin-top:10px;">
+      <p style="margin:0 0 10px;">
+        Selected portfolio projects are currently being refined and packaged into formal case-study PDFs.
+      </p>
+
+      <div class="row">
         <div>
           <div class="title">Portfolio Projects</div>
           <div class="meta">Status: In Progress (interactive)</div>
         </div>
-        <div class="action">
-          <button type="button" id="inProgressBtn" class="inprogress">
-            <span class="pulse"></span> In progress
-          </button>
-        </div>
+
+        <!-- Clicking this jumps near the top AND highlights Kaizen (CSS :target) -->
+        <a class="tag" href="#kaizen" aria-label="In progress — go to Kaizen">
+          <span class="pulse"></span>
+          In progress
+        </a>
       </div>
-      <p style="margin-top:14px; color:var(--muted2); font-size:13px;">
-        Click <strong>In progress</strong> to jump to the top and highlight <em>Kaizen</em>.
+
+      <p style="margin:10px 0 0; font-size:13px; color:var(--muted);">
+        Tip: Click <strong>In progress</strong> to jump up and highlight <em>Kaizen</em>.
       </p>
     </div>
   </section>
 
   <!-- CERTIFICATIONS -->
   <section class="card section anchor" id="certifications">
-    <div class="section-head"><h2>Licenses & Certifications</h2></div>
+    <div class="section-head"><h2>Certifications</h2></div>
     <div class="section-body">
       <div class="row">
         <div>
           <div class="title">Financial Markets — Yale University (Coursera)</div>
-          <div class="meta">Issued Feb 2026 • Certificate PDF</div>
+          <div class="meta">Issued Feb 2026 • PDF</div>
         </div>
-        <div class="action">
-          <a href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View Certificate ↗</a>
-        </div>
+        <a class="btn" href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View ↗</a>
       </div>
 
       <div style="height:10px;"></div>
 
       <div class="row">
         <div>
-          <div class="title">AML Essentials: Anti-Money Laundering, KYC and Compliance — Financial Crime Academy</div>
-          <div class="meta">Issued Feb 2026 • Certificate PDF</div>
+          <div class="title">AML Essentials — Financial Crime Academy</div>
+          <div class="meta">Issued Feb 2026 • PDF</div>
         </div>
-        <div class="action">
-          <a href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View Certificate ↗</a>
-        </div>
+        <a class="btn" href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View ↗</a>
       </div>
 
       <div style="height:10px;"></div>
@@ -605,29 +601,33 @@
           <div class="title">DELF B2 — Diplôme d’Études en Langue Française</div>
           <div class="meta">Issued Mar 2025 • Skills: Business / Professional French</div>
         </div>
-        <div class="action">
-          <a href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View Certificate ↗</a>
-        </div>
+        <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
       </div>
+
+      <p style="margin:12px 0 0; font-size:13px; color:var(--muted);">
+        Make sure these PDFs are uploaded to your repo with the exact filenames shown above.
+      </p>
     </div>
   </section>
 
   <!-- ROADMAP -->
   <section class="card section anchor" id="roadmap">
-    <div class="section-head"><h2>Professional Roadmap</h2></div>
+    <div class="section-head"><h2>Roadmap</h2></div>
     <div class="section-body">
       <div class="two-col">
         <div class="mini">
           <div class="k">Direction</div>
           <div class="v">Compliance & Financial Crime Risk Management</div>
-          <div class="k" style="margin-top:12px;">Near-Term Focus</div>
-          <div class="v">Deepen AML/CFT expertise, strengthen risk-based onboarding, and build measurable compliance outcomes.</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:14px;">
+            Deepen AML/CFT expertise, strengthen risk-based onboarding practice, and build measurable compliance outcomes.
+          </div>
         </div>
         <div class="mini">
           <div class="k">Long-Term Objective</div>
-          <div class="v">Progress toward senior compliance responsibilities and potentially a future MLRO pathway.</div>
-          <div class="k" style="margin-top:12px;">Approach</div>
-          <div class="v">Documentation excellence, strong controls, continuous improvement, and alignment with international AML expectations.</div>
+          <div class="v">Potential MLRO pathway</div>
+          <div style="margin-top:8px;color:var(--muted);font-size:14px;">
+            Build strong documentation standards, governance readiness, and alignment with international AML expectations.
+          </div>
         </div>
       </div>
     </div>
@@ -635,50 +635,33 @@
 
   <!-- CONTACT -->
   <section class="card section anchor" id="contact">
-    <div class="section-head"><h2>Professional Contact</h2></div>
+    <div class="section-head"><h2>Contact</h2></div>
     <div class="section-body">
       <div class="two-col">
         <div class="mini">
           <div class="k">Email</div>
-          <div class="v"><a href="mailto:bhishek.shibdeen@icloud.com" style="color:rgba(255,255,255,0.95); text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.22);">bhishek.shibdeen@icloud.com</a></div>
+          <div class="v"><a href="mailto:bhishek.shibdeen@icloud.com" style="color:var(--text);text-decoration:none;">bhishek.shibdeen@icloud.com</a></div>
           <div class="k" style="margin-top:12px;">Phone</div>
           <div class="v">+230 55024085</div>
         </div>
+
         <div class="mini">
           <div class="k">LinkedIn</div>
           <div class="v">
-            <a class="li-btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-              <svg class="li-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="rgba(255,255,255,0.95)" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+            <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
               </svg>
-              linkedin.com/in/bhishekshibdeen ↗
+              View Profile ↗
             </a>
           </div>
-          <div class="k" style="margin-top:14px;">Location</div>
-          <div class="v">Mauritius</div>
         </div>
       </div>
     </div>
   </section>
 
   <footer>© 2026 Bhishek Shibdeen</footer>
-
 </div>
-
-<script>
-  const btn = document.getElementById("inProgressBtn");
-  const kaizen = document.getElementById("kaizen");
-
-  function highlightKaizen(){
-    kaizen.classList.add("kaizen-highlight");
-    setTimeout(() => kaizen.classList.remove("kaizen-highlight"), 1800);
-  }
-
-  btn?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(highlightKaizen, 350);
-  });
-</script>
 
 </body>
 </html>
