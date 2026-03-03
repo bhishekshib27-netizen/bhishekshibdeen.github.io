@@ -8,19 +8,20 @@
 
 <style>
   :root{
-    --bg:#f6f7fb;
+    --bg:#ffffff;
     --panel:#ffffff;
-    --text:#101828;
-    --muted:#667085;
-    --line:#e6e8ef;
-    --shadow: 0 18px 50px rgba(16,24,40,0.08);
-    --shadow2: 0 10px 30px rgba(16,24,40,0.08);
+    --text:#050505;
+    --muted:#2b2b2b;
+    --line:#e9e9e9;
 
-    --radius:18px;     /* outer cards */
-    --radius2:0px;     /* squared inner description boxes */
+    --radius:18px;
+    --radius2:0px;
 
-    --accent:#111827;
-    --soft:#f1f3f8;
+    --shadow: 0 20px 60px rgba(0,0,0,0.08);
+    --shadow2: 0 10px 30px rgba(0,0,0,0.06);
+
+    --accent:#000000;
+    --soft:#f5f5f5;
   }
 
   *{ box-sizing:border-box; }
@@ -30,72 +31,82 @@
     margin:0;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     color:var(--text);
-    background:
-      radial-gradient(900px 600px at 12% 10%, rgba(17,24,39,0.06), transparent 60%),
-      radial-gradient(900px 600px at 90% 18%, rgba(17,24,39,0.05), transparent 62%),
-      linear-gradient(180deg, #f7f8fc 0%, #f4f6fb 50%, #f7f8fc 100%);
+    background: var(--bg);
   }
 
-  /* Background designs to make it pop */
-  .bg-blobs{
-    position:fixed;
-    inset:-250px;
-    pointer-events:none;
-    opacity:0.55;
-    background:
-      radial-gradient(circle at 14% 12%, rgba(17,24,39,0.10), transparent 55%),
-      radial-gradient(circle at 86% 18%, rgba(17,24,39,0.08), transparent 60%),
-      radial-gradient(circle at 48% 92%, rgba(17,24,39,0.07), transparent 55%);
-    filter: blur(0px);
-  }
-
-  .bg-lines{
-    position:fixed;
-    inset:-120px;
-    pointer-events:none;
-    opacity:0.16;
-    background:
-      repeating-linear-gradient(135deg,
-        rgba(16,24,40,0.10) 0px,
-        rgba(16,24,40,0.10) 1px,
-        transparent 1px,
-        transparent 22px
-      );
-    mask-image: radial-gradient(circle at 50% 10%, black 0%, transparent 70%);
-  }
-
-  .bg-grid{
+  /* ===== Premium motion background (white + black) ===== */
+  .bg-stage{
     position:fixed;
     inset:0;
     pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+  }
+
+  /* soft moving blobs */
+  .blob{
+    position:absolute;
+    width:520px;height:520px;
+    border-radius: 50%;
+    filter: blur(30px);
+    opacity: 0.10;
+    background: radial-gradient(circle at 30% 30%, #000 0%, transparent 60%);
+    animation: drift 14s ease-in-out infinite;
+    transform: translate3d(0,0,0);
+  }
+  .blob.b1{ left:-200px; top:-180px; animation-delay: -2s; }
+  .blob.b2{ right:-240px; top:-120px; width:620px; height:620px; opacity:0.08; animation-delay: -6s; }
+  .blob.b3{ left:20%; bottom:-320px; width:700px; height:700px; opacity:0.07; animation-delay: -10s; }
+
+  @keyframes drift{
+    0%{ transform: translate(0px,0px) scale(1); }
+    50%{ transform: translate(40px,26px) scale(1.06); }
+    100%{ transform: translate(0px,0px) scale(1); }
+  }
+
+  /* animated line-grid (very subtle) */
+  .grid{
+    position:absolute; inset:0;
+    opacity:0.20;
+    background:
+      linear-gradient(#00000010 1px, transparent 1px) 0 0/56px 56px,
+      linear-gradient(90deg, #00000010 1px, transparent 1px) 0 0/56px 56px;
+    mask-image: radial-gradient(circle at 50% 22%, black 0%, transparent 70%);
+    animation: gridFloat 10s ease-in-out infinite;
+  }
+  @keyframes gridFloat{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(8px); }
+    100%{ transform: translateY(0px); }
+  }
+
+  /* geometric shapes (crisp, minimal) */
+  .shape{
+    position:absolute;
+    border: 2px solid #000;
     opacity:0.10;
-    background:
-      linear-gradient(rgba(16,24,40,0.08) 1px, transparent 1px) 0 0/44px 44px,
-      linear-gradient(90deg, rgba(16,24,40,0.08) 1px, transparent 1px) 0 0/44px 44px;
-    mask-image: radial-gradient(circle at 50% 20%, black 0%, transparent 65%);
+    animation: shapeFloat 12s ease-in-out infinite;
+  }
+  .shape.s1{ width:120px;height:120px; left:8%; top:18%; transform: rotate(12deg); animation-delay:-2s; }
+  .shape.s2{ width:160px;height:90px; right:10%; top:26%; transform: rotate(-8deg); animation-delay:-6s; }
+  .shape.s3{ width:110px;height:110px; right:18%; bottom:14%; border-radius: 999px; animation-delay:-9s; }
+
+  @keyframes shapeFloat{
+    0%{ transform: translateY(0px) rotate(var(--r,0deg)); }
+    50%{ transform: translateY(14px) rotate(var(--r,0deg)); }
+    100%{ transform: translateY(0px) rotate(var(--r,0deg)); }
   }
 
-  /* soft rings */
-  .bg-rings{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:0.18;
-    background:
-      radial-gradient(circle at 18% 30%, transparent 0 120px, rgba(16,24,40,0.08) 121px 122px, transparent 123px 100%),
-      radial-gradient(circle at 82% 26%, transparent 0 140px, rgba(16,24,40,0.07) 141px 142px, transparent 143px 100%),
-      radial-gradient(circle at 55% 88%, transparent 0 180px, rgba(16,24,40,0.06) 181px 182px, transparent 183px 100%);
-    filter: blur(0px);
-  }
-
+  /* ===== Layout ===== */
   .wrap{
     width:min(1120px, 92vw);
     margin:0 auto;
-    padding: 22px 0 80px;
+    padding: 18px 0 80px;
     position:relative;
+    z-index:1;
   }
 
-  /* top nav */
+  /* ===== Nav ===== */
   .nav{
     position:sticky;
     top:14px;
@@ -105,24 +116,23 @@
     justify-content:space-between;
     gap:14px;
     padding: 12px 14px;
-    background: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.90);
     border: 1px solid var(--line);
     border-radius: 999px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     box-shadow: var(--shadow2);
   }
   .brand{
     display:flex;
     align-items:center;
     gap:10px;
-    font-weight:800;
+    font-weight:900;
     letter-spacing:0.2px;
   }
   .brand-badge{
     width:12px;height:12px;border-radius:999px;
-    background: linear-gradient(135deg, #111827, #6b7280);
+    background: #000;
   }
-
   .navlinks{
     display:flex;
     flex-wrap:wrap;
@@ -131,32 +141,23 @@
   }
   .nav a{
     text-decoration:none;
-    color:var(--muted);
-    font-size:13px;
+    color: #111;
+    font-weight:800;
+    font-size:12px;
     padding: 9px 11px;
     border-radius: 999px;
     border:1px solid transparent;
     transition: 0.18s ease;
+    opacity:0.75;
   }
   .nav a:hover{
-    color:var(--text);
+    opacity:1;
     background: var(--soft);
     border-color: var(--line);
     transform: translateY(-1px);
   }
 
-  /* layout */
-  .hero{
-    margin-top: 18px;
-    display:grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 16px;
-    align-items: stretch;
-  }
-  @media (max-width: 900px){
-    .hero{ grid-template-columns: 1fr; }
-  }
-
+  /* ===== Cards ===== */
   .card{
     background: var(--panel);
     border: 1px solid var(--line);
@@ -167,82 +168,96 @@
   }
   .card:hover{
     transform: translateY(-4px);
-    box-shadow: 0 22px 55px rgba(16,24,40,0.10);
+    box-shadow: 0 26px 70px rgba(0,0,0,0.10);
+  }
+
+  /* ===== Hero (motion-driven) ===== */
+  .hero{
+    margin-top: 18px;
+    position:relative;
   }
 
   .hero-main{
-    padding: 22px;
+    padding: 26px;
     display:grid;
-    grid-template-columns: 150px 1fr;
-    gap: 18px;
-    align-items:center;
-  }
-  @media (max-width: 700px){
-    .hero-main{ grid-template-columns: 1fr; }
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
-  .avatar{
-    width:150px;height:150px;
-    border-radius: 999px;
-    background:
-      radial-gradient(circle at 35% 25%, rgba(17,24,39,0.12), transparent 60%),
-      linear-gradient(135deg, #111827 0%, #6b7280 100%);
-    position:relative;
-    box-shadow: 0 18px 45px rgba(16,24,40,0.20);
-    border: 6px solid #fff;
+  .headline{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
   }
 
+  /* Header = name (as you requested) */
   h1{
     margin:0;
-    font-size: clamp(28px, 3.6vw, 42px);
-    letter-spacing: -0.5px;
-    line-height: 1.08;
+    font-size: clamp(34px, 4.2vw, 54px);
+    letter-spacing: -1px;
+    line-height: 1.02;
+    font-weight: 950;
   }
 
-  /* Kaizen target wrapper + highlight using :target (no JS) */
-  .kaizen{
-    display:inline-block;
-    margin-top: 10px;
-    font-style: italic;
-    color: var(--muted);
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: #fff;
-    transition: 0.2s ease;
+  .motto-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
   }
-  #kaizen:target .kaizen{
-    background: #111827;
-    color: #fff;
-    border-color: #111827;
-    box-shadow: 0 0 0 10px rgba(17,24,39,0.10);
+
+  .kaizen-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #000;
+    background:#fff;
+    font-weight: 950;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .kaizen-dot{
+    width:10px;height:10px;border-radius:999px;
+    background:#000;
+    box-shadow: 0 0 0 rgba(0,0,0,0.20);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.18); }
+    70%{ box-shadow: 0 0 0 14px rgba(0,0,0,0.0); }
+    100%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.0); }
   }
 
   .subtitle{
-    margin: 10px 0 0;
-    color:var(--muted);
+    margin: 0;
+    color: #1a1a1a;
     line-height: 1.75;
-    font-size: 14.5px;
+    font-size: 15px;
+    font-weight: 650;
+    opacity:0.92;
+    max-width: 78ch;
   }
 
   .cta{
-    margin-top: 14px;
+    margin-top: 6px;
     display:flex;
     flex-wrap: wrap;
     gap: 10px;
   }
-
   .btn{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    padding: 10px 12px;
-    border-radius: 12px;
+    padding: 11px 14px;
+    border-radius: 14px;
     text-decoration:none;
     border: 1px solid var(--line);
     background: #fff;
     color: var(--text);
-    font-weight: 700;
+    font-weight: 900;
     font-size: 13px;
     transition: 0.18s ease;
   }
@@ -251,26 +266,245 @@
     transform: translateY(-1px);
   }
   .btn.primary{
-    background: var(--accent);
+    background: #000;
     color: #fff;
-    border-color: var(--accent);
+    border-color: #000;
   }
   .btn.primary:hover{
-    background: #0b1220;
+    background: #111;
   }
   .icon{
     width:18px;height:18px;
     display:inline-block;
   }
 
-  .hero-side{
-    padding: 18px;
+  /* ===== "Drive to scroll" strip + scroll icon ===== */
+  .scroll-drive{
+    margin-top: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
     display:flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    overflow:hidden;
+    position:relative;
   }
 
-  /* Squared inner description boxes */
+  .scroll-drive::before{
+    content:"";
+    position:absolute;
+    inset:-40px;
+    background:
+      radial-gradient(circle at 18% 30%, rgba(0,0,0,0.07), transparent 50%),
+      radial-gradient(circle at 78% 10%, rgba(0,0,0,0.05), transparent 55%);
+    opacity:0.55;
+    transform: translateY(0);
+    animation: driveGlow 6s ease-in-out infinite;
+  }
+  @keyframes driveGlow{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(8px); }
+    100%{ transform: translateY(0px); }
+  }
+
+  .scroll-drive > *{ position:relative; z-index:1; }
+
+  .drive-text{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .drive-text .top{
+    font-weight: 950;
+    letter-spacing: 0.4px;
+  }
+  .drive-text .sub{
+    color:#222;
+    font-weight: 700;
+    font-size: 13px;
+    opacity:0.75;
+  }
+
+  /* scroll button */
+  .scroll-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid #000;
+    background:#000;
+    color:#fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: 950;
+    text-decoration:none;
+    transition: 0.18s ease;
+    white-space:nowrap;
+  }
+  .scroll-btn:hover{
+    background:#111;
+    transform: translateY(-1px);
+  }
+
+  /* animated scroll icon below hero */
+  .scroll-icon-wrap{
+    margin-top: 12px;
+    display:flex;
+    justify-content:center;
+  }
+  .scroll-icon{
+    width:34px;height:52px;
+    border:2px solid #000;
+    border-radius: 999px;
+    position:relative;
+    opacity:0.85;
+    background:#fff;
+  }
+  .scroll-icon::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:12px;
+    width:6px;height:6px;
+    background:#000;
+    border-radius:999px;
+    transform: translateX(-50%);
+    animation: wheel 1.5s ease-in-out infinite;
+  }
+  @keyframes wheel{
+    0%{ transform: translate(-50%, 0); opacity:1; }
+    70%{ transform: translate(-50%, 16px); opacity:0.15; }
+    100%{ transform: translate(-50%, 0); opacity:1; }
+  }
+
+  /* ===== "Peek" teaser (entices clicks) ===== */
+  .peek{
+    margin-top: 16px;
+    position:relative;
+  }
+
+  .peek-card{
+    border-radius: var(--radius);
+    border:1px solid var(--line);
+    background:#fff;
+    box-shadow: var(--shadow2);
+    overflow:hidden;
+  }
+
+  .peek-head{
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .peek-head .label{
+    font-weight: 950;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .peek-head .hint{
+    font-size: 12px;
+    font-weight: 850;
+    opacity:0.70;
+  }
+
+  .peek-body{
+    padding: 16px 18px 18px;
+    color:#121212;
+    font-size: 14.5px;
+    line-height: 1.85;
+    font-weight: 650;
+  }
+
+  /* show only a "peak" by default */
+  .peek-window{
+    max-height: 132px;
+    overflow:hidden;
+    position:relative;
+  }
+  .peek-window::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:70px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(255,255,255,1));
+  }
+
+  .peek-actions{
+    padding: 14px 18px 18px;
+    border-top: 1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+
+  .peek-actions .micro{
+    font-size: 12.5px;
+    font-weight: 850;
+    opacity:0.72;
+  }
+
+  .peek-actions a{
+    text-decoration:none;
+    font-weight: 950;
+    color:#000;
+    border:1px solid #000;
+    background:#fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    transition: 0.18s ease;
+  }
+  .peek-actions a:hover{
+    background: var(--soft);
+    transform: translateY(-1px);
+  }
+
+  /* ===== Sections ===== */
+  .section{ margin-top: 16px; }
+  .section-head{
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .section-head h2{
+    margin:0;
+    font-size: 12px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--text);
+    font-weight: 950;
+  }
+
+  .section-body{
+    padding: 16px 18px 20px;
+    color: #1b1b1b;
+    line-height: 1.85;
+    font-size: 14.5px;
+    border-radius: var(--radius2);
+    font-weight: 650;
+  }
+
+  .two-col{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 900px){
+    .two-col{ grid-template-columns: 1fr; }
+  }
+
+  ul{ margin: 10px 0 0; padding-left: 18px; }
+  li{ margin: 6px 0; }
+
   .mini{
     border: 1px solid var(--line);
     border-radius: var(--radius2);
@@ -287,61 +521,18 @@
     text-transform: uppercase;
     letter-spacing: 1.6px;
     font-size: 12px;
-    color: var(--muted);
+    color: #111;
+    opacity:0.70;
     margin-bottom: 6px;
+    font-weight: 950;
   }
   .v{
-    font-weight: 750;
+    font-weight: 950;
     color: var(--text);
     line-height: 1.5;
     font-size: 14px;
   }
 
-  /* section blocks */
-  .section{
-    margin-top: 16px;
-  }
-  .section-head{
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .section-head h2{
-    margin:0;
-    font-size: 14px;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  /* squared bodies */
-  .section-body{
-    padding: 16px 18px 20px;
-    color: var(--muted);
-    line-height: 1.85;
-    font-size: 14.5px;
-    border-radius: var(--radius2);
-  }
-
-  .two-col{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 900px){
-    .two-col{ grid-template-columns: 1fr; }
-  }
-
-  ul{
-    margin: 10px 0 0;
-    padding-left: 18px;
-  }
-  li{ margin: 6px 0; }
-
-  /* squared rows */
   .row{
     display:flex;
     align-items:flex-start;
@@ -358,44 +549,15 @@
     background: var(--soft);
   }
   .row .title{
-    font-weight: 850;
+    font-weight: 950;
     color: var(--text);
     margin-bottom: 4px;
   }
   .row .meta{
-    color: var(--muted);
+    color: #111;
+    opacity:0.70;
     font-size: 13px;
-  }
-
-  .tag{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding: 10px 12px;
-    border-radius: 999px;
-    border: 1px dashed rgba(16,24,40,0.22);
-    background: #fff;
-    font-weight: 800;
-    color: var(--text);
-    font-size: 13px;
-    text-decoration:none;
-    transition: 0.18s ease;
-    user-select:none;
-  }
-  .tag:hover{
-    background: var(--soft);
-    transform: translateY(-1px);
-  }
-  .pulse{
-    width:8px;height:8px;border-radius:999px;
-    background: var(--text);
-    box-shadow: 0 0 0 rgba(16,24,40,0.25);
-    animation: pulse 1.8s infinite;
-  }
-  @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(16,24,40,0.18); }
-    70%{ box-shadow: 0 0 0 12px rgba(16,24,40,0.0); }
-    100%{ box-shadow: 0 0 0 0 rgba(16,24,40,0.0); }
+    font-weight: 750;
   }
 
   .anchor{ scroll-margin-top: 90px; }
@@ -403,9 +565,11 @@
   footer{
     margin-top: 24px;
     text-align:center;
-    color: var(--muted);
+    color: #111;
+    opacity:0.70;
     font-size: 13px;
     padding: 14px 0 0;
+    font-weight: 850;
   }
 
   /* subtle reveal */
@@ -418,10 +582,16 @@
 </head>
 
 <body>
-<div class="bg-blobs"></div>
-<div class="bg-lines"></div>
-<div class="bg-grid"></div>
-<div class="bg-rings"></div>
+  <!-- background motion stage -->
+  <div class="bg-stage" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="grid"></div>
+    <div class="shape s1" style="--r:12deg;"></div>
+    <div class="shape s2" style="--r:-8deg;"></div>
+    <div class="shape s3" style="--r:0deg;"></div>
+  </div>
 
 <div class="wrap" id="top">
 
@@ -432,33 +602,33 @@
       <span>Bhishek Shibdeen</span>
     </div>
     <div class="navlinks">
+      <a href="#about">About</a>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#certifications">Certifications</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#contact">Contact</a>
-      <a href="#about">About</a>
     </div>
   </div>
 
-  <!-- HERO (NOW ABOVE ABOUT) -->
+  <!-- HERO -->
   <div class="hero">
-
-    <div class="card hero-main">
-      <div class="avatar" aria-label="Profile placeholder"></div>
-
-      <div>
+    <section class="card hero-main">
+      <div class="headline">
         <h1>Bhishek Shibdeen</h1>
 
-        <div id="kaizen">
-          <span class="kaizen"><em>Kaizen</em></span>
+        <div class="motto-row">
+          <span class="kaizen-pill">
+            <span class="kaizen-dot"></span>
+            Kaizen
+          </span>
+          <span style="font-weight:900; opacity:0.75;">Compliance • AML/CFT • Risk</span>
         </div>
 
         <p class="subtitle">
-          Cambridge International A Levels graduate from <strong>St. Joseph’s College, Mauritius</strong>.
-          Pursuing <strong>BA (Hons) Business Management (Finance)</strong> at Middlesex University Mauritius starting <strong>April 2026</strong>.
-          Focused on Compliance, AML/CFT, and risk-based governance within the financial sector.
+          Building my path in <strong>Compliance</strong>, <strong>AML/CFT</strong>, and <strong>risk-based governance</strong> within the financial sector —
+          with hands-on exposure to KYC operations, EDD support, sanctions/PEP screening, and audit-ready documentation discipline.
         </p>
 
         <div class="cta">
@@ -471,27 +641,53 @@
             LinkedIn
           </a>
         </div>
+
+        <!-- DRIVE TO SCROLL -->
+        <div class="scroll-drive">
+          <div class="drive-text">
+            <div class="top">Scroll to see my strongest work 🖤</div>
+            <div class="sub">A short case-study style About section — risk mindset, real responsibilities, real direction.</div>
+          </div>
+          <a class="scroll-btn" href="#about">
+            Scroll now ↓
+          </a>
+        </div>
+
+        <!-- animated scroll icon -->
+        <div class="scroll-icon-wrap">
+          <a href="#about" aria-label="Scroll to About" style="text-decoration:none;">
+            <div class="scroll-icon"></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PEAK / TEASER -->
+    <div class="peek">
+      <div class="peek-card">
+        <div class="peek-head">
+          <div class="label">Case Study Preview</div>
+          <div class="hint">This is where most people click 👇</div>
+        </div>
+
+        <div class="peek-body peek-window">
+          —🙋‍♂️ Hi, I’m Bhishek and I’m building my path in Compliance, AML, and Risk within the financial sector.<br><br>
+          🎓 Business Management (Finance) student with hands-on experience in KYC, AML, and compliance operations within a regulated fintech environment.<br><br>
+          ✅ Risk-based KYC and Customer Due Diligence (CDD) within a regulated fintech framework.<br>
+          ✅ Supported Enhanced Due Diligence (EDD), sanctions screening, PEP checks, and adverse media reviews.<br>
+          ✅ Corporate ownership structure reviews and UBO identification aligned with regulatory standards.<br><br>
+          ⚖️ My interests lie at the intersection of financial integrity, risk management, and regulatory governance...
+        </div>
+
+        <div class="peek-actions">
+          <div class="micro">Tap to read the full “About” 🔍</div>
+          <a href="#about">Open full About →</a>
+        </div>
       </div>
     </div>
-
-    <div class="card hero-side">
-      <div class="mini">
-        <div class="k">Current Focus</div>
-        <div class="v">Compliance • AML/CFT • KYC Operations</div>
-      </div>
-      <div class="mini">
-        <div class="k">Strength</div>
-        <div class="v">Accuracy, documentation discipline, governance mindset</div>
-      </div>
-      <div class="mini">
-        <div class="k">Goal</div>
-        <div class="v">Specialize in Compliance and potentially progress toward an MLRO path</div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- ABOUT (NOW BELOW NAME SECTION) -->
+  <!-- ABOUT -->
   <section class="card section anchor" id="about">
     <div class="section-head"><h2>About</h2></div>
     <div class="section-body">
@@ -533,7 +729,7 @@
     </div>
   </section>
 
-  <!-- EDUCATION -->
+  <!-- EDUCATION (fixed wording) -->
   <section class="card section anchor" id="education">
     <div class="section-head"><h2>Education</h2></div>
     <div class="section-body">
@@ -541,9 +737,11 @@
         <div class="mini">
           <div class="k">St. Joseph’s College, Mauritius</div>
           <div class="v">Cambridge International A Levels (Higher School Certificate)</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:14px;">Business • Economics • French • Feb 2018 – Nov 2025</div>
-          <div style="margin-top:10px;color:var(--muted);font-size:14px;">
-            <strong>Upcoming:</strong> BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)
+          <div style="margin-top:8px;color:#111;opacity:0.70;font-size:14px;font-weight:800;">
+            Business • Economics • French • Feb 2018 – Nov 2025
+          </div>
+          <div style="margin-top:10px;color:#111;opacity:0.75;font-size:14px;font-weight:850;">
+            <strong>Next:</strong> BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)
           </div>
         </div>
         <div class="mini">
@@ -567,11 +765,11 @@
         <div class="v">KYC & Compliance Operations Intern — ARIE Finance</div>
         <div class="k" style="margin-top:6px;">Dec 2025 – April 2026</div>
         <ul>
-          <li>Led risk-based KYC & CDD reviews for 50+ corporate and retail clients, ensuring full alignment with AML frameworks and internal controls.</li>
-          <li>Conducted enhanced due diligence, including sanctions, PEP, and adverse media screening, mitigating high-risk exposures and protecting institutional integrity.</li>
-          <li>Analysed complex corporate ownership structures to identify UBOs, assess jurisdictional and source-of-funds risk, and support risk-based onboarding decisions.</li>
-          <li>Optimised onboarding governance by validating documentation and resolving discrepancies, reducing compliance-related delays by approximately 15–20% and enhancing operational efficiency.</li>
-          <li>Maintained audit-ready KYC records and supported internal monitoring processes, reinforcing compliance resilience and supervisory preparedness.</li>
+          <li>Led risk-based KYC & CDD reviews for 50+ corporate and retail clients, ensuring alignment with AML frameworks and internal controls.</li>
+          <li>Conducted enhanced due diligence, including sanctions, PEP, and adverse media screening, mitigating high-risk exposures.</li>
+          <li>Analysed corporate ownership structures to identify UBOs and support risk-based onboarding decisions.</li>
+          <li>Validated documentation and resolved discrepancies, reducing onboarding delays by approximately 15–20%.</li>
+          <li>Maintained audit-ready KYC records and supported internal monitoring processes.</li>
         </ul>
       </div>
     </div>
@@ -591,15 +789,8 @@
           <div class="meta">Status: In Progress (interactive)</div>
         </div>
 
-        <a class="tag" href="#kaizen" aria-label="In progress — go to Kaizen">
-          <span class="pulse"></span>
-          In progress
-        </a>
+        <a class="btn" href="#about">See core story →</a>
       </div>
-
-      <p style="margin:10px 0 0; font-size:13px; color:var(--muted);">
-        Tip: Click <strong>In progress</strong> to jump up and highlight <em>Kaizen</em>.
-      </p>
     </div>
   </section>
 
@@ -634,9 +825,6 @@
         </div>
         <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
       </div>
-
-      <p style="margin:12px 0 0; font-size:13px; color:var(--muted);">
-      </p>
     </div>
   </section>
 
@@ -648,15 +836,15 @@
         <div class="mini">
           <div class="k">Direction</div>
           <div class="v">Compliance & Financial Crime Risk Management</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:14px;">
+          <div style="margin-top:8px;color:#111;opacity:0.70;font-size:14px;font-weight:800;">
             Deepen AML/CFT expertise, strengthen risk-based onboarding practice, and build measurable compliance outcomes.
           </div>
         </div>
         <div class="mini">
-          <div class="k">Long-Term Objective</div>
-          <div class="v">Potential MLRO pathway</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:14px;">
-            Build strong documentation standards, governance readiness, and alignment with international AML expectations.
+          <div class="k">Long-Term Target</div>
+          <div class="v">MLRO-level leadership pathway</div>
+          <div style="margin-top:8px;color:#111;opacity:0.70;font-size:14px;font-weight:800;">
+            Build governance readiness, documentation excellence, and alignment with international AML expectations.
           </div>
         </div>
       </div>
@@ -670,7 +858,7 @@
       <div class="two-col">
         <div class="mini">
           <div class="k">Email</div>
-          <div class="v"><a href="mailto:bhishek.shibdeen@icloud.com" style="color:var(--text);text-decoration:none;">bhishek.shibdeen@icloud.com</a></div>
+          <div class="v"><a href="mailto:bhishek.shibdeen@icloud.com" style="color:var(--text);text-decoration:none;font-weight:950;">bhishek.shibdeen@icloud.com</a></div>
           <div class="k" style="margin-top:12px;">Phone</div>
           <div class="v">+230 55024085</div>
         </div>
