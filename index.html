@@ -9,24 +9,22 @@
 <style>
   :root{
     --bg:#ffffff;
-    --text:#0a0a0a;
+    --text:#070707;
     --muted: rgba(0,0,0,.62);
-    --line: rgba(0,0,0,.10);
-    --soft: rgba(0,0,0,.03);
+    --line: rgba(0,0,0,.12);
+    --soft: rgba(0,0,0,.035);
 
-    /* Fintech accents */
-    --a1:#2563eb; /* blue */
-    --a2:#22c55e; /* green */
-    --a3:#f97316; /* orange */
-    --a4:#a855f7; /* purple */
+    /* Darker fintech accents */
+    --a1:#1d4ed8; /* deep blue */
+    --a2:#16a34a; /* deep green */
+    --a3:#ea580c; /* deep orange */
+    --a4:#7c3aed; /* deep purple */
 
-    /* Sharp edges */
     --r:12px;
     --r2:10px;
 
-    /* Clean shadows */
-    --shadow: 0 18px 55px rgba(0,0,0,0.10);
-    --shadow2: 0 10px 26px rgba(0,0,0,0.07);
+    --shadow: 0 18px 55px rgba(0,0,0,0.12);
+    --shadow2: 0 10px 26px rgba(0,0,0,0.085);
 
     --ease: cubic-bezier(.2,.8,.2,1);
   }
@@ -56,23 +54,24 @@
     transform-origin:left;
   }
 
-  /* ===== Background: clean, structured, colored accents (no blur/glass) ===== */
+  /* ===== Background (structured, darker accents, no glass) ===== */
   .bg-stage{
     position:fixed; inset:0;
     pointer-events:none;
     z-index:0;
     overflow:hidden;
     background:
-      radial-gradient(circle at 12% 18%, rgba(37,99,235,0.12), transparent 42%),
-      radial-gradient(circle at 88% 20%, rgba(34,197,94,0.10), transparent 44%),
-      radial-gradient(circle at 50% 92%, rgba(168,85,247,0.10), transparent 48%);
+      radial-gradient(circle at 12% 18%, rgba(29,78,216,0.16), transparent 44%),
+      radial-gradient(circle at 88% 20%, rgba(22,163,74,0.14), transparent 46%),
+      radial-gradient(circle at 50% 92%, rgba(124,58,237,0.14), transparent 52%),
+      radial-gradient(circle at 78% 72%, rgba(234,88,12,0.12), transparent 48%);
   }
   .grid{
     position:absolute; inset:0;
-    opacity:0.08;
+    opacity:0.09;
     background:
-      linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px) 0 0/82px 82px,
-      linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px) 0 0/82px 82px;
+      linear-gradient(rgba(0,0,0,0.09) 1px, transparent 1px) 0 0/84px 84px,
+      linear-gradient(90deg, rgba(0,0,0,0.09) 1px, transparent 1px) 0 0/84px 84px;
     mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
     animation: gridFloat 10s var(--ease) infinite;
   }
@@ -82,17 +81,11 @@
     100%{ transform: translateY(0px); }
   }
 
-  /* Color rails (fintech structure) */
-  .rail{
-    position:absolute;
-    width:14px;
-    border-radius: 0;
-    opacity:0.9;
-    filter: none;
-  }
-  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(37,99,235,0.10); }
-  .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(34,197,94,0.10); }
-  .rail.r3{ left: 22%; bottom: 0; height: 34%; background: rgba(249,115,22,0.10); }
+  /* Color rails */
+  .rail{ position:absolute; width:14px; border-radius:0; }
+  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(29,78,216,0.12); }
+  .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(22,163,74,0.12); }
+  .rail.r3{ left: 22%; bottom: 0; height: 34%; background: rgba(234,88,12,0.10); }
 
   /* ===== Layout ===== */
   .wrap{
@@ -103,7 +96,7 @@
     z-index: 2;
   }
 
-  /* ===== Nav (solid, no blur) ===== */
+  /* ===== Nav ===== */
   .nav{
     position:sticky; top:14px;
     z-index:60;
@@ -137,7 +130,7 @@
     font-weight: 850;
     font-size:12px;
     padding: 9px 12px;
-    border-radius: 10px; /* squared */
+    border-radius: 10px;
     border:1px solid transparent;
     opacity:0.78;
     transition: 0.18s var(--ease);
@@ -151,7 +144,7 @@
   .nav a.active{
     opacity:1;
     color:#000;
-    background: linear-gradient(90deg, rgba(37,99,235,0.16), rgba(34,197,94,0.14));
+    background: linear-gradient(90deg, rgba(29,78,216,0.20), rgba(22,163,74,0.16));
     border-color: rgba(0,0,0,.16);
   }
 
@@ -205,7 +198,7 @@
     padding: 9px 12px;
     border-radius: 10px;
     border: 1px solid rgba(0,0,0,.18);
-    background: linear-gradient(90deg, rgba(37,99,235,0.12), rgba(34,197,94,0.10));
+    background: linear-gradient(90deg, rgba(29,78,216,0.18), rgba(22,163,74,0.14));
     font-weight: 950;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -271,11 +264,11 @@
     border-color: transparent;
     color:#fff;
     background: linear-gradient(90deg, var(--a1), var(--a4));
-    box-shadow: 0 14px 35px rgba(37,99,235,0.22);
+    box-shadow: 0 14px 38px rgba(29,78,216,0.24);
   }
   .btn.primary:hover{
     transform: translateY(-2px);
-    box-shadow: 0 18px 45px rgba(37,99,235,0.28);
+    box-shadow: 0 18px 48px rgba(29,78,216,0.30);
   }
 
   .li-ico{ width:14px; height:14px; display:inline-block; opacity:.9; }
@@ -285,8 +278,8 @@
     border:1px solid var(--line);
     border-radius: var(--r);
     background:
-      linear-gradient(135deg, rgba(37,99,235,0.10), transparent 45%),
-      linear-gradient(225deg, rgba(34,197,94,0.10), transparent 50%),
+      linear-gradient(135deg, rgba(29,78,216,0.14), transparent 45%),
+      linear-gradient(225deg, rgba(22,163,74,0.12), transparent 50%),
       #fff;
     padding: 18px;
   }
@@ -347,10 +340,10 @@
     font-weight: 950;
   }
   .accent{
-    width: 140px; height: 10px;
+    width: 150px; height: 10px;
     border-radius: 0;
     background: linear-gradient(90deg, var(--a1), var(--a2), var(--a3), var(--a4));
-    opacity:0.9;
+    opacity:0.95;
   }
 
   .section-body{
@@ -364,7 +357,7 @@
   /* Rows */
   .row{
     display:flex;
-    align-items:flex-start;
+    align-items:center;
     justify-content:space-between;
     gap:12px;
     padding: 14px;
@@ -377,8 +370,35 @@
     transform: translateY(-2px);
     background: #fafafa;
   }
-  .row .title{ font-weight: 930; margin-bottom: 4px; letter-spacing:-0.2px;}
+  .row-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width: 0;
+  }
+  .row .title{ font-weight: 930; margin-bottom: 4px; letter-spacing:-0.2px; }
   .row .meta{ color: var(--muted); font-size: 13px; font-weight: 650; }
+  .row-text{ min-width:0; }
+  .row-text .title, .row-text .meta{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  /* Certification logos */
+  .cert-logo{
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    flex: 0 0 auto;
+  }
+  .cert-logo img{
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    display:block;
+  }
 
   /* Layout */
   .two-col{
@@ -421,16 +441,17 @@
   }
   .tile:hover{
     transform: translateY(-3px);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.10);
+    box-shadow: 0 18px 55px rgba(0,0,0,0.12);
   }
   .tile::before{
     content:"";
     position:absolute;
-    inset:-80px;
+    inset:-90px;
     background:
-      radial-gradient(circle at 18% 22%, rgba(37,99,235,0.10), transparent 55%),
-      radial-gradient(circle at 80% 28%, rgba(34,197,94,0.08), transparent 55%);
-    opacity:0.85;
+      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.16), transparent 58%),
+      radial-gradient(circle at 80% 28%, rgba(22,163,74,0.12), transparent 58%),
+      radial-gradient(circle at 60% 80%, rgba(124,58,237,0.10), transparent 60%);
+    opacity:0.9;
   }
   .tile > *{ position:relative; z-index:1; }
 
@@ -584,7 +605,7 @@
         <aside class="panel reveal" aria-label="Snapshot">
           <h3>Portfolio Snapshot</h3>
           <p>
-            Minimal fintech style: proof-first credentials + projects, structured for readability and credibility.
+            Modern fintech style: proof-first credentials + projects, structured for readability and credibility.
           </p>
 
           <div class="metric">
@@ -620,30 +641,48 @@
           Certifications
         </div>
 
+        <!-- YALE -->
         <div class="row reveal">
-          <div>
-            <div class="title">Financial Markets — Yale University (Coursera)</div>
-            <div class="meta">Issued Feb 2026 • PDF</div>
+          <div class="row-left">
+            <div class="cert-logo" title="Yale University">
+              <img src="assets/yale.svg" alt="Yale University logo" loading="lazy" />
+            </div>
+            <div class="row-text">
+              <div class="title">Financial Markets — Yale University (Coursera)</div>
+              <div class="meta">Issued Feb 2026 • PDF</div>
+            </div>
           </div>
           <a class="btn" href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View ↗</a>
         </div>
 
         <div style="height:10px;"></div>
 
+        <!-- FCA (Verdian) -->
         <div class="row reveal">
-          <div>
-            <div class="title">AML Essentials — Financial Crime Academy</div>
-            <div class="meta">Issued Feb 2026 • PDF</div>
+          <div class="row-left">
+            <div class="cert-logo" title="Financial Crime Academy (Verdian)">
+              <img src="assets/fca-verdian.svg" alt="Financial Crime Academy by Verdian logo" loading="lazy" />
+            </div>
+            <div class="row-text">
+              <div class="title">AML Essentials — Financial Crime Academy</div>
+              <div class="meta">Issued Feb 2026 • PDF</div>
+            </div>
           </div>
           <a class="btn" href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View ↗</a>
         </div>
 
         <div style="height:10px;"></div>
 
+        <!-- FEI (France Éducation international) -->
         <div class="row reveal">
-          <div>
-            <div class="title">DELF B2 — Diplôme d’Études en Langue Française</div>
-            <div class="meta">Issued Mar 2025 • PDF</div>
+          <div class="row-left">
+            <div class="cert-logo" title="France Éducation international">
+              <img src="assets/fei.svg" alt="France Éducation international logo" loading="lazy" />
+            </div>
+            <div class="row-text">
+              <div class="title">DELF B2 — Diplôme d’Études en Langue Française</div>
+              <div class="meta">Issued Mar 2025 • PDF</div>
+            </div>
           </div>
           <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
         </div>
@@ -810,3 +849,9 @@
 
 </body>
 </html>
+(index.html)
+(AML_Regulations_Mauritius.pdf)
+assets/
+  yale.svg
+  fca-verdian.svg
+  fei.svg
