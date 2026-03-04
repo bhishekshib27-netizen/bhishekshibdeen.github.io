@@ -8,27 +8,26 @@
 
 <style>
   :root{
-    --bg:#ffffff;
-    --text:#070707;
-    --muted: rgba(0,0,0,.62);
-    --line: rgba(0,0,0,.12);
-    --soft: rgba(0,0,0,.035);
+  --bg:#ffffff;
+  --text:#070707;
+  --muted: rgba(0,0,0,.62);
+  --line: rgba(0,0,0,.12);
+  --soft: rgba(0,0,0,.035);
 
-    /* Darker fintech accents */
- --a1:#0f3dff;
---a2:#059669;
---a3:#f59e0b;
---a4:#7c2d12;
-    
-    --r:12px;
-    --r2:10px;
+  /* Dark + Red + Yellow (Fintech / Compliance) */
+  --a1:#7f1d1d; /* deep red */
+  --a2:#f59e0b; /* gold */
+  --a3:#111827; /* near-black slate */
+  --a4:#b91c1c; /* brighter red for pops */
 
-    --shadow: 0 20px 60px rgba(0,0,0,0.12);
-    --shadow2: 0 10px 26px rgba(0,0,0,0.085);
+  --r:12px;
+  --r2:10px;
 
-    --ease: cubic-bezier(.2,.8,.2,1);
-  }
+  --shadow: 0 20px 60px rgba(0,0,0,0.12);
+  --shadow2: 0 10px 26px rgba(0,0,0,0.085);
 
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
@@ -46,7 +45,10 @@
     position:fixed; top:0; left:0;
     width:100%; height:4px;
     z-index:999;
-    background: transparent;
+    background: radial-gradient(circle at 12% 18%, rgba(127,29,29,0.22), transparent 44%),
+  radial-gradient(circle at 88% 20%, rgba(245,158,11,0.20), transparent 46%),
+  radial-gradient(circle at 50% 92%, rgba(17,24,39,0.16), transparent 52%),
+  radial-gradient(circle at 78% 72%, rgba(185,28,28,0.18), transparent 48%); transparent;
   }
   .progress > span{
     display:block; height:100%; width:0%;
