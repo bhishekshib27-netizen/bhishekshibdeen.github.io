@@ -14,11 +14,11 @@
     --line: rgba(0,0,0,.12);
     --soft: rgba(0,0,0,.035);
 
-    /* Darker fintech accents */
+    /* Accents */
     --a1:#0a2fff;
---a2:#00c2a8;
---a3:#ff4d00;
---a4:#6d28d9;
+    --a2:#00c2a8;
+    --a3:#ff4d00;
+    --a4:#6d28d9;
 
     --r:12px;
     --r2:10px;
@@ -27,6 +27,10 @@
     --shadow2: 0 10px 26px rgba(0,0,0,0.085);
 
     --ease: cubic-bezier(.2,.8,.2,1);
+
+    /* Cinematic dark */
+    --deep:#040A1B;       /* deep navy */
+    --deep2:#061233;      /* secondary deep */
   }
 
   *{ box-sizing:border-box; }
@@ -39,6 +43,67 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.15px;
+    overflow-x:hidden;
+  }
+
+  /* ===== Cinematic scroll tint (white -> deep navy) ===== */
+  .cinematic{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:1;
+    background: radial-gradient(circle at 20% 10%, rgba(10,47,255,.10), transparent 55%),
+                radial-gradient(circle at 80% 15%, rgba(0,194,168,.10), transparent 55%),
+                linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(4,10,27,1) 100%);
+    opacity: 0;
+    transform: translateZ(0);
+    transition: opacity .2s var(--ease);
+    mix-blend-mode: multiply;
+  }
+
+  /* When darkened, flip text colors subtly */
+  body.dark-mode{
+    color: rgba(255,255,255,.92);
+  }
+  body.dark-mode .nav,
+  body.dark-mode .card,
+  body.dark-mode .panel,
+  body.dark-mode .cert-card,
+  body.dark-mode .tile,
+  body.dark-mode .mini,
+  body.dark-mode #mobileNav{
+    background: rgba(10,14,26,.72);
+    border-color: rgba(255,255,255,.12);
+  }
+  body.dark-mode .nav a,
+  body.dark-mode .brand,
+  body.dark-mode .btn,
+  body.dark-mode .chip,
+  body.dark-mode .tagchip{
+    color: rgba(255,255,255,.92);
+  }
+  body.dark-mode .btn{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.14);
+  }
+  body.dark-mode .btn:hover{ background: rgba(255,255,255,.10); }
+  body.dark-mode .subtitle,
+  body.dark-mode .section-body,
+  body.dark-mode .pub-body p,
+  body.dark-mode .tile p,
+  body.dark-mode .panel p{
+    color: rgba(255,255,255,.78);
+  }
+  body.dark-mode footer{ color: rgba(255,255,255,.55); }
+  body.dark-mode .grid{
+    opacity: .08;
+    background:
+      linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/86px 86px,
+      linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/86px 86px;
+  }
+  body.dark-mode .dot{
+    border-color: rgba(255,255,255,.22);
+    background: rgba(10,14,26,.75);
+    opacity: .75;
   }
 
   /* ===== Progress bar ===== */
@@ -54,7 +119,7 @@
     transform-origin:left;
   }
 
-  /* ===== Background (structured, darker accents, no glass) ===== */
+  /* ===== Background stage ===== */
   .bg-stage{
     position:fixed; inset:0;
     pointer-events:none;
@@ -65,6 +130,7 @@
       radial-gradient(circle at 88% 20%, rgba(22,163,74,0.14), transparent 46%),
       radial-gradient(circle at 50% 92%, rgba(124,58,237,0.14), transparent 52%),
       radial-gradient(circle at 78% 72%, rgba(234,88,12,0.12), transparent 48%);
+    transition: filter .25s var(--ease);
   }
   .grid{
     position:absolute; inset:0;
@@ -107,6 +173,7 @@
     border:1px solid var(--line);
     border-radius: var(--r);
     box-shadow: var(--shadow2);
+    backdrop-filter: blur(10px);
   }
   .brand{
     display:flex;
@@ -144,6 +211,10 @@
     background: linear-gradient(90deg, rgba(29,78,216,0.20), rgba(22,163,74,0.16));
     border-color: rgba(0,0,0,.16);
   }
+  body.dark-mode .nav a.active{
+    background: linear-gradient(90deg, rgba(10,47,255,0.22), rgba(0,194,168,0.18));
+    border-color: rgba(255,255,255,.18);
+  }
 
   /* ===== Cards ===== */
   .card{
@@ -151,7 +222,7 @@
     border: 1px solid var(--line);
     border-radius: var(--r);
     overflow:hidden;
-    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease), background .22s var(--ease);
     position:relative;
   }
   .card:hover{
@@ -159,7 +230,7 @@
     box-shadow: var(--shadow);
   }
 
-  /* ===== Glow layer (not glass) ===== */
+  /* ===== Glow layer ===== */
   .glow::before{
     content:"";
     position:absolute;
@@ -216,6 +287,10 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 12px;
+  }
+  body.dark-mode .kaizen{
+    border-color: rgba(255,255,255,.18);
+    background: linear-gradient(90deg, rgba(10,47,255,0.22), rgba(0,194,168,0.16));
   }
   .kaizen-dot{
     width:9px;height:9px;border-radius: 2px;
@@ -297,6 +372,7 @@
       linear-gradient(225deg, rgba(22,163,74,0.12), transparent 50%),
       #fff;
     padding: 18px;
+    transition: background .22s var(--ease), border-color .22s var(--ease);
   }
   .panel h3{
     margin:0;
@@ -334,33 +410,13 @@
     font-size: 13px;
     opacity:0.90;
   }
+  body.dark-mode .metric{
+    background: rgba(255,255,255,.04);
+    border-color: rgba(255,255,255,.12);
+  }
+  body.dark-mode .metric:hover{ background: rgba(255,255,255,.07); }
 
   /* ===== Sections ===== */
-  <section class="about-section">
-
-  <div class="about-container">
-
-    <h2>About</h2>
-
-    <p>
-      I am a Business Management (Finance) student at Middlesex University Mauritius with practical experience in KYC, AML, and compliance operations within a regulated fintech environment.
-    </p>
-
-    <p>
-      Through my internship at ARIE Finance, I have worked on Customer Due Diligence (CDD), sanctions screening, PEP checks, and regulatory documentation reviews aligned with AML/CFT frameworks.
-    </p>
-
-    <p>
-      I am particularly interested in financial crime prevention, regulatory intelligence, and the evolving intersection between compliance and financial technology.
-    </p>
-
-    <p class="kaizen">
-      Guided by the principle of <strong>Kaizen — continuous improvement</strong>, I focus on developing the analytical, regulatory, and operational expertise required to contribute to strong financial governance.
-    </p>
-
-  </div>
-
-</section>
   .section{ margin-top: 16px; }
   .anchor{ scroll-margin-top: 92px; }
 
@@ -393,6 +449,44 @@
     font-size: 14.8px;
     font-weight: 620;
   }
+
+  /* ===== About (clean + consultant tone) ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 14px;
+  }
+  @media (max-width: 980px){
+    .about-grid{ grid-template-columns: 1fr; }
+  }
+  .about-box{
+    border:1px solid rgba(0,0,0,.12);
+    border-radius: var(--r);
+    background:#fff;
+    padding: 16px;
+    position:relative;
+    overflow:hidden;
+    transition: .2s var(--ease);
+  }
+  .about-box:hover{ transform: translateY(-2px); box-shadow: 0 18px 55px rgba(0,0,0,0.10); }
+  .about-box::before{
+    content:"";
+    position:absolute; inset:-90px;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.14), transparent 58%),
+      radial-gradient(circle at 80% 28%, rgba(22,163,74,0.10), transparent 58%);
+    opacity:.75;
+  }
+  .about-box > *{ position:relative; z-index:1; }
+  .about-box h3{
+    margin:0 0 8px;
+    font-size: 16px;
+    font-weight: 980;
+    letter-spacing: -0.25px;
+  }
+  .about-box p{ margin:0; color: rgba(0,0,0,.78); font-weight: 650; line-height:1.8; }
+  body.dark-mode .about-box{ background: rgba(10,14,26,.72); border-color: rgba(255,255,255,.12); }
+  body.dark-mode .about-box p{ color: rgba(255,255,255,.78); }
 
   /* ===== Certification cards ===== */
   .cert-grid{
@@ -484,7 +578,6 @@
     flex: 0 0 auto;
   }
 
-  /* ===== Cert hover: micro-slide button ===== */
   .cert-actions .btn{
     transform: translateX(0);
     transition: transform .22s var(--ease), background .22s var(--ease);
@@ -567,7 +660,6 @@
     background: linear-gradient(135deg, var(--a3), var(--a1));
   }
 
-  /* Screenshot frame */
   .thumb-frame{
     border:1px solid rgba(0,0,0,.12);
     border-radius:12px;
@@ -580,7 +672,6 @@
     display:block;
   }
 
-  /* PDF screenshot: lift + subtle tilt */
   .pub-preview img{
     transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
     transform-origin: center;
@@ -787,10 +878,138 @@
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
   }
+
+  /* ==============================
+     UNIQUE FEATURE: Compliance Console Boot
+     ============================== */
+  .boot{
+    position:fixed; inset:0;
+    z-index:1000;
+    display:grid;
+    place-items:center;
+    background: radial-gradient(circle at 20% 15%, rgba(10,47,255,.12), transparent 55%),
+                radial-gradient(circle at 80% 15%, rgba(0,194,168,.12), transparent 55%),
+                linear-gradient(180deg, #050A18 0%, #030616 100%);
+    color: rgba(255,255,255,.92);
+    opacity: 1;
+    transition: opacity .45s var(--ease), transform .45s var(--ease);
+  }
+  .boot.hide{
+    opacity:0;
+    transform: translateY(-8px);
+    pointer-events:none;
+  }
+  .boot-card{
+    width:min(720px, 92vw);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,.04);
+    box-shadow: 0 30px 90px rgba(0,0,0,.55);
+    overflow:hidden;
+  }
+  .boot-top{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  .boot-title{
+    display:flex; align-items:center; gap:10px;
+    font-weight: 950; letter-spacing:.6px;
+  }
+  .boot-dot{
+    width:10px;height:10px;border-radius:3px;
+    background: linear-gradient(135deg, var(--a1), var(--a2));
+  }
+  .boot-status{
+    font-weight: 900;
+    font-size: 12px;
+    opacity: .78;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+  }
+  .boot-body{
+    padding: 16px;
+    display:grid;
+    gap: 12px;
+  }
+  .boot-row{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius: 12px;
+    padding: 12px 12px;
+    background: rgba(0,0,0,.18);
+  }
+  .boot-k{
+    font-weight: 950;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    font-size: 11px;
+    opacity: .78;
+  }
+  .boot-v{
+    font-weight: 900;
+    font-size: 13px;
+    opacity: .92;
+    text-align:right;
+  }
+  .boot-bar{
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .boot-bar > span{
+    display:block;
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg, var(--a1), var(--a2), var(--a3), var(--a4));
+    transition: width 1.1s var(--ease);
+  }
+  .boot-foot{
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255,255,255,.10);
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    opacity:.78;
+    font-weight: 800;
+    font-size: 12px;
+  }
+  .boot-hint{
+    opacity:.85;
+  }
 </style>
 </head>
 
 <body>
+  <!-- UNIQUE BOOT OVERLAY -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-card">
+      <div class="boot-top">
+        <div class="boot-title"><span class="boot-dot"></span>Compliance Console</div>
+        <div class="boot-status">Initializing</div>
+      </div>
+      <div class="boot-body">
+        <div class="boot-row">
+          <div class="boot-k">Module</div>
+          <div class="boot-v">KYC / AML Controls</div>
+        </div>
+        <div class="boot-row">
+          <div class="boot-k">Jurisdiction</div>
+          <div class="boot-v">Mauritius</div>
+        </div>
+        <div class="boot-row">
+          <div class="boot-k">Mode</div>
+          <div class="boot-v">Audit-ready</div>
+        </div>
+        <div class="boot-bar" aria-hidden="true"><span id="bootFill"></span></div>
+      </div>
+      <div class="boot-foot">
+        <span class="boot-hint">Loading case studies + deliverables</span>
+        <span>KAIZEN</span>
+      </div>
+    </div>
+  </div>
+
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
   <div class="bg-stage" aria-hidden="true">
@@ -800,9 +1019,12 @@
     <div class="rail r3"></div>
   </div>
 
+  <div class="cinematic" id="cinematic" aria-hidden="true"></div>
+
   <!-- Scroll dots -->
   <div class="scroll-dots" aria-label="Section progress">
     <a href="#intro" class="dot" data-target="intro" aria-label="Intro"></a>
+    <a href="#about" class="dot" data-target="about" aria-label="About"></a>
     <a href="#certs" class="dot" data-target="certs" aria-label="Certifications"></a>
     <a href="#projects" class="dot" data-target="projects" aria-label="Projects"></a>
     <a href="#contact" class="dot" data-target="contact" aria-label="Contact"></a>
@@ -818,6 +1040,7 @@
       </div>
       <div class="navlinks">
         <a href="#intro" class="nav-item">Intro</a>
+        <a href="#about" class="nav-item">About</a>
         <a href="#certs" class="nav-item">Certifications</a>
         <a href="#projects" class="nav-item">Projects</a>
         <a href="#contact" class="nav-item">Contact</a>
@@ -880,6 +1103,46 @@
           </div>
         </aside>
 
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="card glow section anchor reveal" id="about">
+      <div class="section-head">
+        <h2>About</h2>
+        <span class="accent" aria-hidden="true"></span>
+      </div>
+
+      <div class="section-body">
+        <div class="about-grid">
+          <div class="about-box">
+            <h3>Profile</h3>
+            <p>
+              Business Management (Finance) student at Middlesex University Mauritius with practical experience in KYC, AML, and compliance operations within a regulated fintech environment.
+            </p>
+          </div>
+
+          <div class="about-box">
+            <h3>What I work on</h3>
+            <p>
+              Customer Due Diligence (CDD), sanctions screening, PEP checks, regulatory documentation reviews, and translating AML/CFT expectations into structured, review-ready work.
+            </p>
+          </div>
+
+          <div class="about-box">
+            <h3>Interest area</h3>
+            <p>
+              Financial crime prevention, regulatory intelligence, and the evolving intersection between compliance and financial technology.
+            </p>
+          </div>
+
+          <div class="about-box">
+            <h3>Operating principle</h3>
+            <p>
+              Guided by <strong>Kaizen — continuous improvement</strong>, I focus on strengthening analytical, regulatory, and operational execution to support strong financial governance.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1016,7 +1279,7 @@
           <div class="mini reveal">
             <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Email</div>
             <div style="margin-top:6px; font-weight:950;">
-              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000; text-decoration:none;">
+              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:inherit; text-decoration:none;">
                 bhishek.shibdeen@icloud.com
               </a>
             </div>
@@ -1049,12 +1312,25 @@
   <!-- Mobile bottom nav -->
   <div id="mobileNav">
     <a class="btn" href="#intro">Intro</a>
+    <a class="btn" href="#about">About</a>
     <a class="btn" href="#certs">Certs</a>
     <a class="btn primary" href="#projects">Projects</a>
     <a class="btn" href="#contact">Contact</a>
   </div>
 
 <script>
+  // Boot overlay (unique signature)
+  (function(){
+    const boot = document.getElementById("boot");
+    const fill = document.getElementById("bootFill");
+    // fill bar
+    requestAnimationFrame(()=>{ fill.style.width = "100%"; });
+    // hide after 1.25s
+    setTimeout(()=> boot.classList.add("hide"), 1250);
+    // remove from a11y tree a bit later
+    setTimeout(()=> boot.style.display = "none", 1900);
+  })();
+
   // Scroll progress
   (function(){
     const bar = document.getElementById("bar");
@@ -1128,6 +1404,36 @@
     }, { threshold: 0.5 });
 
     sections.forEach(s => io.observe(s));
+  })();
+
+  // Cinematic: white -> deep navy as you scroll
+  (function(){
+    const overlay = document.getElementById("cinematic");
+    const body = document.body;
+
+    function updateCinematic(){
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+
+      const t = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0; // 0..1
+      // ease-in a bit late so top stays white
+      const start = 0.12;
+      const end = 0.80;
+      let x = (t - start) / (end - start);
+      x = Math.max(0, Math.min(1, x));
+      // smoother curve
+      x = x * x * (3 - 2 * x);
+
+      overlay.style.opacity = (0.95 * x).toFixed(3);
+
+      if(x > 0.55) body.classList.add("dark-mode");
+      else body.classList.remove("dark-mode");
+    }
+
+    window.addEventListener("scroll", updateCinematic, { passive: true });
+    window.addEventListener("resize", updateCinematic);
+    updateCinematic();
   })();
 </script>
 
