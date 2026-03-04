@@ -444,7 +444,36 @@
   }
   .cert-card:hover .cert-logo{ border-color: rgba(245,158,11,.35); }
 
-  .cert-logo img{
+  .cert-logo img{ /* ===== Logo tuning for dark mode ===== */
+.cert-logo{
+  background:#0b0b0c; /* deeper than card for contrast */
+}
+
+/* Default: brighten + increase contrast */
+.cert-logo img{
+  filter: brightness(1.18) contrast(1.12) saturate(1.05);
+  transition: filter .2s var(--ease), transform .2s var(--ease);
+}
+
+/* Hover: tiny lift */
+.cert-card:hover .cert-logo img{
+  transform: scale(1.03);
+  filter: brightness(1.25) contrast(1.18) saturate(1.08);
+}
+
+/* If a logo is dark-on-transparent and disappears, force invert */
+.cert-logo img.invert{
+  filter: invert(1) brightness(1.18) contrast(1.12);
+}
+.cert-card:hover .cert-logo img.invert{
+  filter: invert(1) brightness(1.25) contrast(1.18);
+}
+
+/* Optional: if a logo has a white box background and looks harsh, soften it */
+.cert-logo img.soft{
+  filter: brightness(1.08) contrast(1.06) saturate(1.02);
+  mix-blend-mode: lighten;
+
     width: 76%;
     height: 76%;
     object-fit: contain;
