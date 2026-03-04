@@ -80,7 +80,6 @@
     50%{ transform: translateY(10px); }
     100%{ transform: translateY(0px); }
   }
-
   .rail{ position:absolute; width:14px; border-radius:0; }
   .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(29,78,216,0.12); }
   .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(22,163,74,0.12); }
@@ -272,6 +271,7 @@
     font-size: 13px;
     transition: 0.18s var(--ease);
     cursor:pointer;
+    white-space:nowrap;
   }
   .btn:hover{ background: var(--soft); transform: translateY(-1px); }
 
@@ -390,6 +390,7 @@
     position:relative;
     overflow:hidden;
     transition: 0.20s var(--ease);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
   }
   .cert-card:hover{
     transform: translateY(-3px);
@@ -418,7 +419,10 @@
     place-items:center;
     overflow:hidden;
     flex: 0 0 auto;
+    transition: border-color .2s var(--ease);
   }
+  .cert-card:hover .cert-logo{ border-color: rgba(29,78,216,.28); }
+
   .cert-logo img{
     width: 76%;
     height: 76%;
@@ -455,7 +459,16 @@
     flex: 0 0 auto;
   }
 
-  /* ===== Projects / “Publication-style” featured block ===== */
+  /* ===== Cert hover: micro-slide button ===== */
+  .cert-actions .btn{
+    transform: translateX(0);
+    transition: transform .22s var(--ease), background .22s var(--ease);
+  }
+  .cert-card:hover .cert-actions .btn{
+    transform: translateX(-4px);
+  }
+
+  /* ===== Projects / Featured publication ===== */
   .pub{
     display:grid;
     grid-template-columns: 0.9fr 1.1fr;
@@ -467,6 +480,7 @@
     position:relative;
     overflow:hidden;
     transition: 0.20s var(--ease);
+    cursor:pointer;
   }
   .pub:hover{
     transform: translateY(-3px);
@@ -496,7 +510,7 @@
       linear-gradient(225deg, rgba(234,88,12,0.08), transparent 55%),
       #fff;
     padding: 14px;
-    min-height: 210px;
+    min-height: 230px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -527,29 +541,30 @@
     width:10px;height:10px;border-radius:2px;
     background: linear-gradient(135deg, var(--a3), var(--a1));
   }
-  .pub-lines{
-    border-top:1px dashed rgba(0,0,0,.14);
-    padding-top: 10px;
-    display:grid;
-    gap: 8px;
-  }
-  .line{
-    height:10px;
-    border-radius: 8px;
-    background: rgba(0,0,0,.06);
-    position:relative;
+
+  /* Screenshot frame */
+  .thumb-frame{
+    border:1px solid rgba(0,0,0,.12);
+    border-radius:12px;
+    background:#fff;
     overflow:hidden;
   }
-  .line::after{
-    content:"";
-    position:absolute; inset:0;
-    background: linear-gradient(90deg, transparent, rgba(29,78,216,0.12), transparent);
-    transform: translateX(-60%);
-    animation: shimmer 2.4s var(--ease) infinite;
+  .thumb-frame img{
+    width:100%;
+    height:auto;
+    display:block;
   }
-  @keyframes shimmer{
-    0%{ transform: translateX(-60%); }
-    100%{ transform: translateX(60%); }
+
+  /* PDF screenshot: lift + subtle tilt */
+  .pub-preview img{
+    transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
+    transform-origin: center;
+    transition: transform .28s var(--ease), filter .28s var(--ease);
+    filter: saturate(1.02) contrast(1.02);
+  }
+  .pub:hover .pub-preview img{
+    transform: perspective(900px) rotateX(6deg) rotateY(-4deg) scale(1.04);
+    filter: saturate(1.08) contrast(1.06);
   }
 
   .pub-body h3{
@@ -572,8 +587,6 @@
     flex-wrap:wrap;
     gap:8px;
   }
-
-  /* small “tag chips” */
   .tagchip{
     border:1px solid rgba(0,0,0,.16);
     border-radius: 10px;
@@ -583,7 +596,6 @@
     background:#fff;
   }
 
-  /* Projects grid for other items */
   .grid3{
     margin-top: 14px;
     display:grid;
@@ -600,7 +612,6 @@
     background:#fff;
     padding: 16px;
     transition: 0.20s var(--ease);
-    cursor:pointer;
     position:relative;
     overflow:hidden;
   }
@@ -709,6 +720,40 @@
     gap:6px;
   }
 
+  /* ===== Scroll dots ===== */
+  .scroll-dots{
+    position: fixed;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    gap: 10px;
+    z-index: 80;
+  }
+  .dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,.26);
+    background: rgba(255,255,255,.9);
+    box-shadow: var(--shadow2);
+    opacity: .65;
+    transition: transform .18s var(--ease), opacity .18s var(--ease), background .18s var(--ease);
+  }
+  .dot:hover{
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  .dot.active{
+    opacity: 1;
+    border-color: rgba(0,0,0,.35);
+    background: linear-gradient(135deg, var(--a1), var(--a2));
+    transform: scale(1.18);
+  }
+  @media (max-width: 720px){
+    .scroll-dots{ display:none; }
+  }
+
   /* Reveal */
   .reveal{ opacity:0; transform: translateY(18px); }
   .reveal.in{ opacity:1; transform: translateY(0); transition: 0.75s var(--ease); }
@@ -716,7 +761,6 @@
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
-    .line::after{ display:none; }
   }
 </style>
 </head>
@@ -729,6 +773,14 @@
     <div class="rail r1"></div>
     <div class="rail r2"></div>
     <div class="rail r3"></div>
+  </div>
+
+  <!-- Scroll dots -->
+  <div class="scroll-dots" aria-label="Section progress">
+    <a href="#intro" class="dot" data-target="intro" aria-label="Intro"></a>
+    <a href="#certs" class="dot" data-target="certs" aria-label="Certifications"></a>
+    <a href="#projects" class="dot" data-target="projects" aria-label="Projects"></a>
+    <a href="#contact" class="dot" data-target="contact" aria-label="Contact"></a>
   </div>
 
   <div class="wrap" id="top">
@@ -815,11 +867,8 @@
 
       <div class="section-body">
         <div class="cert-grid">
-          <!-- YALE -->
           <div class="cert-card">
-            <div class="cert-logo" title="Yale University">
-              <img src="yale.jpeg" alt="Yale University logo" loading="lazy" />
-            </div>
+            <div class="cert-logo"><img src="yale.jpeg" alt="Yale University logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>Financial Markets — Yale University (Coursera)</h3>
               <p>Issued Feb 2026 • PDF</p>
@@ -829,11 +878,8 @@
             </div>
           </div>
 
-          <!-- FCA -->
           <div class="cert-card">
-            <div class="cert-logo" title="Financial Crime Academy (Verdian)">
-              <img src="fca.jpeg" alt="Financial Crime Academy by Verdian logo" loading="lazy" />
-            </div>
+            <div class="cert-logo"><img src="fca.jpeg" alt="Financial Crime Academy by Verdian logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>AML Essentials — Financial Crime Academy</h3>
               <p>Issued Feb 2026 • PDF</p>
@@ -843,11 +889,8 @@
             </div>
           </div>
 
-          <!-- FEI -->
           <div class="cert-card">
-            <div class="cert-logo" title="France Éducation international">
-              <img src="fei.png" alt="France Éducation international logo" loading="lazy" />
-            </div>
+            <div class="cert-logo"><img src="fei.png" alt="France Éducation international logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>DELF B2 — Diplôme d’Études en Langue Française</h3>
               <p>Issued Mar 2025 • PDF</p>
@@ -868,21 +911,18 @@
       </div>
 
       <div class="section-body">
-        <!-- Featured “publication-style” project -->
         <div class="pub" role="button" tabindex="0" aria-label="Open AML Regulations in Mauritius PDF"
              onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')"
              onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('AML_Regulations_Mauritius.pdf','_blank'); }">
+
           <div class="pub-preview" aria-hidden="true">
             <div class="pub-minihead">
               <span class="pill"><span class="sq"></span>Featured PDF</span>
               <span class="pill" style="border-radius:10px; letter-spacing:1px; text-transform:none;">AML/CFT</span>
             </div>
 
-            <div class="pub-lines">
-              <div class="line" style="width:92%"></div>
-              <div class="line" style="width:86%"></div>
-              <div class="line" style="width:78%"></div>
-              <div class="line" style="width:64%"></div>
+            <div class="thumb-frame">
+              <img src="aml-thumb.jpeg" alt="Preview of AML Regulations in Mauritius PDF" loading="lazy" />
             </div>
 
             <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-end;">
@@ -899,8 +939,7 @@
             <h3>AML Regulations in Mauritius</h3>
             <p>
               A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius:
-              reporting flow (client → institution → FIU → regulators), core obligations (CDD/EDD, STR, RBA),
-              and the role of supervisory bodies (e.g., FSC, BoM).
+              reporting flow, core obligations (CDD/EDD, STR, RBA), and how key bodies interact across supervision and intelligence.
             </p>
 
             <div class="badge-row">
@@ -918,30 +957,23 @@
           </div>
         </div>
 
-        <!-- Additional projects -->
         <div class="grid3">
           <div class="tile reveal">
             <div class="tag"><span class="sq" style="background:linear-gradient(135deg,var(--a1),var(--a4))"></span>Project</div>
             <h4>KYC Controls Overview</h4>
-            <p>
-              Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.
-            </p>
+            <p>Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.</p>
           </div>
 
           <div class="tile reveal">
             <div class="tag"><span class="sq" style="background:linear-gradient(135deg,var(--a2),var(--a3))"></span>Project</div>
             <h4>Screening & Escalation Logic</h4>
-            <p>
-              Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.
-            </p>
+            <p>Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
           </div>
 
           <div class="tile reveal">
             <div class="tag"><span class="sq" style="background:linear-gradient(135deg,var(--a3),var(--a1))"></span>Project</div>
             <h4>Documentation Discipline</h4>
-            <p>
-              A practical checklist for maintaining review-ready files: evidence, rationale, and consistency across onboarding.
-            </p>
+            <p>A practical checklist for maintaining review-ready files: evidence, rationale, and consistency across onboarding.</p>
           </div>
         </div>
       </div>
@@ -1053,6 +1085,24 @@
     function check(){ m.style.display = window.innerWidth < 720 ? "flex" : "none"; }
     window.addEventListener("resize", check);
     check();
+  })();
+
+  // Scroll dots active state
+  (function(){
+    const dots = Array.from(document.querySelectorAll(".dot"));
+    const sections = dots.map(d => document.getElementById(d.dataset.target)).filter(Boolean);
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          dots.forEach(d => d.classList.remove("active"));
+          const active = dots.find(d => d.dataset.target === entry.target.id);
+          if(active) active.classList.add("active");
+        }
+      });
+    }, { threshold: 0.5 });
+
+    sections.forEach(s => io.observe(s));
   })();
 </script>
 
