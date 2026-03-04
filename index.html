@@ -1942,6 +1942,44 @@
         <div>© 2026 Bhishek Shibdeen</div>
         <div style="opacity:.9;">Tip: use <strong>J</strong>/<strong>K</strong> to navigate sections · <strong>⌘K</strong> palette</div>
       </div>
+    <section class="section reveal" id="kaizen">
+  
+  <div class="section-head">
+    <div class="section-title">
+      <svg class="sec-ico" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3l4 8-4 2-4-2 4-8zM5 13l7 8 7-8" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <h2>Continuous Improvement</h2>
+    </div>
+    <div class="accent"></div>
+  </div>
+
+  <div class="section-body">
+
+    <p>
+      I believe strong compliance frameworks are built through
+      <strong>continuous improvement, operational discipline, and
+      regulatory awareness</strong>.
+    </p>
+
+    <p>
+      As I build my career in Compliance, AML, and Risk, I focus on
+      strengthening both my <strong>technical understanding of regulatory
+      frameworks</strong> and my ability to apply them within real financial
+      environments.
+    </p>
+
+    <p>
+      Guided by the principle of <strong>Kaizen</strong>, I aim to constantly
+      refine my knowledge, improve processes, and contribute to
+      compliance cultures that protect financial systems and
+      uphold regulatory integrity.
+    </p>
+
+  </div>
+
+</section>
+    
     </footer>
 
   </div>
@@ -2204,62 +2242,7 @@
     });
   })();
 
-  // ===== Keyboard navigation: J/K + arrows + Home/End =====
-  (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const order = ["intro","certs","experience","projects","contact","press"]
-      .map(id => document.getElementById(id))
-      .filter(Boolean);
-
-    function currentIndex(){
-      const y = window.scrollY + 120;
-      let idx = 0;
-      for(let i=0;i<order.length;i++){
-        const top = order[i].getBoundingClientRect().top + window.scrollY;
-        if(top <= y) idx = i;
-      }
-      return idx;
-    }
-    function scrollToIdx(i){
-      if(i < 0) i = 0;
-      if(i >= order.length) i = order.length - 1;
-      order[i].scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    }
-
-    document.addEventListener("keydown", (e) => {
-      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
-      const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
-      if(typing) return;
-      if(e.metaKey || e.ctrlKey || e.altKey) return;
-
-      const key = e.key;
-
-      if(key === "Home"){
-        e.preventDefault();
-        document.getElementById("top").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
-        return;
-      }
-      if(key === "End"){
-        e.preventDefault();
-        document.getElementById("press")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
-        return;
-      }
-
-      const idx = currentIndex();
-
-      if(key === "j" || key === "J" || key === "ArrowDown" || key === "PageDown"){
-        e.preventDefault();
-        scrollToIdx(idx + 1);
-      }
-      if(key === "k" || key === "K" || key === "ArrowUp" || key === "PageUp"){
-        e.preventDefault();
-        scrollToIdx(idx - 1);
-      }
-    });
-  })();
-
-  // ✅ Search: filters Certifications, Experience entries, Projects (anything with data-search-item)
+ // ✅ Search: filters Certifications, Experience entries, Projects (anything with data-search-item)
   (function(){
     const input = document.getElementById("searchInput");
     const clear = document.getElementById("clearSearch");
