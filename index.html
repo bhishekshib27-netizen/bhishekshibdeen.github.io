@@ -1,724 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Bhishek Shibdeen — Compliance, AML & Risk portfolio. About, Education, Experience, Case Study, Certifications, Roadmap, Contact." />
-
-<style>
-  :root{
-    --bg:#ffffff;
-    --panel:#ffffff;
-    --text:#050505;
-    --muted:#121212;
-    --line:#ececec;
-    --soft:#f6f6f6;
-
-    --radius:18px;
-    --shadow: 0 18px 60px rgba(0,0,0,0.08);
-    --shadow2: 0 10px 30px rgba(0,0,0,0.06);
-
-    --accent:#000;
-  }
-
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    color:var(--text);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* ===== Scroll progress bar ===== */
-  .progress{
-    position:fixed;
-    top:0; left:0;
-    width:100%;
-    height:4px;
-    z-index:999;
-    background: transparent;
-  }
-  .progress > span{
-    display:block;
-    height:100%;
-    width:0%;
-    background: #000;
-    transform-origin: left;
-  }
-
-  /* ===== Animated background (clean “dev-portfolio” vibe) ===== */
-  .bg-stage{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:0;
-  }
-  .grid{
-    position:absolute; inset:0;
-    opacity:0.18;
-    background:
-      linear-gradient(#00000010 1px, transparent 1px) 0 0/56px 56px,
-      linear-gradient(90deg, #00000010 1px, transparent 1px) 0 0/56px 56px;
-    mask-image: radial-gradient(circle at 50% 20%, black 0%, transparent 72%);
-    animation: gridFloat 10s ease-in-out infinite;
-  }
-  @keyframes gridFloat{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(8px); }
-    100%{ transform: translateY(0px); }
-  }
-
-  .blob{
-    position:absolute;
-    width:620px;height:620px;
-    border-radius: 50%;
-    filter: blur(34px);
-    opacity: 0.07;
-    background: radial-gradient(circle at 30% 30%, #000 0%, transparent 60%);
-    animation: drift 14s ease-in-out infinite;
-    transform: translate3d(0,0,0);
-  }
-  .blob.b1{ left:-260px; top:-220px; animation-delay: -2s; }
-  .blob.b2{ right:-300px; top:-180px; width:720px; height:720px; opacity:0.055; animation-delay: -7s; }
-  .blob.b3{ left:18%; bottom:-380px; width:800px; height:800px; opacity:0.05; animation-delay: -11s; }
-  @keyframes drift{
-    0%{ transform: translate(0px,0px) scale(1); }
-    50%{ transform: translate(48px,28px) scale(1.05); }
-    100%{ transform: translate(0px,0px) scale(1); }
-  }
-
-  .shape{
-    position:absolute;
-    border: 2px solid #000;
-    opacity:0.08;
-    animation: shapeFloat 12s ease-in-out infinite;
-  }
-  .shape.s1{ width:120px;height:120px; left:8%; top:18%; transform: rotate(12deg); animation-delay:-2s; }
-  .shape.s2{ width:180px;height:90px; right:10%; top:26%; transform: rotate(-8deg); animation-delay:-6s; }
-  .shape.s3{ width:112px;height:112px; right:18%; bottom:14%; border-radius: 999px; animation-delay:-9s; }
-  @keyframes shapeFloat{
-    0%{ transform: translateY(0px) rotate(var(--r,0deg)); }
-    50%{ transform: translateY(14px) rotate(var(--r,0deg)); }
-    100%{ transform: translateY(0px) rotate(var(--r,0deg)); }
-  }
-
-  /* ===== Layout ===== */
-  .wrap{
-    width:min(1120px, 92vw);
-    margin:0 auto;
-    padding: 18px 0 80px;
-    position:relative;
-    z-index:1;
-  }
-
-  /* ===== Nav ===== */
-  .nav{
-    position:sticky;
-    top:14px;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    padding: 12px 14px;
-    background: rgba(255,255,255,0.90);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    backdrop-filter: blur(12px);
-    box-shadow: var(--shadow2);
-  }
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-weight: 850;
-    letter-spacing:0.2px;
-  }
-  .brand-badge{
-    width:10px;height:10px;border-radius:999px;
-    background: #000;
-  }
-  .navlinks{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    justify-content:flex-end;
-  }
-  .nav a{
-    text-decoration:none;
-    color:#000;
-    font-weight:750;
-    font-size:12px;
-    padding: 9px 11px;
-    border-radius: 999px;
-    border:1px solid transparent;
-    transition: 0.18s ease;
-    opacity:0.72;
-  }
-  .nav a:hover{
-    opacity:1;
-    background: var(--soft);
-    border-color: var(--line);
-    transform: translateY(-1px);
-  }
-
-  /* ===== Cards ===== */
-  .card{
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow:hidden;
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
-  }
-  .card:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 26px 70px rgba(0,0,0,0.10);
-  }
-
-  /* ===== HERO (LIKE THE VIDEO) ===== */
-  .hero{
-    margin-top: 18px;
-  }
-  .hero-main{
-    padding: 28px;
-  }
-
-  /* split layout */
-  .hero-grid{
-    display:grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 18px;
-    align-items: stretch;
-  }
-  @media (max-width: 920px){
-    .hero-grid{ grid-template-columns: 1fr; }
-  }
-
-  h1{
-    margin:0;
-    font-size: clamp(36px, 4.4vw, 56px);
-    letter-spacing: -1.2px;
-    line-height: 1.02;
-    font-weight: 900;
-  }
-
-  .hi{
-    display:flex;
-    flex-direction:column;
-    gap: 12px;
-  }
-
-  .motto-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .kaizen-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid #000;
-    background:#fff;
-    font-weight: 850;
-    letter-spacing: 0.7px;
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-  .kaizen-dot{
-    width:9px;height:9px;border-radius:999px;
-    background:#000;
-    box-shadow: 0 0 0 rgba(0,0,0,0.22);
-    animation: pulse 1.6s infinite;
-  }
-  @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.16); }
-    70%{ box-shadow: 0 0 0 14px rgba(0,0,0,0.0); }
-    100%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.0); }
-  }
-
-  /* modern slim text */
-  .subtitle{
-    margin:0;
-    line-height: 1.75;
-    font-size: 15px;
-    font-weight: 560;
-    opacity:0.90;
-    max-width: 84ch;
-    color:#0d0d0d;
-  }
-  .subtitle strong{ font-weight: 820; }
-
-  .chips{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top: 6px;
-  }
-  .chip{
-    border:1px solid var(--line);
-    background:#fff;
-    padding: 9px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 760;
-    opacity:0.85;
-    transition: 0.18s ease;
-  }
-  .chip:hover{ background: var(--soft); transform: translateY(-1px); }
-
-  .cta{
-    margin-top: 4px;
-    display:flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding: 11px 14px;
-    border-radius: 14px;
-    text-decoration:none;
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--text);
-    font-weight: 780;
-    font-size: 13px;
-    transition: 0.18s ease;
-  }
-  .btn:hover{ background: var(--soft); transform: translateY(-1px); }
-  .btn.primary{
-    background:#000;
-    color:#fff;
-    border-color:#000;
-  }
-  .btn.primary:hover{ background:#111; }
-  .icon{ width:18px;height:18px; display:inline-block; }
-
-  /* Right “glow card” like the video */
-  .showcase{
-    position:relative;
-    border:1px solid var(--line);
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: var(--shadow2);
-    overflow:hidden;
-    padding: 16px;
-    display:flex;
-    flex-direction:column;
-    gap: 12px;
-  }
-  .showcase::before{
-    content:"";
-    position:absolute;
-    inset:-80px;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(0,0,0,0.08), transparent 55%),
-      radial-gradient(circle at 80% 30%, rgba(0,0,0,0.05), transparent 55%);
-    opacity:0.80;
-    animation: glowMove 7s ease-in-out infinite;
-  }
-  @keyframes glowMove{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(10px); }
-    100%{ transform: translateY(0px); }
-  }
-  .showcase > *{ position:relative; z-index:1; }
-
-  .showcase-top{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:10px;
-  }
-  .showcase-title{
-    font-weight: 900;
-    letter-spacing: -0.2px;
-    margin:0;
-  }
-  .showcase-sub{
-    margin:6px 0 0;
-    font-weight: 600;
-    opacity:0.70;
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    border:1px solid #000;
-    border-radius: 999px;
-    padding: 8px 10px;
-    font-weight: 900;
-    font-size: 12px;
-    background:#fff;
-    white-space:nowrap;
-  }
-  .badge-dot{
-    width:8px;height:8px;border-radius:999px;background:#000;
-    box-shadow: 0 0 0 10px rgba(0,0,0,0.06);
-  }
-
-  .showcase-box{
-    border:1px solid var(--line);
-    border-radius: 14px;
-    background:#fff;
-    padding: 14px;
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    align-items:center;
-    transition: 0.18s ease;
-  }
-  .showcase-box:hover{ background: var(--soft); transform: translateY(-2px); }
-
-  .code-mark{
-    width:56px;height:56px;border-radius: 16px;
-    border:1px solid var(--line);
-    display:grid; place-items:center;
-    font-weight: 950;
-    font-size: 18px;
-    background:#fff;
-  }
-
-  .showcase-k{
-    font-weight: 900;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    font-size: 11px;
-    opacity:0.65;
-    margin:0 0 6px;
-  }
-  .showcase-v{
-    margin:0;
-    font-weight: 850;
-    font-size: 13px;
-    opacity:0.90;
-    line-height: 1.55;
-  }
-
-  /* Drive to scroll (like the “scroll to explore” cue) */
-  .scroll-drive{
-    margin-top: 12px;
-    padding: 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    overflow:hidden;
-    position:relative;
-  }
-  .scroll-drive::before{
-    content:"";
-    position:absolute;
-    inset:-40px;
-    background:
-      radial-gradient(circle at 18% 30%, rgba(0,0,0,0.06), transparent 50%),
-      radial-gradient(circle at 78% 10%, rgba(0,0,0,0.04), transparent 55%);
-    opacity:0.65;
-    animation: driveGlow 6s ease-in-out infinite;
-  }
-  @keyframes driveGlow{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(8px); }
-    100%{ transform: translateY(0px); }
-  }
-  .scroll-drive > *{ position:relative; z-index:1; }
-  .drive-text .top{ font-weight: 850; letter-spacing: 0.2px; }
-  .drive-text .sub{
-    color:#111;
-    font-weight: 560;
-    font-size: 13px;
-    opacity:0.70;
-    margin-top:2px;
-  }
-  .scroll-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    border:1px solid #000;
-    background:#000;
-    color:#fff;
-    padding: 10px 14px;
-    border-radius: 999px;
-    font-weight: 850;
-    text-decoration:none;
-    transition: 0.18s ease;
-    white-space:nowrap;
-  }
-  .scroll-btn:hover{ background:#111; transform: translateY(-1px); }
-
-  /* Scroll icon below hero */
-  .scroll-icon-wrap{ margin-top: 12px; display:flex; justify-content:center; }
-  .scroll-icon{
-    width:34px;height:52px;
-    border:2px solid #000;
-    border-radius: 999px;
-    position:relative;
-    opacity:0.85;
-    background:#fff;
-  }
-  .scroll-icon::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:12px;
-    width:6px;height:6px;
-    background:#000;
-    border-radius:999px;
-    transform: translateX(-50%);
-    animation: wheel 1.5s ease-in-out infinite;
-  }
-  @keyframes wheel{
-    0%{ transform: translate(-50%, 0); opacity:1; }
-    70%{ transform: translate(-50%, 16px); opacity:0.15; }
-    100%{ transform: translate(-50%, 0); opacity:1; }
-  }
-
-  /* ===== Sections ===== */
-  .section{ margin-top: 16px; }
-  .section-head{
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .section-head h2{
-    margin:0;
-    font-size: 12px;
-    letter-spacing: 2.2px;
-    text-transform: uppercase;
-    color: var(--text);
-    font-weight: 900;
-  }
-
-  .section-body{
-    padding: 16px 18px 20px;
-    color:#0f0f0f;
-    line-height: 1.85;
-    font-size: 14.5px;
-    font-weight: 560;
-  }
-
-  .two-col{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 900px){
-    .two-col{ grid-template-columns: 1fr; }
-  }
-
-  .mini{
-    border: 1px solid var(--line);
-    border-radius: 0px;
-    background: #fff;
-    padding: 14px;
-    transition: transform 0.18s ease, background 0.18s ease;
-  }
-  .mini:hover{ transform: translateY(-2px); background: var(--soft); }
-
-  .k{
-    text-transform: uppercase;
-    letter-spacing: 1.6px;
-    font-size: 12px;
-    color:#000;
-    opacity:0.62;
-    margin-bottom: 6px;
-    font-weight: 850;
-  }
-  .v{
-    font-weight: 850;
-    color: var(--text);
-    line-height: 1.5;
-    font-size: 14px;
-  }
-
-  .row{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:12px;
-    padding: 14px;
-    border: 1px solid var(--line);
-    border-radius: 0px;
-    background: #fff;
-    transition: transform 0.18s ease, background 0.18s ease;
-  }
-  .row:hover{ transform: translateY(-2px); background: var(--soft); }
-  .row .title{ font-weight: 880; color: var(--text); margin-bottom: 4px; }
-  .row .meta{ color:#000; opacity:0.65; font-size: 13px; font-weight: 600; }
-
-  ul{ margin: 10px 0 0; padding-left: 18px; }
-  li{ margin: 6px 0; }
-
-  /* ===== Case Study 3 cards ===== */
-  .case-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 900px){
-    .case-grid{ grid-template-columns: 1fr; }
-  }
-  .case-card{
-    border:1px solid var(--line);
-    background:#fff;
-    border-radius: 0px;
-    padding: 16px;
-    transition: transform 0.18s ease, background 0.18s ease;
-    position:relative;
-    overflow:hidden;
-  }
-  .case-card:hover{ transform: translateY(-3px); background: var(--soft); }
-  .case-card::before{
-    content:"";
-    position:absolute;
-    inset:-60px;
-    background: radial-gradient(circle at 20% 20%, rgba(0,0,0,0.06), transparent 55%);
-    opacity:0.55;
-    transform: translateY(0px);
-    transition: 0.18s ease;
-  }
-  .case-card:hover::before{ transform: translateY(8px); }
-  .case-card > *{ position:relative; z-index:1; }
-
-  .case-label{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 12px;
-    opacity:0.75;
-    margin-bottom: 10px;
-  }
-  .case-h{
-    margin:0 0 8px;
-    font-size: 16px;
-    font-weight: 900;
-    letter-spacing: -0.2px;
-  }
-  .case-p{
-    margin:0;
-    font-size: 14px;
-    line-height: 1.8;
-    font-weight: 560;
-    opacity:0.90;
-  }
-
-  /* ===== Timeline Experience ===== */
-  .timeline{
-    position:relative;
-    padding-left: 18px;
-    display:flex;
-    flex-direction:column;
-    gap: 12px;
-  }
-  .timeline::before{
-    content:"";
-    position:absolute;
-    left:7px; top:6px; bottom:6px;
-    width:2px;
-    background: #00000020;
-  }
-  .t-item{
-    position:relative;
-    border:1px solid var(--line);
-    border-radius: 0px;
-    background:#fff;
-    padding: 14px 14px 14px 18px;
-    transition: transform 0.18s ease, background 0.18s ease;
-  }
-  .t-item:hover{ transform: translateY(-2px); background: var(--soft); }
-  .t-item::before{
-    content:"";
-    position:absolute;
-    left:-2px; top:18px;
-    width:12px;height:12px;
-    border-radius:999px;
-    background:#000;
-    box-shadow: 0 0 0 6px rgba(0,0,0,0.07);
-  }
-  .t-title{
-    font-weight: 900;
-    letter-spacing: -0.2px;
-    margin:0 0 6px;
-  }
-  .t-meta{
-    font-weight: 600;
-    opacity:0.65;
-    font-size: 13px;
-    margin:0 0 10px;
-  }
-  .t-bullets{
-    margin:0;
-    padding-left: 18px;
-    font-weight: 560;
-    opacity:0.92;
-  }
-
-  .anchor{ scroll-margin-top: 90px; }
-
-  footer{
-    margin-top: 24px;
-    text-align:center;
-    color:#000;
-    opacity:0.62;
-    font-size: 13px;
-    padding: 14px 0 0;
-    font-weight: 700;
-  }
-
-  /* ===== Floating action button (like the video) ===== */
-  .fab{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    width:52px;height:52px;
-    border-radius: 999px;
-    border:1px solid var(--line);
-    background:#fff;
-    box-shadow: var(--shadow2);
-    display:grid;
-    place-items:center;
-    z-index:50;
-    transition: 0.18s ease;
-    text-decoration:none;
-    color:#000;
-    font-weight: 950;
-  }
-  .fab:hover{
-    transform: translateY(-2px);
-    background: var(--soft);
-  }
-
-  /* subtle reveal */
-  .card{ animation: floatIn 0.55s ease both; }
-  @keyframes floatIn{
-    from{ opacity:0; transform: translateY(10px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
-</style>
-</head>
-
 <body>
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
@@ -732,337 +11,306 @@
     <div class="shape s3" style="--r:0deg;"></div>
   </div>
 
-<div class="wrap" id="top">
+  <div class="wrap" id="top">
 
-  <!-- NAV -->
-  <div class="nav">
-    <div class="brand">
-      <span class="brand-badge"></span>
-      <span>Bhishek Shibdeen</span>
-    </div>
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#case-study">Case Study</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-
-  <!-- HERO (LIKE THE VIDEO) -->
-  <section class="card hero hero-main">
-    <div class="hero-grid">
-      <!-- LEFT -->
-      <div class="hi">
-        <h1>Bhishek Shibdeen</h1>
-
-        <div class="motto-row">
-          <span class="kaizen-pill"><span class="kaizen-dot"></span>Kaizen</span>
-          <span style="font-weight:750; opacity:0.70;">Compliance • AML/CFT • Risk</span>
-        </div>
-
-        <p class="subtitle">
-          I focus on risk-based onboarding and financial crime controls — KYC governance, EDD support, sanctions/PEP screening,
-          and audit-ready documentation discipline within a regulated fintech environment.
-        </p>
-
-        <div class="chips">
-          <span class="chip">Risk-based KYC</span>
-          <span class="chip">CDD / EDD Support</span>
-          <span class="chip">Sanctions & PEP</span>
-          <span class="chip">UBO Analysis</span>
-        </div>
-
-        <div class="cta">
-          <a class="btn primary" href="#case-study">View Case Study</a>
-          <a class="btn" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
-          <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-            </svg>
-            LinkedIn
-          </a>
-        </div>
-
-        <div class="scroll-drive">
-          <div class="drive-text">
-            <div class="top">Scroll to explore</div>
-            <div class="sub">Case study summary → timeline experience → credentials.</div>
-          </div>
-          <a class="scroll-btn" href="#case-study">Go ↓</a>
-        </div>
-
-        <div class="scroll-icon-wrap">
-          <a href="#case-study" aria-label="Scroll to Case Study" style="text-decoration:none;">
-            <div class="scroll-icon"></div>
-          </a>
-        </div>
+    <!-- NAV -->
+    <div class="nav">
+      <div class="brand">
+        <span class="brand-badge"></span>
+        <span>Bhishek Shibdeen</span>
       </div>
-
-      <!-- RIGHT (SHOWCASE CARD) -->
-      <aside class="showcase" aria-label="Showcase card">
-        <div class="showcase-top">
-          <div>
-            <p class="showcase-title" style="margin:0;">Controls-first mindset</p>
-            <p class="showcase-sub">
-              Structured checks, consistent documentation, and decisions that hold up under review.
-            </p>
-          </div>
-          <span class="badge"><span class="badge-dot"></span>Quality first</span>
-        </div>
-
-        <div class="showcase-box">
-          <div>
-            <p class="showcase-k">Focus</p>
-            <p class="showcase-v">Compliance • AML/CFT • Onboarding Governance</p>
-          </div>
-          <div class="code-mark">&lt;/&gt;</div>
-        </div>
-
-        <div class="showcase-box">
-          <div>
-            <p class="showcase-k">Method</p>
-            <p class="showcase-v">Risk-based logic, screening inputs, clean audit trails</p>
-          </div>
-          <div class="code-mark">✔</div>
-        </div>
-
-        <div class="showcase-box">
-          <div>
-            <p class="showcase-k">Goal</p>
-            <p class="showcase-v">MLRO-aligned progression through strong controls</p>
-          </div>
-          <div class="code-mark">↗</div>
-        </div>
-      </aside>
+      <div class="navlinks" id="navlinks">
+        <a href="#intro" class="nav-item">Intro</a>
+        <a href="#work" class="nav-item">Certifications & Projects</a>
+        <a href="#contact" class="nav-item">Contact</a>
+      </div>
     </div>
-  </section>
 
-  <!-- ABOUT (compact, no emojis) -->
-  <section class="card section anchor" id="about">
-    <div class="section-head"><h2>About</h2></div>
-    <div class="section-body">
-      <p style="margin:0;">
-        I’m building a long-term path in Compliance, AML/CFT, and risk-based governance within the financial sector.
-      </p>
-      <p style="margin:10px 0 0;">
-        I’ve worked across KYC and due diligence workflows in a regulated fintech environment, supporting screening (sanctions/PEP/adverse media),
-        ownership and UBO analysis, documentation validation, and audit-ready record keeping.
-      </p>
-      <p style="margin:10px 0 0;">
-        My focus is practical: structured risk thinking, disciplined documentation, and controls that stand up to review.
-      </p>
-    </div>
-  </section>
+    <!-- HERO / INTRO -->
+    <section class="card hero hero-main anchor reveal" id="intro">
+      <div class="hero-grid">
+        <!-- LEFT -->
+        <div class="hi">
+          <h1>Bhishek Shibdeen</h1>
 
-  <!-- CASE STUDY -->
-  <section class="card section anchor" id="case-study">
-    <div class="section-head"><h2>Case Study</h2></div>
-    <div class="section-body">
-      <div class="case-grid">
-        <div class="case-card">
-          <div class="case-label">Problem</div>
-          <h3 class="case-h">Onboarding risk needs structure</h3>
-          <p class="case-p">
-            Corporate and retail onboarding requires consistent risk logic, reliable documentation, and defensible screening outcomes—especially when ownership and jurisdiction add complexity.
+          <div class="motto-row">
+            <span class="kaizen-pill"><span class="kaizen-dot"></span>Kaizen</span>
+            <span style="font-weight:750; opacity:0.70;">Compliance • AML/CFT • Risk</span>
+          </div>
+
+          <p class="subtitle">
+            I’m building my path in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> — with a controls-first mindset.
+            I focus on risk-based onboarding, structured due diligence, and documentation that stays audit-ready.
           </p>
-        </div>
-        <div class="case-card">
-          <div class="case-label">What I did</div>
-          <h3 class="case-h">Applied risk-based controls</h3>
-          <p class="case-p">
-            Supported KYC/CDD reviews, EDD escalation inputs, sanctions/PEP/adverse media checks, and UBO identification—while validating documents and keeping records audit-ready.
-          </p>
-        </div>
-        <div class="case-card">
-          <div class="case-label">Outcome</div>
-          <h3 class="case-h">Cleaner files, faster decisions</h3>
-          <p class="case-p">
-            Reduced friction by resolving discrepancies early, improving file quality, and supporting consistent governance standards across the onboarding process.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- EDUCATION -->
-  <section class="card section anchor" id="education">
-    <div class="section-head"><h2>Education</h2></div>
-    <div class="section-body">
-      <div class="two-col">
-        <div class="mini">
-          <div class="k">St. Joseph’s College, Mauritius</div>
-          <div class="v">Cambridge International A Levels (Higher School Certificate)</div>
-          <div style="margin-top:8px;color:#000;opacity:0.65;font-size:14px;font-weight:600;">
-            Business • Economics • French • Feb 2018 – Nov 2025
+          <div class="chips">
+            <span class="chip">Risk-Based KYC</span>
+            <span class="chip">CDD / EDD</span>
+            <span class="chip">Sanctions & PEP</span>
+            <span class="chip">UBO Analysis</span>
           </div>
-          <div style="margin-top:10px;color:#000;opacity:0.75;font-size:14px;font-weight:700;">
-            Next: BA (Hons) Business Management (Finance) — Middlesex University Mauritius (April 2026)
-          </div>
-        </div>
-        <div class="mini">
-          <div class="k">Activities & Achievements</div>
-          <ul>
-            <li>Secretary, Student Council (2025)</li>
-            <li>Student Delegate – Mauritius Revenue Authority Educational Event (2025)</li>
-            <li>Captain, School Football Team (2025)</li>
-            <li>Ranked 1st in English Language (2023)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- EXPERIENCE (TIMELINE) -->
-  <section class="card section anchor" id="experience">
-    <div class="section-head"><h2>Experience</h2></div>
-    <div class="section-body">
-      <div class="timeline">
-        <div class="t-item">
-          <div class="t-title">KYC & Compliance Operations Intern — ARIE Finance</div>
-          <div class="t-meta">Dec 2025 – April 2026 • Ébène, Mauritius</div>
-          <ul class="t-bullets">
-            <li>Supported risk-based KYC & CDD reviews across corporate and retail onboarding within a regulated framework.</li>
-            <li>Provided screening inputs including sanctions, PEP checks, and adverse media reviews to support risk decisions.</li>
-            <li>Reviewed ownership structures to support UBO identification and jurisdiction/source-of-funds considerations.</li>
-            <li>Validated documentation and resolved discrepancies to reduce onboarding delays and improve file quality.</li>
-            <li>Maintained audit-ready records aligned with internal controls and monitoring expectations.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section class="card section anchor" id="projects">
-    <div class="section-head"><h2>Projects</h2></div>
-    <div class="section-body">
-      <p style="margin:0 0 10px;">
-        Selected projects are being refined into formal case-study PDFs.
-      </p>
-      <div class="row">
-        <div>
-          <div class="title">Portfolio Projects</div>
-          <div class="meta">Status: In Progress</div>
-        </div>
-        <a class="btn" href="#case-study">View case-study format →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CERTIFICATIONS -->
-  <section class="card section anchor" id="certifications">
-    <div class="section-head"><h2>Certifications</h2></div>
-    <div class="section-body">
-      <div class="row">
-        <div>
-          <div class="title">Financial Markets — Yale University (Coursera)</div>
-          <div class="meta">Issued Feb 2026 • PDF</div>
-        </div>
-        <a class="btn" href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View ↗</a>
-      </div>
-
-      <div style="height:10px;"></div>
-
-      <div class="row">
-        <div>
-          <div class="title">AML Essentials — Financial Crime Academy</div>
-          <div class="meta">Issued Feb 2026 • PDF</div>
-        </div>
-        <a class="btn" href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View ↗</a>
-      </div>
-
-      <div style="height:10px;"></div>
-
-      <div class="row">
-        <div>
-          <div class="title">DELF B2 — Diplôme d’Études en Langue Française</div>
-          <div class="meta">Issued Mar 2025</div>
-        </div>
-        <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section class="card section anchor" id="roadmap">
-    <div class="section-head"><h2>Roadmap</h2></div>
-    <div class="section-body">
-      <div class="two-col">
-        <div class="mini">
-          <div class="k">Direction</div>
-          <div class="v">Compliance & Financial Crime Risk Management</div>
-          <div style="margin-top:8px;color:#000;opacity:0.65;font-size:14px;font-weight:600;">
-            Deepen AML/CFT capability, improve risk articulation, and build measurable compliance outcomes.
-          </div>
-        </div>
-        <div class="mini">
-          <div class="k">Long-Term Target</div>
-          <div class="v">MLRO-level leadership pathway</div>
-          <div style="margin-top:8px;color:#000;opacity:0.65;font-size:14px;font-weight:600;">
-            Strong governance readiness, documentation standards, and alignment with international AML expectations.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="card section anchor" id="contact">
-    <div class="section-head"><h2>Contact</h2></div>
-    <div class="section-body">
-      <div class="two-col">
-        <div class="mini">
-          <div class="k">Email</div>
-          <div class="v">
-            <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000;text-decoration:none;font-weight:850;">
-              bhishek.shibdeen@icloud.com
-            </a>
-          </div>
-          <div class="k" style="margin-top:12px;">Phone</div>
-          <div class="v">+230 55024085</div>
-        </div>
-
-        <div class="mini">
-          <div class="k">LinkedIn</div>
-          <div class="v">
+          <div class="cta">
+            <a class="btn primary" href="#work">See my work ↓</a>
+            <a class="btn" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
             <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
               </svg>
-              View Profile ↗
+              LinkedIn
+            </a>
+          </div>
+
+          <div class="scroll-icon-wrap">
+            <a href="#work" aria-label="Scroll to work" style="text-decoration:none;">
+              <div class="scroll-icon"></div>
             </a>
           </div>
         </div>
+
+        <!-- RIGHT: PERSONAL BRAND CARD -->
+        <aside class="showcase reveal" aria-label="Showcase card">
+          <div class="showcase-top">
+            <div>
+              <p class="showcase-title" style="margin:0;">Portfolio Snapshot</p>
+              <p class="showcase-sub">
+                Compliance-focused work — designed to be clear, credible, and review-ready.
+              </p>
+            </div>
+            <span class="badge"><span class="badge-dot"></span>Controls</span>
+          </div>
+
+          <div class="showcase-box">
+            <div>
+              <p class="showcase-k">Core Theme</p>
+              <p class="showcase-v">Clarity, structure, and governance</p>
+            </div>
+            <div class="code-mark">✔</div>
+          </div>
+
+          <div class="showcase-box">
+            <div>
+              <p class="showcase-k">Motto</p>
+              <p class="showcase-v">Kaizen — continuous improvement</p>
+            </div>
+            <div class="code-mark">↗</div>
+          </div>
+
+          <div class="showcase-box">
+            <div>
+              <p class="showcase-k">What you’ll see</p>
+              <p class="showcase-v">Certifications + practical AML/KYC projects</p>
+            </div>
+            <div class="code-mark">📄</div>
+          </div>
+        </aside>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>© 2026 Bhishek Shibdeen</footer>
-</div>
+    <!-- WORK: CERTIFICATIONS + PROJECTS -->
+    <section class="card section anchor reveal" id="work">
+      <div class="section-head">
+        <h2>Certifications & Projects</h2>
+      </div>
 
-<!-- Floating button -->
-<a class="fab" href="#contact" aria-label="Jump to Contact">✦</a>
+      <div class="section-body">
+        <p style="margin:0 0 14px;">
+          A focused selection of credentials and work samples — built around AML/CFT knowledge, risk discipline, and communication clarity.
+        </p>
 
-<script>
-  // Scroll progress bar
-  (function(){
-    const bar = document.getElementById("bar");
-    function update(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      bar.style.width = pct.toFixed(2) + "%";
+        <!-- CERTIFICATIONS -->
+        <div style="margin: 10px 0 12px; font-weight:900; letter-spacing:1.6px; text-transform:uppercase; font-size:12px; opacity:0.75;">
+          Certifications
+        </div>
+
+        <div class="row reveal">
+          <div>
+            <div class="title">Financial Markets — Yale University (Coursera)</div>
+            <div class="meta">Issued Feb 2026 • PDF</div>
+          </div>
+          <a class="btn" href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View ↗</a>
+        </div>
+
+        <div style="height:10px;"></div>
+
+        <div class="row reveal">
+          <div>
+            <div class="title">AML Essentials — Financial Crime Academy</div>
+            <div class="meta">Issued Feb 2026 • PDF</div>
+          </div>
+          <a class="btn" href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View ↗</a>
+        </div>
+
+        <div style="height:10px;"></div>
+
+        <div class="row reveal">
+          <div>
+            <div class="title">DELF B2 — Diplôme d’Études en Langue Française</div>
+            <div class="meta">Issued Mar 2025 • PDF</div>
+          </div>
+          <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
+        </div>
+
+        <!-- PROJECTS -->
+        <div style="margin: 18px 0 12px; font-weight:900; letter-spacing:1.6px; text-transform:uppercase; font-size:12px; opacity:0.75;">
+          Projects
+        </div>
+
+        <div class="case-grid">
+          <!-- PROJECT 1: AML PDF -->
+          <div class="case-card reveal" style="cursor:pointer;" onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')">
+            <div class="case-label">PDF • AML</div>
+            <h3 class="case-h">AML Regulations in Mauritius</h3>
+            <p class="case-p">
+              A clear, simplified write-up on the regulatory ecosystem (FIU, FSC, BoM, reporting flow), key obligations, and practical compliance takeaways.
+            </p>
+            <div style="margin-top:12px;">
+              <span class="btn" style="display:inline-flex;">Open PDF ↗</span>
+            </div>
+          </div>
+
+          <!-- PROJECT 2: placeholder -->
+          <div class="case-card reveal">
+            <div class="case-label">Project</div>
+            <h3 class="case-h">KYC Controls Overview</h3>
+            <p class="case-p">
+              A compact project focused on risk-based onboarding: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.
+            </p>
+          </div>
+
+          <!-- PROJECT 3: placeholder -->
+          <div class="case-card reveal">
+            <div class="case-label">Project</div>
+            <h3 class="case-h">Screening & Escalation Logic</h3>
+            <p class="case-p">
+              A practical workflow mapping sanctions/PEP/adverse media screening into consistent escalation decisions and record-keeping.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="card section anchor reveal" id="contact">
+      <div class="section-head"><h2>Contact</h2></div>
+      <div class="section-body">
+        <div class="two-col">
+          <div class="mini">
+            <div class="k">Email</div>
+            <div class="v">
+              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000;text-decoration:none;font-weight:850;">
+                bhishek.shibdeen@icloud.com
+              </a>
+            </div>
+            <div class="k" style="margin-top:12px;">Phone</div>
+            <div class="v">+230 55024085</div>
+          </div>
+
+          <div class="mini">
+            <div class="k">LinkedIn</div>
+            <div class="v">
+              <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
+                View Profile ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 Bhishek Shibdeen</footer>
+  </div>
+
+  <!-- Floating button -->
+  <a class="fab" href="#work" aria-label="Jump to Work">⬤</a>
+
+  <!-- Mobile bottom nav -->
+  <div id="mobileNav" style="
+    position:fixed; left:50%; transform:translateX(-50%);
+    bottom:12px; z-index:60;
+    background:rgba(255,255,255,0.92);
+    border:1px solid #ececec;
+    border-radius:999px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding:8px; display:none; gap:6px; backdrop-filter: blur(12px);
+  ">
+    <a class="btn" href="#intro" style="border-radius:999px;">Intro</a>
+    <a class="btn primary" href="#work" style="border-radius:999px;">Work</a>
+    <a class="btn" href="#contact" style="border-radius:999px;">Contact</a>
+  </div>
+
+  <script>
+    // Scroll progress bar
+    (function(){
+      const bar = document.getElementById("bar");
+      function update(){
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        bar.style.width = pct.toFixed(2) + "%";
+      }
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    })();
+
+    // Reveal on scroll (IntersectionObserver)
+    (function(){
+      const els = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      els.forEach(el => io.observe(el));
+    })();
+
+    // Active nav indicator (highlights current section)
+    (function(){
+      const links = Array.from(document.querySelectorAll(".nav-item"));
+      const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            links.forEach(l => l.classList.remove("active"));
+            const active = links.find(l => l.getAttribute("href") === "#" + entry.target.id);
+            if(active) active.classList.add("active");
+          }
+        });
+      }, { threshold: 0.40 });
+
+      sections.forEach(s => io.observe(s));
+    })();
+
+    // Mobile nav show on small screens
+    (function(){
+      const m = document.getElementById("mobileNav");
+      function check(){
+        m.style.display = window.innerWidth < 720 ? "flex" : "none";
+      }
+      window.addEventListener("resize", check);
+      check();
+    })();
+  </script>
+
+  <style>
+    /* Reveal animation styling */
+    .reveal{ opacity:0; transform: translateY(14px); }
+    .reveal.in{ opacity:1; transform: translateY(0); transition: 0.6s ease; }
+
+    /* Active nav styling */
+    .nav a.active{
+      opacity:1 !important;
+      background: #000;
+      color:#fff;
+      border-color:#000;
     }
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
-  })();
-</script>
+  </style>
 
 </body>
-</html>
