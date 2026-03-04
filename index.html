@@ -2598,7 +2598,59 @@ window.addEventListener("scroll", () => {
 
   lastScroll = currentScroll;
 
-});</script>
+});
+/* 🎬 Scroll velocity blur (very subtle) */
+(function(){
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce) return;
+
+  const wrap = document.querySelector(".wrap");
+  if(!wrap) return;
+
+  let lastY = window.scrollY || 0;
+  let lastT = performance.now();
+  let blur = 0;
+  let raf = null;
+  let settleTimer = null;
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function apply(){
+    raf = null;
+    // smooth settle to 0
+    blur *= 0.82;
+    if(blur < 0.03) blur = 0;
+
+    wrap.style.setProperty("--svb", blur.toFixed(2) + "px");
+
+    if(blur > 0) raf = requestAnimationFrame(apply);
+  }
+
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY || 0;
+    const t = performance.now();
+
+    const dy = Math.abs(y - lastY);
+    const dt = Math.max(16, t - lastT); // avoid crazy spikes
+    const v = dy / dt; // px per ms
+
+    // Map speed -> blur (cap at ~2.2px)
+    const target = clamp(v * 6.2, 0, 2.2);
+    blur = Math.max(blur, target);
+
+    lastY = y;
+    lastT = t;
+
+    if(!raf) raf = requestAnimationFrame(apply);
+
+    // When scrolling stops, force it to settle quickly
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      blur = Math.min(blur, 0.6);
+      if(!raf) raf = requestAnimationFrame(apply);
+    }, 90);
+  }, { passive:true });
+})();</script>
 
 </body>
 </html>
