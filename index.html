@@ -4,29 +4,29 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Bhishek Shibdeen — Editorial-style portfolio: Intro, Certifications, Projects, Contact." />
+<meta name="description" content="Bhishek Shibdeen — Modern fintech portfolio: Intro, Certifications, Projects, Contact." />
 
 <style>
   :root{
     --bg:#ffffff;
-    --text:#0b0b0b;
+    --text:#0a0a0a;
     --muted: rgba(0,0,0,.62);
-    --line: rgba(0,0,0,.14);
-    --soft: rgba(0,0,0,.04);
+    --line: rgba(0,0,0,.10);
+    --soft: rgba(0,0,0,.03);
 
-    /* Editorial accents */
-    --blue:#2563eb;
-    --green:#22c55e;
-    --orange:#f97316;
-    --pink:#ec4899;
+    /* Fintech accents */
+    --a1:#2563eb; /* blue */
+    --a2:#22c55e; /* green */
+    --a3:#f97316; /* orange */
+    --a4:#a855f7; /* purple */
 
-    /* Square vibe */
-    --r:10px;
-    --r2:8px;
+    /* Sharp edges */
+    --r:12px;
+    --r2:10px;
 
-    /* Print shadow (offset) */
-    --os: 6px; /* offset size */
-    --shadowInk: rgba(0,0,0,.14);
+    /* Clean shadows */
+    --shadow: 0 18px 55px rgba(0,0,0,0.10);
+    --shadow2: 0 10px 26px rgba(0,0,0,0.07);
 
     --ease: cubic-bezier(.2,.8,.2,1);
   }
@@ -40,10 +40,10 @@
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    letter-spacing: -0.18px;
+    letter-spacing: -0.15px;
   }
 
-  /* ===== Top progress ===== */
+  /* ===== Progress bar ===== */
   .progress{
     position:fixed; top:0; left:0;
     width:100%; height:4px;
@@ -52,60 +52,47 @@
   }
   .progress > span{
     display:block; height:100%; width:0%;
-    background:#000;
+    background: linear-gradient(90deg, var(--a1), var(--a2), var(--a3), var(--a4));
     transform-origin:left;
   }
 
-  /* ===== Background: editorial stripes + halftone dots ===== */
+  /* ===== Background: clean, structured, colored accents (no blur/glass) ===== */
   .bg-stage{
     position:fixed; inset:0;
     pointer-events:none;
     z-index:0;
     overflow:hidden;
     background:
-      linear-gradient(90deg, rgba(37,99,235,0.10) 0 14%, transparent 14% 100%),
-      linear-gradient(180deg, rgba(34,197,94,0.10) 0 16%, transparent 16% 100%),
-      radial-gradient(circle at 78% 16%, rgba(249,115,22,0.18), transparent 38%),
-      radial-gradient(circle at 14% 78%, rgba(236,72,153,0.12), transparent 42%);
+      radial-gradient(circle at 12% 18%, rgba(37,99,235,0.12), transparent 42%),
+      radial-gradient(circle at 88% 20%, rgba(34,197,94,0.10), transparent 44%),
+      radial-gradient(circle at 50% 92%, rgba(168,85,247,0.10), transparent 48%);
+  }
+  .grid{
+    position:absolute; inset:0;
+    opacity:0.08;
+    background:
+      linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px) 0 0/82px 82px,
+      linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px) 0 0/82px 82px;
+    mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
+    animation: gridFloat 10s var(--ease) infinite;
+  }
+  @keyframes gridFloat{
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(10px); }
+    100%{ transform: translateY(0px); }
   }
 
-  /* Animated stripe ticker */
-  .ticker{
+  /* Color rails (fintech structure) */
+  .rail{
     position:absolute;
-    left:-20%;
-    top: 18%;
-    width:140%;
-    height: 44px;
-    border-top:2px solid #000;
-    border-bottom:2px solid #000;
-    background:
-      repeating-linear-gradient(
-        45deg,
-        rgba(0,0,0,0.06) 0 10px,
-        transparent 10px 20px
-      );
-    transform: rotate(-6deg);
-    opacity:0.95;
-    animation: tickerMove 10s linear infinite;
+    width:14px;
+    border-radius: 0;
+    opacity:0.9;
+    filter: none;
   }
-  @keyframes tickerMove{
-    0%{ background-position: 0 0; }
-    100%{ background-position: 360px 0; }
-  }
-
-  /* Halftone dots (subtle) */
-  .dots{
-    position:absolute;
-    right:-120px;
-    bottom:-140px;
-    width:520px;
-    height:520px;
-    background:
-      radial-gradient(circle, rgba(0,0,0,0.08) 2px, transparent 2px) 0 0/18px 18px;
-    mask-image: radial-gradient(circle at 40% 40%, black 0%, transparent 65%);
-    opacity:0.8;
-    transform: rotate(8deg);
-  }
+  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(37,99,235,0.10); }
+  .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(34,197,94,0.10); }
+  .rail.r3{ left: 22%; bottom: 0; height: 34%; background: rgba(249,115,22,0.10); }
 
   /* ===== Layout ===== */
   .wrap{
@@ -116,22 +103,20 @@
     z-index: 2;
   }
 
-  /* ===== Nav (no glass) ===== */
+  /* ===== Nav (solid, no blur) ===== */
   .nav{
-    position:sticky;
-    top:14px;
-    z-index:50;
+    position:sticky; top:14px;
+    z-index:60;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:14px;
     padding: 12px 14px;
     background:#fff;
-    border:2px solid #000;
+    border:1px solid var(--line);
     border-radius: var(--r);
-    box-shadow: var(--os) var(--os) 0 var(--shadowInk);
+    box-shadow: var(--shadow2);
   }
-
   .brand{
     display:flex;
     align-items:center;
@@ -140,21 +125,21 @@
     letter-spacing: -0.2px;
   }
   .brand-mark{
-    width:12px;height:12px;
-    background:#000;
-    border-radius: 2px;
+    width:11px; height:11px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, var(--a1), var(--a2));
   }
 
   .navlinks{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
   .nav a{
     text-decoration:none;
     color:#000;
-    font-weight: 900;
+    font-weight: 850;
     font-size:12px;
     padding: 9px 12px;
-    border-radius: var(--r2);
+    border-radius: 10px; /* squared */
     border:1px solid transparent;
-    opacity:0.80;
+    opacity:0.78;
     transition: 0.18s var(--ease);
   }
   .nav a:hover{
@@ -165,34 +150,32 @@
   }
   .nav a.active{
     opacity:1;
-    color:#fff;
-    background: var(--blue);
-    border-color:#000;
-    box-shadow: 4px 4px 0 #000;
+    color:#000;
+    background: linear-gradient(90deg, rgba(37,99,235,0.16), rgba(34,197,94,0.14));
+    border-color: rgba(0,0,0,.16);
   }
 
-  /* ===== Editorial cards ===== */
+  /* ===== Cards ===== */
   .card{
     background:#fff;
-    border:2px solid #000;
+    border: 1px solid var(--line);
     border-radius: var(--r);
-    box-shadow: var(--os) var(--os) 0 var(--shadowInk);
     overflow:hidden;
     transition: transform .22s var(--ease), box-shadow .22s var(--ease);
   }
   .card:hover{
     transform: translateY(-3px);
-    box-shadow: calc(var(--os) + 2px) calc(var(--os) + 2px) 0 rgba(0,0,0,.18);
+    box-shadow: var(--shadow);
   }
 
   /* ===== Hero ===== */
   .hero{ margin-top: 18px; }
-  .hero-main{ padding: 26px; }
+  .hero-main{ padding: 28px; }
 
   .hero-grid{
     display:grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 16px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
     align-items: stretch;
   }
   @media (max-width: 920px){
@@ -201,269 +184,203 @@
 
   h1{
     margin:0;
-    font-size: clamp(36px, 4.4vw, 62px);
+    font-size: clamp(36px, 4.4vw, 58px);
     line-height: 1.02;
-    font-weight: 1000;
-    letter-spacing: -2.1px;
+    font-weight: 980;
+    letter-spacing: -1.8px;
   }
 
-  .deck{
-    margin:10px 0 0;
-    font-size: 16px;
-    line-height: 1.85;
-    font-weight: 650;
-    color: rgba(0,0,0,.85);
-    max-width: 90ch;
-  }
-  .deck strong{ font-weight: 950; }
-
-  .editorial-bar{
-    margin-top: 12px;
+  .motto-row{
+    margin-top: 10px;
     display:flex;
+    align-items:center;
     gap:10px;
     flex-wrap:wrap;
-    align-items:center;
   }
 
-  .pill{
+  .kaizen{
     display:inline-flex;
     align-items:center;
     gap:10px;
     padding: 9px 12px;
-    border:2px solid #000;
-    border-radius: var(--r2); /* square-ish */
-    background:#fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.18);
+    background: linear-gradient(90deg, rgba(37,99,235,0.12), rgba(34,197,94,0.10));
     font-weight: 950;
-    font-size: 12px;
-    letter-spacing: 1.4px;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    font-size: 12px;
   }
-  .dot{
-    width:10px;height:10px;
-    border-radius: 2px;
-    background: var(--green);
-    box-shadow: 2px 2px 0 #000;
-    animation: dotPop 1.8s var(--ease) infinite;
-  }
-  @keyframes dotPop{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-2px); }
+  .kaizen-dot{
+    width:9px;height:9px;border-radius: 2px;
+    background: linear-gradient(135deg, var(--a2), var(--a1));
   }
 
-  .tagline{
-    font-weight: 900;
-    opacity:0.70;
+  .subtitle{
+    margin: 12px 0 0;
+    line-height: 1.85;
+    font-size: 16px;
+    font-weight: 620;
+    color: rgba(0,0,0,.84);
+    max-width: 90ch;
   }
+  .subtitle strong{ font-weight: 920; }
 
   .chips{
     display:flex;
-    flex-wrap:wrap;
     gap:8px;
+    flex-wrap:wrap;
     margin-top: 12px;
   }
   .chip{
-    padding: 8px 10px;
-    border:1px solid #000;
-    border-radius: var(--r2);
-    font-size:12px;
-    font-weight: 900;
+    border:1px solid rgba(0,0,0,.16);
     background:#fff;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 820;
     transition: 0.18s var(--ease);
   }
-  .chip:hover{
-    transform: translateY(-2px);
-    background: var(--soft);
-  }
-  /* color-coded chips */
-  .chip.blue{ border-color:#000; background: rgba(37,99,235,.10); }
-  .chip.green{ border-color:#000; background: rgba(34,197,94,.12); }
-  .chip.orange{ border-color:#000; background: rgba(249,115,22,.14); }
-  .chip.pink{ border-color:#000; background: rgba(236,72,153,.12); }
+  .chip:hover{ background: var(--soft); transform: translateY(-1px); }
 
   .cta{
     margin-top: 14px;
     display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
+    gap: 10px;
     align-items:center;
   }
-
   .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:10px;
     padding: 10px 14px;
-    border:2px solid #000;
-    border-radius: var(--r2);
-    background:#fff;
-    color:#000;
+    border-radius: 10px;
     text-decoration:none;
-    font-weight: 950;
+    border: 1px solid rgba(0,0,0,.16);
+    background: #fff;
+    color: #000;
+    font-weight: 860;
     font-size: 13px;
-    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
     transition: 0.18s var(--ease);
   }
-  .btn:hover{
-    transform: translateY(-2px);
-    background: #f6f6f6;
-    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
-  }
+  .btn:hover{ background: var(--soft); transform: translateY(-1px); }
+
   .btn.primary{
-    background: var(--blue);
+    border-color: transparent;
     color:#fff;
-    box-shadow: 5px 5px 0 #000;
+    background: linear-gradient(90deg, var(--a1), var(--a4));
+    box-shadow: 0 14px 35px rgba(37,99,235,0.22);
   }
   .btn.primary:hover{
-    background:#1d4ed8;
-    box-shadow: 6px 6px 0 #000;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 45px rgba(37,99,235,0.28);
   }
 
-  /* Small LinkedIn icon */
-  .li-ico{ width:14px; height:14px; display:inline-block; }
+  .li-ico{ width:14px; height:14px; display:inline-block; opacity:.9; }
 
-  /* Right “cover card” */
-  .cover{
-    border:2px solid #000;
+  /* Hero right card */
+  .panel{
+    border:1px solid var(--line);
     border-radius: var(--r);
     background:
       linear-gradient(135deg, rgba(37,99,235,0.10), transparent 45%),
-      linear-gradient(225deg, rgba(249,115,22,0.12), transparent 45%),
+      linear-gradient(225deg, rgba(34,197,94,0.10), transparent 50%),
       #fff;
     padding: 18px;
-    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
-    position:relative;
-    overflow:hidden;
   }
-  .cover::before{
-    content:"";
-    position:absolute; inset:-60px;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(0,0,0,0.06), transparent 55%),
-      repeating-linear-gradient(0deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px);
-    opacity:0.8;
-    transform: rotate(8deg);
-  }
-  .cover > *{ position:relative; z-index:1; }
-
-  .cover h3{
+  .panel h3{
     margin:0;
     font-size: 16px;
-    font-weight: 1000;
-    letter-spacing: -0.4px;
+    font-weight: 950;
+    letter-spacing: -0.2px;
   }
-  .cover p{
+  .panel p{
     margin:10px 0 0;
     color: var(--muted);
-    font-weight: 700;
+    font-weight: 650;
     font-size: 13px;
     line-height: 1.75;
   }
-
-  .bulletbox{
+  .metric{
     margin-top: 12px;
-    border:1px solid #000;
-    border-radius: var(--r2);
+    border:1px solid rgba(0,0,0,.10);
+    border-radius: 10px;
     padding: 12px;
     background:#fff;
     transition: 0.18s var(--ease);
   }
-  .bulletbox:hover{ transform: translateY(-2px); background:#f7f7f7; }
-  .bulletbox .k{
+  .metric:hover{ transform: translateY(-2px); background: #fafafa; }
+  .metric .k{
     margin:0 0 6px;
-    font-weight: 1000;
+    font-weight: 950;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 11px;
-    opacity:0.70;
+    opacity:0.66;
   }
-  .bulletbox .v{
+  .metric .v{
     margin:0;
-    font-weight: 950;
-    font-size: 13px;
-  }
-
-  /* Scroll cue */
-  .scrollcue{
-    margin-top: 14px;
-    display:flex;
-    align-items:center;
-    gap:10px;
     font-weight: 900;
-    opacity:0.70;
-    font-size: 12px;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-  }
-  .arrow{
-    width: 26px; height: 26px;
-    border:2px solid #000;
-    border-radius: 4px;
-    display:grid; place-items:center;
-    box-shadow: 3px 3px 0 rgba(0,0,0,.12);
-    animation: nudge 1.2s var(--ease) infinite;
-  }
-  @keyframes nudge{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(2px); }
+    font-size: 13px;
+    opacity:0.90;
   }
 
   /* ===== Sections ===== */
   .section{ margin-top: 16px; }
-  .anchor{ scroll-margin-top: 96px; }
+  .anchor{ scroll-margin-top: 92px; }
 
   .section-head{
     padding: 16px 20px;
-    border-bottom: 2px solid #000;
+    border-bottom: 1px solid var(--line);
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:10px;
+    justify-content: space-between;
+    gap: 12px;
   }
   .section-head h2{
     margin:0;
     font-size: 12px;
-    letter-spacing: 3px;
+    letter-spacing: 2.6px;
     text-transform: uppercase;
-    font-weight: 1000;
+    font-weight: 950;
   }
-
   .accent{
-    width: 120px; height: 10px;
-    border:2px solid #000;
-    border-radius: 4px;
-    background: linear-gradient(90deg, var(--blue), var(--green), var(--orange), var(--pink));
+    width: 140px; height: 10px;
+    border-radius: 0;
+    background: linear-gradient(90deg, var(--a1), var(--a2), var(--a3), var(--a4));
+    opacity:0.9;
   }
 
   .section-body{
     padding: 18px 20px 24px;
-    font-size: 14.8px;
-    line-height: 1.9;
-    font-weight: 650;
     color: rgba(0,0,0,.86);
+    line-height: 1.9;
+    font-size: 14.8px;
+    font-weight: 620;
   }
 
-  /* List rows */
+  /* Rows */
   .row{
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
     gap:12px;
     padding: 14px;
-    border:2px solid #000;
-    border-radius: var(--r);
+    border:1px solid rgba(0,0,0,.12);
+    border-radius: var(--r2);
     background:#fff;
-    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
     transition: 0.18s var(--ease);
   }
   .row:hover{
     transform: translateY(-2px);
-    background: #f7f7f7;
-    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
+    background: #fafafa;
   }
-  .row .title{ font-weight: 1000; margin-bottom: 4px; }
-  .row .meta{ color: var(--muted); font-size: 13px; font-weight: 700; }
+  .row .title{ font-weight: 930; margin-bottom: 4px; letter-spacing:-0.2px;}
+  .row .meta{ color: var(--muted); font-size: 13px; font-weight: 650; }
 
+  /* Layout */
   .two-col{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -474,18 +391,13 @@
   }
 
   .mini{
-    border:2px solid #000;
-    border-radius: var(--r);
+    border:1px solid rgba(0,0,0,.12);
+    border-radius: var(--r2);
     background:#fff;
     padding: 16px;
-    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
     transition: 0.18s var(--ease);
   }
-  .mini:hover{
-    transform: translateY(-2px);
-    background:#f7f7f7;
-    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
-  }
+  .mini:hover{ transform: translateY(-2px); background:#fafafa; }
 
   /* Projects grid */
   .grid3{
@@ -498,64 +410,60 @@
   }
 
   .tile{
-    border:2px solid #000;
+    border:1px solid rgba(0,0,0,.12);
     border-radius: var(--r);
     background:#fff;
     padding: 16px;
-    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
-    transition: 0.18s var(--ease);
+    transition: 0.20s var(--ease);
     cursor:pointer;
     position:relative;
     overflow:hidden;
   }
   .tile:hover{
     transform: translateY(-3px);
-    background:#f7f7f7;
-    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
+    box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
-  .tile::after{
+  .tile::before{
     content:"";
     position:absolute;
-    right:-40px; top:-40px;
-    width:120px; height:120px;
-    border:2px solid #000;
-    background: rgba(37,99,235,0.10);
-    transform: rotate(18deg);
-    opacity:0.9;
+    inset:-80px;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(37,99,235,0.10), transparent 55%),
+      radial-gradient(circle at 80% 28%, rgba(34,197,94,0.08), transparent 55%);
+    opacity:0.85;
   }
+  .tile > *{ position:relative; z-index:1; }
 
   .tag{
     display:inline-flex;
     align-items:center;
-    gap:10px;
-    font-weight: 1000;
+    gap:8px;
+    font-weight: 950;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 11px;
-    opacity:0.78;
+    opacity:0.72;
     margin-bottom: 10px;
   }
-  .tag .sq{
-    width:10px; height:10px; border-radius:2px;
-    border:2px solid #000;
-    background: var(--orange);
-    box-shadow: 2px 2px 0 rgba(0,0,0,.14);
+  .sq{
+    width:10px; height:10px;
+    border-radius: 2px;
+    background: linear-gradient(135deg, var(--a3), var(--a1));
   }
   .tile h3{
     margin:0 0 8px;
     font-size: 18px;
-    font-weight: 1000;
-    letter-spacing: -0.4px;
+    font-weight: 950;
+    letter-spacing: -0.3px;
   }
   .tile p{
     margin:0;
     color: rgba(0,0,0,.78);
-    font-weight: 700;
+    font-weight: 650;
     line-height: 1.75;
     font-size: 14px;
   }
 
-  /* Footer */
   footer{
     margin-top: 24px;
     text-align:center;
@@ -571,19 +479,19 @@
     right:18px;
     bottom:18px;
     width:52px;height:52px;
-    border-radius: 10px;
-    border:2px solid #000;
+    border-radius: 12px;
+    border:1px solid rgba(0,0,0,.14);
     background:#fff;
-    box-shadow: 5px 5px 0 rgba(0,0,0,.16);
+    box-shadow: var(--shadow2);
     display:grid;
     place-items:center;
-    z-index:60;
+    z-index:70;
     transition: 0.18s var(--ease);
     text-decoration:none;
     color:#000;
-    font-weight: 1000;
+    font-weight: 950;
   }
-  .fab:hover{ transform: translateY(-2px); background:#f6f6f6; }
+  .fab:hover{ transform: translateY(-2px); background: var(--soft); }
 
   /* Mobile bottom nav */
   #mobileNav{
@@ -591,11 +499,11 @@
     left:50%;
     transform:translateX(-50%);
     bottom:12px;
-    z-index:70;
+    z-index:80;
     background:#fff;
-    border:2px solid #000;
-    border-radius: 10px;
-    box-shadow: 6px 6px 0 rgba(0,0,0,.14);
+    border:1px solid rgba(0,0,0,.14);
+    border-radius: 12px;
+    box-shadow: var(--shadow2);
     padding:8px;
     display:none;
     gap:6px;
@@ -603,11 +511,11 @@
 
   /* Reveal */
   .reveal{ opacity:0; transform: translateY(18px); }
-  .reveal.in{ opacity:1; transform: translateY(0); transition: 0.7s var(--ease); }
+  .reveal.in{ opacity:1; transform: translateY(0); transition: 0.75s var(--ease); }
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
-    *{ animation: none !important; transition: none !important; }
+    *{ animation:none !important; transition:none !important; }
   }
 </style>
 </head>
@@ -616,8 +524,10 @@
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
   <div class="bg-stage" aria-hidden="true">
-    <div class="ticker"></div>
-    <div class="dots"></div>
+    <div class="grid"></div>
+    <div class="rail r1"></div>
+    <div class="rail r2"></div>
+    <div class="rail r3"></div>
   </div>
 
   <div class="wrap" id="top">
@@ -642,21 +552,21 @@
         <div>
           <h1>Bhishek Shibdeen</h1>
 
-          <div class="editorial-bar">
-            <span class="pill"><span class="dot"></span>Kaizen</span>
-            <span class="tagline">Compliance • AML/CFT • Risk</span>
+          <div class="motto-row">
+            <span class="kaizen"><span class="kaizen-dot"></span>Kaizen</span>
+            <span style="font-weight:820; opacity:0.70;">Compliance • AML/CFT • Risk</span>
           </div>
 
-          <p class="deck">
+          <p class="subtitle">
             I build competence in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> through structured work:
             risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
           </p>
 
           <div class="chips" aria-label="Focus areas">
-            <span class="chip blue">Risk-Based KYC</span>
-            <span class="chip green">CDD / EDD</span>
-            <span class="chip orange">Sanctions & PEP</span>
-            <span class="chip pink">UBO & Ownership</span>
+            <span class="chip">Risk-Based KYC</span>
+            <span class="chip">CDD / EDD</span>
+            <span class="chip">Sanctions & PEP</span>
+            <span class="chip">UBO & Ownership</span>
           </div>
 
           <div class="cta">
@@ -669,29 +579,23 @@
               LinkedIn
             </a>
           </div>
-
-          <div class="scrollcue">
-            <span class="arrow">↓</span>
-            <span>Scroll for certifications & projects</span>
-          </div>
         </div>
 
-        <aside class="cover reveal" aria-label="Snapshot">
+        <aside class="panel reveal" aria-label="Snapshot">
           <h3>Portfolio Snapshot</h3>
           <p>
-            Editorial-style, proof-first portfolio: credentials + deliverables.
-            Built to read fast and feel credible.
+            Minimal fintech style: proof-first credentials + projects, structured for readability and credibility.
           </p>
 
-          <div class="bulletbox">
+          <div class="metric">
             <p class="k">Core</p>
             <p class="v">Controls-first thinking</p>
           </div>
-          <div class="bulletbox">
+          <div class="metric">
             <p class="k">Work</p>
-            <p class="v">Certifications + PDF project</p>
+            <p class="v">Certifications + AML PDF</p>
           </div>
-          <div class="bulletbox">
+          <div class="metric">
             <p class="k">Approach</p>
             <p class="v">Structure, clarity, audit-ready discipline</p>
           </div>
@@ -712,7 +616,7 @@
           A focused selection of credentials and work samples — built around AML/CFT knowledge, risk discipline, and communication clarity.
         </p>
 
-        <div style="margin: 10px 0 12px; font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">
+        <div style="margin: 10px 0 12px; font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">
           Certifications
         </div>
 
@@ -744,7 +648,7 @@
           <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
         </div>
 
-        <div style="margin: 18px 0 12px; font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">
+        <div style="margin: 18px 0 12px; font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">
           Projects
         </div>
 
@@ -757,9 +661,9 @@
               Simplified overview of the regulatory ecosystem (FIU, FSC, BoM, reporting flow), key obligations, and practical compliance takeaways.
             </p>
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="chip orange">Reporting Flow</span>
-              <span class="chip green">Obligations</span>
-              <span class="chip blue">Institutions</span>
+              <span class="chip">Reporting Flow</span>
+              <span class="chip">Obligations</span>
+              <span class="chip">Institutions</span>
             </div>
             <div style="margin-top:14px;">
               <span class="btn primary" style="width:max-content;">Open PDF ↗</span>
@@ -768,29 +672,29 @@
 
           <!-- Project 2 -->
           <div class="tile reveal">
-            <div class="tag"><span class="sq" style="background:var(--blue)"></span>Project</div>
+            <div class="tag"><span class="sq" style="background:linear-gradient(135deg,var(--a1),var(--a4))"></span>Project</div>
             <h3>KYC Controls Overview</h3>
             <p>
               Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.
             </p>
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="chip blue">CDD</span>
-              <span class="chip pink">EDD Triggers</span>
-              <span class="chip green">File Quality</span>
+              <span class="chip">CDD</span>
+              <span class="chip">EDD Triggers</span>
+              <span class="chip">File Quality</span>
             </div>
           </div>
 
           <!-- Project 3 -->
           <div class="tile reveal">
-            <div class="tag"><span class="sq" style="background:var(--green)"></span>Project</div>
+            <div class="tag"><span class="sq" style="background:linear-gradient(135deg,var(--a2),var(--a3))"></span>Project</div>
             <h3>Screening & Escalation Logic</h3>
             <p>
               Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.
             </p>
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="chip orange">Sanctions</span>
-              <span class="chip blue">PEP</span>
-              <span class="chip pink">Adverse Media</span>
+              <span class="chip">Sanctions</span>
+              <span class="chip">PEP</span>
+              <span class="chip">Adverse Media</span>
             </div>
           </div>
         </div>
@@ -802,25 +706,25 @@
     <section class="card section anchor reveal" id="contact">
       <div class="section-head">
         <h2>Contact</h2>
-        <span class="accent" aria-hidden="true" style="background:linear-gradient(90deg,var(--pink),var(--orange),var(--green),var(--blue))"></span>
+        <span class="accent" aria-hidden="true" style="background:linear-gradient(90deg,var(--a4),var(--a3),var(--a2),var(--a1));"></span>
       </div>
 
       <div class="section-body">
         <div class="two-col">
           <div class="mini reveal">
-            <div style="font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">Email</div>
-            <div style="margin-top:6px; font-weight:1000;">
+            <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Email</div>
+            <div style="margin-top:6px; font-weight:950;">
               <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000; text-decoration:none;">
                 bhishek.shibdeen@icloud.com
               </a>
             </div>
 
-            <div style="margin-top:14px; font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">Phone</div>
-            <div style="margin-top:6px; font-weight:1000;">+230 55024085</div>
+            <div style="margin-top:14px; font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Phone</div>
+            <div style="margin-top:6px; font-weight:950;">+230 55024085</div>
           </div>
 
           <div class="mini reveal">
-            <div style="font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">LinkedIn</div>
+            <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">LinkedIn</div>
             <div style="margin-top:10px;">
               <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
                 <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
@@ -838,7 +742,7 @@
   </div>
 
   <!-- Floating button -->
-  <a class="fab" href="#work" aria-label="Jump to Work">↘</a>
+  <a class="fab" href="#work" aria-label="Jump to Work">⬤</a>
 
   <!-- Mobile bottom nav -->
   <div id="mobileNav">
@@ -877,7 +781,7 @@
     els.forEach(el => io.observe(el));
   })();
 
-  // Active nav
+  // Active nav highlight
   (function(){
     const links = Array.from(document.querySelectorAll(".nav-item"));
     const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
