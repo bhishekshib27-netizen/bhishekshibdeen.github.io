@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Modern fintech portfolio: Intro, Certifications, Projects, Contact." />
+<meta name="description" content="Modern fintech portfolio: Intro, About, Certifications, Projects, Contact." />
 
 <style>
   :root{
@@ -27,10 +27,6 @@
     --shadow2: 0 10px 26px rgba(0,0,0,0.085);
 
     --ease: cubic-bezier(.2,.8,.2,1);
-
-    /* Cinematic dark */
-    --deep:#040A1B;       /* deep navy */
-    --deep2:#061233;      /* secondary deep */
   }
 
   *{ box-sizing:border-box; }
@@ -46,64 +42,38 @@
     overflow-x:hidden;
   }
 
-  /* ===== Cinematic scroll tint (white -> deep navy) ===== */
-  .cinematic{
-    position:fixed; inset:0;
-    pointer-events:none;
-    z-index:1;
-    background: radial-gradient(circle at 20% 10%, rgba(10,47,255,.10), transparent 55%),
-                radial-gradient(circle at 80% 15%, rgba(0,194,168,.10), transparent 55%),
-                linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(4,10,27,1) 100%);
-    opacity: 0;
-    transform: translateZ(0);
-    transition: opacity .2s var(--ease);
-    mix-blend-mode: multiply;
+  /* =========================================
+     Moving background (video)
+     Put your video here: /assets/bg.mp4
+     ========================================= */
+  .bg-video{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .bg-video video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+    filter: grayscale(1) contrast(1.08) brightness(0.92);
+    opacity: 0.14; /* subtle + corporate */
+  }
+  /* soften video edges */
+  .bg-video::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 20% 12%, rgba(10,47,255,0.10), transparent 55%),
+      radial-gradient(circle at 85% 18%, rgba(0,194,168,0.08), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.82));
+    mix-blend-mode: normal;
   }
 
-  /* When darkened, flip text colors subtly */
-  body.dark-mode{
-    color: rgba(255,255,255,.92);
-  }
-  body.dark-mode .nav,
-  body.dark-mode .card,
-  body.dark-mode .panel,
-  body.dark-mode .cert-card,
-  body.dark-mode .tile,
-  body.dark-mode .mini,
-  body.dark-mode #mobileNav{
-    background: rgba(10,14,26,.72);
-    border-color: rgba(255,255,255,.12);
-  }
-  body.dark-mode .nav a,
-  body.dark-mode .brand,
-  body.dark-mode .btn,
-  body.dark-mode .chip,
-  body.dark-mode .tagchip{
-    color: rgba(255,255,255,.92);
-  }
-  body.dark-mode .btn{
-    background: rgba(255,255,255,.06);
-    border-color: rgba(255,255,255,.14);
-  }
-  body.dark-mode .btn:hover{ background: rgba(255,255,255,.10); }
-  body.dark-mode .subtitle,
-  body.dark-mode .section-body,
-  body.dark-mode .pub-body p,
-  body.dark-mode .tile p,
-  body.dark-mode .panel p{
-    color: rgba(255,255,255,.78);
-  }
-  body.dark-mode footer{ color: rgba(255,255,255,.55); }
-  body.dark-mode .grid{
-    opacity: .08;
-    background:
-      linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/86px 86px,
-      linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/86px 86px;
-  }
-  body.dark-mode .dot{
-    border-color: rgba(255,255,255,.22);
-    background: rgba(10,14,26,.75);
-    opacity: .75;
+  @media (prefers-reduced-motion: reduce){
+    .bg-video{ display:none !important; }
   }
 
   /* ===== Progress bar ===== */
@@ -119,26 +89,27 @@
     transform-origin:left;
   }
 
-  /* ===== Background stage ===== */
+  /* =========================================
+     Background stage (REMOVED excess shapes)
+     - no rails
+     - lighter single glow + grid
+     ========================================= */
   .bg-stage{
     position:fixed; inset:0;
     pointer-events:none;
-    z-index:0;
+    z-index:1;
     overflow:hidden;
     background:
-      radial-gradient(circle at 12% 18%, rgba(29,78,216,0.16), transparent 44%),
-      radial-gradient(circle at 88% 20%, rgba(22,163,74,0.14), transparent 46%),
-      radial-gradient(circle at 50% 92%, rgba(124,58,237,0.14), transparent 52%),
-      radial-gradient(circle at 78% 72%, rgba(234,88,12,0.12), transparent 48%);
-    transition: filter .25s var(--ease);
+      radial-gradient(circle at 14% 18%, rgba(29,78,216,0.12), transparent 55%),
+      radial-gradient(circle at 84% 20%, rgba(0,194,168,0.08), transparent 58%);
   }
   .grid{
     position:absolute; inset:0;
-    opacity:0.09;
+    opacity:0.065;
     background:
-      linear-gradient(rgba(0,0,0,0.09) 1px, transparent 1px) 0 0/86px 86px,
-      linear-gradient(90deg, rgba(0,0,0,0.09) 1px, transparent 1px) 0 0/86px 86px;
-    mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
+      linear-gradient(rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/92px 92px,
+      linear-gradient(90deg, rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/92px 92px;
+    mask-image: radial-gradient(circle at 50% 16%, black 0%, transparent 72%);
     animation: gridFloat 10s var(--ease) infinite;
   }
   @keyframes gridFloat{
@@ -146,10 +117,6 @@
     50%{ transform: translateY(10px); }
     100%{ transform: translateY(0px); }
   }
-  .rail{ position:absolute; width:14px; border-radius:0; }
-  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(29,78,216,0.12); }
-  .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(22,163,74,0.12); }
-  .rail.r3{ left: 22%; bottom: 0; height: 34%; background: rgba(234,88,12,0.10); }
 
   /* ===== Layout ===== */
   .wrap{
@@ -173,7 +140,6 @@
     border:1px solid var(--line);
     border-radius: var(--r);
     box-shadow: var(--shadow2);
-    backdrop-filter: blur(10px);
   }
   .brand{
     display:flex;
@@ -211,10 +177,6 @@
     background: linear-gradient(90deg, rgba(29,78,216,0.20), rgba(22,163,74,0.16));
     border-color: rgba(0,0,0,.16);
   }
-  body.dark-mode .nav a.active{
-    background: linear-gradient(90deg, rgba(10,47,255,0.22), rgba(0,194,168,0.18));
-    border-color: rgba(255,255,255,.18);
-  }
 
   /* ===== Cards ===== */
   .card{
@@ -222,7 +184,7 @@
     border: 1px solid var(--line);
     border-radius: var(--r);
     overflow:hidden;
-    transition: transform .22s var(--ease), box-shadow .22s var(--ease), background .22s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     position:relative;
   }
   .card:hover{
@@ -230,15 +192,14 @@
     box-shadow: var(--shadow);
   }
 
-  /* ===== Glow layer ===== */
+  /* ===== Glow layer (not glass) ===== */
   .glow::before{
     content:"";
     position:absolute;
     inset:-120px;
     background:
-      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.18), transparent 55%),
-      radial-gradient(circle at 82% 30%, rgba(22,163,74,0.14), transparent 55%),
-      radial-gradient(circle at 64% 82%, rgba(124,58,237,0.12), transparent 60%);
+      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.16), transparent 55%),
+      radial-gradient(circle at 82% 30%, rgba(0,194,168,0.12), transparent 58%);
     opacity:0;
     transition: opacity .25s var(--ease);
     pointer-events:none;
@@ -288,10 +249,6 @@
     text-transform: uppercase;
     font-size: 12px;
   }
-  body.dark-mode .kaizen{
-    border-color: rgba(255,255,255,.18);
-    background: linear-gradient(90deg, rgba(10,47,255,0.22), rgba(0,194,168,0.16));
-  }
   .kaizen-dot{
     width:9px;height:9px;border-radius: 2px;
     background: linear-gradient(135deg, var(--a2), var(--a1));
@@ -306,23 +263,6 @@
     max-width: 90ch;
   }
   .subtitle strong{ font-weight: 920; }
-
-  .chips{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top: 12px;
-  }
-  .chip{
-    border:1px solid rgba(0,0,0,.16);
-    background:#fff;
-    padding: 8px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 820;
-    transition: 0.18s var(--ease);
-  }
-  .chip:hover{ background: var(--soft); transform: translateY(-1px); }
 
   .cta{
     margin-top: 14px;
@@ -368,11 +308,10 @@
     border:1px solid var(--line);
     border-radius: var(--r);
     background:
-      linear-gradient(135deg, rgba(29,78,216,0.14), transparent 45%),
-      linear-gradient(225deg, rgba(22,163,74,0.12), transparent 50%),
+      linear-gradient(135deg, rgba(29,78,216,0.12), transparent 45%),
+      linear-gradient(225deg, rgba(0,194,168,0.10), transparent 52%),
       #fff;
     padding: 18px;
-    transition: background .22s var(--ease), border-color .22s var(--ease);
   }
   .panel h3{
     margin:0;
@@ -410,11 +349,6 @@
     font-size: 13px;
     opacity:0.90;
   }
-  body.dark-mode .metric{
-    background: rgba(255,255,255,.04);
-    border-color: rgba(255,255,255,.12);
-  }
-  body.dark-mode .metric:hover{ background: rgba(255,255,255,.07); }
 
   /* ===== Sections ===== */
   .section{ margin-top: 16px; }
@@ -450,7 +384,7 @@
     font-weight: 620;
   }
 
-  /* ===== About (clean + consultant tone) ===== */
+  /* ===== About ===== */
   .about-grid{
     display:grid;
     grid-template-columns: 1.05fr 0.95fr;
@@ -473,8 +407,8 @@
     content:"";
     position:absolute; inset:-90px;
     background:
-      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.14), transparent 58%),
-      radial-gradient(circle at 80% 28%, rgba(22,163,74,0.10), transparent 58%);
+      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.12), transparent 58%),
+      radial-gradient(circle at 80% 28%, rgba(0,194,168,0.09), transparent 58%);
     opacity:.75;
   }
   .about-box > *{ position:relative; z-index:1; }
@@ -485,8 +419,6 @@
     letter-spacing: -0.25px;
   }
   .about-box p{ margin:0; color: rgba(0,0,0,.78); font-weight: 650; line-height:1.8; }
-  body.dark-mode .about-box{ background: rgba(10,14,26,.72); border-color: rgba(255,255,255,.12); }
-  body.dark-mode .about-box p{ color: rgba(255,255,255,.78); }
 
   /* ===== Certification cards ===== */
   .cert-grid{
@@ -521,7 +453,7 @@
     inset:-90px;
     background:
       radial-gradient(circle at 18% 22%, rgba(29,78,216,0.16), transparent 58%),
-      radial-gradient(circle at 82% 30%, rgba(22,163,74,0.12), transparent 58%);
+      radial-gradient(circle at 82% 30%, rgba(0,194,168,0.12), transparent 58%);
     opacity:0;
     transition: opacity .25s var(--ease);
   }
@@ -578,14 +510,6 @@
     flex: 0 0 auto;
   }
 
-  .cert-actions .btn{
-    transform: translateX(0);
-    transition: transform .22s var(--ease), background .22s var(--ease);
-  }
-  .cert-card:hover .cert-actions .btn{
-    transform: translateX(-4px);
-  }
-
   /* ===== Projects / Featured publication ===== */
   .pub{
     display:grid;
@@ -609,10 +533,9 @@
     position:absolute;
     inset:-100px;
     background:
-      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.18), transparent 55%),
-      radial-gradient(circle at 80% 28%, rgba(22,163,74,0.12), transparent 58%),
-      radial-gradient(circle at 64% 82%, rgba(124,58,237,0.10), transparent 60%);
-    opacity:0.85;
+      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.16), transparent 55%),
+      radial-gradient(circle at 80% 28%, rgba(0,194,168,0.12), transparent 58%);
+    opacity:0.8;
   }
   .pub > *{ position:relative; z-index:1; }
 
@@ -625,7 +548,7 @@
     border-radius: 12px;
     background:
       linear-gradient(135deg, rgba(29,78,216,0.10), transparent 50%),
-      linear-gradient(225deg, rgba(234,88,12,0.08), transparent 55%),
+      linear-gradient(225deg, rgba(234,88,12,0.06), transparent 55%),
       #fff;
     padding: 14px;
     min-height: 230px;
@@ -740,8 +663,8 @@
     position:absolute;
     inset:-90px;
     background:
-      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.14), transparent 58%),
-      radial-gradient(circle at 80% 28%, rgba(22,163,74,0.10), transparent 58%);
+      radial-gradient(circle at 18% 22%, rgba(29,78,216,0.12), transparent 58%),
+      radial-gradient(circle at 80% 28%, rgba(0,194,168,0.09), transparent 58%);
     opacity:0.9;
   }
   .tile > *{ position:relative; z-index:1; }
@@ -800,7 +723,7 @@
     font-weight: 800;
   }
 
-  /* Floating button */
+  /* Floating button (right) */
   .fab{
     position:fixed;
     right:18px;
@@ -819,6 +742,109 @@
     font-weight: 950;
   }
   .fab:hover{ transform: translateY(-2px); background: var(--soft); }
+
+  /* NEW: Contact icon (bottom-left) */
+  .contact-fab{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    width:52px;height:52px;
+    border-radius: 12px;
+    border:1px solid rgba(0,0,0,.14);
+    background:#fff;
+    box-shadow: var(--shadow2);
+    display:grid;
+    place-items:center;
+    z-index:90;
+    cursor:pointer;
+    transition: 0.18s var(--ease);
+  }
+  .contact-fab:hover{ transform: translateY(-2px); background: var(--soft); }
+  .contact-fab svg{ width:18px; height:18px; opacity:.92; }
+
+  .contact-pop{
+    position: fixed;
+    left:18px;
+    bottom:78px;
+    z-index:90;
+    width: min(320px, 88vw);
+    border:1px solid rgba(0,0,0,.14);
+    border-radius: 14px;
+    background:#fff;
+    box-shadow: var(--shadow);
+    padding: 14px;
+    transform: translateY(10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.18s var(--ease);
+  }
+  .contact-pop.open{
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .contact-pop .head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom: 10px;
+  }
+  .contact-pop .title{
+    font-weight: 980;
+    letter-spacing: -0.2px;
+  }
+  .xbtn{
+    border:1px solid rgba(0,0,0,.14);
+    background:#fff;
+    border-radius: 10px;
+    width:34px;height:34px;
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    transition: .18s var(--ease);
+  }
+  .xbtn:hover{ background: var(--soft); transform: translateY(-1px); }
+  .xbtn svg{ width:14px;height:14px; opacity:.8; }
+
+  .contact-row{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    padding: 10px;
+    border:1px solid rgba(0,0,0,.10);
+    border-radius: 12px;
+    background:#fff;
+  }
+  .contact-row + .contact-row{ margin-top: 10px; }
+  .contact-ico{
+    width:34px;height:34px;
+    border-radius: 10px;
+    border:1px solid rgba(0,0,0,.12);
+    display:grid;
+    place-items:center;
+    background: linear-gradient(135deg, rgba(29,78,216,0.10), rgba(0,194,168,0.08));
+    flex: 0 0 auto;
+  }
+  .contact-ico svg{ width:16px;height:16px; opacity:.9; }
+  .contact-row .k{
+    font-weight: 950;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 10.5px;
+    opacity: .70;
+    margin:0 0 4px;
+  }
+  .contact-row .v{
+    margin:0;
+    font-weight: 900;
+    font-size: 13px;
+    opacity:.92;
+    line-height:1.35;
+    word-break: break-word;
+  }
+  .contact-row a{ color:#000; text-decoration:none; }
+  .contact-row a:hover{ text-decoration: underline; }
 
   /* Mobile bottom nav */
   #mobileNav{
@@ -974,14 +1000,21 @@
     font-weight: 800;
     font-size: 12px;
   }
-  .boot-hint{
-    opacity:.85;
-  }
+  .boot-hint{ opacity:.85; }
 </style>
 </head>
 
 <body>
-  <!-- UNIQUE BOOT OVERLAY -->
+  <!-- Moving video background -->
+  <div class="bg-video" aria-hidden="true">
+    <!-- Replace src with your own file path (recommended: /assets/bg.mp4) -->
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="assets/bg.mp4" type="video/mp4" />
+      <!-- Fallback: keep page usable if video missing -->
+    </video>
+  </div>
+
+  <!-- Unique boot overlay -->
   <div class="boot" id="boot" aria-hidden="true">
     <div class="boot-card">
       <div class="boot-top">
@@ -1012,14 +1045,10 @@
 
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
+  <!-- Reduced background shapes -->
   <div class="bg-stage" aria-hidden="true">
     <div class="grid"></div>
-    <div class="rail r1"></div>
-    <div class="rail r2"></div>
-    <div class="rail r3"></div>
   </div>
-
-  <div class="cinematic" id="cinematic" aria-hidden="true"></div>
 
   <!-- Scroll dots -->
   <div class="scroll-dots" aria-label="Section progress">
@@ -1064,12 +1093,7 @@
             risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
           </p>
 
-          <div class="chips" aria-label="Focus areas">
-            <span class="chip">Risk-Based KYC</span>
-            <span class="chip">CDD / EDD</span>
-            <span class="chip">Sanctions & PEP</span>
-            <span class="chip">UBO & Ownership</span>
-          </div>
+          <!-- REMOVED the top chips you requested -->
 
           <div class="cta">
             <a class="btn primary" href="#projects">View projects ↓</a>
@@ -1279,7 +1303,7 @@
           <div class="mini reveal">
             <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Email</div>
             <div style="margin-top:6px; font-weight:950;">
-              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:inherit; text-decoration:none;">
+              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000; text-decoration:none;">
                 bhishek.shibdeen@icloud.com
               </a>
             </div>
@@ -1306,8 +1330,51 @@
     <footer>© 2026 Bhishek Shibdeen</footer>
   </div>
 
-  <!-- Floating button -->
+  <!-- Floating button (right) -->
   <a class="fab" href="#projects" aria-label="Jump to Projects">⬤</a>
+
+  <!-- NEW: Contact icon (bottom-left) -->
+  <button class="contact-fab" id="contactFab" aria-label="Quick contact" title="Quick contact">
+    <!-- chat/contact icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm3 5h10v2H7V9Zm0 4h7v2H7v-2Z"/>
+    </svg>
+  </button>
+
+  <div class="contact-pop" id="contactPop" role="dialog" aria-label="Quick contact details" aria-modal="false">
+    <div class="head">
+      <div class="title">Quick Contact</div>
+      <button class="xbtn" id="contactClose" aria-label="Close quick contact">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>
+        </svg>
+      </div>
+      <div>
+        <p class="k">Email</p>
+        <p class="v"><a href="mailto:bhishek.shibdeen@icloud.com">bhishek.shibdeen@icloud.com</a></p>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path fill="currentColor" d="M6.6 10.8c1.5 2.9 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.9.1.4 0 .8-.3 1.1l-2 2.8Z"/>
+        </svg>
+      </div>
+      <div>
+        <p class="k">Phone</p>
+        <p class="v"><a href="tel:+23055024085">+230 55024085</a></p>
+      </div>
+    </div>
+  </div>
 
   <!-- Mobile bottom nav -->
   <div id="mobileNav">
@@ -1323,11 +1390,8 @@
   (function(){
     const boot = document.getElementById("boot");
     const fill = document.getElementById("bootFill");
-    // fill bar
     requestAnimationFrame(()=>{ fill.style.width = "100%"; });
-    // hide after 1.25s
     setTimeout(()=> boot.classList.add("hide"), 1250);
-    // remove from a11y tree a bit later
     setTimeout(()=> boot.style.display = "none", 1900);
   })();
 
@@ -1406,34 +1470,36 @@
     sections.forEach(s => io.observe(s));
   })();
 
-  // Cinematic: white -> deep navy as you scroll
+  // Quick Contact (bottom-left) toggle
   (function(){
-    const overlay = document.getElementById("cinematic");
-    const body = document.body;
+    const fab = document.getElementById("contactFab");
+    const pop = document.getElementById("contactPop");
+    const close = document.getElementById("contactClose");
 
-    function updateCinematic(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-
-      const t = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0; // 0..1
-      // ease-in a bit late so top stays white
-      const start = 0.12;
-      const end = 0.80;
-      let x = (t - start) / (end - start);
-      x = Math.max(0, Math.min(1, x));
-      // smoother curve
-      x = x * x * (3 - 2 * x);
-
-      overlay.style.opacity = (0.95 * x).toFixed(3);
-
-      if(x > 0.55) body.classList.add("dark-mode");
-      else body.classList.remove("dark-mode");
+    function openPop(){
+      pop.classList.add("open");
+    }
+    function closePop(){
+      pop.classList.remove("open");
+    }
+    function togglePop(){
+      pop.classList.toggle("open");
     }
 
-    window.addEventListener("scroll", updateCinematic, { passive: true });
-    window.addEventListener("resize", updateCinematic);
-    updateCinematic();
+    fab.addEventListener("click", (e)=>{ e.stopPropagation(); togglePop(); });
+    close.addEventListener("click", (e)=>{ e.stopPropagation(); closePop(); });
+
+    // close on outside click
+    document.addEventListener("click", (e)=>{
+      if(!pop.classList.contains("open")) return;
+      const inside = pop.contains(e.target) || fab.contains(e.target);
+      if(!inside) closePop();
+    });
+
+    // close on Escape
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape") closePop();
+    });
   })();
 </script>
 
