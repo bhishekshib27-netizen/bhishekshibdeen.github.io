@@ -1215,6 +1215,252 @@
 
   /* ✅ Search filtering helper */
   .search-hidden{ display:none !important; }
+
+  /* ============================
+     🧭 Navigation vibe upgrade
+     - Live section label
+     - Scroll direction hint
+     - Command palette (⌘K)
+     ============================ */
+
+  .nav-hud{
+    position: fixed;
+    top: 66px;
+    left: 18px;
+    z-index: 120;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    pointer-events: none;
+  }
+  @media (max-width: 720px){
+    .nav-hud{ top: 12px; left: 12px; }
+  }
+
+  .hud-pill{
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow2);
+    color: var(--text);
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: .92;
+    transition: opacity .2s var(--ease), transform .2s var(--ease);
+    user-select: none;
+  }
+
+  .hud-pill .dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 28%, transparent));
+    opacity: .9;
+  }
+
+  .hud-muted{
+    opacity: .78;
+    font-weight: 850;
+    letter-spacing: 1.1px;
+  }
+
+  .scroll-hint{
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow2);
+    color: var(--text);
+    font-weight: 900;
+    font-size: 12px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .2s var(--ease), transform .2s var(--ease);
+    user-select: none;
+  }
+  .scroll-hint.show{
+    opacity: .92;
+    transform: translateY(0);
+  }
+  .scroll-hint .arr{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    opacity: .92;
+  }
+
+  /* Command palette */
+  .cmdk{
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(8px);
+  }
+  [data-theme="dark"] .cmdk{ background: rgba(0,0,0,.55); }
+
+  .cmdk.open{ display: flex; }
+
+  .cmdk-panel{
+    width: min(720px, 92vw);
+    margin-top: 64px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform .2s var(--ease), opacity .2s var(--ease);
+  }
+  .cmdk.open .cmdk-panel{
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .cmdk-top{
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--soft);
+  }
+  .cmdk-top svg{ width: 18px; height: 18px; opacity: .9; }
+  .cmdk-input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+    font-weight: 850;
+    font-size: 14px;
+    letter-spacing: -.1px;
+  }
+  .cmdk-input::placeholder{ color: var(--muted); font-weight: 700; }
+
+  .cmdk-meta{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 14px;
+    color: var(--muted);
+    font-weight: 750;
+    font-size: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .cmdk-kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    opacity: .92;
+  }
+
+  .cmdk-list{
+    max-height: 54vh;
+    overflow: auto;
+    padding: 8px;
+  }
+  .cmdk-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 12px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background .16s var(--ease), transform .16s var(--ease), border-color .16s var(--ease);
+  }
+  .cmdk-item:hover{
+    background: var(--soft);
+    transform: translateY(-1px);
+    border-color: var(--line);
+  }
+  .cmdk-item.active{
+    background: var(--soft);
+    border-color: color-mix(in srgb, var(--line) 100%, transparent);
+  }
+
+  .cmdk-left{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .cmdk-ico{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--card) 92%, var(--soft));
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+  .cmdk-ico svg{ width: 18px; height: 18px; opacity: .92; }
+
+  .cmdk-txt{
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .cmdk-title{
+    font-weight: 950;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cmdk-sub{
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cmdk-right{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-weight: 900;
+    font-size: 12px;
+  }
+
+  .cmdk-empty{
+    padding: 16px 14px 18px;
+    color: var(--muted);
+    font-weight: 750;
+    font-size: 13px;
+  }
 </style>
 </head>
 
@@ -1234,6 +1480,43 @@
 
   <!-- 🎬 Grain overlay -->
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- 🧭 HUD: live section label + scroll direction cue -->
+  <div class="nav-hud" aria-hidden="true">
+    <div class="hud-pill" id="sectionPill">
+      <span class="dot"></span>
+      <span id="sectionLabel">Intro</span>
+      <span class="hud-muted" id="sectionMini">/</span>
+      <span class="hud-muted" id="sectionSub">Portfolio</span>
+    </div>
+
+    <div class="scroll-hint" id="scrollHint">
+      <span class="arr" id="scrollArrow">↓</span>
+      <span id="scrollText">Scroll</span>
+    </div>
+  </div>
+
+  <!-- ⌘K Command Palette -->
+  <div class="cmdk" id="cmdk" role="dialog" aria-label="Command palette" aria-modal="true">
+    <div class="cmdk-panel" role="document">
+      <div class="cmdk-top">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M10 2a8 8 0 1 1 5.29 14.01l4.35 4.35-1.42 1.42-4.35-4.35A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12a6 6 0 0 0 0-12z"/>
+        </svg>
+        <input id="cmdkInput" class="cmdk-input" type="text" placeholder="Search sections & links… (e.g., projects, CV, email)" autocomplete="off" />
+      </div>
+
+      <div class="cmdk-meta">
+        <span class="cmdk-kbd">Enter</span> open
+        <span class="cmdk-kbd">↑</span><span class="cmdk-kbd">↓</span> navigate
+        <span class="cmdk-kbd">Esc</span> close
+        <span style="margin-left:auto;" class="cmdk-kbd">⌘K / Ctrl K</span>
+      </div>
+
+      <div class="cmdk-list" id="cmdkList"></div>
+      <div class="cmdk-empty" id="cmdkEmpty" style="display:none;">No matches. Try “projects”, “cv”, “email”, “linkedin”.</div>
+    </div>
+  </div>
 
   <!-- Back to top -->
   <a href="#top" class="topbtn" id="topBtn" aria-label="Back to top">
@@ -1286,7 +1569,7 @@
           <a href="#contact" class="nav-item">Contact</a>
 
           <div class="kbd-hint" title="Keyboard navigation">
-            <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev
+            <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev · <kbd>⌘K</kbd> palette
           </div>
         </div>
       </div>
@@ -1655,7 +1938,7 @@
 
       <div class="foot-sub">
         <div>© 2026 Bhishek Shibdeen</div>
-        <div style="opacity:.9;">Tip: use <strong>J</strong>/<strong>K</strong> to navigate sections</div>
+        <div style="opacity:.9;">Tip: use <strong>J</strong>/<strong>K</strong> to navigate sections · <strong>⌘K</strong> palette</div>
       </div>
     </footer>
 
@@ -2063,6 +2346,236 @@
     // initial nice position
     spot.style.setProperty("--sx", tx + "px");
     spot.style.setProperty("--sy", ty + "px");
+  })();
+
+  // ============================
+  // 🧭 Live Section Label + Scroll Direction Cue
+  // ============================
+  (function(){
+    const label = document.getElementById("sectionLabel");
+    const sub = document.getElementById("sectionSub");
+    const hint = document.getElementById("scrollHint");
+    const arrow = document.getElementById("scrollArrow");
+    const text = document.getElementById("scrollText");
+
+    const map = [
+      { id:"intro", name:"Intro", sub:"Overview" },
+      { id:"certs", name:"Certs", sub:"Credentials" },
+      { id:"experience", name:"Experience", sub:"Timeline" },
+      { id:"projects", name:"Projects", sub:"Work" },
+      { id:"contact", name:"Contact", sub:"Reach me" },
+      { id:"press", name:"Press", sub:"Footer" }
+    ];
+
+    const sections = map
+      .map(x => ({...x, el: document.getElementById(x.id)}))
+      .filter(x => x.el);
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const hit = sections.find(s => s.el === entry.target);
+          if(hit){
+            label.textContent = hit.name;
+            sub.textContent = hit.sub;
+          }
+        }
+      });
+    }, { threshold: 0.52 });
+
+    sections.forEach(s => io.observe(s.el));
+
+    let lastY = window.scrollY || 0;
+    let t;
+    function show(dir){
+      arrow.textContent = dir === "down" ? "↓" : "↑";
+      text.textContent = dir === "down" ? "Scroll" : "Back";
+      hint.classList.add("show");
+      clearTimeout(t);
+      t = setTimeout(()=> hint.classList.remove("show"), 550);
+    }
+
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY || 0;
+      const dy = y - lastY;
+      if(Math.abs(dy) > 6){
+        show(dy > 0 ? "down" : "up");
+        lastY = y;
+      }
+    }, { passive:true });
+  })();
+
+  // ============================
+  // ⌘K / Ctrl+K Command Palette
+  // ============================
+  (function(){
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const cmdk = document.getElementById("cmdk");
+    const input = document.getElementById("cmdkInput");
+    const list = document.getElementById("cmdkList");
+    const empty = document.getElementById("cmdkEmpty");
+
+    if(!cmdk || !input || !list || !empty) return;
+
+    function open(){
+      cmdk.classList.add("open");
+      document.body.style.overflow = "hidden";
+      setTimeout(()=> input.focus(), 40);
+      render();
+    }
+    function close(){
+      cmdk.classList.remove("open");
+      document.body.style.overflow = "";
+      input.value = "";
+      filtered = [...actions];
+      idx = 0;
+      render();
+    }
+    function toggle(){
+      if(cmdk.classList.contains("open")) close();
+      else open();
+    }
+
+    function openUrl(url){
+      close();
+      if(url.startsWith("mailto:") || url.startsWith("tel:")){
+        window.location.href = url;
+      }else{
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    }
+
+    function jump(hash){
+      close();
+      const el = document.querySelector(hash);
+      if(!el) return;
+      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
+      history.replaceState(null, "", hash);
+    }
+
+    const actions = [
+      { type:"Section", title:"Intro", sub:"Overview", key:"Go", run: ()=> jump("#intro") },
+      { type:"Section", title:"Certifications", sub:"Credentials", key:"Go", run: ()=> jump("#certs") },
+      { type:"Section", title:"Experience", sub:"Timeline", key:"Go", run: ()=> jump("#experience") },
+      { type:"Section", title:"Projects", sub:"Work", key:"Go", run: ()=> jump("#projects") },
+      { type:"Section", title:"Contact", sub:"Reach me", key:"Go", run: ()=> jump("#contact") },
+      { type:"Section", title:"Press-Ready Footer", sub:"Downloads & last updated", key:"Go", run: ()=> jump("#press") },
+
+      { type:"Link", title:"Download CV", sub:"CV_Bhishek_Shibdeen.pdf", key:"↗", run: ()=> openUrl("CV_Bhishek_Shibdeen.pdf") },
+      { type:"Link", title:"Featured PDF", sub:"AML Regulations in Mauritius", key:"↗", run: ()=> openUrl("AML_Regulations_Mauritius.pdf") },
+      { type:"Link", title:"Email", sub:"bhishek.shibdeen@icloud.com", key:"↗", run: ()=> openUrl("mailto:bhishek.shibdeen@icloud.com") },
+      { type:"Link", title:"LinkedIn", sub:"/bhishekshibdeen", key:"↗", run: ()=> openUrl("https://www.linkedin.com/in/bhishekshibdeen/") },
+
+      { type:"Action", title:"Toggle Dark Mode", sub:"Switch theme", key:"↻", run: ()=> { close(); document.getElementById("themeToggle")?.click(); } },
+      { type:"Action", title:"Open Contact Panel", sub:"Bottom-right quick contact", key:"↻", run: ()=> { close(); document.getElementById("contactBtn")?.click(); } },
+      { type:"Action", title:"Focus Portfolio Search", sub:"Top nav search field", key:"↻", run: ()=> { close(); document.getElementById("searchInput")?.focus(); } },
+    ];
+
+    function norm(s){ return (s||"").toLowerCase().replace(/\s+/g," ").trim(); }
+
+    function iconFor(type){
+      if(type === "Section") return `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v4H4V5zm0 5h16v4H4v-4zm0 5h16v4H4v-4z"/></svg>`;
+      if(type === "Link") return `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>`;
+      return `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>`;
+    }
+
+    let filtered = [...actions];
+    let idx = 0;
+
+    function render(){
+      list.innerHTML = "";
+      empty.style.display = filtered.length ? "none" : "block";
+
+      filtered.forEach((a, i) => {
+        const item = document.createElement("div");
+        item.className = "cmdk-item" + (i === idx ? " active" : "");
+        item.innerHTML = `
+          <div class="cmdk-left">
+            <span class="cmdk-ico" aria-hidden="true">${iconFor(a.type)}</span>
+            <span class="cmdk-txt">
+              <span class="cmdk-title">${a.title}</span>
+              <span class="cmdk-sub">${a.sub}</span>
+            </span>
+          </div>
+          <div class="cmdk-right">
+            <span>${a.type}</span>
+            <span style="opacity:.75;">${a.key || ""}</span>
+          </div>
+        `;
+        item.addEventListener("mouseenter", () => { idx = i; render(); });
+        item.addEventListener("click", () => a.run());
+        list.appendChild(item);
+      });
+    }
+
+    function applyFilter(q){
+      const query = norm(q);
+      if(!query){
+        filtered = [...actions];
+        idx = 0;
+        render();
+        return;
+      }
+      filtered = actions.filter(a => {
+        const hay = norm(`${a.type} ${a.title} ${a.sub} ${a.key || ""}`);
+        return hay.includes(query);
+      });
+      idx = 0;
+      render();
+    }
+
+    input.addEventListener("input", () => applyFilter(input.value));
+
+    // Keyboard controls inside palette
+    document.addEventListener("keydown", (e) => {
+      const isOpen = cmdk.classList.contains("open");
+
+      // Open palette
+      if((e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey)){
+        e.preventDefault();
+        toggle();
+        return;
+      }
+
+      if(!isOpen) return;
+
+      if(e.key === "Escape"){
+        e.preventDefault();
+        close();
+        return;
+      }
+
+      if(e.key === "ArrowDown"){
+        e.preventDefault();
+        if(!filtered.length) return;
+        idx = (idx + 1) % filtered.length;
+        render();
+        return;
+      }
+
+      if(e.key === "ArrowUp"){
+        e.preventDefault();
+        if(!filtered.length) return;
+        idx = (idx - 1 + filtered.length) % filtered.length;
+        render();
+        return;
+      }
+
+      if(e.key === "Enter"){
+        e.preventDefault();
+        if(filtered[idx]) filtered[idx].run();
+        return;
+      }
+    });
+
+    // Click backdrop to close
+    cmdk.addEventListener("click", (e) => {
+      if(e.target === cmdk) close();
+    });
+
+    // Build initial list
+    render();
   })();
 </script>
 
