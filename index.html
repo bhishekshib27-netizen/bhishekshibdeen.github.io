@@ -6,6 +6,11 @@
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
 <meta name="description" content="Modern fintech portfolio: Intro, Certifications, Experience, Projects, Contact." />
 
+<!-- ✅ Premium fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --bg:#ffffff;
@@ -29,12 +34,18 @@
   html{ scroll-behavior:smooth; }
   body{
     margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial;
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     color: var(--text);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.15px;
+  }
+
+  /* Headings / brand font */
+  h1, h2, h3, .brand span{
+    font-family: "Space Grotesk", "Inter", ui-sans-serif, system-ui;
+    letter-spacing: -0.6px;
   }
 
   /* ===== Progress bar (monochrome) ===== */
@@ -183,8 +194,8 @@
     margin:0;
     font-size: clamp(36px, 4.4vw, 58px);
     line-height: 1.02;
-    font-weight: 980;
-    letter-spacing: -1.8px;
+    font-weight: 700;
+    letter-spacing: -1.2px;
   }
 
   .motto-row{
@@ -203,7 +214,7 @@
     border-radius: 10px;
     border: 1px solid rgba(0,0,0,.18);
     background: rgba(0,0,0,.045);
-    font-weight: 950;
+    font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 12px;
@@ -217,11 +228,11 @@
     margin: 12px 0 0;
     line-height: 1.85;
     font-size: 16px;
-    font-weight: 620;
+    font-weight: 520;
     color: rgba(0,0,0,.84);
     max-width: 90ch;
   }
-  .subtitle strong{ font-weight: 920; }
+  .subtitle strong{ font-weight: 800; }
 
   .cta{
     margin-top: 14px;
@@ -241,7 +252,7 @@
     border: 1px solid rgba(0,0,0,.16);
     background: #fff;
     color: #000;
-    font-weight: 860;
+    font-weight: 800;
     font-size: 13px;
     transition: 0.18s var(--ease);
     cursor:pointer;
@@ -272,13 +283,13 @@
   .panel h3{
     margin:0;
     font-size: 16px;
-    font-weight: 950;
+    font-weight: 700;
     letter-spacing: -0.2px;
   }
   .panel p{
     margin:10px 0 0;
     color: var(--muted);
-    font-weight: 650;
+    font-weight: 520;
     font-size: 13px;
     line-height: 1.75;
   }
@@ -321,14 +332,14 @@
     min-width:0;
   }
   .ql .t{
-    font-weight: 950;
+    font-weight: 900;
     font-size: 13px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
   }
   .ql .s{
-    font-weight: 750;
+    font-weight: 600;
     font-size: 12px;
     color: rgba(0,0,0,.62);
     white-space:nowrap;
@@ -371,7 +382,7 @@
     font-size: 12px;
     letter-spacing: 2.6px;
     text-transform: uppercase;
-    font-weight: 950;
+    font-weight: 700;
     white-space:nowrap;
   }
   .sec-ico{
@@ -391,7 +402,7 @@
     color: rgba(0,0,0,.86);
     line-height: 1.9;
     font-size: 14.8px;
-    font-weight: 620;
+    font-weight: 520;
   }
 
   /* ===== Certification cards ===== */
@@ -450,7 +461,7 @@
   .cert-info h3{
     margin:0;
     font-size: 14.5px;
-    font-weight: 950;
+    font-weight: 800;
     letter-spacing:-0.2px;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -460,7 +471,7 @@
     margin:0;
     font-size: 13px;
     color: var(--muted);
-    font-weight: 650;
+    font-weight: 520;
   }
   .cert-actions{
     display:flex;
@@ -525,25 +536,25 @@
   .t-title{
     margin:0;
     font-size: 15px;
-    font-weight: 980;
+    font-weight: 800;
     letter-spacing:-0.25px;
   }
   .t-meta{
     font-size: 12px;
-    font-weight: 850;
+    font-weight: 750;
     color: rgba(0,0,0,.62);
     white-space:nowrap;
   }
   .t-sub{
     margin: 4px 0 0;
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 650;
     color: rgba(0,0,0,.75);
   }
   .t-desc{
     margin: 10px 0 0;
     color: rgba(0,0,0,.78);
-    font-weight: 650;
+    font-weight: 520;
     line-height: 1.75;
     font-size: 14px;
   }
@@ -558,7 +569,7 @@
     border-radius: 10px;
     padding: 7px 10px;
     font-size: 12px;
-    font-weight: 820;
+    font-weight: 700;
     background:#fff;
   }
 
@@ -647,13 +658,13 @@
   .pub-body h3{
     margin:0 0 8px;
     font-size: 18px;
-    font-weight: 980;
+    font-weight: 800;
     letter-spacing:-0.35px;
   }
   .pub-body p{
     margin:0;
     color: rgba(0,0,0,.78);
-    font-weight: 650;
+    font-weight: 520;
     line-height: 1.75;
     font-size: 14px;
   }
@@ -692,7 +703,7 @@
     display:inline-flex;
     align-items:center;
     gap:8px;
-    font-weight: 950;
+    font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 11px;
@@ -703,13 +714,13 @@
   .tile h4{
     margin:0 0 8px;
     font-size: 16px;
-    font-weight: 950;
+    font-weight: 800;
     letter-spacing: -0.25px;
   }
   .tile p{
     margin:0;
     color: rgba(0,0,0,.78);
-    font-weight: 650;
+    font-weight: 520;
     line-height: 1.75;
     font-size: 14px;
   }
@@ -831,7 +842,7 @@
     background: rgba(0,0,0,.02);
   }
   .contact-pop .head .title{
-    font-weight: 950;
+    font-weight: 900;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     font-size: 12px;
@@ -842,7 +853,7 @@
     background:#fff;
     border-radius: 10px;
     padding: 6px 10px;
-    font-weight: 950;
+    font-weight: 900;
     cursor:pointer;
     transition: .18s var(--ease);
   }
@@ -861,7 +872,7 @@
     gap: 6px;
   }
   .label{
-    font-weight: 950;
+    font-weight: 900;
     letter-spacing: 1.8px;
     text-transform: uppercase;
     font-size: 11px;
@@ -877,7 +888,7 @@
   .value-row a{
     color:#000;
     text-decoration:none;
-    font-weight: 920;
+    font-weight: 800;
   }
   .copy{
     border:1px solid rgba(0,0,0,.14);
@@ -1001,12 +1012,9 @@
           </div>
         </div>
 
-        <!-- ✅ Replaced Portfolio Snapshot with Quick Links -->
         <aside class="panel reveal" aria-label="Quick Links">
           <h3>Quick Links</h3>
-          <p>
-            Fast access to key items: CV, featured work, and contact.
-          </p>
+          <p>Fast access to key items: CV, featured work, and contact.</p>
 
           <div class="quicklinks">
             <div class="ql">
@@ -1138,7 +1146,6 @@
 
       <div class="section-body">
         <div class="timeline">
-          <!-- ✅ Kept only ARIE Finance, removed Zetheta -->
           <div class="t-item reveal">
             <div class="t-head">
               <div>
@@ -1158,7 +1165,6 @@
               <span class="tagchip">Documentation Quality</span>
             </div>
           </div>
-
         </div>
       </div>
     </section>
