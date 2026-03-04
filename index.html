@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Modern compliance portfolio: certifications, experience timeline, projects, and downloadable portfolio pack." />
+<meta name="description" content="Modern compliance portfolio: certifications, experience timeline, projects, and searchable content with dark mode." />
 
 <!-- ✅ Premium fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,13 @@
 <style>
   :root{
     --bg:#ffffff;
+    --card:#ffffff;
     --text:#0b0b0b;
     --muted: rgba(0,0,0,.62);
     --line: rgba(0,0,0,.14);
     --soft: rgba(0,0,0,.04);
+    --rail: rgba(0,0,0,0.055);
+    --grid: rgba(0,0,0,0.10);
 
     --r:12px;
     --r2:10px;
@@ -26,6 +29,21 @@
     --shadow2: 0 10px 26px rgba(0,0,0,0.075);
 
     --ease: cubic-bezier(.2,.8,.2,1);
+  }
+
+  /* ✅ Dark mode tokens */
+  [data-theme="dark"]{
+    --bg:#0b0f14;
+    --card:#0f151d;
+    --text:#f2f4f7;
+    --muted: rgba(255,255,255,.62);
+    --line: rgba(255,255,255,.14);
+    --soft: rgba(255,255,255,.06);
+    --rail: rgba(255,255,255,0.08);
+    --grid: rgba(255,255,255,0.10);
+
+    --shadow: 0 20px 60px rgba(0,0,0,0.40);
+    --shadow2: 0 10px 26px rgba(0,0,0,0.30);
   }
 
   *{ box-sizing:border-box; }
@@ -45,6 +63,8 @@
     letter-spacing: -0.6px;
   }
 
+  a{ color: inherit; }
+
   /* ===== Progress bar ===== */
   .progress{
     position:fixed; top:0; left:0;
@@ -57,6 +77,9 @@
     background: linear-gradient(90deg, rgba(0,0,0,.85), rgba(0,0,0,.25));
     transform-origin:left;
   }
+  [data-theme="dark"] .progress > span{
+    background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  }
 
   /* ===== Background ===== */
   .bg-stage{
@@ -65,23 +88,33 @@
     z-index:0;
     overflow:hidden;
     background:
-      radial-gradient(circle at 12% 18%, rgba(0,0,0,0.04), transparent 44%),
+      radial-gradient(circle at 12% 18%, var(--soft), transparent 44%),
       radial-gradient(circle at 88% 20%, rgba(0,0,0,0.035), transparent 46%),
       radial-gradient(circle at 50% 92%, rgba(0,0,0,0.03), transparent 52%),
       radial-gradient(circle at 78% 72%, rgba(0,0,0,0.03), transparent 48%);
   }
+  [data-theme="dark"] .bg-stage{
+    background:
+      radial-gradient(circle at 12% 18%, rgba(255,255,255,0.06), transparent 44%),
+      radial-gradient(circle at 88% 20%, rgba(255,255,255,0.05), transparent 46%),
+      radial-gradient(circle at 50% 92%, rgba(255,255,255,0.04), transparent 52%),
+      radial-gradient(circle at 78% 72%, rgba(255,255,255,0.04), transparent 48%);
+  }
+
   .grid{
     position:absolute; inset:0;
     opacity:0.085;
     background:
-      linear-gradient(rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/86px 86px,
-      linear-gradient(90deg, rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/86px 86px;
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/86px 86px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/86px 86px;
     mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
   }
   .rail{ position:absolute; width:14px; border-radius:0; }
-  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(0,0,0,0.055); }
+  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: var(--rail); }
   .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(0,0,0,0.05); }
   .rail.r3{ left: 22%; bottom: 0; height: 34%; background: rgba(0,0,0,0.04); }
+  [data-theme="dark"] .rail.r2{ background: rgba(255,255,255,0.07); }
+  [data-theme="dark"] .rail.r3{ background: rgba(255,255,255,0.06); }
 
   /* ===== Layout ===== */
   .wrap{
@@ -101,7 +134,7 @@
     justify-content:space-between;
     gap:14px;
     padding: 12px 14px;
-    background:#fff;
+    background: var(--card);
     border:1px solid var(--line);
     border-radius: var(--r);
     box-shadow: var(--shadow2);
@@ -119,10 +152,15 @@
     border-radius: 3px;
     background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
   }
+  [data-theme="dark"] .brand-mark{
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  }
+
   .navlinks{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; align-items:center; }
+
   .nav a{
     text-decoration:none;
-    color:#000;
+    color: var(--text);
     font-weight: 850;
     font-size:12px;
     padding: 9px 12px;
@@ -139,21 +177,24 @@
   }
   .nav a.active{
     opacity:1;
-    color:#000;
     background: rgba(0,0,0,0.055);
     border-color: rgba(0,0,0,.18);
+  }
+  [data-theme="dark"] .nav a.active{
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.18);
   }
 
   /* Keyboard hint */
   .kbd-hint{
     margin-left: 6px;
     padding: 7px 10px;
-    border: 1px solid rgba(0,0,0,.12);
+    border: 1px solid var(--line);
     border-radius: 10px;
-    background: rgba(0,0,0,.02);
+    background: var(--soft);
     font-size: 11px;
     font-weight: 850;
-    opacity: .72;
+    opacity: .78;
     user-select:none;
     white-space:nowrap;
   }
@@ -162,19 +203,101 @@
     font-size: 10px;
     padding: 2px 6px;
     border-radius: 7px;
-    border: 1px solid rgba(0,0,0,.14);
-    background:#fff;
+    border: 1px solid var(--line);
+    background: var(--card);
     margin: 0 2px;
-    opacity: .9;
+    opacity: .95;
   }
   @media (max-width: 860px){
     .kbd-hint{ display:none; }
   }
 
+  /* ✅ Header controls: search + theme */
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .search-wrap{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 8px 10px;
+    border:1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    transition: background .18s var(--ease), border-color .18s var(--ease);
+    min-width: 280px;
+  }
+  @media (max-width: 980px){
+    .search-wrap{ min-width: 220px; }
+  }
+  @media (max-width: 720px){
+    .search-wrap{ display:none; } /* keep nav clean on small screens */
+  }
+  .search-ico{
+    width:16px; height:16px; opacity:.85;
+  }
+  .search{
+    border:none;
+    outline:none;
+    background:transparent;
+    color: var(--text);
+    font-weight: 750;
+    font-size: 13px;
+    width: 240px;
+  }
+  .search::placeholder{
+    color: var(--muted);
+    opacity:.9;
+    font-weight: 650;
+  }
+  .search-meta{
+    font-size: 11px;
+    font-weight: 850;
+    opacity:.7;
+    white-space:nowrap;
+  }
+  .clearbtn{
+    border:1px solid var(--line);
+    background: var(--card);
+    border-radius: 10px;
+    padding: 6px 10px;
+    font-weight: 900;
+    cursor:pointer;
+    transition: background .18s var(--ease);
+    font-size: 12px;
+    opacity:.85;
+  }
+  .clearbtn:hover{ background: var(--soft); }
+
+  .themebtn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    font-weight: 900;
+    font-size: 12px;
+    cursor:pointer;
+    transition: background .18s var(--ease), transform .18s var(--ease);
+    user-select:none;
+    white-space:nowrap;
+  }
+  .themebtn:hover{ background: var(--soft); transform: translateY(-1px); }
+  .themebtn svg{ width:16px; height:16px; opacity:.9; }
+
   /* ============================
      Micro-interactions core
      ============================ */
-  .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .dl-card{
+  .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .dl-card, .themebtn, .clearbtn{
     --mx: 0px;
     --my: 0px;
     --hoverLift: 0px;
@@ -193,7 +316,7 @@
 
   /* Cards */
   .card{
-    background:#fff;
+    background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--r);
     overflow:hidden;
@@ -216,6 +339,12 @@
     opacity:0;
     transition: opacity .25s var(--ease);
     pointer-events:none;
+  }
+  [data-theme="dark"] .glow::before{
+    background:
+      radial-gradient(circle at 18% 22%, rgba(255,255,255,0.08), transparent 55%),
+      radial-gradient(circle at 82% 30%, rgba(255,255,255,0.06), transparent 55%),
+      radial-gradient(circle at 64% 82%, rgba(255,255,255,0.05), transparent 60%);
   }
   .glow:hover::before{ opacity:1; }
 
@@ -254,8 +383,8 @@
     gap:10px;
     padding: 9px 12px;
     border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.18);
-    background: rgba(0,0,0,.045);
+    border: 1px solid var(--line);
+    background: var(--soft);
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -265,13 +394,16 @@
     width:9px;height:9px;border-radius: 2px;
     background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
   }
+  [data-theme="dark"] .kaizen-dot{
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  }
 
   .subtitle{
     margin: 12px 0 0;
     line-height: 1.85;
     font-size: 16px;
     font-weight: 520;
-    color: rgba(0,0,0,.84);
+    color: color-mix(in srgb, var(--text) 84%, transparent);
     max-width: 90ch;
   }
   .subtitle strong{ font-weight: 800; }
@@ -292,9 +424,9 @@
     padding: 10px 14px;
     border-radius: 10px;
     text-decoration:none;
-    border: 1px solid rgba(0,0,0,.16);
-    background: #fff;
-    color: #000;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
     font-weight: 800;
     font-size: 13px;
     transition: background .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
@@ -307,10 +439,15 @@
   }
 
   .btn.primary{
-    border-color: rgba(0,0,0,.25);
-    color:#fff;
-    background: linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.55));
+    border-color: color-mix(in srgb, var(--text) 22%, transparent);
+    color: var(--bg);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 55%, transparent));
     box-shadow: 0 14px 38px rgba(0,0,0,0.18);
+  }
+  [data-theme="dark"] .btn.primary{
+    color: #0b0f14;
+    background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,.60));
+    box-shadow: 0 14px 38px rgba(0,0,0,0.45);
   }
   .btn.primary:hover{
     --hoverLift: -2px;
@@ -323,7 +460,7 @@
   .panel{
     border:1px solid var(--line);
     border-radius: var(--r);
-    background: rgba(0,0,0,.03);
+    background: var(--soft);
     padding: 18px;
   }
   .panel h3{
@@ -350,12 +487,12 @@
     justify-content:space-between;
     gap: 10px;
     padding: 12px;
-    border:1px solid rgba(0,0,0,.10);
+    border:1px solid var(--line);
     border-radius: 12px;
-    background:#fff;
+    background: var(--card);
     transition: transform .22s var(--ease), box-shadow .22s var(--ease), background .18s var(--ease);
   }
-  .ql:hover{ background:#fafafa; --lift:-2px; box-shadow: var(--shadow2); }
+  .ql:hover{ background: color-mix(in srgb, var(--card) 92%, var(--soft)); --lift:-2px; box-shadow: var(--shadow2); }
   .ql .left{
     display:flex;
     align-items:center;
@@ -366,10 +503,10 @@
     width: 34px;
     height: 34px;
     border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.12);
+    border: 1px solid var(--line);
     display:grid;
     place-items:center;
-    background: rgba(0,0,0,.03);
+    background: var(--soft);
   }
   .ql .ico svg{ width:18px; height:18px; }
   .ql .txt{
@@ -387,7 +524,7 @@
   .ql .s{
     font-weight: 600;
     font-size: 12px;
-    color: rgba(0,0,0,.62);
+    color: var(--muted);
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
@@ -397,7 +534,6 @@
     opacity:.7;
   }
   .ql a{
-    color:#000;
     text-decoration:none;
     display:flex;
     align-items:center;
@@ -405,98 +541,43 @@
     width:100%;
   }
 
-  /* ✅ Portfolio Pack downloads block */
-  .pack{
-    margin-top: 12px;
-    border-top: 1px dashed rgba(0,0,0,.14);
-    padding-top: 12px;
-  }
-  .pack-head{
-    display:flex;
+  /* ✅ Search results status */
+  .search-status{
+    margin-top: 10px;
+    display:none;
+    gap:10px;
     align-items:center;
     justify-content:space-between;
-    gap:10px;
+    padding: 10px 12px;
+    border:1px dashed var(--line);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--card) 90%, var(--soft));
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 12px;
   }
-  .pack-title{
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 11px;
-    opacity:.75;
-    display:flex;
+  .search-status.show{ display:flex; }
+  .pillmini{
+    display:inline-flex;
     align-items:center;
     gap:8px;
+    border:1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    background: var(--card);
+    opacity:0.92;
+    color: var(--text);
   }
-  .pack-title .dot{
+  .pillmini .sq{
     width:10px;height:10px;border-radius:2px;
     background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
-    border: 1px solid rgba(0,0,0,.12);
   }
-  .pack-grid{
-    margin-top: 10px;
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  .dl-card{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 12px;
-    padding: 12px;
-    border:1px solid rgba(0,0,0,.10);
-    border-radius: 12px;
-    background:#fff;
-    text-decoration:none;
-    color:#000;
-    transition: background .18s var(--ease), box-shadow .22s var(--ease), border-color .18s var(--ease);
-  }
-  .dl-card:hover{
-    background:#fafafa;
-    border-color: rgba(0,0,0,.16);
-    --hoverLift:-1px;
-    box-shadow: var(--shadow2);
-  }
-  .dl-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    min-width:0;
-  }
-  .dl-ico{
-    width:34px;height:34px;
-    border-radius: 10px;
-    border:1px solid rgba(0,0,0,.12);
-    display:grid;
-    place-items:center;
-    background: rgba(0,0,0,.03);
-    flex: 0 0 auto;
-  }
-  .dl-ico svg{ width:18px;height:18px; }
-  .dl-txt{
-    display:grid;
-    gap:2px;
-    min-width:0;
-  }
-  .dl-txt .t{
-    font-weight: 900;
-    font-size: 13px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .dl-txt .s{
-    font-weight: 600;
-    font-size: 12px;
-    color: rgba(0,0,0,.62);
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .dl-go{
-    font-weight: 950;
-    opacity:.7;
-    flex: 0 0 auto;
+  [data-theme="dark"] .pillmini .sq{
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
   }
 
   /* ===== Sections ===== */
@@ -533,13 +614,13 @@
   .accent{
     width: 150px; height: 10px;
     border-radius: 0;
-    background: linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.25));
+    background: linear-gradient(90deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 25%, transparent));
     opacity:0.95;
   }
 
   .section-body{
     padding: 18px 20px 18px;
-    color: rgba(0,0,0,.86);
+    color: color-mix(in srgb, var(--text) 86%, transparent);
     line-height: 1.9;
     font-size: 14.8px;
     font-weight: 520;
@@ -550,8 +631,8 @@
     display:flex;
     justify-content:flex-end;
     gap:10px;
-    border-top: 1px dashed rgba(0,0,0,.10);
-    background: linear-gradient(180deg, rgba(255,255,255,0), rgba(0,0,0,0.012));
+    border-top: 1px dashed var(--line);
+    background: linear-gradient(180deg, rgba(255,255,255,0), color-mix(in srgb, var(--soft) 35%, transparent));
   }
   .nextbtn{
     display:inline-flex;
@@ -559,19 +640,19 @@
     gap:10px;
     padding: 10px 12px;
     border-radius: 12px;
-    border: 1px solid rgba(0,0,0,.14);
-    background:#fff;
-    color:#000;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
     text-decoration:none;
     font-weight: 900;
     font-size: 12px;
-    opacity:.9;
+    opacity:.95;
     transition: background .18s var(--ease), border-color .18s var(--ease);
     cursor:pointer;
   }
   .nextbtn:hover{
     background: var(--soft);
-    border-color: rgba(0,0,0,.18);
+    border-color: color-mix(in srgb, var(--line) 100%, transparent);
     --hoverLift: -1px;
   }
   .nextbtn .mini{
@@ -579,9 +660,9 @@
     font-size: 10px;
     padding: 2px 7px;
     border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.14);
-    background:#fff;
-    opacity:.85;
+    border: 1px solid var(--line);
+    background: var(--card);
+    opacity:.9;
   }
 
   /* ===== Certification cards ===== */
@@ -595,9 +676,9 @@
   }
 
   .cert-card{
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: var(--r);
-    background:#fff;
+    background: var(--card);
     padding: 16px;
     display:flex;
     align-items:center;
@@ -611,19 +692,21 @@
     --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
+  [data-theme="dark"] .cert-card:hover{ box-shadow: 0 18px 55px rgba(0,0,0,0.45); }
+
   .cert-logo{
     width: 56px;
     height: 56px;
     border-radius: 12px;
-    border: 1px solid rgba(0,0,0,.12);
-    background:#fff;
+    border: 1px solid var(--line);
+    background: var(--card);
     display:grid;
     place-items:center;
     overflow:hidden;
     flex: 0 0 auto;
     transition: border-color .2s var(--ease);
   }
-  .cert-card:hover .cert-logo{ border-color: rgba(0,0,0,.28); }
+  .cert-card:hover .cert-logo{ border-color: color-mix(in srgb, var(--line) 100%, transparent); }
   .cert-logo img{
     width: 76%;
     height: 76%;
@@ -652,12 +735,6 @@
     color: var(--muted);
     font-weight: 520;
   }
-  .cert-actions{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    flex: 0 0 auto;
-  }
 
   /* ===== Experience Timeline ===== */
   .timeline{
@@ -673,13 +750,13 @@
     top: 2px;
     bottom: 2px;
     width: 2px;
-    background: rgba(0,0,0,.12);
+    background: var(--line);
   }
   .t-item{
     position:relative;
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: var(--r);
-    background:#fff;
+    background: var(--card);
     padding: 14px 14px 14px 16px;
     transition: transform .22s var(--ease), box-shadow .22s var(--ease);
   }
@@ -687,6 +764,8 @@
     --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
+  [data-theme="dark"] .t-item:hover{ box-shadow: 0 18px 55px rgba(0,0,0,0.45); }
+
   .t-item::before{
     content:"";
     position:absolute;
@@ -695,9 +774,10 @@
     width: 14px;
     height: 14px;
     border-radius: 4px;
-    background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.28));
-    border: 1px solid rgba(0,0,0,.15);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 28%, transparent));
+    border: 1px solid var(--line);
   }
+
   .t-head{
     display:flex;
     align-items:flex-start;
@@ -714,18 +794,18 @@
   .t-meta{
     font-size: 12px;
     font-weight: 750;
-    color: rgba(0,0,0,.62);
+    color: var(--muted);
     white-space:nowrap;
   }
   .t-sub{
     margin: 4px 0 0;
     font-size: 13px;
     font-weight: 650;
-    color: rgba(0,0,0,.75);
+    color: color-mix(in srgb, var(--text) 75%, transparent);
   }
   .t-desc{
     margin: 10px 0 0;
-    color: rgba(0,0,0,.78);
+    color: color-mix(in srgb, var(--text) 78%, transparent);
     font-weight: 520;
     line-height: 1.75;
     font-size: 14px;
@@ -737,12 +817,12 @@
     gap: 8px;
   }
   .tagchip{
-    border:1px solid rgba(0,0,0,.16);
+    border:1px solid var(--line);
     border-radius: 10px;
     padding: 7px 10px;
     font-size: 12px;
     font-weight: 700;
-    background:#fff;
+    background: var(--card);
   }
 
   /* ===== Projects ===== */
@@ -750,9 +830,9 @@
     display:grid;
     grid-template-columns: 0.9fr 1.1fr;
     gap: 14px;
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: var(--r);
-    background:#fff;
+    background: var(--card);
     padding: 16px;
     position:relative;
     overflow:hidden;
@@ -763,14 +843,16 @@
     --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
+  [data-theme="dark"] .pub:hover{ box-shadow: 0 18px 55px rgba(0,0,0,0.45); }
+
   @media (max-width: 980px){
     .pub{ grid-template-columns: 1fr; }
   }
 
   .pub-preview{
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: 12px;
-    background: rgba(0,0,0,.03);
+    background: var(--soft);
     padding: 14px;
     min-height: 230px;
     display:flex;
@@ -789,25 +871,25 @@
     display:inline-flex;
     align-items:center;
     gap:8px;
-    border:1px solid rgba(0,0,0,.16);
+    border:1px solid var(--line);
     border-radius: 999px;
     padding: 6px 10px;
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 1.6px;
     text-transform: uppercase;
-    background:#fff;
+    background: var(--card);
     opacity:0.92;
   }
   .pill .sq{
     width:10px;height:10px;border-radius:2px;
-    background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 25%, transparent));
   }
 
   .thumb-frame{
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius:12px;
-    background:#fff;
+    background: var(--card);
     overflow:hidden;
   }
   .thumb-frame img{
@@ -835,7 +917,7 @@
   }
   .pub-body p{
     margin:0;
-    color: rgba(0,0,0,.78);
+    color: color-mix(in srgb, var(--text) 78%, transparent);
     font-weight: 520;
     line-height: 1.75;
     font-size: 14px;
@@ -859,9 +941,9 @@
   }
 
   .tile{
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: var(--r);
-    background:#fff;
+    background: var(--card);
     padding: 16px;
     transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     position:relative;
@@ -871,6 +953,8 @@
     --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
+  [data-theme="dark"] .tile:hover{ box-shadow: 0 18px 55px rgba(0,0,0,0.45); }
+
   .tag{
     display:inline-flex;
     align-items:center;
@@ -882,7 +966,7 @@
     opacity:0.72;
     margin-bottom: 10px;
   }
-  .tag .sq{ width:10px; height:10px; border-radius: 2px; background: rgba(0,0,0,.85); }
+  .tag .sq{ width:10px; height:10px; border-radius: 2px; background: color-mix(in srgb, var(--text) 85%, transparent); }
   .tile h4{
     margin:0 0 8px;
     font-size: 16px;
@@ -891,7 +975,7 @@
   }
   .tile p{
     margin:0;
-    color: rgba(0,0,0,.78);
+    color: color-mix(in srgb, var(--text) 78%, transparent);
     font-weight: 520;
     line-height: 1.75;
     font-size: 14px;
@@ -907,15 +991,15 @@
     .two-col{ grid-template-columns: 1fr; }
   }
   .mini{
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: var(--r2);
-    background:#fff;
+    background: var(--card);
     padding: 16px;
     transition: transform .22s var(--ease), box-shadow .22s var(--ease), background .18s var(--ease);
   }
   .mini:hover{
     --lift:-2px;
-    background:#fafafa;
+    background: color-mix(in srgb, var(--card) 92%, var(--soft));
     box-shadow: var(--shadow2);
   }
 
@@ -933,8 +1017,8 @@
     width: 10px;
     height: 10px;
     border-radius: 2px;
-    border: 1px solid rgba(0,0,0,.26);
-    background: rgba(255,255,255,.95);
+    border: 1px solid color-mix(in srgb, var(--text) 26%, transparent);
+    background: color-mix(in srgb, var(--card) 95%, transparent);
     box-shadow: var(--shadow2);
     opacity: .65;
     transition: transform .18s var(--ease), opacity .18s var(--ease), background .18s var(--ease);
@@ -942,8 +1026,8 @@
   .dotnav:hover{ opacity:1; transform: scale(1.12); }
   .dotnav.active{
     opacity: 1;
-    border-color: rgba(0,0,0,.35);
-    background: linear-gradient(135deg, rgba(0,0,0,.92), rgba(0,0,0,.28));
+    border-color: color-mix(in srgb, var(--text) 35%, transparent);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 28%, transparent));
     transform: scale(1.18);
   }
   @media (max-width: 720px){
@@ -972,8 +1056,8 @@
     width:44px;
     height:44px;
     border-radius: 12px;
-    border:1px solid rgba(0,0,0,.14);
-    background:#fff;
+    border:1px solid var(--line);
+    background: var(--card);
     box-shadow: var(--shadow2);
     display:grid;
     place-items:center;
@@ -982,7 +1066,7 @@
     pointer-events:none;
     transition: opacity .18s var(--ease), background .18s var(--ease);
     text-decoration:none;
-    color:#000;
+    color: var(--text);
     font-weight: 950;
   }
   .topbtn.show{
@@ -1008,22 +1092,23 @@
   .contact-btn{
     width:52px;height:52px;
     border-radius: 12px;
-    border:1px solid rgba(0,0,0,.14);
-    background:#fff;
+    border:1px solid var(--line);
+    background: var(--card);
     box-shadow: var(--shadow2);
     display:grid;
     place-items:center;
     transition: background .18s var(--ease), box-shadow .18s var(--ease);
     cursor:pointer;
+    color: var(--text);
   }
   .contact-btn:hover{ background: var(--soft); }
   .contact-btn svg{ width:20px; height:20px; }
 
   .contact-pop{
     width:min(340px, calc(100vw - 36px));
-    border:1px solid rgba(0,0,0,.14);
+    border:1px solid var(--line);
     border-radius: 14px;
-    background:#fff;
+    background: var(--card);
     box-shadow: var(--shadow);
     overflow:hidden;
     transform-origin: bottom right;
@@ -1039,23 +1124,24 @@
   }
   .contact-pop .head{
     padding: 12px 14px;
-    border-bottom:1px solid rgba(0,0,0,.10);
+    border-bottom:1px solid var(--line);
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    background: rgba(0,0,0,.02);
+    background: var(--soft);
   }
   .contact-pop .head .title{
     font-weight: 900;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     font-size: 12px;
-    opacity:.85;
+    opacity:.9;
   }
   .xbtn{
-    border:1px solid rgba(0,0,0,.14);
-    background:#fff;
+    border:1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
     border-radius: 10px;
     padding: 6px 10px;
     font-weight: 900;
@@ -1070,7 +1156,7 @@
     gap: 12px;
   }
   .field{
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: 12px;
     padding: 10px 10px;
     display:grid;
@@ -1081,7 +1167,7 @@
     letter-spacing: 1.8px;
     text-transform: uppercase;
     font-size: 11px;
-    opacity:.68;
+    opacity:.75;
   }
   .value-row{
     display:flex;
@@ -1091,13 +1177,13 @@
     flex-wrap:wrap;
   }
   .value-row a{
-    color:#000;
     text-decoration:none;
     font-weight: 800;
   }
   .copy{
-    border:1px solid rgba(0,0,0,.14);
-    background:#fff;
+    border:1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
     border-radius: 10px;
     padding: 8px 10px;
     font-weight: 900;
@@ -1113,9 +1199,9 @@
     bottom: 84px;
     z-index:120;
     padding: 10px 12px;
-    border:1px solid rgba(0,0,0,.16);
+    border:1px solid var(--line);
     border-radius: 12px;
-    background:#fff;
+    background: var(--card);
     box-shadow: var(--shadow2);
     font-weight: 900;
     font-size: 13px;
@@ -1123,6 +1209,7 @@
     transform: translateY(8px);
     pointer-events:none;
     transition: 0.2s var(--ease);
+    color: var(--text);
   }
   .toast.show{
     opacity:1;
@@ -1136,8 +1223,8 @@
     transform:translateX(-50%);
     bottom:12px;
     z-index:80;
-    background:#fff;
-    border:1px solid rgba(0,0,0,.14);
+    background: var(--card);
+    border:1px solid var(--line);
     border-radius: 12px;
     box-shadow: var(--shadow2);
     padding:8px;
@@ -1148,9 +1235,9 @@
   /* ✅ Press-ready footer */
   footer{
     margin-top: 18px;
-    border: 1px solid rgba(0,0,0,.12);
+    border: 1px solid var(--line);
     border-radius: var(--r);
-    background:#fff;
+    background: var(--card);
     box-shadow: var(--shadow2);
     overflow:hidden;
   }
@@ -1174,7 +1261,7 @@
     letter-spacing: 1.8px;
     text-transform: uppercase;
     font-size: 11px;
-    opacity:.78;
+    opacity:.82;
     white-space:nowrap;
   }
   .foot-chip{
@@ -1182,9 +1269,9 @@
     align-items:center;
     gap:8px;
     padding: 8px 10px;
-    border:1px solid rgba(0,0,0,.12);
+    border:1px solid var(--line);
     border-radius: 12px;
-    background: rgba(0,0,0,.02);
+    background: var(--soft);
     font-weight: 800;
     font-size: 12px;
     white-space:nowrap;
@@ -1202,24 +1289,33 @@
   }
   .foot-sub{
     padding: 10px 16px 14px;
-    border-top: 1px dashed rgba(0,0,0,.12);
+    border-top: 1px dashed var(--line);
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap: 10px;
     flex-wrap:wrap;
-    color: rgba(0,0,0,.62);
+    color: var(--muted);
     font-weight: 650;
     font-size: 12px;
   }
-  .foot-sub strong{ color: rgba(0,0,0,.82); font-weight: 900; }
+  .foot-sub strong{ color: color-mix(in srgb, var(--text) 82%, transparent); font-weight: 900; }
+
+  /* ✅ Search filtering helpers */
+  .search-hidden{
+    display:none !important;
+  }
+  .dimmed{
+    opacity:.45;
+    filter: grayscale(.25);
+  }
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
     .reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
     .tiltable{ transform:none !important; }
-    .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .dl-card{ transform:none !important; }
+    .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn{ transform:none !important; }
   }
 </style>
 </head>
@@ -1258,32 +1354,61 @@
         <span class="brand-mark"></span>
         <span>Bhishek Shibdeen</span>
       </div>
-      <div class="navlinks">
-        <a href="#intro" class="nav-item">Intro</a>
-        <a href="#certs" class="nav-item">Certifications</a>
-        <a href="#experience" class="nav-item">Experience</a>
-        <a href="#projects" class="nav-item">Projects</a>
-        <a href="#contact" class="nav-item">Contact</a>
 
-        <div class="kbd-hint" title="Keyboard navigation">
-          <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev
+      <div class="controls">
+        <!-- ✅ Search -->
+        <div class="search-wrap" aria-label="Search portfolio">
+          <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M10 2a8 8 0 1 1 5.29 14.01l4.35 4.35-1.42 1.42-4.35-4.35A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12a6 6 0 0 0 0-12z"/>
+          </svg>
+          <input id="searchInput" class="search" type="search" placeholder="Search: CDD, sanctions, STR…" autocomplete="off" />
+          <button class="clearbtn" id="clearSearch" type="button" title="Clear search">Clear</button>
+        </div>
+
+        <!-- ✅ Dark mode toggle -->
+        <button class="themebtn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM6.22 6.22a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42L6.22 7.64a1 1 0 0 1 0-1.42zm9.14 9.14a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42l-1.42-1.42a1 1 0 0 1 0-1.41zM17.78 6.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM8.64 15.36a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>
+          </svg>
+          <span id="themeLabel">Dark</span>
+        </button>
+
+        <div class="navlinks">
+          <a href="#intro" class="nav-item">Intro</a>
+          <a href="#certs" class="nav-item">Certifications</a>
+          <a href="#experience" class="nav-item">Experience</a>
+          <a href="#projects" class="nav-item">Projects</a>
+          <a href="#contact" class="nav-item">Contact</a>
+
+          <div class="kbd-hint" title="Keyboard navigation">
+            <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- ✅ Search status strip (appears when searching) -->
+    <div class="search-status" id="searchStatus" aria-live="polite">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <span class="pillmini"><span class="sq"></span> Search</span>
+        <span id="searchText">—</span>
+      </div>
+      <div id="searchCounts" style="font-weight:900; color: var(--text); opacity:.9;">0 results</div>
+    </div>
+
     <!-- INTRO -->
-    <section class="card glow hero hero-main anchor reveal tiltable" id="intro">
+    <section class="card glow hero hero-main anchor reveal tiltable" id="intro" data-search-scope="intro">
       <div class="hero-grid">
 
         <div>
-          <h1>Bhishek Shibdeen</h1>
+          <h1 data-search-text="Bhishek Shibdeen Compliance AML CFT Risk Kaizen">Bhishek Shibdeen</h1>
 
           <div class="motto-row">
-            <span class="kaizen"><span class="kaizen-dot"></span>Kaizen</span>
-            <span style="font-weight:820; opacity:0.70;">Compliance • AML/CFT • Risk</span>
+            <span class="kaizen" data-search-text="Kaizen continuous improvement"><span class="kaizen-dot"></span>Kaizen</span>
+            <span style="font-weight:820; opacity:0.70;" data-search-text="Compliance AML CFT Risk">Compliance • AML/CFT • Risk</span>
           </div>
 
-          <p class="subtitle">
+          <p class="subtitle" data-search-text="Compliance Financial Crime Risk risk-based onboarding due diligence screening documentation discipline review-ready">
             I build competence in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> through structured work:
             risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
           </p>
@@ -1303,10 +1428,10 @@
         <!-- Top-right panel -->
         <aside class="panel reveal" aria-label="Quick Links">
           <h3>Quick Links</h3>
-          <p>Fast access to key items: portfolio pack, featured work, and contact.</p>
+          <p>Fast access to key items: CV, featured work, and contact.</p>
 
           <div class="quicklinks">
-            <div class="ql tiltable">
+            <div class="ql tiltable" data-search-item data-type="certification" data-search-text="CV download curriculum vitae pdf Bhishek Shibdeen">
               <a href="CV_Bhishek_Shibdeen.pdf" target="_blank" rel="noreferrer">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1321,7 +1446,7 @@
               </a>
             </div>
 
-            <div class="ql tiltable">
+            <div class="ql tiltable" data-search-item data-type="project" data-search-text="AML regulations Mauritius featured PDF AML CFT reporting flow FIU FSC BoM STR CDD EDD RBA">
               <a href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1336,7 +1461,7 @@
               </a>
             </div>
 
-            <div class="ql tiltable">
+            <div class="ql tiltable" data-search-item data-type="contact" data-search-text="Email bhishek.shibdeen@icloud.com contact">
               <a href="mailto:bhishek.shibdeen@icloud.com">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1352,67 +1477,7 @@
             </div>
           </div>
 
-          <!-- ✅ Portfolio Pack -->
-          <div class="pack" aria-label="Portfolio pack downloads">
-            <div class="pack-head">
-              <div class="pack-title"><span class="dot"></span> Portfolio Pack</div>
-              <div style="font-size:12px; font-weight:750; opacity:.62;">One-click downloads</div>
-            </div>
-
-            <div class="pack-grid">
-              <a class="dl-card" href="CV_Bhishek_Shibdeen.pdf" download>
-                <div class="dl-left">
-                  <span class="dl-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10l3-3 1.4 1.4L12 16.8 7.6 11.4 9 10l3 3V3h0zM5 19h14v2H5v-2z"/></svg>
-                  </span>
-                  <span class="dl-txt">
-                    <span class="t">CV (PDF)</span>
-                    <span class="s">Download</span>
-                  </span>
-                </div>
-                <span class="dl-go">↓</span>
-              </a>
-
-              <a class="dl-card" href="AML_Regulations_Mauritius.pdf" download>
-                <div class="dl-left">
-                  <span class="dl-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h12v20H6V2zm2 2v16h8V4H8z"/></svg>
-                  </span>
-                  <span class="dl-txt">
-                    <span class="t">Featured PDF</span>
-                    <span class="s">AML Regulations in Mauritius</span>
-                  </span>
-                </div>
-                <span class="dl-go">↓</span>
-              </a>
-
-              <a class="dl-card" href="KYC_Controls_Overview_1Pager.pdf" download>
-                <div class="dl-left">
-                  <span class="dl-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v14H4V5zm2 2v10h12V7H6z"/></svg>
-                  </span>
-                  <span class="dl-txt">
-                    <span class="t">1-Pager Case Study</span>
-                    <span class="s">KYC Controls Overview</span>
-                  </span>
-                </div>
-                <span class="dl-go">↓</span>
-              </a>
-
-              <a class="dl-card" href="Documentation_Checklist.pdf" download>
-                <div class="dl-left">
-                  <span class="dl-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 11h10v2H9v-2zm0 4h10v2H9v-2zM7 11H5v2h2v-2zm0 4H5v2h2v-2zM6 2h9l3 3v17H6V2zm8 1.5V6h2.5L14 3.5z"/></svg>
-                  </span>
-                  <span class="dl-txt">
-                    <span class="t">Checklist (PDF)</span>
-                    <span class="s">Documentation Discipline</span>
-                  </span>
-                </div>
-                <span class="dl-go">↓</span>
-              </a>
-            </div>
-          </div>
+          <!-- ✅ Portfolio Pack removed -->
         </aside>
       </div>
 
@@ -1437,7 +1502,9 @@
 
       <div class="section-body">
         <div class="cert-grid">
-          <div class="cert-card tiltable">
+
+          <div class="cert-card tiltable" data-search-item data-type="certification"
+               data-search-text="Financial Markets Yale University Coursera certificate finance markets">
             <div class="cert-logo"><img src="yale.jpeg" alt="Yale University logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>Financial Markets — Yale University (Coursera)</h3>
@@ -1448,7 +1515,8 @@
             </div>
           </div>
 
-          <div class="cert-card tiltable">
+          <div class="cert-card tiltable" data-search-item data-type="certification"
+               data-search-text="AML Essentials Financial Crime Academy Verdian KYC CDD EDD sanctions PEP compliance certificate">
             <div class="cert-logo"><img src="fca.jpeg" alt="Financial Crime Academy by Verdian logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>AML Essentials — Financial Crime Academy</h3>
@@ -1459,7 +1527,8 @@
             </div>
           </div>
 
-          <div class="cert-card tiltable">
+          <div class="cert-card tiltable" data-search-item data-type="certification"
+               data-search-text="DELF B2 Diplome d'Etudes en Langue Francaise France Education International French language certificate">
             <div class="cert-logo"><img src="fei.png" alt="France Éducation international logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>DELF B2 — Diplôme d’Études en Langue Française</h3>
@@ -1469,6 +1538,7 @@
               <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -1493,7 +1563,9 @@
 
       <div class="section-body">
         <div class="timeline">
-          <div class="t-item reveal tiltable">
+
+          <div class="t-item reveal tiltable" data-search-item data-type="experience"
+               data-search-text="KYC Compliance Operations Intern ARIE Finance Ebene Mauritius onboarding CDD EDD sanctions PEP screening ongoing monitoring remediation documentation quality">
             <div class="t-head">
               <div>
                 <p class="t-title">KYC & Compliance Operations Intern — ARIE Finance</p>
@@ -1512,6 +1584,7 @@
               <span class="tagchip">Documentation Quality</span>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -1536,6 +1609,8 @@
 
       <div class="section-body">
         <div class="pub tiltable" role="button" tabindex="0" aria-label="Open AML Regulations in Mauritius PDF"
+             data-search-item data-type="project"
+             data-search-text="AML Regulations in Mauritius AML CFT reporting flow FIU FSC BoM STR CDD EDD risk-based approach governance overview"
              onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')"
              onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('AML_Regulations_Mauritius.pdf','_blank'); }">
 
@@ -1582,19 +1657,22 @@
         </div>
 
         <div class="grid3">
-          <div class="tile reveal tiltable">
+          <div class="tile reveal tiltable" data-search-item data-type="project"
+               data-search-text="KYC Controls Overview risk-based onboarding CDD EDD triggers file quality checks audit-ready documentation standards">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>KYC Controls Overview</h4>
             <p>Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.</p>
           </div>
 
-          <div class="tile reveal tiltable">
+          <div class="tile reveal tiltable" data-search-item data-type="project"
+               data-search-text="Screening Escalation Logic sanctions PEP adverse media escalation decision rationale record keeping defensible">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>Screening & Escalation Logic</h4>
             <p>Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
           </div>
 
-          <div class="tile reveal tiltable">
+          <div class="tile reveal tiltable" data-search-item data-type="project"
+               data-search-text="Documentation Discipline checklist review-ready files evidence rationale consistency onboarding KYC">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>Documentation Discipline</h4>
             <p>A practical checklist for maintaining review-ready files: evidence, rationale, and consistency across onboarding.</p>
@@ -1623,21 +1701,21 @@
 
       <div class="section-body">
         <div class="two-col">
-          <div class="mini reveal tiltable">
+          <div class="mini reveal tiltable" data-search-item data-type="contact" data-search-text="Email bhishek.shibdeen@icloud.com Phone +230 55024085">
             <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Email</div>
             <div style="margin-top:6px; font-weight:950;">
-              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000; text-decoration:none;">
+              <a href="mailto:bhishek.shibdeen@icloud.com" style="text-decoration:none;">
                 bhishek.shibdeen@icloud.com
               </a>
             </div>
 
             <div style="margin-top:14px; font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Phone</div>
             <div style="margin-top:6px; font-weight:950;">
-              <a href="tel:+23055024085" style="color:#000; text-decoration:none;">+230 55024085</a>
+              <a href="tel:+23055024085" style="text-decoration:none;">+230 55024085</a>
             </div>
           </div>
 
-          <div class="mini reveal tiltable">
+          <div class="mini reveal tiltable" data-search-item data-type="contact" data-search-text="LinkedIn Bhishek Shibdeen profile">
             <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">LinkedIn</div>
             <div style="margin-top:10px;">
               <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
@@ -1662,7 +1740,7 @@
     </section>
 
     <!-- ✅ Press-ready footer -->
-    <footer class="reveal tiltable" id="press">
+    <footer class="reveal tiltable" id="press" data-search-item data-type="contact" data-search-text="Press-ready footer email bhishek.shibdeen@icloud.com last updated Mar 2026">
       <div class="foot-inner">
         <div class="foot-left">
           <div class="foot-title">Press-Ready</div>
@@ -1735,7 +1813,38 @@
   <div class="toast" id="toast" aria-hidden="true">Copied ✅</div>
 
 <script>
-  // Scroll progress
+  // ===== Theme (dark mode toggle) =====
+  (function(){
+    const root = document.documentElement;
+    const btn = document.getElementById("themeToggle");
+    const label = document.getElementById("themeLabel");
+    const icon = document.getElementById("themeIcon");
+
+    function setTheme(mode){
+      if(mode === "dark") root.setAttribute("data-theme","dark");
+      else root.removeAttribute("data-theme");
+      localStorage.setItem("theme", mode);
+
+      const isDark = mode === "dark";
+      label.textContent = isDark ? "Light" : "Dark";
+
+      // swap icon (sun/moon-ish)
+      icon.innerHTML = isDark
+        ? '<path fill="currentColor" d="M21 14.5A7.5 7.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5z"/>'
+        : '<path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM6.22 6.22a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42L6.22 7.64a1 1 0 0 1 0-1.42zm9.14 9.14a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42l-1.42-1.42a1 1 0 0 1 0-1.41zM17.78 6.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM8.64 15.36a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>';
+    }
+
+    const saved = localStorage.getItem("theme");
+    if(saved === "dark") setTheme("dark");
+    else setTheme("light");
+
+    btn.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      setTheme(isDark ? "light" : "dark");
+    });
+  })();
+
+  // ===== Scroll progress =====
   (function(){
     const bar = document.getElementById("bar");
     function update(){
@@ -1750,7 +1859,7 @@
     update();
   })();
 
-  // Reveal on scroll
+  // ===== Reveal on scroll =====
   (function(){
     const els = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver((entries) => {
@@ -1764,7 +1873,7 @@
     els.forEach(el => io.observe(el));
   })();
 
-  // Active nav highlight
+  // ===== Active nav highlight =====
   (function(){
     const links = Array.from(document.querySelectorAll(".nav-item"));
     const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
@@ -1782,7 +1891,7 @@
     sections.forEach(s => io.observe(s));
   })();
 
-  // Mobile nav show
+  // ===== Mobile nav show =====
   (function(){
     const m = document.getElementById("mobileNav");
     function check(){ m.style.display = window.innerWidth < 720 ? "flex" : "none"; }
@@ -1790,7 +1899,7 @@
     check();
   })();
 
-  // Scroll dots active state
+  // ===== Scroll dots active state =====
   (function(){
     const dots = Array.from(document.querySelectorAll(".dotnav"));
     const sections = dots.map(d => document.getElementById(d.dataset.target)).filter(Boolean);
@@ -1808,7 +1917,7 @@
     sections.forEach(s => io.observe(s));
   })();
 
-  // Back-to-top show/hide
+  // ===== Back-to-top show/hide =====
   (function(){
     const topBtn = document.getElementById("topBtn");
     function toggle(){
@@ -1820,7 +1929,7 @@
     toggle();
   })();
 
-  // Contact popover + copy (shared)
+  // ===== Contact popover + copy (shared) =====
   (function(){
     const btn = document.getElementById("contactBtn");
     const pop = document.getElementById("contactPop");
@@ -1867,19 +1976,18 @@
       });
     });
 
-    // Press footer copy email
     const copyEmailBtn = document.getElementById("copyEmailBtn");
     if(copyEmailBtn){
       copyEmailBtn.addEventListener("click", () => copyText("bhishek.shibdeen@icloud.com"));
     }
   })();
 
-  // Micro-interactions: magnetic buttons + tilt cards
+  // ===== Micro-interactions: magnetic buttons + tilt cards =====
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(reduce) return;
 
-    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .dl-card");
+    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn");
     const strength = 9;
     magnets.forEach(el => {
       el.addEventListener("mousemove", (e) => {
@@ -1914,7 +2022,7 @@
     });
   })();
 
-  // Keyboard navigation: J/K + arrows + Home/End
+  // ===== Keyboard navigation: J/K + arrows + Home/End =====
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -1967,6 +2075,78 @@
         scrollToIdx(idx - 1);
       }
     });
+  })();
+
+  // ✅ Search: filters Projects, Certifications, Timeline entries (and any element with data-search-item)
+  (function(){
+    const input = document.getElementById("searchInput");
+    const clear = document.getElementById("clearSearch");
+    const status = document.getElementById("searchStatus");
+    const statusText = document.getElementById("searchText");
+    const statusCounts = document.getElementById("searchCounts");
+
+    const items = Array.from(document.querySelectorAll("[data-search-item]"));
+
+    function norm(s){
+      return (s || "")
+        .toLowerCase()
+        .replace(/\s+/g," ")
+        .trim();
+    }
+
+    function apply(q){
+      const query = norm(q);
+
+      // Save query
+      try{ localStorage.setItem("portfolio_search", query); }catch(e){}
+
+      if(!query){
+        status.classList.remove("show");
+        statusText.textContent = "—";
+        statusCounts.textContent = "";
+        items.forEach(el => {
+          el.classList.remove("search-hidden","dimmed");
+        });
+        return;
+      }
+
+      status.classList.add("show");
+      statusText.textContent = `“${query}”`;
+
+      let visible = 0;
+
+      items.forEach(el => {
+        const text = norm(el.getAttribute("data-search-text") || el.textContent);
+        const hit = text.includes(query);
+
+        if(hit){
+          el.classList.remove("search-hidden");
+          el.classList.remove("dimmed");
+          visible++;
+        }else{
+          el.classList.add("search-hidden");
+        }
+      });
+
+      // If nothing matches, show a nice count
+      statusCounts.textContent = visible === 1 ? "1 result" : `${visible} results`;
+    }
+
+    input.addEventListener("input", () => apply(input.value));
+    clear.addEventListener("click", () => {
+      input.value = "";
+      apply("");
+      input.focus();
+    });
+
+    // Restore last query
+    try{
+      const saved = localStorage.getItem("portfolio_search") || "";
+      if(saved){
+        input.value = saved;
+        apply(saved);
+      }
+    }catch(e){}
   })();
 </script>
 
