@@ -32,13 +32,22 @@
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
-    margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial;
-    color: var(--text);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    letter-spacing: -0.15px;
+     margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial;
+  color: var(--text);
+
+  /* SCROLL GRADIENT BACKGROUND */
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #f7f9ff 20%,
+    #e6ecff 40%,
+    #9fb3ff 65%,
+    #2c3ebd 85%,
+    #0b0f3a 100%
+  );
+
+  background-attachment: fixed;
   }
 
   /* ===== Progress bar ===== */
