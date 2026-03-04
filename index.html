@@ -235,19 +235,15 @@
 
   /* ===== Nav ===== */
   .nav{
-    position:sticky; top:14px;
-    z-index:60;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    padding: 12px 14px;
-    background: var(--card);
-    border:1px solid var(--line);
-    border-radius: var(--r);
-    box-shadow: var(--shadow2);
-    backdrop-filter: blur(6px);
-  }
+  position: sticky;
+  top:14px;
+  z-index:60;
+
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+  .nav.hide{
+  transform: translateY(-120%);
+}
   .brand{
     display:flex;
     align-items:center;
@@ -2577,7 +2573,32 @@
     // Build initial list
     render();
   })();
-</script>
+/* Hide navbar on scroll down / show on scroll up */
+
+let lastScroll = 0;
+const navbar = document.querySelector(".nav");
+
+window.addEventListener("scroll", () => {
+
+  const currentScroll = window.pageYOffset;
+
+  if(currentScroll <= 0){
+    navbar.classList.remove("hide");
+    return;
+  }
+
+  if(currentScroll > lastScroll && !navbar.classList.contains("hide")){
+    // scrolling down
+    navbar.classList.add("hide");
+  } 
+  else if(currentScroll < lastScroll && navbar.classList.contains("hide")){
+    // scrolling up
+    navbar.classList.remove("hide");
+  }
+
+  lastScroll = currentScroll;
+
+});</script>
 
 </body>
 </html>
