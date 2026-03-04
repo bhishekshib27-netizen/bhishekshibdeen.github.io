@@ -4,21 +4,29 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Bhishek Shibdeen — Compliance, AML/CFT & Risk portfolio. Intro, Certifications, Projects, Contact." />
+<meta name="description" content="Bhishek Shibdeen — Editorial-style portfolio: Intro, Certifications, Projects, Contact." />
 
 <style>
   :root{
     --bg:#ffffff;
-    --text:#050505;
-    --muted:rgba(0,0,0,.62);
-    --line:rgba(0,0,0,.08);
-    --soft:rgba(0,0,0,.03);
+    --text:#0b0b0b;
+    --muted: rgba(0,0,0,.62);
+    --line: rgba(0,0,0,.14);
+    --soft: rgba(0,0,0,.04);
 
-    --radius:22px;
-    --radius2:16px;
+    /* Editorial accents */
+    --blue:#2563eb;
+    --green:#22c55e;
+    --orange:#f97316;
+    --pink:#ec4899;
 
-    --shadow: 0 18px 55px rgba(0,0,0,0.10);
-    --shadow2: 0 10px 26px rgba(0,0,0,0.07);
+    /* Square vibe */
+    --r:10px;
+    --r2:8px;
+
+    /* Print shadow (offset) */
+    --os: 6px; /* offset size */
+    --shadowInk: rgba(0,0,0,.14);
 
     --ease: cubic-bezier(.2,.8,.2,1);
   }
@@ -28,14 +36,14 @@
   body{
     margin:0;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial;
-    color:var(--text);
+    color: var(--text);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    letter-spacing: -0.15px;
- <div class="spotlight" aria-hidden="true"></div> }
+    letter-spacing: -0.18px;
+  }
 
-  /* ===== Scroll progress bar ===== */
+  /* ===== Top progress ===== */
   .progress{
     position:fixed; top:0; left:0;
     width:100%; height:4px;
@@ -48,53 +56,55 @@
     transform-origin:left;
   }
 
-  /* ===== Background: structured brackets + fine grid ===== */
+  /* ===== Background: editorial stripes + halftone dots ===== */
   .bg-stage{
     position:fixed; inset:0;
     pointer-events:none;
-    overflow:hidden;
     z-index:0;
-  }
-  .grid{
-    position:absolute; inset:0;
-    opacity:0.10;
+    overflow:hidden;
     background:
-      linear-gradient(#00000010 1px, transparent 1px) 0 0/78px 78px,
-      linear-gradient(90deg, #00000010 1px, transparent 1px) 0 0/78px 78px;
-    mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 70%);
-    animation: gridFloat 10s var(--ease) infinite;
-  }
-  @keyframes gridFloat{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(10px); }
-    100%{ transform: translateY(0px); }
+      linear-gradient(90deg, rgba(37,99,235,0.10) 0 14%, transparent 14% 100%),
+      linear-gradient(180deg, rgba(34,197,94,0.10) 0 16%, transparent 16% 100%),
+      radial-gradient(circle at 78% 16%, rgba(249,115,22,0.18), transparent 38%),
+      radial-gradient(circle at 14% 78%, rgba(236,72,153,0.12), transparent 42%);
   }
 
-  .frame{
+  /* Animated stripe ticker */
+  .ticker{
     position:absolute;
-    width:340px; height:220px;
-    border:1px solid rgba(0,0,0,.12);
-    border-radius: 28px;
-    opacity:0.55;
-    animation: drift 14s var(--ease) infinite;
-    filter: blur(.2px);
+    left:-20%;
+    top: 18%;
+    width:140%;
+    height: 44px;
+    border-top:2px solid #000;
+    border-bottom:2px solid #000;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.06) 0 10px,
+        transparent 10px 20px
+      );
+    transform: rotate(-6deg);
+    opacity:0.95;
+    animation: tickerMove 10s linear infinite;
   }
-  .frame.f1{ left:-70px; top:110px; transform: rotate(8deg); animation-delay:-2s; }
-  .frame.f2{ right:-90px; top:160px; width:420px; height:260px; transform: rotate(-7deg); animation-delay:-7s; opacity:.45;}
-  .frame.f3{ left:18%; bottom:-90px; width:520px; height:300px; transform: rotate(4deg); animation-delay:-10s; opacity:.35;}
-  @keyframes drift{
-    0%{ transform: translate(0px,0px) rotate(var(--r,0deg)); }
-    50%{ transform: translate(26px,16px) rotate(var(--r,0deg)); }
-    100%{ transform: translate(0px,0px) rotate(var(--r,0deg)); }
+  @keyframes tickerMove{
+    0%{ background-position: 0 0; }
+    100%{ background-position: 360px 0; }
   }
 
-  .ink{
-    position:absolute; inset:-200px;
+  /* Halftone dots (subtle) */
+  .dots{
+    position:absolute;
+    right:-120px;
+    bottom:-140px;
+    width:520px;
+    height:520px;
     background:
-      radial-gradient(circle at 12% 18%, rgba(0,0,0,0.05), transparent 38%),
-      radial-gradient(circle at 88% 24%, rgba(0,0,0,0.04), transparent 40%),
-      radial-gradient(circle at 50% 88%, rgba(0,0,0,0.035), transparent 42%);
-    opacity:0.9;
+      radial-gradient(circle, rgba(0,0,0,0.08) 2px, transparent 2px) 0 0/18px 18px;
+    mask-image: radial-gradient(circle at 40% 40%, black 0%, transparent 65%);
+    opacity:0.8;
+    transform: rotate(8deg);
   }
 
   /* ===== Layout ===== */
@@ -103,24 +113,25 @@
     margin:0 auto;
     padding: 18px 0 90px;
     position:relative;
-    z-index:1;
+    z-index: 2;
   }
 
-  /* ===== Nav ===== */
+  /* ===== Nav (no glass) ===== */
   .nav{
-    position:sticky; top:14px;
+    position:sticky;
+    top:14px;
     z-index:50;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:14px;
     padding: 12px 14px;
-    background: rgba(255,255,255,0.86);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    backdrop-filter: blur(14px);
-    box-shadow: var(--shadow2);
+    background:#fff;
+    border:2px solid #000;
+    border-radius: var(--r);
+    box-shadow: var(--os) var(--os) 0 var(--shadowInk);
   }
+
   .brand{
     display:flex;
     align-items:center;
@@ -128,26 +139,23 @@
     font-weight: 950;
     letter-spacing: -0.2px;
   }
-  .brand-badge{
-    width:10px;height:10px;border-radius:999px;
-    background: #000;
+  .brand-mark{
+    width:12px;height:12px;
+    background:#000;
+    border-radius: 2px;
   }
-  .navlinks{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    justify-content:flex-end;
-  }
+
+  .navlinks{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
   .nav a{
     text-decoration:none;
     color:#000;
-    font-weight: 860;
+    font-weight: 900;
     font-size:12px;
     padding: 9px 12px;
-    border-radius: 999px;
+    border-radius: var(--r2);
     border:1px solid transparent;
+    opacity:0.80;
     transition: 0.18s var(--ease);
-    opacity:0.72;
   }
   .nav a:hover{
     opacity:1;
@@ -157,33 +165,34 @@
   }
   .nav a.active{
     opacity:1;
-    background:#000;
     color:#fff;
+    background: var(--blue);
     border-color:#000;
-    box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    box-shadow: 4px 4px 0 #000;
   }
 
-  /* ===== Cards ===== */
+  /* ===== Editorial cards ===== */
   .card{
     background:#fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border:2px solid #000;
+    border-radius: var(--r);
+    box-shadow: var(--os) var(--os) 0 var(--shadowInk);
     overflow:hidden;
-    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
   }
   .card:hover{
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+    box-shadow: calc(var(--os) + 2px) calc(var(--os) + 2px) 0 rgba(0,0,0,.18);
   }
 
   /* ===== Hero ===== */
   .hero{ margin-top: 18px; }
-  .hero-main{ padding: 28px; }
+  .hero-main{ padding: 26px; }
 
   .hero-grid{
     display:grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 18px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 16px;
     align-items: stretch;
   }
   @media (max-width: 920px){
@@ -192,90 +201,90 @@
 
   h1{
     margin:0;
-    font-size: clamp(36px, 4.4vw, 58px);
-    letter-spacing: -1.8px;
+    font-size: clamp(36px, 4.4vw, 62px);
     line-height: 1.02;
-    font-weight: 980;
+    font-weight: 1000;
+    letter-spacing: -2.1px;
   }
 
-  .hi{
-    display:flex;
-    flex-direction:column;
-    gap: 12px;
+  .deck{
+    margin:10px 0 0;
+    font-size: 16px;
+    line-height: 1.85;
+    font-weight: 650;
+    color: rgba(0,0,0,.85);
+    max-width: 90ch;
   }
+  .deck strong{ font-weight: 950; }
 
-  .motto-row{
+  .editorial-bar{
+    margin-top: 12px;
     display:flex;
-    align-items:center;
     gap:10px;
     flex-wrap:wrap;
+    align-items:center;
   }
-  .kaizen-pill{
+
+  .pill{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid #000;
+    padding: 9px 12px;
+    border:2px solid #000;
+    border-radius: var(--r2); /* square-ish */
     background:#fff;
     font-weight: 950;
-    letter-spacing: 1px;
-    text-transform: uppercase;
     font-size: 12px;
-  }
-  .kaizen-dot{
-    width:9px;height:9px;border-radius:999px;
-    background:#000;
-    animation: pulse 1.6s infinite;
-  }
-  @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.16); }
-    70%{ box-shadow: 0 0 0 14px rgba(0,0,0,0.0); }
-    100%{ box-shadow: 0 0 0 0 rgba(0,0,0,0.0); }
-  }
-
-  .subtitle{
-    margin:0;
-    line-height: 1.8;
-    font-size: 16px;
-    font-weight: 600;
-    color: rgba(0,0,0,.86);
-    max-width: 86ch;
-  }
-  .subtitle strong{ font-weight: 900; }
-
-  .stamp{
-    margin-top: 2px;
-    font-weight: 950;
-    opacity: 0.60;
-    letter-spacing: 2px;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
-    font-size: 11px;
+  }
+  .dot{
+    width:10px;height:10px;
+    border-radius: 2px;
+    background: var(--green);
+    box-shadow: 2px 2px 0 #000;
+    animation: dotPop 1.8s var(--ease) infinite;
+  }
+  @keyframes dotPop{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-2px); }
+  }
+
+  .tagline{
+    font-weight: 900;
+    opacity:0.70;
   }
 
   .chips{
     display:flex;
-    gap:8px;
     flex-wrap:wrap;
-    margin-top: 6px;
+    gap:8px;
+    margin-top: 12px;
   }
   .chip{
-    border:1px solid var(--line);
+    padding: 8px 10px;
+    border:1px solid #000;
+    border-radius: var(--r2);
+    font-size:12px;
+    font-weight: 900;
     background:#fff;
-    padding: 9px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 820;
-    opacity:0.86;
     transition: 0.18s var(--ease);
   }
-  .chip:hover{ background: var(--soft); transform: translateY(-1px); }
+  .chip:hover{
+    transform: translateY(-2px);
+    background: var(--soft);
+  }
+  /* color-coded chips */
+  .chip.blue{ border-color:#000; background: rgba(37,99,235,.10); }
+  .chip.green{ border-color:#000; background: rgba(34,197,94,.12); }
+  .chip.orange{ border-color:#000; background: rgba(249,115,22,.14); }
+  .chip.pink{ border-color:#000; background: rgba(236,72,153,.12); }
 
   .cta{
-    margin-top: 4px;
+    margin-top: 14px;
     display:flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap:10px;
+    flex-wrap:wrap;
     align-items:center;
   }
 
@@ -285,186 +294,175 @@
     justify-content:center;
     gap:10px;
     padding: 10px 14px;
-    border-radius: 999px;
-    text-decoration:none;
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--text);
-    font-weight: 860;
-    font-size: 13px;
-    transition: 0.18s var(--ease);
-  }
-  .btn:hover{ background: var(--soft); transform: translateY(-1px); }
-  .btn.primary{
-    background:#000;
-    color:#fff;
-    border-color:#000;
-    box-shadow: 0 14px 35px rgba(0,0,0,0.14);
-  }
-  .btn.primary:hover{ background:#111; }
-
-  /* Tiny LinkedIn icon (NOT BIG) */
-  .li-ico{
-    width:14px;height:14px;
-    display:inline-block;
-    opacity:.9;
-  }
-
-  /* Right card */
-  .showcase{
-    position:relative;
-    border:1px solid var(--line);
-    background:#fff;
-    border-radius: var(--radius);
-    overflow:hidden;
-    padding: 18px;
-    box-shadow: none;
-  }
-  .showcase::before{
-    content:"";
-    position:absolute;
-    inset:-80px;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(0,0,0,0.08), transparent 55%),
-      radial-gradient(circle at 82% 26%, rgba(0,0,0,0.05), transparent 55%);
-    opacity:0.45;
-    animation: glowMove 7s var(--ease) infinite;
-  }
-  @keyframes glowMove{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(12px); }
-    100%{ transform: translateY(0px); }
-  }
-  .showcase > *{ position:relative; z-index:1; }
-
-  .showcase-title{
-    margin:0;
-    font-weight: 980;
-    letter-spacing: -0.3px;
-    font-size: 18px;
-  }
-  .showcase-sub{
-    margin:8px 0 0;
-    color: var(--muted);
-    font-weight: 650;
-    font-size: 13px;
-    line-height: 1.7;
-  }
-
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    border:1px solid #000;
-    border-radius: 999px;
-    padding: 8px 10px;
-    font-weight: 950;
-    font-size: 12px;
-    background:#fff;
-    white-space:nowrap;
-  }
-  .badge-dot{
-    width:8px;height:8px;border-radius:999px;background:#000;
-    box-shadow: 0 0 0 10px rgba(0,0,0,0.06);
-  }
-
-  .showcase-box{
-    margin-top:12px;
-    border:1px solid var(--line);
-    border-radius: var(--radius2);
-    background:#fff;
-    padding: 14px;
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    align-items:center;
-    transition: 0.18s var(--ease);
-  }
-  .showcase-box:hover{ background: var(--soft); transform: translateY(-2px); }
-
-  .k{
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-    font-size: 11px;
-    opacity:0.58;
-    margin:0 0 6px;
-    font-weight: 950;
-  }
-  .v{
-    margin:0;
-    font-weight: 900;
-    font-size: 13px;
-    opacity:0.92;
-    line-height: 1.55;
-  }
-
-  /* Scroll icon */
-  .scroll-icon-wrap{ margin-top: 10px; display:flex; justify-content:flex-start; }
-  .scroll-icon{
-    width:34px;height:52px;
     border:2px solid #000;
-    border-radius: 999px;
-    position:relative;
-    opacity:0.85;
+    border-radius: var(--r2);
     background:#fff;
+    color:#000;
+    text-decoration:none;
+    font-weight: 950;
+    font-size: 13px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
+    transition: 0.18s var(--ease);
   }
-  .scroll-icon::after{
+  .btn:hover{
+    transform: translateY(-2px);
+    background: #f6f6f6;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
+  }
+  .btn.primary{
+    background: var(--blue);
+    color:#fff;
+    box-shadow: 5px 5px 0 #000;
+  }
+  .btn.primary:hover{
+    background:#1d4ed8;
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  /* Small LinkedIn icon */
+  .li-ico{ width:14px; height:14px; display:inline-block; }
+
+  /* Right “cover card” */
+  .cover{
+    border:2px solid #000;
+    border-radius: var(--r);
+    background:
+      linear-gradient(135deg, rgba(37,99,235,0.10), transparent 45%),
+      linear-gradient(225deg, rgba(249,115,22,0.12), transparent 45%),
+      #fff;
+    padding: 18px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
+    position:relative;
+    overflow:hidden;
+  }
+  .cover::before{
     content:"";
-    position:absolute;
-    left:50%;
-    top:12px;
-    width:6px;height:6px;
-    background:#000;
-    border-radius:999px;
-    transform: translateX(-50%);
-    animation: wheel 1.5s var(--ease) infinite;
+    position:absolute; inset:-60px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(0,0,0,0.06), transparent 55%),
+      repeating-linear-gradient(0deg, transparent 0 12px, rgba(0,0,0,0.03) 12px 13px);
+    opacity:0.8;
+    transform: rotate(8deg);
   }
-  @keyframes wheel{
-    0%{ transform: translate(-50%, 0); opacity:1; }
-    70%{ transform: translate(-50%, 16px); opacity:0.15; }
-    100%{ transform: translate(-50%, 0); opacity:1; }
+  .cover > *{ position:relative; z-index:1; }
+
+  .cover h3{
+    margin:0;
+    font-size: 16px;
+    font-weight: 1000;
+    letter-spacing: -0.4px;
+  }
+  .cover p{
+    margin:10px 0 0;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  .bulletbox{
+    margin-top: 12px;
+    border:1px solid #000;
+    border-radius: var(--r2);
+    padding: 12px;
+    background:#fff;
+    transition: 0.18s var(--ease);
+  }
+  .bulletbox:hover{ transform: translateY(-2px); background:#f7f7f7; }
+  .bulletbox .k{
+    margin:0 0 6px;
+    font-weight: 1000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 11px;
+    opacity:0.70;
+  }
+  .bulletbox .v{
+    margin:0;
+    font-weight: 950;
+    font-size: 13px;
+  }
+
+  /* Scroll cue */
+  .scrollcue{
+    margin-top: 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight: 900;
+    opacity:0.70;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+  }
+  .arrow{
+    width: 26px; height: 26px;
+    border:2px solid #000;
+    border-radius: 4px;
+    display:grid; place-items:center;
+    box-shadow: 3px 3px 0 rgba(0,0,0,.12);
+    animation: nudge 1.2s var(--ease) infinite;
+  }
+  @keyframes nudge{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(2px); }
   }
 
   /* ===== Sections ===== */
   .section{ margin-top: 16px; }
-  .anchor{ scroll-margin-top: 92px; }
+  .anchor{ scroll-margin-top: 96px; }
 
   .section-head{
-    padding: 18px 22px;
-    border-bottom: 1px solid var(--line);
+    padding: 16px 20px;
+    border-bottom: 2px solid #000;
     display:flex;
     align-items:center;
-    justify-content: space-between;
+    justify-content:space-between;
+    gap:10px;
   }
   .section-head h2{
     margin:0;
     font-size: 12px;
-    letter-spacing: 2.6px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    font-weight: 980;
-  }
-  .section-body{
-    padding: 18px 22px 26px;
-    color: rgba(0,0,0,.88);
-    line-height: 1.9;
-    font-size: 14.8px;
-    font-weight: 600;
+    font-weight: 1000;
   }
 
+  .accent{
+    width: 120px; height: 10px;
+    border:2px solid #000;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--green), var(--orange), var(--pink));
+  }
+
+  .section-body{
+    padding: 18px 20px 24px;
+    font-size: 14.8px;
+    line-height: 1.9;
+    font-weight: 650;
+    color: rgba(0,0,0,.86);
+  }
+
+  /* List rows */
   .row{
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
     gap:12px;
-    padding: 16px;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: #fff;
-    transition: transform 0.18s var(--ease), background 0.18s var(--ease);
+    padding: 14px;
+    border:2px solid #000;
+    border-radius: var(--r);
+    background:#fff;
+    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
+    transition: 0.18s var(--ease);
   }
-  .row:hover{ transform: translateY(-2px); background: var(--soft); }
-  .row .title{ font-weight: 950; margin-bottom: 4px; letter-spacing:-0.2px;}
-  .row .meta{ color: var(--muted); font-size: 13px; font-weight: 650; }
+  .row:hover{
+    transform: translateY(-2px);
+    background: #f7f7f7;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
+  }
+  .row .title{ font-weight: 1000; margin-bottom: 4px; }
+  .row .meta{ color: var(--muted); font-size: 13px; font-weight: 700; }
 
   .two-col{
     display:grid;
@@ -476,13 +474,18 @@
   }
 
   .mini{
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    background: #fff;
+    border:2px solid #000;
+    border-radius: var(--r);
+    background:#fff;
     padding: 16px;
-    transition: transform 0.18s var(--ease), background 0.18s var(--ease);
+    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
+    transition: 0.18s var(--ease);
   }
-  .mini:hover{ transform: translateY(-2px); background: var(--soft); }
+  .mini:hover{
+    transform: translateY(-2px);
+    background:#f7f7f7;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
+  }
 
   /* Projects grid */
   .grid3{
@@ -495,172 +498,126 @@
   }
 
   .tile{
-    border:1px solid var(--line);
-    border-radius: 20px;
+    border:2px solid #000;
+    border-radius: var(--r);
     background:#fff;
-    padding: 18px;
-    transition: transform .22s var(--ease), background .22s var(--ease), box-shadow .22s var(--ease);
+    padding: 16px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,.12);
+    transition: 0.18s var(--ease);
+    cursor:pointer;
     position:relative;
     overflow:hidden;
-    cursor:pointer;
   }
   .tile:hover{
-    transform: translateY(-4px);
-    background: var(--soft);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+    background:#f7f7f7;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.16);
   }
-  .tile::before{
+  .tile::after{
     content:"";
     position:absolute;
-    inset:-70px;
-    background: radial-gradient(circle at 20% 20%, rgba(0,0,0,0.06), transparent 55%);
-    opacity:0.55;
-    transform: translateY(0px);
-    transition: 0.22s var(--ease);
+    right:-40px; top:-40px;
+    width:120px; height:120px;
+    border:2px solid #000;
+    background: rgba(37,99,235,0.10);
+    transform: rotate(18deg);
+    opacity:0.9;
   }
-  .tile:hover::before{ transform: translateY(10px); }
-  .tile > *{ position:relative; z-index:1; }
 
   .tag{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    font-weight: 980;
+    gap:10px;
+    font-weight: 1000;
     letter-spacing: 2px;
     text-transform: uppercase;
     font-size: 11px;
-    opacity:0.72;
+    opacity:0.78;
     margin-bottom: 10px;
+  }
+  .tag .sq{
+    width:10px; height:10px; border-radius:2px;
+    border:2px solid #000;
+    background: var(--orange);
+    box-shadow: 2px 2px 0 rgba(0,0,0,.14);
   }
   .tile h3{
     margin:0 0 8px;
     font-size: 18px;
-    font-weight: 980;
-    letter-spacing: -0.3px;
+    font-weight: 1000;
+    letter-spacing: -0.4px;
   }
   .tile p{
     margin:0;
     color: rgba(0,0,0,.78);
-    font-weight: 650;
+    font-weight: 700;
     line-height: 1.75;
     font-size: 14px;
   }
 
+  /* Footer */
   footer{
     margin-top: 24px;
     text-align:center;
     color: rgba(0,0,0,.55);
     font-size: 13px;
     padding: 14px 0 0;
-    font-weight: 750;
+    font-weight: 800;
   }
 
-  /* Floating action button */
+  /* Floating button */
   .fab{
     position:fixed;
     right:18px;
     bottom:18px;
     width:52px;height:52px;
-    border-radius: 999px;
-    border:1px solid var(--line);
+    border-radius: 10px;
+    border:2px solid #000;
     background:#fff;
-    box-shadow: var(--shadow2);
+    box-shadow: 5px 5px 0 rgba(0,0,0,.16);
     display:grid;
     place-items:center;
     z-index:60;
     transition: 0.18s var(--ease);
     text-decoration:none;
     color:#000;
-    font-weight: 980;
+    font-weight: 1000;
   }
-  .fab:hover{ transform: translateY(-2px); background: var(--soft); }
-
-  /* Reveal */
-  .reveal{ opacity:0; transform: translateY(18px); filter: blur(2px); }
-  .reveal.in{ opacity:1; transform: translateY(0); filter: blur(0); transition: 0.75s var(--ease); }
+  .fab:hover{ transform: translateY(-2px); background:#f6f6f6; }
 
   /* Mobile bottom nav */
   #mobileNav{
-    position:fixed; left:50%; transform:translateX(-50%);
-    bottom:12px; z-index:70;
-    background:rgba(255,255,255,0.88);
-    border:1px solid var(--line);
-    border-radius:999px;
-    box-shadow: var(--shadow2);
+    position:fixed;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:12px;
+    z-index:70;
+    background:#fff;
+    border:2px solid #000;
+    border-radius: 10px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,.14);
     padding:8px;
     display:none;
     gap:6px;
-    backdrop-filter: blur(14px);
   }
-</style /* =========================
-   SPOTLIGHT + TILT
-========================= */
 
-/* Spotlight overlay (subtle) */
-.spotlight{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2; /* above bg-stage, below content via wrap z-index */
-  opacity: 0;
-  transition: opacity .25s var(--ease);
-  background: radial-gradient(
-    600px circle at var(--mx, 50%) var(--my, 20%),
-    rgba(0,0,0,0.07),
-    transparent 45%
-  );
-  mix-blend-mode: multiply;
-}
+  /* Reveal */
+  .reveal{ opacity:0; transform: translateY(18px); }
+  .reveal.in{ opacity:1; transform: translateY(0); transition: 0.7s var(--ease); }
 
-/* Only show spotlight when mouse is active */
-body.has-mouse .spotlight{ opacity: 1; }
-
-/* Better layering: spotlight above background but below content */
-.wrap{ position:relative; z-index: 3; } /* your wrap already has z-index; keep this */
-.bg-stage{ z-index: 0; }
-.progress{ z-index: 999; }
-.nav{ z-index: 50; }
-
-/* Tilt effect targets */
-.tilt{
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-/* add a tiny depth highlight */
-.tilt::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius: inherit;
-  pointer-events:none;
-  opacity:0;
-  transition: opacity .25s var(--ease);
-  background: radial-gradient(
-    420px circle at var(--tx, 50%) var(--ty, 20%),
-    rgba(255,255,255,0.55),
-    transparent 55%
-  );
-}
-.tilt:hover::after{ opacity: .22; }
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .spotlight{ display:none; }
-  .tilt{ transform:none !important; }
-  .tilt::after{ display:none; }
-}>
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
 </head>
 
 <body>
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
   <div class="bg-stage" aria-hidden="true">
-    <div class="ink"></div>
-    <div class="grid"></div>
-    <div class="frame f1" style="--r:8deg;"></div>
-    <div class="frame f2" style="--r:-7deg;"></div>
-    <div class="frame f3" style="--r:4deg;"></div>
+    <div class="ticker"></div>
+    <div class="dots"></div>
   </div>
 
   <div class="wrap" id="top">
@@ -668,7 +625,7 @@ body.has-mouse .spotlight{ opacity: 1; }
     <!-- NAV -->
     <div class="nav">
       <div class="brand">
-        <span class="brand-badge"></span>
+        <span class="brand-mark"></span>
         <span>Bhishek Shibdeen</span>
       </div>
       <div class="navlinks">
@@ -682,32 +639,29 @@ body.has-mouse .spotlight{ opacity: 1; }
     <section class="card hero hero-main anchor reveal" id="intro">
       <div class="hero-grid">
 
-        <div class="hi">
+        <div>
           <h1>Bhishek Shibdeen</h1>
 
-          <div class="motto-row">
-            <span class="kaizen-pill"><span class="kaizen-dot"></span>Kaizen</span>
-            <span style="font-weight:850; opacity:0.68;">Compliance • AML/CFT • Risk</span>
+          <div class="editorial-bar">
+            <span class="pill"><span class="dot"></span>Kaizen</span>
+            <span class="tagline">Compliance • AML/CFT • Risk</span>
           </div>
 
-          <p class="subtitle">
+          <p class="deck">
             I build competence in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> through structured work:
             risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
           </p>
 
-          <div class="stamp">Built with Kaizen discipline • Clean controls • Strong governance</div>
-
-          <div class="chips">
-            <span class="chip">Risk-Based KYC</span>
-            <span class="chip">CDD / EDD</span>
-            <span class="chip">Sanctions & PEP</span>
-            <span class="chip">UBO & Ownership</span>
+          <div class="chips" aria-label="Focus areas">
+            <span class="chip blue">Risk-Based KYC</span>
+            <span class="chip green">CDD / EDD</span>
+            <span class="chip orange">Sanctions & PEP</span>
+            <span class="chip pink">UBO & Ownership</span>
           </div>
 
           <div class="cta">
             <a class="btn primary" href="#work">See my work ↓</a>
             <a class="btn" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
-
             <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
               <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
@@ -716,46 +670,30 @@ body.has-mouse .spotlight{ opacity: 1; }
             </a>
           </div>
 
-          <div class="scroll-icon-wrap">
-            <a href="#work" aria-label="Scroll to Work" style="text-decoration:none;">
-              <div class="scroll-icon"></div>
-            </a>
+          <div class="scrollcue">
+            <span class="arrow">↓</span>
+            <span>Scroll for certifications & projects</span>
           </div>
         </div>
 
-        <aside class="showcase reveal" aria-label="Showcase card">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px;">
-            <div>
-              <p class="showcase-title">Portfolio Snapshot</p>
-              <p class="showcase-sub">
-                A minimal, controls-first portfolio — clarity, structure, and proof of work.
-              </p>
-            </div>
-            <span class="badge"><span class="badge-dot"></span>Controls</span>
-          </div>
+        <aside class="cover reveal" aria-label="Snapshot">
+          <h3>Portfolio Snapshot</h3>
+          <p>
+            Editorial-style, proof-first portfolio: credentials + deliverables.
+            Built to read fast and feel credible.
+          </p>
 
-          <div class="showcase-box">
-            <div>
-              <p class="k">Focus</p>
-              <p class="v">AML/CFT • Compliance • Risk logic</p>
-            </div>
-            <div style="font-weight:980;">✔</div>
+          <div class="bulletbox">
+            <p class="k">Core</p>
+            <p class="v">Controls-first thinking</p>
           </div>
-
-          <div class="showcase-box">
-            <div>
-              <p class="k">Style</p>
-              <p class="v">Sharp decisions + clean audit trails</p>
-            </div>
-            <div style="font-weight:980;">↗</div>
+          <div class="bulletbox">
+            <p class="k">Work</p>
+            <p class="v">Certifications + PDF project</p>
           </div>
-
-          <div class="showcase-box">
-            <div>
-              <p class="k">Proof</p>
-              <p class="v">Certifications + Projects (PDF)</p>
-            </div>
-            <div style="font-weight:980;">📄</div>
+          <div class="bulletbox">
+            <p class="k">Approach</p>
+            <p class="v">Structure, clarity, audit-ready discipline</p>
           </div>
         </aside>
 
@@ -766,6 +704,7 @@ body.has-mouse .spotlight{ opacity: 1; }
     <section class="card section anchor reveal" id="work">
       <div class="section-head">
         <h2>Certifications & Projects</h2>
+        <span class="accent" aria-hidden="true"></span>
       </div>
 
       <div class="section-body">
@@ -773,7 +712,7 @@ body.has-mouse .spotlight{ opacity: 1; }
           A focused selection of credentials and work samples — built around AML/CFT knowledge, risk discipline, and communication clarity.
         </p>
 
-        <div style="margin: 10px 0 12px; font-weight:980; letter-spacing:2px; text-transform:uppercase; font-size:11px; opacity:0.72;">
+        <div style="margin: 10px 0 12px; font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">
           Certifications
         </div>
 
@@ -805,53 +744,53 @@ body.has-mouse .spotlight{ opacity: 1; }
           <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
         </div>
 
-        <div style="margin: 18px 0 12px; font-weight:980; letter-spacing:2px; text-transform:uppercase; font-size:11px; opacity:0.72;">
+        <div style="margin: 18px 0 12px; font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">
           Projects
         </div>
 
         <div class="grid3">
           <!-- AML PDF PROJECT -->
           <div class="tile reveal" onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')">
-            <div class="tag">PDF • AML</div>
+            <div class="tag"><span class="sq"></span>PDF • AML</div>
             <h3>AML Regulations in Mauritius</h3>
             <p>
               Simplified overview of the regulatory ecosystem (FIU, FSC, BoM, reporting flow), key obligations, and practical compliance takeaways.
             </p>
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="chip">Reporting Flow</span>
-              <span class="chip">Core Obligations</span>
-              <span class="chip">Institutions</span>
+              <span class="chip orange">Reporting Flow</span>
+              <span class="chip green">Obligations</span>
+              <span class="chip blue">Institutions</span>
             </div>
             <div style="margin-top:14px;">
               <span class="btn primary" style="width:max-content;">Open PDF ↗</span>
             </div>
           </div>
 
-          <!-- PLACEHOLDER PROJECT 2 -->
+          <!-- Project 2 -->
           <div class="tile reveal">
-            <div class="tag">Project</div>
+            <div class="tag"><span class="sq" style="background:var(--blue)"></span>Project</div>
             <h3>KYC Controls Overview</h3>
             <p>
-              A compact build around risk-based onboarding: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.
+              Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.
             </p>
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="chip">CDD</span>
-              <span class="chip">EDD Triggers</span>
-              <span class="chip">File Quality</span>
+              <span class="chip blue">CDD</span>
+              <span class="chip pink">EDD Triggers</span>
+              <span class="chip green">File Quality</span>
             </div>
           </div>
 
-          <!-- PLACEHOLDER PROJECT 3 -->
+          <!-- Project 3 -->
           <div class="tile reveal">
-            <div class="tag">Project</div>
+            <div class="tag"><span class="sq" style="background:var(--green)"></span>Project</div>
             <h3>Screening & Escalation Logic</h3>
             <p>
               Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.
             </p>
             <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-              <span class="chip">Sanctions</span>
-              <span class="chip">PEP</span>
-              <span class="chip">Adverse Media</span>
+              <span class="chip orange">Sanctions</span>
+              <span class="chip blue">PEP</span>
+              <span class="chip pink">Adverse Media</span>
             </div>
           </div>
         </div>
@@ -861,23 +800,28 @@ body.has-mouse .spotlight{ opacity: 1; }
 
     <!-- CONTACT -->
     <section class="card section anchor reveal" id="contact">
-      <div class="section-head"><h2>Contact</h2></div>
+      <div class="section-head">
+        <h2>Contact</h2>
+        <span class="accent" aria-hidden="true" style="background:linear-gradient(90deg,var(--pink),var(--orange),var(--green),var(--blue))"></span>
+      </div>
+
       <div class="section-body">
         <div class="two-col">
           <div class="mini reveal">
-            <div class="k">Email</div>
-            <div class="v">
-              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000;text-decoration:none;font-weight:950;">
+            <div style="font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">Email</div>
+            <div style="margin-top:6px; font-weight:1000;">
+              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000; text-decoration:none;">
                 bhishek.shibdeen@icloud.com
               </a>
             </div>
-            <div class="k" style="margin-top:12px;">Phone</div>
-            <div class="v">+230 55024085</div>
+
+            <div style="margin-top:14px; font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">Phone</div>
+            <div style="margin-top:6px; font-weight:1000;">+230 55024085</div>
           </div>
 
           <div class="mini reveal">
-            <div class="k">LinkedIn</div>
-            <div class="v" style="margin-top:6px;">
+            <div style="font-weight:1000; letter-spacing:2.6px; text-transform:uppercase; font-size:11px; opacity:0.78;">LinkedIn</div>
+            <div style="margin-top:10px;">
               <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
                 <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
@@ -894,17 +838,17 @@ body.has-mouse .spotlight{ opacity: 1; }
   </div>
 
   <!-- Floating button -->
-  <a class="fab" href="#work" aria-label="Jump to Work">⬤</a>
+  <a class="fab" href="#work" aria-label="Jump to Work">↘</a>
 
   <!-- Mobile bottom nav -->
   <div id="mobileNav">
-    <a class="btn" href="#intro" style="border-radius:999px;">Intro</a>
-    <a class="btn primary" href="#work" style="border-radius:999px;">Work</a>
-    <a class="btn" href="#contact" style="border-radius:999px;">Contact</a>
+    <a class="btn" href="#intro">Intro</a>
+    <a class="btn primary" href="#work">Work</a>
+    <a class="btn" href="#contact">Contact</a>
   </div>
 
 <script>
-  // Scroll progress bar
+  // Scroll progress
   (function(){
     const bar = document.getElementById("bar");
     function update(){
@@ -933,7 +877,7 @@ body.has-mouse .spotlight{ opacity: 1; }
     els.forEach(el => io.observe(el));
   })();
 
-  // Active nav indicator
+  // Active nav
   (function(){
     const links = Array.from(document.querySelectorAll(".nav-item"));
     const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
@@ -946,7 +890,7 @@ body.has-mouse .spotlight{ opacity: 1; }
           if(active) active.classList.add("active");
         }
       });
-    }, { threshold: 0.42 });
+    }, { threshold: 0.45 });
 
     sections.forEach(s => io.observe(s));
   })();
@@ -958,77 +902,7 @@ body.has-mouse .spotlight{ opacity: 1; }
     window.addEventListener("resize", check);
     check();
   })();
-</script // =========================
-// Spotlight (cursor light)
-// =========================
-(function(){
-  const spot = document.querySelector(".spotlight");
-  if(!spot) return;
+</script>
 
-  let raf = null;
-
-  function onMove(e){
-    document.body.classList.add("has-mouse");
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-
-    // throttle with rAF
-    if(raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      document.documentElement.style.setProperty("--mx", x + "%");
-      document.documentElement.style.setProperty("--my", y + "%");
-    });
-  }
-
-  window.addEventListener("mousemove", onMove, { passive: true });
-
-  // Hide spotlight on touch devices (optional polish)
-  window.addEventListener("touchstart", () => {
-    document.body.classList.remove("has-mouse");
-  }, { passive: true });
-})();
-
-
-// =========================
-// Tilt (cards + tiles)
-// =========================
-(function(){
-  const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(prefersReduce) return;
-
-  // Choose what tilts:
-  // tiles (projects), rows (certs), showcase card
-  const targets = document.querySelectorAll(".tile, .row, .showcase");
-  targets.forEach(el => el.classList.add("tilt"));
-
-  function setTilt(el, e){
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width;   // 0..1
-    const py = (e.clientY - r.top) / r.height;   // 0..1
-
-    // controls intensity
-    const max = 9; // degrees
-    const rotY = (px - 0.5) * (max * 2);
-    const rotX = (0.5 - py) * (max * 2);
-
-    el.style.transform = `perspective(900px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-2px)`;
-
-    // move the highlight
-    el.style.setProperty("--tx", (px * 100).toFixed(1) + "%");
-    el.style.setProperty("--ty", (py * 100).toFixed(1) + "%");
-  }
-
-  function resetTilt(el){
-    el.style.transform = "";
-    el.style.setProperty("--tx", "50%");
-    el.style.setProperty("--ty", "20%");
-  }
-
-  targets.forEach(el => {
-    el.addEventListener("mousemove", (e) => setTilt(el, e), { passive: true });
-    el.addEventListener("mouseleave", () => resetTilt(el));
-    el.addEventListener("blur", () => resetTilt(el));
-  });
-})(); >
 </body>
 </html>
