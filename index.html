@@ -122,7 +122,7 @@
     border-radius: 3px;
     background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
   }
-  .navlinks{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+  .navlinks{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; align-items:center; }
   .nav a{
     text-decoration:none;
     color:#000;
@@ -147,12 +147,39 @@
     border-color: rgba(0,0,0,.18);
   }
 
+  /* ✅ Tiny keyboard hint (product feel) */
+  .kbd-hint{
+    margin-left: 6px;
+    padding: 7px 10px;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 10px;
+    background: rgba(0,0,0,.02);
+    font-size: 11px;
+    font-weight: 850;
+    opacity: .72;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .kbd-hint kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 7px;
+    border: 1px solid rgba(0,0,0,.14);
+    background:#fff;
+    margin: 0 2px;
+    opacity: .9;
+  }
+  @media (max-width: 860px){
+    .kbd-hint{ display:none; }
+  }
+
   /* ============================
      ✅ Micro-interactions core
      ============================ */
 
   /* Magnetic buttons use CSS vars */
-  .btn, .contact-btn, .xbtn, .copy{
+  .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn{
     --mx: 0px;
     --my: 0px;
     --hoverLift: 0px;
@@ -425,11 +452,51 @@
   }
 
   .section-body{
-    padding: 18px 20px 24px;
+    padding: 18px 20px 18px;
     color: rgba(0,0,0,.86);
     line-height: 1.9;
     font-size: 14.8px;
     font-weight: 520;
+  }
+
+  /* ✅ Next section footer */
+  .section-foot{
+    padding: 0 20px 22px;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    border-top: 1px dashed rgba(0,0,0,.10);
+    background: linear-gradient(180deg, rgba(255,255,255,0), rgba(0,0,0,0.012));
+  }
+  .nextbtn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.14);
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    font-weight: 900;
+    font-size: 12px;
+    opacity:.9;
+    transition: background .18s var(--ease), border-color .18s var(--ease);
+    cursor:pointer;
+  }
+  .nextbtn:hover{
+    background: var(--soft);
+    border-color: rgba(0,0,0,.18);
+    --hoverLift: -1px;
+  }
+  .nextbtn .mini{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.14);
+    background:#fff;
+    opacity:.85;
   }
 
   /* ===== Certification cards ===== */
@@ -664,7 +731,6 @@
     display:block;
   }
 
-  /* Screenshot: lift + subtle tilt stays */
   .pub-preview img{
     transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
     transform-origin: center;
@@ -958,6 +1024,38 @@
     transform: translateY(0);
   }
 
+  /* ✅ Back-to-top micro button */
+  .topbtn{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    z-index:88;
+    width:44px;
+    height:44px;
+    border-radius: 12px;
+    border:1px solid rgba(0,0,0,.14);
+    background:#fff;
+    box-shadow: var(--shadow2);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity .18s var(--ease), background .18s var(--ease);
+    text-decoration:none;
+    color:#000;
+    font-weight: 950;
+  }
+  .topbtn.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .topbtn:hover{
+    background: var(--soft);
+    --hoverLift: -1px;
+  }
+  .topbtn svg{ width:18px; height:18px; }
+
   /* Mobile bottom nav */
   #mobileNav{
     position:fixed;
@@ -979,7 +1077,7 @@
     *{ animation:none !important; transition:none !important; }
     .reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
     .tiltable{ transform:none !important; }
-    .btn, .contact-btn, .xbtn, .copy{ transform:none !important; }
+    .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn{ transform:none !important; }
   }
 </style>
 </head>
@@ -993,6 +1091,13 @@
     <div class="rail r2"></div>
     <div class="rail r3"></div>
   </div>
+
+  <!-- ✅ Back to top -->
+  <a href="#top" class="topbtn" id="topBtn" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M12 5l7 7-1.4 1.4L13 8.8V20h-2V8.8L6.4 13.4 5 12l7-7z"/>
+    </svg>
+  </a>
 
   <!-- Scroll dots -->
   <div class="scroll-dots" aria-label="Section progress">
@@ -1017,6 +1122,11 @@
         <a href="#experience" class="nav-item">Experience</a>
         <a href="#projects" class="nav-item">Projects</a>
         <a href="#contact" class="nav-item">Contact</a>
+
+        <!-- ✅ keyboard hint -->
+        <div class="kbd-hint" title="Keyboard navigation">
+          <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev
+        </div>
       </div>
     </div>
 
@@ -1117,6 +1227,13 @@
         </aside>
 
       </div>
+
+      <!-- ✅ Next section -->
+      <div class="section-foot">
+        <a class="nextbtn" href="#certs" aria-label="Next: Certifications">
+          Next: Certifications <span class="mini">J</span> →
+        </a>
+      </div>
     </section>
 
     <!-- CERTIFICATIONS -->
@@ -1167,6 +1284,12 @@
           </div>
         </div>
       </div>
+
+      <div class="section-foot">
+        <a class="nextbtn" href="#experience" aria-label="Next: Experience">
+          Next: Experience <span class="mini">J</span> →
+        </a>
+      </div>
     </section>
 
     <!-- EXPERIENCE -->
@@ -1203,6 +1326,12 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="section-foot">
+        <a class="nextbtn" href="#projects" aria-label="Next: Projects">
+          Next: Projects <span class="mini">J</span> →
+        </a>
       </div>
     </section>
 
@@ -1285,6 +1414,12 @@
           </div>
         </div>
       </div>
+
+      <div class="section-foot">
+        <a class="nextbtn" href="#contact" aria-label="Next: Contact">
+          Next: Contact <span class="mini">J</span> →
+        </a>
+      </div>
     </section>
 
     <!-- CONTACT -->
@@ -1327,6 +1462,15 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="section-foot" style="justify-content:space-between;">
+        <a class="nextbtn" href="#top" aria-label="Back to top">
+          ← Back to top <span class="mini">Home</span>
+        </a>
+        <a class="nextbtn" href="#top" aria-label="Restart">
+          Restart <span class="mini">K</span>
+        </a>
       </div>
     </section>
 
@@ -1527,6 +1671,18 @@
     });
   })();
 
+  // ✅ Back-to-top show/hide
+  (function(){
+    const topBtn = document.getElementById("topBtn");
+    function toggle(){
+      const y = window.scrollY || 0;
+      if(y > 520) topBtn.classList.add("show");
+      else topBtn.classList.remove("show");
+    }
+    window.addEventListener("scroll", toggle, { passive:true });
+    toggle();
+  })();
+
   /* ============================
      ✅ Micro-interactions JS
      - Magnetic buttons
@@ -1537,8 +1693,8 @@
     if(reduce) return;
 
     // Magnetic hover
-    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy");
-    const strength = 10; // subtle
+    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn");
+    const strength = 9; // subtle
     magnets.forEach(el => {
       el.addEventListener("mousemove", (e) => {
         const r = el.getBoundingClientRect();
@@ -1570,6 +1726,67 @@
         el.style.setProperty("--rx", `0deg`);
         el.style.setProperty("--ry", `0deg`);
       });
+    });
+  })();
+
+  /* ============================
+     ✅ Keyboard navigation
+     J / ↓ / PageDown : next section
+     K / ↑ / PageUp   : prev section
+     Home: top, End: contact
+     ============================ */
+  (function(){
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const order = ["intro","certs","experience","projects","contact"]
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    function currentIndex(){
+      const y = window.scrollY + 120;
+      let idx = 0;
+      for(let i=0;i<order.length;i++){
+        const top = order[i].getBoundingClientRect().top + window.scrollY;
+        if(top <= y) idx = i;
+      }
+      return idx;
+    }
+
+    function scrollToIdx(i){
+      if(i < 0) i = 0;
+      if(i >= order.length) i = order.length - 1;
+      order[i].scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+
+    document.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
+      if(typing) return;
+      if(e.metaKey || e.ctrlKey || e.altKey) return;
+
+      const key = e.key;
+
+      if(key === "Home"){
+        e.preventDefault();
+        document.getElementById("top").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
+        return;
+      }
+      if(key === "End"){
+        e.preventDefault();
+        document.getElementById("contact")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
+        return;
+      }
+
+      const idx = currentIndex();
+
+      if(key === "j" || key === "J" || key === "ArrowDown" || key === "PageDown"){
+        e.preventDefault();
+        scrollToIdx(idx + 1);
+      }
+      if(key === "k" || key === "K" || key === "ArrowUp" || key === "PageUp"){
+        e.preventDefault();
+        scrollToIdx(idx - 1);
+      }
     });
   })();
 </script>
