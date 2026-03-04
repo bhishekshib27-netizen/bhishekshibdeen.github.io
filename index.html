@@ -4,1397 +4,448 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Modern compliance/fintech portfolio: Intro, About, Certifications, Projects, Contact." />
+<meta name="description" content="Clean editorial portfolio: Intro + Projects + Contact." />
 
 <style>
   :root{
-    /* Dark theme (grey / black / white) */
-    --bg:#07090d;
-    --panel:#0c1016;
-    --card:#0e141c;
-    --text:#f4f6f8;
-    --muted: rgba(244,246,248,.68);
-    --line: rgba(244,246,248,.12);
-    --soft: rgba(244,246,248,.06);
-
-    /* Neutral accents (monochrome) */
-    --g1: rgba(244,246,248,.92);
-    --g2: rgba(244,246,248,.55);
-    --g3: rgba(244,246,248,.26);
-
-    --r:14px;
-    --r2:12px;
-    --shadow: 0 22px 70px rgba(0,0,0,0.55);
-    --shadow2: 0 12px 34px rgba(0,0,0,0.42);
+    --bg:#f3f3f2;
+    --paper:#f7f7f6;
+    --ink:#121212;
+    --muted: rgba(18,18,18,.62);
+    --line: rgba(18,18,18,.10);
+    --shadow: 0 18px 45px rgba(0,0,0,.14);
+    --shadow2: 0 10px 28px rgba(0,0,0,.10);
+    --r:18px;
     --ease: cubic-bezier(.2,.8,.2,1);
+
+    /* type */
+    --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial;
+
+    /* cursor */
+    --cursor: rgba(18,18,18,.75);
+    --cursorSoft: rgba(18,18,18,.15);
   }
 
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
     margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial;
-    color: var(--text);
     background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    letter-spacing: -0.15px;
-    overflow-x:hidden;
-    cursor: none; /* custom cursor */
+    cursor: none;
   }
-
   a, button{ cursor:none; }
 
-  /* =============================
-     Moving background (video)
-     ============================= */
-  .bg-video{
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .bg-video video{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.06);
-    filter: grayscale(1) contrast(1.12) brightness(0.75);
-    opacity: 0.10; /* subtle */
-  }
-  .bg-video::after{
-    content:"";
-    position:absolute; inset:0;
-    background:
-      radial-gradient(circle at 20% 12%, rgba(255,255,255,0.10), transparent 56%),
-      radial-gradient(circle at 85% 18%, rgba(255,255,255,0.08), transparent 60%),
-      linear-gradient(180deg, rgba(7,9,13,0.72), rgba(7,9,13,0.92));
+  /* ===== Page shell (like the screenshot’s framed content) ===== */
+  .page{
+    width: min(1160px, 92vw);
+    margin: 22px auto 90px;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .bg-video{ display:none !important; }
-    body{ cursor:auto; }
-    a, button{ cursor:pointer; }
-  }
-
-  /* =============================
-     Combined progress bar (top + nav pill)
-     ============================= */
-  .progress{
-    position:fixed; top:0; left:0;
-    width:100%; height:4px;
-    z-index:999;
-    background: transparent;
-  }
-  .progress > span{
-    display:block; height:100%; width:0%;
-    background: linear-gradient(90deg, rgba(255,255,255,.15), rgba(255,255,255,.92), rgba(255,255,255,.15));
-    transform-origin:left;
-  }
-
-  /* Background stage (minimal, no excess shapes) */
-  .bg-stage{
-    position:fixed; inset:0;
-    pointer-events:none;
-    z-index:1;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 12% 18%, rgba(255,255,255,0.06), transparent 56%),
-      radial-gradient(circle at 88% 20%, rgba(255,255,255,0.05), transparent 60%);
-  }
-  .grid{
-    position:absolute; inset:0;
-    opacity:0.07;
-    background:
-      linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/92px 92px,
-      linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/92px 92px;
-    mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
-    animation: gridFloat 10s var(--ease) infinite;
-  }
-  @keyframes gridFloat{
-    0%{ transform: translateY(0px); }
-    50%{ transform: translateY(10px); }
-    100%{ transform: translateY(0px); }
-  }
-
-  /* Layout */
-  .wrap{
-    width:min(1120px, 92vw);
-    margin:0 auto;
-    padding: 18px 0 92px;
-    position:relative;
-    z-index: 2;
-  }
-
-  /* Nav */
-  .nav{
-    position:sticky; top:14px;
-    z-index:60;
+  /* ===== Top bar ===== */
+  .topbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:14px;
-    padding: 12px 14px;
-    background: rgba(14,20,28,.86);
-    border:1px solid var(--line);
-    border-radius: var(--r);
-    box-shadow: var(--shadow2);
-    backdrop-filter: blur(10px);
+    gap:16px;
+    padding: 10px 6px 14px;
   }
-
-  .brand{
+  .logo{
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: .1px;
+  }
+  .status{
+    font-size: 13px;
+    font-weight: 650;
+    color: rgba(18,18,18,.68);
     display:flex;
     align-items:center;
     gap:10px;
-    font-weight: 950;
-    letter-spacing: -0.2px;
-  }
-  .brand-mark{
-    width:11px; height:11px;
-    border-radius: 3px;
-    background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.35));
-  }
-
-  .nav-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-  }
-
-  .navlinks{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
-  .nav a{
-    text-decoration:none;
-    color: var(--text);
-    font-weight: 850;
-    font-size:12px;
-    padding: 9px 12px;
-    border-radius: 10px;
-    border:1px solid transparent;
-    opacity:0.82;
-    transition: 0.18s var(--ease);
-  }
-  .nav a:hover{
-    opacity:1;
-    background: rgba(255,255,255,.06);
-    border-color: rgba(255,255,255,.12);
-    transform: translateY(-1px);
-  }
-  .nav a.active{
-    opacity:1;
-    background: linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
-    border-color: rgba(255,255,255,.18);
-  }
-
-  /* Combined progress pill */
-  .prog-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding: 8px 10px;
-    border-radius: 999px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.04);
-    font-weight: 900;
-    font-size: 11px;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    opacity: .90;
     white-space:nowrap;
   }
-  .prog-track{
-    width:92px; height:8px;
-    border-radius:999px;
-    background: rgba(255,255,255,.07);
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.12);
+  .dot{
+    width:9px;height:9px;border-radius:999px;
+    background: #20c05c;
+    box-shadow: 0 0 0 4px rgba(32,192,92,.18);
   }
-  .prog-fill{
-    height:100%;
-    width:0%;
-    background: linear-gradient(90deg, rgba(255,255,255,.20), rgba(255,255,255,.92));
-    transition: width .08s linear;
-  }
-  .prog-num{ opacity:.88; }
 
-  /* Cards */
-  .card{
-    background: rgba(14,20,28,.86);
+  /* ===== Hero stage ===== */
+  .hero{
+    background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--r);
-    overflow:hidden;
-    transition: transform .22s var(--ease), box-shadow .22s var(--ease), border-color .22s var(--ease);
-    position:relative;
-    backdrop-filter: blur(10px);
-  }
-  .card:hover{
-    transform: translateY(-3px);
     box-shadow: var(--shadow);
-    border-color: rgba(255,255,255,.18);
+    overflow:hidden;
+    position:relative;
   }
 
-  /* Glow layer */
-  .glow::before{
+  /* subtle left-side slab */
+  .hero::before{
     content:"";
     position:absolute;
-    inset:-120px;
-    background:
-      radial-gradient(circle at 18% 22%, rgba(255,255,255,0.10), transparent 55%),
-      radial-gradient(circle at 82% 30%, rgba(255,255,255,0.08), transparent 60%);
-    opacity:0;
-    transition: opacity .25s var(--ease);
+    left:0; top:0; bottom:0;
+    width: 38%;
+    background: rgba(0,0,0,.03);
     pointer-events:none;
   }
-  .glow:hover::before{ opacity:1; }
 
-  /* Hero */
-  .hero{ margin-top: 18px; }
-  .hero-main{ padding: 28px; }
-
-  .hero-grid{
+  .hero-inner{
     display:grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 18px;
-    align-items: stretch;
+    grid-template-columns: 0.95fr 1.05fr;
+    min-height: 430px;
   }
-  @media (max-width: 920px){
-    .hero-grid{ grid-template-columns: 1fr; }
+
+  /* LEFT column */
+  .hero-left{
+    position:relative;
+    padding: 44px 42px;
+  }
+
+  .kicker{
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(18,18,18,.74);
+    margin: 0 0 20px;
   }
 
   h1{
-    margin:0;
-    font-size: clamp(36px, 4.4vw, 58px);
-    line-height: 1.02;
-    font-weight: 980;
-    letter-spacing: -1.8px;
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -.6px;
+    font-size: clamp(38px, 4.6vw, 56px);
+  }
+  .line2{
+    display:block;
+    margin-top: 8px;
   }
 
-  .motto-row{
-    margin-top: 10px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .kaizen{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding: 9px 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,.16);
-    background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
-    font-weight: 950;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-  .kaizen-dot{
-    width:9px;height:9px;border-radius: 2px;
-    background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.35));
-  }
-
-  .subtitle{
-    margin: 12px 0 0;
-    line-height: 1.85;
-    font-size: 16px;
-    font-weight: 620;
-    color: rgba(244,246,248,.86);
-    max-width: 90ch;
-  }
-  .subtitle strong{ font-weight: 920; }
-
-  .cta{
+  /* “Living in Mauritius” with a round flag chip */
+  .subline{
     margin-top: 14px;
     display:flex;
-    flex-wrap: wrap;
-    gap: 10px;
     align-items:center;
+    gap: 10px;
+    flex-wrap:wrap;
+    font-family: var(--serif);
+    font-size: clamp(22px, 3.1vw, 34px);
+    font-weight: 520;
+    color: rgba(18,18,18,.72);
   }
-  .btn{
+  .flag{
+    width: 34px; height: 34px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.14);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, #c21807, #1f6feb, #ffcc00, #1ea35a);
+    box-shadow: 0 8px 18px rgba(0,0,0,.10);
+  }
+  .subline strong{
+    font-weight: 640;
+    color: rgba(18,18,18,.82);
+  }
+
+  .desc{
+    margin: 18px 0 0;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 560;
+  }
+
+  /* Button like screenshot (soft pill + heavy shadow) */
+  .cta-row{ margin-top: 24px; }
+  .pillbtn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
-    padding: 10px 14px;
-    border-radius: 10px;
+    padding: 15px 28px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,.18);
+    background: #efefee;
+    color: rgba(18,18,18,.52);
+    font-weight: 650;
     text-decoration:none;
-    border: 1px solid rgba(255,255,255,.16);
-    background: rgba(255,255,255,.04);
-    color: var(--text);
-    font-weight: 860;
-    font-size: 13px;
-    transition: 0.18s var(--ease);
-    cursor:pointer;
-    white-space:nowrap;
+    box-shadow:
+      0 16px 28px rgba(0,0,0,.16),
+      0 2px 0 rgba(255,255,255,.9) inset;
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+    user-select:none;
   }
-  .btn:hover{ background: rgba(255,255,255,.08); transform: translateY(-1px); border-color: rgba(255,255,255,.22); }
-
-  .btn.primary{
-    border-color: rgba(255,255,255,.22);
-    color:#0b0f14;
-    background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.55));
-    box-shadow: 0 16px 44px rgba(0,0,0,0.45);
-  }
-  .btn.primary:hover{
+  .pillbtn:hover{
     transform: translateY(-2px);
-    box-shadow: 0 18px 52px rgba(0,0,0,0.55);
+    box-shadow:
+      0 22px 34px rgba(0,0,0,.18),
+      0 2px 0 rgba(255,255,255,.9) inset;
   }
 
-  .li-ico{ width:14px; height:14px; display:inline-block; opacity:.92; }
-
-  /* Right panel */
-  .panel{
-    border:1px solid var(--line);
-    border-radius: var(--r);
-    background: rgba(255,255,255,.03);
-    padding: 18px;
-  }
-  .panel h3{
-    margin:0;
-    font-size: 16px;
-    font-weight: 950;
-    letter-spacing: -0.2px;
-  }
-  .panel p{
-    margin:10px 0 0;
-    color: var(--muted);
-    font-weight: 650;
-    font-size: 13px;
-    line-height: 1.75;
-  }
-  .metric{
-    margin-top: 12px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: 12px;
-    padding: 12px;
-    background: rgba(0,0,0,.18);
-    transition: 0.18s var(--ease);
-  }
-  .metric:hover{ transform: translateY(-2px); background: rgba(0,0,0,.26); }
-  .metric .k{
-    margin:0 0 6px;
-    font-weight: 950;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 11px;
-    opacity:0.72;
-  }
-  .metric .v{
-    margin:0;
-    font-weight: 900;
-    font-size: 13px;
-    opacity:0.93;
-  }
-
-  /* Sections */
-  .section{ margin-top: 16px; }
-  .anchor{ scroll-margin-top: 92px; }
-
-  .section-head{
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .section-head h2{
-    margin:0;
-    font-size: 12px;
-    letter-spacing: 2.6px;
-    text-transform: uppercase;
-    font-weight: 950;
-  }
-  .accent{
-    width: 150px; height: 10px;
-    border-radius: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.80), rgba(255,255,255,.18));
-    opacity:0.95;
-  }
-
-  .section-body{
-    padding: 18px 20px 24px;
-    color: rgba(244,246,248,.88);
-    line-height: 1.9;
-    font-size: 14.8px;
-    font-weight: 620;
-  }
-
-  /* About */
-  .about-grid{
-    display:grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 14px;
-  }
-  @media (max-width: 980px){ .about-grid{ grid-template-columns: 1fr; } }
-  .about-box{
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: var(--r);
-    background: rgba(255,255,255,.03);
-    padding: 16px;
+  /* RIGHT column image */
+  .hero-right{
     position:relative;
-    overflow:hidden;
-    transition: .2s var(--ease);
-  }
-  .about-box:hover{ transform: translateY(-2px); box-shadow: 0 18px 55px rgba(0,0,0,0.46); border-color: rgba(255,255,255,.18); }
-  .about-box h3{
-    margin:0 0 8px;
-    font-size: 16px;
-    font-weight: 980;
-    letter-spacing: -0.25px;
-  }
-  .about-box p{ margin:0; color: rgba(244,246,248,.78); font-weight: 650; line-height:1.8; }
-
-  /* Certification cards */
-  .cert-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-  }
-  @media (max-width: 980px){ .cert-grid{ grid-template-columns: 1fr; } }
-
-  .cert-card{
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: var(--r);
-    background: rgba(255,255,255,.03);
-    padding: 16px;
     display:flex;
-    align-items:center;
-    gap: 14px;
-    position:relative;
-    overflow:hidden;
-    transition: 0.20s var(--ease);
-    box-shadow: 0 0 0 rgba(0,0,0,0);
+    align-items:stretch;
+    justify-content:stretch;
+    padding: 0;
   }
-  .cert-card:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.55);
-    border-color: rgba(255,255,255,.18);
+  .hero-media{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(0,0,0,.04), transparent 55%),
+      radial-gradient(circle at 70% 55%, rgba(0,0,0,.05), transparent 60%),
+      #f6f6f5;
+  }
+  .hero-media img{
+    position:absolute;
+    right:-40px;
+    top:-20px;
+    width: min(560px, 55vw);
+    height:auto;
+    opacity: 0.96;
+    filter: saturate(0) contrast(1.05);
+    transform: rotate(0.001deg);
+    user-select:none;
+    pointer-events:none;
   }
 
-  .cert-logo{
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(0,0,0,.22);
-    display:grid;
-    place-items:center;
-    overflow:hidden;
-    flex: 0 0 auto;
-    transition: border-color .2s var(--ease);
+  /* ===== Projects section like screenshot ===== */
+  .section{
+    margin-top: 34px;
+    padding: 0 6px;
   }
-  .cert-card:hover .cert-logo{ border-color: rgba(255,255,255,.22); }
-
-  .cert-logo img{
-    width: 76%;
-    height: 76%;
-    object-fit: contain;
+  .section small{
     display:block;
-    filter: grayscale(1) contrast(1.05) brightness(1.15);
-    opacity: .95;
-  }
-
-  .cert-info{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-    flex: 1 1 auto;
-  }
-  .cert-info h3{
-    margin:0;
-    font-size: 14.5px;
-    font-weight: 950;
-    letter-spacing:-0.2px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-  .cert-info p{
-    margin:0;
-    font-size: 13px;
-    color: var(--muted);
+    color: rgba(18,18,18,.60);
     font-weight: 650;
+    letter-spacing: .3px;
+    margin-bottom: 10px;
+  }
+  .section h2{
+    margin: 0;
+    font-family: var(--serif);
+    font-weight: 600;
+    letter-spacing: -.5px;
+    font-size: clamp(30px, 3.4vw, 44px);
   }
 
-  /* Projects / Featured */
-  .pub{
-    display:grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 14px;
-    border:1px solid rgba(255,255,255,.12);
+  .project-card{
+    margin-top: 18px;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: var(--r);
-    background: rgba(255,255,255,.03);
-    padding: 16px;
-    position:relative;
+    box-shadow: var(--shadow2);
     overflow:hidden;
-    transition: 0.20s var(--ease);
-    cursor:pointer;
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease);
   }
-  .pub:hover{
+  .project-card:hover{
     transform: translateY(-3px);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.56);
-    border-color: rgba(255,255,255,.18);
+    box-shadow: 0 18px 45px rgba(0,0,0,.16);
   }
-  @media (max-width: 980px){ .pub{ grid-template-columns: 1fr; } }
-
-  .pub-preview{
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: 12px;
-    background: rgba(0,0,0,.22);
-    padding: 14px;
-    min-height: 230px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    gap: 10px;
+  .project-inner{
+    padding: 22px 22px 18px;
+  }
+  .project-title{
+    margin:0;
+    font-family: var(--serif);
+    font-weight: 650;
+    font-size: 22px;
+    letter-spacing: -.2px;
+  }
+  .project-desc{
+    margin: 10px 0 0;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 14px;
+    font-weight: 560;
+    max-width: 80ch;
   }
 
-  .pub-minihead{
+  .project-actions{
+    margin-top: 14px;
     display:flex;
-    align-items:center;
-    justify-content:space-between;
     gap:10px;
+    flex-wrap:wrap;
   }
-  .pill{
+  .ghost{
     display:inline-flex;
     align-items:center;
-    gap:8px;
-    border:1px solid rgba(255,255,255,.16);
+    justify-content:center;
+    padding: 10px 14px;
     border-radius: 999px;
-    padding: 6px 10px;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    background: rgba(255,255,255,.04);
-    opacity:0.92;
+    border: 1px solid rgba(0,0,0,.16);
+    background: rgba(0,0,0,.03);
+    text-decoration:none;
+    color: rgba(18,18,18,.78);
+    font-weight: 700;
+    font-size: 13px;
+    transition: transform .18s var(--ease), background .18s var(--ease);
   }
-  .pill .sq{
-    width:10px;height:10px;border-radius:2px;
-    background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.35));
-  }
+  .ghost:hover{ transform: translateY(-1px); background: rgba(0,0,0,.06); }
 
+  .thumb{
+    border-top: 1px solid var(--line);
+    background: #fafafa;
+    padding: 18px;
+  }
   .thumb-frame{
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:12px;
-    background: rgba(0,0,0,.24);
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 18px;
     overflow:hidden;
+    background:#fff;
+    box-shadow: 0 14px 34px rgba(0,0,0,.14);
   }
   .thumb-frame img{
     width:100%;
     height:auto;
     display:block;
-    filter: grayscale(1) contrast(1.06) brightness(1.06);
-    opacity: .96;
   }
 
-  .pub-preview img{
-    transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
-    transform-origin: center;
-    transition: transform .28s var(--ease), filter .28s var(--ease);
-  }
-  .pub:hover .pub-preview img{
-    transform: perspective(900px) rotateX(6deg) rotateY(-4deg) scale(1.04);
-  }
-
-  .pub-body h3{
-    margin:0 0 8px;
-    font-size: 18px;
-    font-weight: 980;
-    letter-spacing:-0.35px;
-  }
-  .pub-body p{
-    margin:0;
-    color: rgba(244,246,248,.78);
-    font-weight: 650;
-    line-height: 1.75;
-    font-size: 14px;
-  }
-
-  .badge-row{
-    margin-top: 12px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-  .tagchip{
-    border:1px solid rgba(255,255,255,.16);
-    border-radius: 10px;
-    padding: 7px 10px;
-    font-size: 12px;
-    font-weight: 820;
-    background: rgba(255,255,255,.04);
-  }
-
-  .grid3{
-    margin-top: 14px;
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 900px){ .grid3{ grid-template-columns: 1fr; } }
-
-  .tile{
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: var(--r);
-    background: rgba(255,255,255,.03);
-    padding: 16px;
-    transition: 0.20s var(--ease);
-    position:relative;
-    overflow:hidden;
-  }
-  .tile:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 18px 55px rgba(0,0,0,0.56);
-    border-color: rgba(255,255,255,.18);
-  }
-  .tag{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-weight: 950;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 11px;
-    opacity:0.72;
-    margin-bottom: 10px;
-  }
-  .tag .sq{ width:10px; height:10px; border-radius: 2px; background: rgba(255,255,255,.75); }
-  .tile h4{
-    margin:0 0 8px;
-    font-size: 16px;
-    font-weight: 950;
-    letter-spacing: -0.25px;
-  }
-  .tile p{
-    margin:0;
-    color: rgba(244,246,248,.78);
-    font-weight: 650;
-    line-height: 1.75;
-    font-size: 14px;
-  }
-
-  /* Contact section */
-  .two-col{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 900px){ .two-col{ grid-template-columns: 1fr; } }
-
-  .mini{
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: var(--r2);
-    background: rgba(255,255,255,.03);
-    padding: 16px;
-    transition: 0.18s var(--ease);
-  }
-  .mini:hover{ transform: translateY(-2px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18); }
-
+  /* ===== Footer ===== */
   footer{
-    margin-top: 24px;
-    text-align:center;
-    color: rgba(244,246,248,.56);
+    padding: 28px 6px 0;
+    color: rgba(18,18,18,.54);
     font-size: 13px;
-    padding: 14px 0 0;
-    font-weight: 800;
+    font-weight: 650;
   }
 
-  /* Scroll dots */
-  .scroll-dots{
-    position: fixed;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: grid;
-    gap: 10px;
-    z-index: 80;
-  }
-  .dot{
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    border: 1px solid rgba(255,255,255,.22);
-    background: rgba(0,0,0,.22);
-    box-shadow: var(--shadow2);
-    opacity: .62;
-    transition: transform .18s var(--ease), opacity .18s var(--ease), background .18s var(--ease);
-  }
-  .dot:hover{ opacity: 1; transform: scale(1.12); }
-  .dot.active{
-    opacity: 1;
-    border-color: rgba(255,255,255,.32);
-    background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.35));
-    transform: scale(1.18);
-  }
-  @media (max-width: 720px){ .scroll-dots{ display:none; } }
-
-  /* Reveal */
-  .reveal{ opacity:0; transform: translateY(18px); }
-  .reveal.in{ opacity:1; transform: translateY(0); transition: 0.75s var(--ease); }
-
-  /* =============================
-     Floating buttons
-     - Projects: bottom-left
-     - Contact: bottom-right (as requested)
-     ============================= */
-  .fab-left{
-    position:fixed;
-    left:18px;
-    bottom:18px;
-    width:52px;height:52px;
-    border-radius: 14px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.04);
-    box-shadow: var(--shadow2);
-    display:grid;
-    place-items:center;
-    z-index:90;
-    transition: 0.18s var(--ease);
-    text-decoration:none;
-    color: var(--text);
-    font-weight: 950;
-  }
-  .fab-left:hover{ transform: translateY(-2px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20); }
-
-  .contact-fab{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    width:52px;height:52px;
-    border-radius: 14px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.04);
-    box-shadow: var(--shadow2);
-    display:grid;
-    place-items:center;
-    z-index:90;
-    cursor:pointer;
-    transition: 0.18s var(--ease);
-  }
-  .contact-fab:hover{ transform: translateY(-2px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.20); }
-  .contact-fab svg{ width:18px; height:18px; opacity:.92; }
-
-  /* Contact popover (opens above bottom-right button) */
-  .contact-pop{
-    position: fixed;
-    right:18px;
-    bottom:78px;
-    z-index:90;
-    width: min(340px, 88vw);
-    border:1px solid rgba(255,255,255,.14);
-    border-radius: 16px;
-    background: rgba(14,20,28,.92);
-    box-shadow: var(--shadow);
-    padding: 14px;
-    transform: translateY(10px);
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.18s var(--ease);
-    backdrop-filter: blur(12px);
-  }
-  .contact-pop.open{
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .contact-pop .head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom: 10px;
-  }
-  .contact-pop .title{
-    font-weight: 980;
-    letter-spacing: -0.2px;
-  }
-  .xbtn{
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(255,255,255,.04);
-    border-radius: 12px;
-    width:34px;height:34px;
-    display:grid;
-    place-items:center;
-    cursor:pointer;
-    transition: .18s var(--ease);
-    color: var(--text);
-  }
-  .xbtn:hover{ background: rgba(255,255,255,.08); transform: translateY(-1px); }
-  .xbtn svg{ width:14px;height:14px; opacity:.9; }
-
-  .contact-row{
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    padding: 10px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    background: rgba(255,255,255,.03);
-  }
-  .contact-row + .contact-row{ margin-top: 10px; }
-  .contact-ico{
-    width:34px;height:34px;
-    border-radius: 12px;
-    border:1px solid rgba(255,255,255,.12);
-    display:grid;
-    place-items:center;
-    background: rgba(0,0,0,.22);
-    flex: 0 0 auto;
-  }
-  .contact-ico svg{ width:16px;height:16px; opacity:.92; }
-  .contact-row .k{
-    font-weight: 950;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 10.5px;
-    opacity: .72;
-    margin:0 0 4px;
-  }
-  .contact-row .v{
-    margin:0;
-    font-weight: 900;
-    font-size: 13px;
-    opacity:.94;
-    line-height:1.35;
-    word-break: break-word;
-  }
-  .contact-row a{ color: var(--text); text-decoration:none; }
-  .contact-row a:hover{ text-decoration: underline; }
-
-  /* Mobile bottom nav */
-  #mobileNav{
-    position:fixed;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:12px;
-    z-index:80;
-    background: rgba(14,20,28,.92);
-    border:1px solid rgba(255,255,255,.14);
-    border-radius: 14px;
-    box-shadow: var(--shadow2);
-    padding:8px;
-    display:none;
-    gap:6px;
-    backdrop-filter: blur(12px);
+  /* ===== Responsive ===== */
+  @media (max-width: 920px){
+    .hero-inner{ grid-template-columns: 1fr; }
+    .hero::before{ width: 100%; height: 28%; bottom:auto; }
+    .hero-left{ padding: 36px 28px 22px; }
+    .hero-right{ min-height: 320px; }
+    .hero-media img{
+      right: -10px;
+      top: 0px;
+      width: min(560px, 88vw);
+    }
   }
 
-  /* =============================
-     Custom cursor animation
-     ============================= */
+  /* ===== Cursor animation ===== */
   .cursor{
     position: fixed;
-    left: 0; top: 0;
+    left:0; top:0;
     width: 18px; height: 18px;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.38);
-    background: rgba(255,255,255,.06);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 2000;
-    transition: width .18s var(--ease), height .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease), opacity .18s var(--ease);
-    mix-blend-mode: normal;
+    border: 1px solid var(--cursor);
+    background: var(--cursorSoft);
+    transform: translate(-50%,-50%);
+    pointer-events:none;
+    z-index: 9999;
+    transition: width .18s var(--ease), height .18s var(--ease), background .18s var(--ease);
   }
   .cursor-dot{
     position: fixed;
-    left: 0; top: 0;
+    left:0; top:0;
     width: 5px; height: 5px;
     border-radius: 999px;
-    background: rgba(255,255,255,.88);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 2001;
-    transition: opacity .18s var(--ease);
+    background: var(--cursor);
+    transform: translate(-50%,-50%);
+    pointer-events:none;
+    z-index: 10000;
   }
-  .cursor.is-hover{
-    width: 34px; height: 34px;
-    background: rgba(255,255,255,.10);
-    border-color: rgba(255,255,255,.52);
-  }
-  .cursor.is-down{
-    width: 14px; height: 14px;
-    background: rgba(255,255,255,.14);
-  }
-  .cursor.hidden, .cursor-dot.hidden{ opacity:0; }
+  .cursor.hover{ width: 34px; height: 34px; background: rgba(18,18,18,.08); }
+  .cursor.down{ width: 14px; height: 14px; }
 
-  /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
-    .cursor, .cursor-dot{ display:none !important; }
-    *{ animation:none !important; transition:none !important; }
+    body{ cursor:auto; }
+    a, button{ cursor:pointer; }
+    .cursor, .cursor-dot{ display:none; }
+    *{ transition:none !important; }
   }
 </style>
 </head>
 
 <body>
-  <!-- Custom cursor -->
+  <!-- Cursor -->
   <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
-  <!-- Moving video background -->
-  <div class="bg-video" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="auto">
-      <!-- Put your compressed video here -->
-      <source src="assetsbg.mp4" type="video/mp4" />
-    </video>
-  </div>
-
-  <!-- Minimal background overlay -->
-  <div class="bg-stage" aria-hidden="true"><div class="grid"></div></div>
-
-  <!-- Combined progress (top bar) -->
-  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
-
-  <!-- Scroll dots -->
-  <div class="scroll-dots" aria-label="Section progress">
-    <a href="#intro" class="dot" data-target="intro" aria-label="Intro"></a>
-    <a href="#about" class="dot" data-target="about" aria-label="About"></a>
-    <a href="#certs" class="dot" data-target="certs" aria-label="Certifications"></a>
-    <a href="#projects" class="dot" data-target="projects" aria-label="Projects"></a>
-    <a href="#contact" class="dot" data-target="contact" aria-label="Contact"></a>
-  </div>
-
-  <div class="wrap" id="top">
-
-    <!-- NAV -->
-    <div class="nav">
-      <div class="brand">
-        <span class="brand-mark"></span>
-        <span>Bhishek Shibdeen</span>
-      </div>
-
-      <div class="nav-right">
-        <div class="prog-pill" aria-label="Scroll progress">
-          <span>Progress</span>
-          <span class="prog-track" aria-hidden="true"><span class="prog-fill" id="pillFill"></span></span>
-          <span class="prog-num" id="pillNum">0%</span>
-        </div>
-
-        <div class="navlinks">
-          <a href="#intro" class="nav-item">Intro</a>
-          <a href="#about" class="nav-item">About</a>
-          <a href="#certs" class="nav-item">Certifications</a>
-          <a href="#projects" class="nav-item">Projects</a>
-          <a href="#contact" class="nav-item">Contact</a>
-        </div>
-      </div>
+  <div class="page">
+    <div class="topbar">
+      <div class="logo">Bhishek Shibdeen</div>
+      <div class="status"><span class="dot" aria-hidden="true"></span> available for work</div>
     </div>
 
-    <!-- INTRO -->
-    <section class="card glow hero hero-main anchor reveal" id="intro">
-      <div class="hero-grid">
-        <div>
-          <h1>Bhishek Shibdeen</h1>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <p class="kicker">Bhishek Shibdeen</p>
 
-          <div class="motto-row">
-            <span class="kaizen"><span class="kaizen-dot"></span>Kaizen</span>
-            <span style="font-weight:820; opacity:0.74;">Compliance • AML/CFT • Risk</span>
+          <h1>
+            Hey, I'm Bhishek
+            <span class="line2">Uni Student</span>
+          </h1>
+
+          <div class="subline">
+            <span>Living in</span>
+            <span class="flag" aria-hidden="true"></span>
+            <strong>Mauritius</strong>
           </div>
 
-          <p class="subtitle">
-            I build competence in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> through structured work:
-            risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
+          <p class="desc">
+            Currently building toward long-term specialization in Compliance, AML, and Risk within financial institutions, fintech, and regulatory environments.
           </p>
 
-          <!-- (Removed the top chips as requested earlier) -->
-
-          <div class="cta">
-            <a class="btn primary" href="#projects">View projects ↓</a>
-            <a class="btn" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
-            <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
-              <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-              </svg>
-              LinkedIn
-            </a>
+          <div class="cta-row">
+            <a class="pillbtn" href="#projects">Get In Touch Today</a>
           </div>
         </div>
 
-        <aside class="panel reveal" aria-label="Snapshot">
-          <h3>Portfolio Snapshot</h3>
-          <p>Proof-first portfolio: certifications + real deliverables. Clean, structured, and built to read fast.</p>
-
-          <div class="metric">
-            <p class="k">Focus</p>
-            <p class="v">AML/CFT controls & onboarding governance</p>
-          </div>
-          <div class="metric">
-            <p class="k">Work</p>
-            <p class="v">Certifications + AML regulations PDF</p>
-          </div>
-          <div class="metric">
-            <p class="k">Standard</p>
-            <p class="v">Audit-ready documentation discipline</p>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="card glow section anchor reveal" id="about">
-      <div class="section-head">
-        <h2>About</h2>
-        <span class="accent" aria-hidden="true"></span>
-      </div>
-
-      <div class="section-body">
-        <div class="about-grid">
-          <div class="about-box">
-            <h3>Profile</h3>
-            <p>
-              Business Management (Finance) student at Middlesex University Mauritius with practical experience in KYC, AML, and compliance operations within a regulated fintech environment.
-            </p>
-          </div>
-
-          <div class="about-box">
-            <h3>What I work on</h3>
-            <p>
-              Customer Due Diligence (CDD), sanctions screening, PEP checks, regulatory documentation reviews, and translating AML/CFT expectations into structured, review-ready work.
-            </p>
-          </div>
-
-          <div class="about-box">
-            <h3>Interest area</h3>
-            <p>
-              Financial crime prevention, regulatory intelligence, and the evolving intersection between compliance and financial technology.
-            </p>
-          </div>
-
-          <div class="about-box">
-            <h3>Operating principle</h3>
-            <p>
-              Guided by <strong>Kaizen — continuous improvement</strong>, I focus on strengthening analytical, regulatory, and operational execution to support strong financial governance.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICATIONS -->
-    <section class="card glow section anchor reveal" id="certs">
-      <div class="section-head">
-        <h2>Certifications</h2>
-        <span class="accent" aria-hidden="true"></span>
-      </div>
-
-      <div class="section-body">
-        <div class="cert-grid">
-          <div class="cert-card">
-            <div class="cert-logo"><img src="yale.jpeg" alt="Yale University logo" loading="lazy" /></div>
-            <div class="cert-info">
-              <h3>Financial Markets — Yale University (Coursera)</h3>
-              <p>Issued Feb 2026 • PDF</p>
-            </div>
-            <div class="cert-actions">
-              <a class="btn" href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View ↗</a>
-            </div>
-          </div>
-
-          <div class="cert-card">
-            <div class="cert-logo"><img src="fca.jpeg" alt="Financial Crime Academy by Verdian logo" loading="lazy" /></div>
-            <div class="cert-info">
-              <h3>AML Essentials — Financial Crime Academy</h3>
-              <p>Issued Feb 2026 • PDF</p>
-            </div>
-            <div class="cert-actions">
-              <a class="btn" href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View ↗</a>
-            </div>
-          </div>
-
-          <div class="cert-card">
-            <div class="cert-logo"><img src="fei.png" alt="France Éducation international logo" loading="lazy" /></div>
-            <div class="cert-info">
-              <h3>DELF B2 — Diplôme d’Études en Langue Française</h3>
-              <p>Issued Mar 2025 • PDF</p>
-            </div>
-            <div class="cert-actions">
-              <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
-            </div>
+        <div class="hero-right" aria-hidden="true">
+          <div class="hero-media">
+            <!-- Put your 3D beads/abstract image here -->
+            <img src="hero-3d.png" alt="" />
           </div>
         </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
-    <section class="card glow section anchor reveal" id="projects">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <span class="accent" aria-hidden="true"></span>
-      </div>
+    <section class="section" id="projects">
+      <small>My Projects</small>
+      <h2>AML / CFT In Mauritius</h2>
 
-      <div class="section-body">
-        <div class="pub" role="button" tabindex="0" aria-label="Open AML Regulations in Mauritius PDF"
-             onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')"
-             onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('AML_Regulations_Mauritius.pdf','_blank'); }">
+      <article class="project-card" role="button" tabindex="0"
+        onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')"
+        onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('AML_Regulations_Mauritius.pdf','_blank'); }"
+        aria-label="Open AML Regulations in Mauritius PDF">
+        <div class="project-inner">
+          <p class="project-title">AML Regulations in Mauritius</p>
+          <p class="project-desc">
+            A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius: reporting flow, key bodies, and core obligations (CDD/EDD, STR, RBA).
+          </p>
 
-          <div class="pub-preview" aria-hidden="true">
-            <div class="pub-minihead">
-              <span class="pill"><span class="sq"></span>Featured PDF</span>
-              <span class="pill" style="border-radius:12px; letter-spacing:1px; text-transform:none;">AML/CFT</span>
-            </div>
-
-            <div class="thumb-frame">
-              <img src="aml-thumb.jpeg" alt="Preview of AML Regulations in Mauritius PDF" loading="lazy" />
-            </div>
-
-            <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-end;">
-              <div style="font-weight:950; letter-spacing:1.8px; text-transform:uppercase; font-size:11px; opacity:0.72;">
-                Mauritius
-              </div>
-              <div class="btn primary" style="padding:9px 12px; border-radius:12px; font-size:12px;">
-                Open PDF ↗
-              </div>
-            </div>
-          </div>
-
-          <div class="pub-body">
-            <h3>AML Regulations in Mauritius</h3>
-            <p>
-              A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius:
-              reporting flow, core obligations (CDD/EDD, STR, RBA), and how key bodies interact across supervision and intelligence.
-            </p>
-
-            <div class="badge-row">
-              <span class="tagchip">Reporting Flow</span>
-              <span class="tagchip">CDD / EDD</span>
-              <span class="tagchip">STR</span>
-              <span class="tagchip">Risk-Based Approach</span>
-              <span class="tagchip">Governance</span>
-            </div>
-
-            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-              <span class="btn primary" onclick="event.stopPropagation(); window.open('AML_Regulations_Mauritius.pdf','_blank');">Open PDF ↗</span>
-              <span class="btn" onclick="event.stopPropagation(); window.location.hash='#contact';">Contact me</span>
-            </div>
+          <div class="project-actions">
+            <a class="ghost" href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">Open PDF ↗</a>
+            <a class="ghost" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
+            <a class="ghost" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
           </div>
         </div>
 
-        <div class="grid3">
-          <div class="tile reveal">
-            <div class="tag"><span class="sq"></span>Project</div>
-            <h4>KYC Controls Overview</h4>
-            <p>Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.</p>
-          </div>
-
-          <div class="tile reveal">
-            <div class="tag"><span class="sq"></span>Project</div>
-            <h4>Screening & Escalation Logic</h4>
-            <p>Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
-          </div>
-
-          <div class="tile reveal">
-            <div class="tag"><span class="sq"></span>Project</div>
-            <h4>Documentation Discipline</h4>
-            <p>A practical checklist for maintaining review-ready files: evidence, rationale, and consistency across onboarding.</p>
+        <div class="thumb">
+          <div class="thumb-frame">
+            <img src="aml-thumb.jpeg" alt="Preview thumbnail of AML Regulations in Mauritius" loading="lazy" />
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="card glow section anchor reveal" id="contact">
-      <div class="section-head">
-        <h2>Contact</h2>
-        <span class="accent" aria-hidden="true"></span>
-      </div>
-
-      <div class="section-body">
-        <div class="two-col">
-          <div class="mini reveal">
-            <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.78;">Email</div>
-            <div style="margin-top:6px; font-weight:950;">
-              <a href="mailto:bhishek.shibdeen@icloud.com" style="color:var(--text); text-decoration:none;">
-                bhishek.shibdeen@icloud.com
-              </a>
-            </div>
-
-            <div style="margin-top:14px; font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.78;">Phone</div>
-            <div style="margin-top:6px; font-weight:950;">+230 55024085</div>
-          </div>
-
-          <div class="mini reveal">
-            <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.78;">LinkedIn</div>
-            <div style="margin-top:10px;">
-              <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-                <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-                </svg>
-                View Profile ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      </article>
     </section>
 
     <footer>© 2026 Bhishek Shibdeen</footer>
   </div>
 
-  <!-- Floating button: Projects (bottom-left) -->
-  <a class="fab-left" href="#projects" aria-label="Jump to Projects">⬤</a>
-
-  <!-- Floating button: Contact (bottom-right) -->
-  <button class="contact-fab" id="contactFab" aria-label="Quick contact" title="Quick contact">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm3 5h10v2H7V9Zm0 4h7v2H7v-2Z"/>
-    </svg>
-  </button>
-
-  <div class="contact-pop" id="contactPop" role="dialog" aria-label="Quick contact details" aria-modal="false">
-    <div class="head">
-      <div class="title">Quick Contact</div>
-      <button class="xbtn" id="contactClose" aria-label="Close quick contact">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z"/>
-        </svg>
-      </button>
-    </div>
-
-    <div class="contact-row">
-      <div class="contact-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>
-        </svg>
-      </div>
-      <div>
-        <p class="k">Email</p>
-        <p class="v"><a href="mailto:bhishek.shibdeen@icloud.com">bhishek.shibdeen@icloud.com</a></p>
-      </div>
-    </div>
-
-    <div class="contact-row">
-      <div class="contact-ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path fill="currentColor" d="M6.6 10.8c1.5 2.9 3.7 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.9.1.4 0 .8-.3 1.1l-2 2.8Z"/>
-        </svg>
-      </div>
-      <div>
-        <p class="k">Phone</p>
-        <p class="v"><a href="tel:+23055024085">+230 55024085</a></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile bottom nav -->
-  <div id="mobileNav">
-    <a class="btn" href="#intro">Intro</a>
-    <a class="btn" href="#about">About</a>
-    <a class="btn" href="#certs">Certs</a>
-    <a class="btn primary" href="#projects">Projects</a>
-    <a class="btn" href="#contact">Contact</a>
-  </div>
-
 <script>
-  // Combined progress (top bar + nav pill)
-  (function(){
-    const bar = document.getElementById("bar");
-    const pillFill = document.getElementById("pillFill");
-    const pillNum = document.getElementById("pillNum");
-
-    function update(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-
-      bar.style.width = pct.toFixed(2) + "%";
-      pillFill.style.width = pct.toFixed(2) + "%";
-      pillNum.textContent = Math.round(pct) + "%";
-    }
-
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
-  })();
-
-  // Reveal on scroll
-  (function(){
-    const els = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          e.target.classList.add("in");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
-  })();
-
-  // Active nav highlight
-  (function(){
-    const links = Array.from(document.querySelectorAll(".nav-item"));
-    const sections = links
-      .map(a => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          links.forEach(l => l.classList.remove("active"));
-          const active = links.find(l => l.getAttribute("href") === "#" + entry.target.id);
-          if(active) active.classList.add("active");
-        }
-      });
-    }, { threshold: 0.45 });
-
-    sections.forEach(s => io.observe(s));
-  })();
-
-  // Mobile nav show
-  (function(){
-    const m = document.getElementById("mobileNav");
-    function check(){ m.style.display = window.innerWidth < 720 ? "flex" : "none"; }
-    window.addEventListener("resize", check);
-    check();
-  })();
-
-  // Scroll dots active state
-  (function(){
-    const dots = Array.from(document.querySelectorAll(".dot"));
-    const sections = dots.map(d => document.getElementById(d.dataset.target)).filter(Boolean);
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          dots.forEach(d => d.classList.remove("active"));
-          const active = dots.find(d => d.dataset.target === entry.target.id);
-          if(active) active.classList.add("active");
-        }
-      });
-    }, { threshold: 0.5 });
-
-    sections.forEach(s => io.observe(s));
-  })();
-
-  // Quick Contact toggle (bottom-right)
-  (function(){
-    const fab = document.getElementById("contactFab");
-    const pop = document.getElementById("contactPop");
-    const close = document.getElementById("contactClose");
-
-    function closePop(){ pop.classList.remove("open"); }
-    function togglePop(){ pop.classList.toggle("open"); }
-
-    fab.addEventListener("click", (e)=>{ e.stopPropagation(); togglePop(); });
-    close.addEventListener("click", (e)=>{ e.stopPropagation(); closePop(); });
-
-    document.addEventListener("click", (e)=>{
-      if(!pop.classList.contains("open")) return;
-      const inside = pop.contains(e.target) || fab.contains(e.target);
-      if(!inside) closePop();
-    });
-
-    document.addEventListener("keydown", (e)=>{
-      if(e.key === "Escape") closePop();
-    });
-  })();
-
   // Cursor animation (smooth follower + hover expand)
   (function(){
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -1404,48 +455,31 @@
 
     let mx = window.innerWidth / 2, my = window.innerHeight / 2;
     let cx = mx, cy = my;
+    const speed = 0.18;
 
-    const speed = 0.18; // cursor lag (lower = more lag)
-
-    function onMove(e){
-      mx = e.clientX;
-      my = e.clientY;
-      cursor.classList.remove("hidden");
-      dot.classList.remove("hidden");
-    }
-
+    function onMove(e){ mx = e.clientX; my = e.clientY; }
     function raf(){
       cx += (mx - cx) * speed;
       cy += (my - cy) * speed;
-
       cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
       dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-
       requestAnimationFrame(raf);
     }
 
-    // hover targets
-    const hoverSelector = "a, button, .btn, .pub, .cert-card, .tile, .dot";
-    function setHover(on){
-      cursor.classList.toggle("is-hover", on);
-    }
-
+    const hoverSelector = "a, button, [role='button'], .pillbtn, .ghost, .project-card";
     document.addEventListener("mousemove", onMove, { passive:true });
-    document.addEventListener("mouseleave", ()=>{ cursor.classList.add("hidden"); dot.classList.add("hidden"); });
-
-    document.addEventListener("mousedown", ()=> cursor.classList.add("is-down"));
-    document.addEventListener("mouseup", ()=> cursor.classList.remove("is-down"));
+    document.addEventListener("mousedown", ()=> cursor.classList.add("down"));
+    document.addEventListener("mouseup", ()=> cursor.classList.remove("down"));
 
     document.addEventListener("mouseover", (e)=>{
-      if(e.target && e.target.closest && e.target.closest(hoverSelector)) setHover(true);
+      if(e.target && e.target.closest && e.target.closest(hoverSelector)) cursor.classList.add("hover");
     });
     document.addEventListener("mouseout", (e)=>{
-      if(e.target && e.target.closest && e.target.closest(hoverSelector)) setHover(false);
+      if(e.target && e.target.closest && e.target.closest(hoverSelector)) cursor.classList.remove("hover");
     });
 
     raf();
   })();
 </script>
-
 </body>
 </html>
