@@ -147,6 +147,29 @@
     border-color: rgba(0,0,0,.18);
   }
 
+  /* ============================
+     ✅ Micro-interactions core
+     ============================ */
+
+  /* Magnetic buttons use CSS vars */
+  .btn, .contact-btn, .xbtn, .copy{
+    --mx: 0px;
+    --my: 0px;
+    --hoverLift: 0px;
+    transform: translate(calc(var(--mx)), calc(var(--my) + var(--hoverLift)));
+    will-change: transform;
+  }
+
+  /* Tilt on cards via CSS vars */
+  .tiltable{
+    --rx: 0deg;
+    --ry: 0deg;
+    --lift: 0px;
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
   /* ===== Cards ===== */
   .card{
     background:#fff;
@@ -157,7 +180,7 @@
     position:relative;
   }
   .card:hover{
-    transform: translateY(-3px);
+    --lift: -3px;
     box-shadow: var(--shadow);
   }
 
@@ -241,6 +264,7 @@
     gap: 10px;
     align-items:center;
   }
+
   .btn{
     display:inline-flex;
     align-items:center;
@@ -254,11 +278,14 @@
     color: #000;
     font-weight: 800;
     font-size: 13px;
-    transition: 0.18s var(--ease);
+    transition: background .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
     cursor:pointer;
     white-space:nowrap;
   }
-  .btn:hover{ background: var(--soft); transform: translateY(-1px); }
+  .btn:hover{
+    background: var(--soft);
+    --hoverLift: -1px;
+  }
 
   .btn.primary{
     border-color: rgba(0,0,0,.25);
@@ -267,13 +294,13 @@
     box-shadow: 0 14px 38px rgba(0,0,0,0.18);
   }
   .btn.primary:hover{
-    transform: translateY(-2px);
+    --hoverLift: -2px;
     box-shadow: 0 18px 48px rgba(0,0,0,0.22);
   }
 
   .li-ico{ width:14px; height:14px; display:inline-block; opacity:.9; }
 
-  /* New top-right panel (replacement) */
+  /* Top-right panel */
   .panel{
     border:1px solid var(--line);
     border-radius: var(--r);
@@ -307,9 +334,9 @@
     border:1px solid rgba(0,0,0,.10);
     border-radius: 12px;
     background:#fff;
-    transition: 0.18s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease), background .18s var(--ease);
   }
-  .ql:hover{ transform: translateY(-2px); background:#fafafa; }
+  .ql:hover{ background:#fafafa; --lift:-2px; box-shadow: var(--shadow2); }
   .ql .left{
     display:flex;
     align-items:center;
@@ -425,11 +452,11 @@
     gap: 14px;
     position:relative;
     overflow:hidden;
-    transition: 0.20s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
   .cert-card:hover{
-    transform: translateY(-3px);
+    --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
   .cert-logo{
@@ -479,13 +506,6 @@
     align-items:center;
     flex: 0 0 auto;
   }
-  .cert-actions .btn{
-    transform: translateX(0);
-    transition: transform .22s var(--ease), background .22s var(--ease);
-  }
-  .cert-card:hover .cert-actions .btn{
-    transform: translateX(-4px);
-  }
 
   /* ===== Experience Timeline ===== */
   .timeline{
@@ -509,10 +529,10 @@
     border-radius: var(--r);
     background:#fff;
     padding: 14px 14px 14px 16px;
-    transition: 0.20s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
   }
   .t-item:hover{
-    transform: translateY(-3px);
+    --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
   .t-item::before{
@@ -584,11 +604,11 @@
     padding: 16px;
     position:relative;
     overflow:hidden;
-    transition: 0.20s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     cursor:pointer;
   }
   .pub:hover{
-    transform: translateY(-3px);
+    --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
   @media (max-width: 980px){
@@ -644,6 +664,7 @@
     display:block;
   }
 
+  /* Screenshot: lift + subtle tilt stays */
   .pub-preview img{
     transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
     transform-origin: center;
@@ -691,12 +712,12 @@
     border-radius: var(--r);
     background:#fff;
     padding: 16px;
-    transition: 0.20s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     position:relative;
     overflow:hidden;
   }
   .tile:hover{
-    transform: translateY(-3px);
+    --lift:-3px;
     box-shadow: 0 18px 55px rgba(0,0,0,0.10);
   }
   .tag{
@@ -739,9 +760,13 @@
     border-radius: var(--r2);
     background:#fff;
     padding: 16px;
-    transition: 0.18s var(--ease);
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease), background .18s var(--ease);
   }
-  .mini:hover{ transform: translateY(-2px); background:#fafafa; }
+  .mini:hover{
+    --lift:-2px;
+    background:#fafafa;
+    box-shadow: var(--shadow2);
+  }
 
   footer{
     margin-top: 24px;
@@ -786,9 +811,18 @@
     .scroll-dots{ display:none; }
   }
 
-  /* Reveal */
-  .reveal{ opacity:0; transform: translateY(18px); }
-  .reveal.in{ opacity:1; transform: translateY(0); transition: 0.75s var(--ease); }
+  /* ✅ Reveal with fade + blur */
+  .reveal{
+    opacity:0;
+    transform: translateY(18px);
+    filter: blur(10px);
+  }
+  .reveal.in{
+    opacity:1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition: opacity 0.85s var(--ease), transform 0.85s var(--ease), filter 0.85s var(--ease);
+  }
 
   /* ===== Bottom-right contact icon + popover ===== */
   .contact-fab{
@@ -808,10 +842,10 @@
     box-shadow: var(--shadow2);
     display:grid;
     place-items:center;
-    transition: 0.18s var(--ease);
+    transition: background .18s var(--ease), box-shadow .18s var(--ease);
     cursor:pointer;
   }
-  .contact-btn:hover{ transform: translateY(-2px); background: var(--soft); }
+  .contact-btn:hover{ background: var(--soft); }
   .contact-btn svg{ width:20px; height:20px; }
 
   .contact-pop{
@@ -855,9 +889,9 @@
     padding: 6px 10px;
     font-weight: 900;
     cursor:pointer;
-    transition: .18s var(--ease);
+    transition: background .18s var(--ease);
   }
-  .xbtn:hover{ background: var(--soft); transform: translateY(-1px); }
+  .xbtn:hover{ background: var(--soft); }
 
   .contact-pop .body{
     padding: 12px 14px 14px;
@@ -897,10 +931,10 @@
     padding: 8px 10px;
     font-weight: 900;
     cursor:pointer;
-    transition:.18s var(--ease);
+    transition: background .18s var(--ease);
     font-size: 12px;
   }
-  .copy:hover{ background: var(--soft); transform: translateY(-1px); }
+  .copy:hover{ background: var(--soft); }
 
   .toast{
     position:fixed;
@@ -943,6 +977,9 @@
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
+    .reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
+    .tiltable{ transform:none !important; }
+    .btn, .contact-btn, .xbtn, .copy{ transform:none !important; }
   }
 </style>
 </head>
@@ -984,7 +1021,7 @@
     </div>
 
     <!-- INTRO -->
-    <section class="card glow hero hero-main anchor reveal" id="intro">
+    <section class="card glow hero hero-main anchor reveal tiltable" id="intro">
       <div class="hero-grid">
 
         <div>
@@ -1017,7 +1054,7 @@
           <p>Fast access to key items: CV, featured work, and contact.</p>
 
           <div class="quicklinks">
-            <div class="ql">
+            <div class="ql tiltable">
               <a href="CV_Bhishek_Shibdeen.pdf" target="_blank" rel="noreferrer">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1032,7 +1069,7 @@
               </a>
             </div>
 
-            <div class="ql">
+            <div class="ql tiltable">
               <a href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1047,7 +1084,7 @@
               </a>
             </div>
 
-            <div class="ql">
+            <div class="ql tiltable">
               <a href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1062,7 +1099,7 @@
               </a>
             </div>
 
-            <div class="ql">
+            <div class="ql tiltable">
               <a href="mailto:bhishek.shibdeen@icloud.com">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -1083,7 +1120,7 @@
     </section>
 
     <!-- CERTIFICATIONS -->
-    <section class="card glow section anchor reveal" id="certs">
+    <section class="card glow section anchor reveal tiltable" id="certs">
       <div class="section-head">
         <div class="section-title">
           <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
@@ -1096,7 +1133,7 @@
 
       <div class="section-body">
         <div class="cert-grid">
-          <div class="cert-card">
+          <div class="cert-card tiltable">
             <div class="cert-logo"><img src="yale.jpeg" alt="Yale University logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>Financial Markets — Yale University (Coursera)</h3>
@@ -1107,7 +1144,7 @@
             </div>
           </div>
 
-          <div class="cert-card">
+          <div class="cert-card tiltable">
             <div class="cert-logo"><img src="fca.jpeg" alt="Financial Crime Academy by Verdian logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>AML Essentials — Financial Crime Academy</h3>
@@ -1118,7 +1155,7 @@
             </div>
           </div>
 
-          <div class="cert-card">
+          <div class="cert-card tiltable">
             <div class="cert-logo"><img src="fei.png" alt="France Éducation international logo" loading="lazy" /></div>
             <div class="cert-info">
               <h3>DELF B2 — Diplôme d’Études en Langue Française</h3>
@@ -1132,8 +1169,8 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE (Timeline) -->
-    <section class="card glow section anchor reveal" id="experience">
+    <!-- EXPERIENCE -->
+    <section class="card glow section anchor reveal tiltable" id="experience">
       <div class="section-head">
         <div class="section-title">
           <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
@@ -1146,7 +1183,7 @@
 
       <div class="section-body">
         <div class="timeline">
-          <div class="t-item reveal">
+          <div class="t-item reveal tiltable">
             <div class="t-head">
               <div>
                 <p class="t-title">KYC & Compliance Operations Intern — ARIE Finance</p>
@@ -1155,13 +1192,8 @@
               <div class="t-meta">Dec 2025 — Present</div>
             </div>
             <p class="t-desc">
-          Conducted KYC and CDD reviews for corporate and retail clients using KYCP within
-              a regulated fintech environment. Performed client screening, including sanctions 
-              and PEP checks, ensuring compliance with AML and regulatory requirements.
-              Managed ongoing monitoring of client documentation through the KYC portal, 
-              maintaining data accuracy and regulatory completeness. Identified and resolved KYC discrepancies
-              to enhance onboarding efficiency and mitigate compliance risk. Supported account opening processes
-              by validating client documentation against internal policies and regulatory standards
+              Conduct KYC & CDD reviews for corporate/retail clients, perform sanctions & PEP screening,
+              manage ongoing monitoring and remediation, and validate onboarding documentation against internal policy and regulatory expectations.
             </p>
             <div class="t-tags">
               <span class="tagchip">KYC / CDD</span>
@@ -1175,7 +1207,7 @@
     </section>
 
     <!-- PROJECTS -->
-    <section class="card glow section anchor reveal" id="projects">
+    <section class="card glow section anchor reveal tiltable" id="projects">
       <div class="section-head">
         <div class="section-title">
           <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
@@ -1187,7 +1219,7 @@
       </div>
 
       <div class="section-body">
-        <div class="pub" role="button" tabindex="0" aria-label="Open AML Regulations in Mauritius PDF"
+        <div class="pub tiltable" role="button" tabindex="0" aria-label="Open AML Regulations in Mauritius PDF"
              onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')"
              onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('AML_Regulations_Mauritius.pdf','_blank'); }">
 
@@ -1234,19 +1266,19 @@
         </div>
 
         <div class="grid3">
-          <div class="tile reveal">
+          <div class="tile reveal tiltable">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>KYC Controls Overview</h4>
             <p>Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.</p>
           </div>
 
-          <div class="tile reveal">
+          <div class="tile reveal tiltable">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>Screening & Escalation Logic</h4>
             <p>Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
           </div>
 
-          <div class="tile reveal">
+          <div class="tile reveal tiltable">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>Documentation Discipline</h4>
             <p>A practical checklist for maintaining review-ready files: evidence, rationale, and consistency across onboarding.</p>
@@ -1256,7 +1288,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="card glow section anchor reveal" id="contact">
+    <section class="card glow section anchor reveal tiltable" id="contact">
       <div class="section-head">
         <div class="section-title">
           <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
@@ -1269,7 +1301,7 @@
 
       <div class="section-body">
         <div class="two-col">
-          <div class="mini reveal">
+          <div class="mini reveal tiltable">
             <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Email</div>
             <div style="margin-top:6px; font-weight:950;">
               <a href="mailto:bhishek.shibdeen@icloud.com" style="color:#000; text-decoration:none;">
@@ -1283,7 +1315,7 @@
             </div>
           </div>
 
-          <div class="mini reveal">
+          <div class="mini reveal tiltable">
             <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">LinkedIn</div>
             <div style="margin-top:10px;">
               <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
@@ -1459,7 +1491,6 @@
     });
     close.addEventListener("click", closePop);
 
-    // close when clicking outside
     document.addEventListener("click", (e) => {
       const within = pop.contains(e.target) || btn.contains(e.target);
       if(!within) closePop();
@@ -1492,6 +1523,52 @@
         e.preventDefault();
         e.stopPropagation();
         copyText(b.dataset.copy || "");
+      });
+    });
+  })();
+
+  /* ============================
+     ✅ Micro-interactions JS
+     - Magnetic buttons
+     - Tilt cards
+     ============================ */
+  (function(){
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce) return;
+
+    // Magnetic hover
+    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy");
+    const strength = 10; // subtle
+    magnets.forEach(el => {
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - (r.left + r.width/2)) / (r.width/2);
+        const y = (e.clientY - (r.top + r.height/2)) / (r.height/2);
+        el.style.setProperty("--mx", `${x * strength}px`);
+        el.style.setProperty("--my", `${y * strength}px`);
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.setProperty("--mx", `0px`);
+        el.style.setProperty("--my", `0px`);
+      });
+    });
+
+    // Tilt cards
+    const tilts = document.querySelectorAll(".tiltable");
+    const maxTilt = 4; // degrees (light)
+    tilts.forEach(el => {
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;   // 0..1
+        const py = (e.clientY - r.top) / r.height;   // 0..1
+        const ry = (px - 0.5) * (maxTilt * 2);
+        const rx = (0.5 - py) * (maxTilt * 2);
+        el.style.setProperty("--rx", `${rx.toFixed(2)}deg`);
+        el.style.setProperty("--ry", `${ry.toFixed(2)}deg`);
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.setProperty("--rx", `0deg`);
+        el.style.setProperty("--ry", `0deg`);
       });
     });
   })();
