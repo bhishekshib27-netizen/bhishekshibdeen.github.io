@@ -106,12 +106,20 @@ rgba(255,255,255,.25)
       radial-gradient(circle at 78% 72%, rgba(0,0,0,0.03), transparent 48%);
   }
   [data-theme="dark"] .bg-stage{
-    background:
-      radial-gradient(circle at 12% 18%, rgba(255,255,255,0.06), transparent 44%),
-      radial-gradient(circle at 88% 20%, rgba(255,255,255,0.05), transparent 46%),
-      radial-gradient(circle at 50% 92%, rgba(255,255,255,0.04), transparent 52%),
-      radial-gradient(circle at 78% 72%, rgba(255,255,255,0.04), transparent 48%);
-  }
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+
+background:
+linear-gradient(
+180deg,
+#0b0f14 0%,
+#0e141b 35%,
+#0b0f14 70%,
+#070b10 100%
+);
+}
 
   .grid{
     position:absolute; inset:0;
