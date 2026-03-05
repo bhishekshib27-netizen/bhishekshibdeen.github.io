@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Modern compliance portfolio: certifications, experience, projects, cinematic grain + spotlight glow, rotating featured work." />
+<meta name="description" content="Modern compliance portfolio: certifications, experience, projects, cinematic grain + spotlight glow, featured work." />
 
 <!-- ✅ Premium fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,9 +395,8 @@
   .ql .s{ font-weight:650; font-size:12px; color: var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .ql .go{ font-weight:950; opacity:.7; }
 
-  /* Featured swap polish */
+  /* (kept for polish; no swapping now) */
   .swap-fade{ transition: opacity .35s var(--ease), transform .35s var(--ease), filter .35s var(--ease); }
-  .swap-out{ opacity:0; transform: translateY(6px); filter: blur(6px); }
   .swap-glow{
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--line) 85%, transparent),
@@ -834,7 +833,7 @@
 
         <aside class="panel reveal" aria-label="Quick Links">
           <h3>Quick Links</h3>
-          <p>Fast access to your CV + rotating featured work (updates every 5 seconds).</p>
+          <p>Fast access to your CV + featured work.</p>
 
           <div class="quicklinks">
             <div class="ql">
@@ -852,8 +851,8 @@
               </a>
             </div>
 
-            <!-- ✅ ROTATING FEATURED (Quick Links) -->
-            <div class="ql swap-fade" id="featuredQL">
+            <!-- ✅ FEATURED (Quick Links) — static -->
+            <div class="ql" id="featuredQL">
               <a id="featuredQLLink" href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
@@ -987,8 +986,8 @@
       </div>
 
       <div class="section-body">
-        <!-- ✅ ROTATING FEATURED (Main card) -->
-        <div class="pub swap-fade" id="featuredCard" role="button" tabindex="0" aria-label="Open featured PDF">
+        <!-- ✅ FEATURED (Main card) — static -->
+        <div class="pub" id="featuredCard" role="button" tabindex="0" aria-label="Open featured PDF">
           <div class="pub-preview" aria-hidden="true">
             <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
               <span class="pill"><span class="sq"></span>Featured PDF</span>
@@ -1116,7 +1115,7 @@
 
       <div class="foot-sub">
         <div>© 2026 Bhishek Shibdeen</div>
-        <div style="opacity:.9;">Tip: click the featured card — it rotates automatically ✨</div>
+        <div style="opacity:.9;">Tip: click the featured card to open the PDF ✨</div>
       </div>
     </footer>
   </div>
@@ -1418,34 +1417,18 @@
     resize(); draw();
   })();
 
-  // ✅ Rotating Featured PDF (every 5s) + subtle glow on change
+  // ✅ Featured PDF (STATIC) — no rotation
   (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const featured = [
-      {
-        key: "aml",
-        href: "AML_Regulations_Mauritius.pdf",
-        title: "AML Regulations in Mauritius",
-        desc: "A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius: reporting flow, core obligations (CDD/EDD, STR, RBA), and how key bodies interact across supervision and intelligence.",
-        thumb: "aml-thumb.jpeg",
-        tag: "AML/CFT",
-        region: "Mauritius",
-        badges: ["FATF-Aligned","Mauritius Regulatory Context","Educational Framework"],
-        qlSub: "AML Regulations in Mauritius"
-      },
-      {
-        key: "kyc",
-        href: "KYC_Controls_Overview.pdf",
-        title: "KYC Controls Overview",
-        desc: "Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.",
-        thumb: "kyc-controls-overview.jpeg",
-        tag: "KYC",
-        region: "Controls",
-        badges: ["CDD / EDD Triggers","File Quality Checks","Audit-Ready Standards"],
-        qlSub: "KYC Controls Overview"
-      }
-    ];
+    const featured = {
+      href: "AML_Regulations_Mauritius.pdf",
+      title: "AML Regulations in Mauritius",
+      desc: "A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius: reporting flow, core obligations (CDD/EDD, STR, RBA), and how key bodies interact across supervision and intelligence.",
+      thumb: "aml-thumb.jpeg",
+      tag: "AML/CFT",
+      region: "Mauritius",
+      badges: ["FATF-Aligned","Mauritius Regulatory Context","Educational Framework"],
+      qlSub: "AML Regulations in Mauritius"
+    };
 
     // Main card refs
     const card = document.getElementById("featuredCard");
@@ -1458,11 +1441,8 @@
     const badges = document.getElementById("featuredBadges");
 
     // Quick link refs
-    const ql = document.getElementById("featuredQL");
     const qlLink = document.getElementById("featuredQLLink");
     const qlSub = document.getElementById("featuredQLSub");
-
-    let idx = 0;
 
     function apply(item){
       // main
@@ -1490,39 +1470,7 @@
       };
     }
 
-    function swap(){
-      const item = featured[idx];
-
-      // fade out
-      card.classList.add("swap-out");
-      ql.classList.add("swap-out");
-
-      setTimeout(() => {
-        apply(item);
-
-        // fade in
-        card.classList.remove("swap-out");
-        ql.classList.remove("swap-out");
-
-        // glow pulse
-        card.classList.add("swap-glow");
-        ql.classList.add("swap-glow");
-        setTimeout(() => {
-          card.classList.remove("swap-glow");
-          ql.classList.remove("swap-glow");
-        }, 650);
-
-      }, reduce ? 0 : 240);
-
-      idx = (idx + 1) % featured.length;
-    }
-
-    // initial
-    apply(featured[0]);
-    idx = 1;
-
-    // rotate
-    setInterval(swap, 5000);
+    apply(featured);
   })();
 </script>
 
