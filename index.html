@@ -765,6 +765,212 @@
     font-size:12px;
   }
   .foot-sub strong{ color: color-mix(in srgb, var(--text) 82%, transparent); font-weight:900; }
+
+  /* =========================================================
+     🤖 Chatbot UI (NEW): typing indicator + suggestion chips
+     ========================================================= */
+  .chat-fab{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    z-index:95;
+    display:grid;
+    gap:10px;
+    justify-items:start;
+  }
+  @media (max-width: 720px){
+    .chat-fab{ left:14px; bottom:14px; }
+  }
+
+  .chat-btn{
+    width:52px; height:52px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background: var(--card);
+    box-shadow: var(--shadow2);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    transition: background .18s var(--ease), transform .18s var(--ease);
+    user-select:none;
+  }
+  .chat-btn:hover{ background: var(--soft); transform: translateY(-1px); }
+  .chat-btn svg{ width:20px; height:20px; }
+
+  .chatbot{
+    width:min(370px, calc(100vw - 36px));
+    border:1px solid var(--line);
+    border-radius:14px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    transform-origin: bottom left;
+    transform: translateY(8px) scale(.98);
+    opacity:0;
+    pointer-events:none;
+    transition: 0.18s var(--ease);
+  }
+  .chatbot.open{
+    opacity:1;
+    pointer-events:auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .chat-head{
+    padding:12px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    background: var(--soft);
+  }
+  .chat-title{
+    display:flex; align-items:center; gap:10px;
+    font-weight:950;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    font-size:12px;
+    opacity:.92;
+  }
+  .chat-title .dot{
+    width:9px; height:9px; border-radius:3px;
+    background: linear-gradient(135deg, rgba(0,0,0,.90), rgba(0,0,0,.25));
+  }
+  [data-theme="dark"] .chat-title .dot{
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  }
+
+  .chat-body{
+    padding:12px 12px 10px;
+    display:grid;
+    gap:10px;
+  }
+
+  .chatlog{
+    height: 300px;
+    overflow:auto;
+    padding:4px;
+    display:grid;
+    gap:10px;
+    scroll-behavior:smooth;
+  }
+  .msg{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .bubble{
+    max-width: 86%;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 10px;
+    background: var(--soft);
+    line-height:1.55;
+    font-size:13px;
+    font-weight:540;
+    color: color-mix(in srgb, var(--text) 88%, transparent);
+    white-space:pre-wrap;
+  }
+  .msg.user{ justify-content:flex-end; }
+  .msg.user .bubble{
+    background: var(--card);
+    font-weight:650;
+  }
+  .msg.bot .bubble{
+    background: color-mix(in srgb, var(--soft) 55%, var(--card));
+  }
+
+  /* typing indicator row */
+  .typing-row{
+    display:none;
+    align-items:center;
+    gap:10px;
+    padding:0 4px;
+  }
+  .typing-row.show{ display:flex; }
+  .typing-pill{
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:8px 10px;
+    background: var(--soft);
+    font-weight:800;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    opacity:.92;
+  }
+  .dots{
+    display:inline-flex;
+    gap:4px;
+    align-items:center;
+  }
+  .dots span{
+    width:6px; height:6px;
+    border-radius:2px;
+    background: color-mix(in srgb, var(--text) 75%, transparent);
+    opacity:.35;
+    animation: dotPulse 1s infinite ease-in-out;
+  }
+  .dots span:nth-child(2){ animation-delay: .15s; }
+  .dots span:nth-child(3){ animation-delay: .30s; }
+  @keyframes dotPulse{
+    0%, 100%{ transform: translateY(0); opacity:.35; }
+    50%{ transform: translateY(-2px); opacity:.85; }
+  }
+
+  /* suggestion chips */
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:2px 2px 0;
+  }
+  .chip{
+    border:1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    border-radius:999px;
+    padding:8px 10px;
+    font-weight:900;
+    font-size:12px;
+    cursor:pointer;
+    transition: transform .18s var(--ease), background .18s var(--ease);
+    user-select:none;
+  }
+  .chip:hover{ background: var(--soft); transform: translateY(-1px); }
+
+  .chat-input{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    padding:10px;
+    border-top:1px solid var(--line);
+    background: var(--card);
+  }
+  .chat-input input{
+    flex:1 1 auto;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px 12px;
+    background: var(--card);
+    color: var(--text);
+    outline:none;
+    font-weight:650;
+    font-size:13px;
+  }
+  .chat-input input::placeholder{ color: var(--muted); font-weight:650; }
+  .chat-send{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px 12px;
+    background: var(--soft);
+    color: var(--text);
+    font-weight:950;
+    font-size:13px;
+    cursor:pointer;
+    transition: transform .18s var(--ease), background .18s var(--ease);
+    white-space:nowrap;
+  }
+  .chat-send:hover{ background: color-mix(in srgb, var(--soft) 70%, var(--card)); transform: translateY(-1px); }
 </style>
 </head>
 
@@ -1098,7 +1304,7 @@
       </div>
     </section>
 
-    <!-- Footer -->
+        <!-- Footer -->
     <footer class="reveal" id="press">
       <div class="foot-inner">
         <div class="foot-left">
@@ -1160,6 +1366,45 @@
   </div>
 
   <div class="toast" id="toast" aria-hidden="true">Copied ✅</div>
+
+  <!-- =========================================================
+       🤖 Chatbot (NEW) — bottom-left
+       Includes: typing indicator + dynamic suggestion chips
+       ========================================================= -->
+  <div class="chat-fab" aria-label="Assistant chat">
+    <div class="chatbot" id="chatbot" role="dialog" aria-label="Chat assistant">
+      <div class="chat-head">
+        <div class="chat-title"><span class="dot"></span> Assistant</div>
+        <button class="xbtn" id="chatClose" type="button" aria-label="Close chat">✕</button>
+      </div>
+
+      <div class="chat-body">
+        <div class="chatlog" id="chatlog" aria-live="polite" aria-label="Chat messages"></div>
+
+        <div class="typing-row" id="typingRow" aria-hidden="true">
+          <div class="typing-pill">
+            Assistant is typing…
+            <span class="dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="chips" id="chatChips" aria-label="Suggested questions"></div>
+      </div>
+
+      <div class="chat-input">
+        <input id="chatInput" type="text" placeholder="Ask about projects, AML, or how to contact…" autocomplete="off" />
+        <button class="chat-send" id="chatSend" type="button">Send</button>
+      </div>
+    </div>
+
+    <button class="chat-btn" id="chatFab" type="button" aria-label="Open chat">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M4 4h16v12H7l-3 3V4zm3 4h10v2H7V8zm0 4h7v2H7v-2z"/>
+      </svg>
+    </button>
+  </div>
 
 <script>
   // ===== Theme =====
@@ -1523,6 +1768,310 @@
 
     // rotate
     setInterval(swap, 5000);
+  })();
+
+  /* =========================================================
+     🤖 Chatbot logic (NEW)
+     - Typing indicator
+     - Dynamic suggestion chips
+     - Auto-open after 4s on FIRST VISIT
+     ========================================================= */
+  (function(){
+    const bot = document.getElementById("chatbot");
+    const fab = document.getElementById("chatFab");
+    const close = document.getElementById("chatClose");
+    const log = document.getElementById("chatlog");
+    const input = document.getElementById("chatInput");
+    const send = document.getElementById("chatSend");
+    const chipsWrap = document.getElementById("chatChips");
+    const typingRow = document.getElementById("typingRow");
+
+    if(!bot || !fab || !close || !log || !input || !send || !chipsWrap || !typingRow) return;
+
+    const EMAIL = "bhishek.shibdeen@icloud.com";
+    const PHONE = "+230 55024085";
+    const LINKEDIN = "https://www.linkedin.com/in/bhishekshibdeen/";
+
+    // 🔧 Optional: auto-open on first visit
+    const AUTO_OPEN_ON_FIRST_VISIT = true;
+    const AUTO_OPEN_DELAY_MS = 4000;
+    const OPENED_KEY = "bhishek_chat_auto_opened_v1";
+
+    function openChat(){
+      bot.classList.add("open");
+      setTimeout(()=> input.focus(), 60);
+      scrollToBottom();
+    }
+    function closeChat(){ bot.classList.remove("open"); }
+
+    fab.addEventListener("click", () => {
+      bot.classList.toggle("open");
+      if(bot.classList.contains("open")) setTimeout(()=> input.focus(), 60);
+      scrollToBottom();
+    });
+    close.addEventListener("click", closeChat);
+
+    document.addEventListener("click", (e) => {
+      const within = bot.contains(e.target) || fab.contains(e.target);
+      if(!within) closeChat();
+    });
+
+    function scrollToBottom(){
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function addMsg(role, text){
+      const row = document.createElement("div");
+      row.className = "msg " + (role === "user" ? "user" : "bot");
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.textContent = text;
+
+      row.appendChild(bubble);
+      log.appendChild(row);
+      scrollToBottom();
+    }
+
+    function setTyping(isOn){
+      if(isOn){
+        typingRow.classList.add("show");
+        typingRow.setAttribute("aria-hidden","false");
+      } else {
+        typingRow.classList.remove("show");
+        typingRow.setAttribute("aria-hidden","true");
+      }
+      scrollToBottom();
+    }
+
+    // --- suggestion chips ---
+    const chipSets = {
+      start: [
+        "What are your main projects?",
+        "How can I contact you?",
+        "What’s your experience?",
+        "Which certification is most relevant?"
+      ],
+      projects: [
+        "Tell me about AML Regulations in Mauritius",
+        "Explain KYC Controls Overview",
+        "What tools/process do you use for screening?",
+        "Open your featured PDF"
+      ],
+      certs: [
+        "Which certifications do you have?",
+        "What did you learn from Yale Financial Markets?",
+        "What is AML Essentials about?",
+        "Why DELF B2 matters?"
+      ],
+      contact: [
+        "Copy your email",
+        "Copy your phone",
+        "Open LinkedIn",
+        "Send an email now"
+      ],
+      experience: [
+        "What do you do at ARIE Finance?",
+        "What is your KYC workflow?",
+        "How do you handle EDD?",
+        "How do you ensure file quality?"
+      ],
+      default: [
+        "Show me projects",
+        "Show certifications",
+        "How do I reach you?",
+        "Summarise your profile"
+      ]
+    };
+
+    function renderChips(keys){
+      chipsWrap.innerHTML = "";
+      const items = keys || chipSets.default;
+      items.forEach(label => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chip";
+        b.textContent = label;
+        b.addEventListener("click", () => {
+          input.value = label;
+          handleSend();
+        });
+        chipsWrap.appendChild(b);
+      });
+    }
+
+    function normalize(s){
+      return (s || "").toLowerCase().trim();
+    }
+
+    function routeChipsByIntent(intent){
+      const map = {
+        projects: chipSets.projects,
+        certs: chipSets.certs,
+        contact: chipSets.contact,
+        experience: chipSets.experience,
+        start: chipSets.start,
+        default: chipSets.default
+      };
+      renderChips(map[intent] || chipSets.default);
+    }
+
+    // --- response logic ---
+    function detectIntent(q){
+      const t = normalize(q);
+
+      if(t.includes("contact") || t.includes("email") || t.includes("phone") || t.includes("linkedin") || t.includes("reach")) return "contact";
+      if(t.includes("cert") || t.includes("yale") || t.includes("delf") || t.includes("academy") || t.includes("fca")) return "certs";
+      if(t.includes("experience") || t.includes("arie") || t.includes("intern") || t.includes("workflow") || t.includes("edd") || t.includes("cdd")) return "experience";
+      if(t.includes("project") || t.includes("aml") || t.includes("kyc") || t.includes("screening") || t.includes("featured") || t.includes("pdf")) return "projects";
+
+      return "default";
+    }
+
+    function makeReply(q){
+      const t = normalize(q);
+
+      // quick actions
+      if(t.includes("copy your email") || t === "copy email" || t.includes("copy email")){
+        try{ navigator.clipboard.writeText(EMAIL); }catch(e){}
+        return "✅ Email copied: " + EMAIL;
+      }
+      if(t.includes("copy your phone") || t.includes("copy phone")){
+        try{ navigator.clipboard.writeText(PHONE); }catch(e){}
+        return "✅ Phone copied: " + PHONE;
+      }
+      if(t.includes("open linkedin")){
+        window.open(LINKEDIN, "_blank");
+        return "Opening LinkedIn ↗";
+      }
+      if(t.includes("send an email") || t.includes("email now")){
+        window.location.href = "mailto:" + EMAIL;
+        return "Opening your email app… ✉️";
+      }
+      if(t.includes("open your featured pdf") || t.includes("open featured") || t.includes("open pdf")){
+        window.open("AML_Regulations_Mauritius.pdf", "_blank");
+        return "Opening the featured PDF ↗";
+      }
+
+      // general answers
+      if(t.includes("main projects") || t.includes("your main projects") || t === "show me projects"){
+        return [
+          "Here are the key projects on this portfolio:",
+          "• AML Regulations in Mauritius (featured overview PDF)",
+          "• KYC Controls Overview (CDD/EDD triggers + file quality checks)",
+          "• Screening & Escalation Logic (sanctions/PEP/adverse media → decisions)",
+          "• Documentation Discipline (audit-ready checklist)",
+          "",
+          "Want me to open a PDF or summarise one?"
+        ].join("\n");
+      }
+
+      if(t.includes("experience") || t.includes("what’s your experience") || t.includes("what do you do at arie")){
+        return [
+          "At ARIE Finance, I support KYC & compliance operations:",
+          "• KYC / CDD reviews (corporate + retail)",
+          "• Sanctions & PEP screening",
+          "• Ongoing monitoring + remediation",
+          "• Documentation quality aligned to internal policy & regulatory expectations",
+          "",
+          "If you want, I can outline a clean KYC workflow (Step 1 → Step 6)."
+        ].join("\n");
+      }
+
+      if(t.includes("aml regulations") || t.includes("mauritius aml")){
+        return [
+          "The featured AML Regulations in Mauritius PDF is a simplified visual overview:",
+          "• Reporting flow (client → FI → FIU → regulators)",
+          "• Core obligations (CDD/EDD, STR, RBA)",
+          "• How key institutions interact (supervision + intelligence)",
+          "",
+          "Want me to open it now?"
+        ].join("\n");
+      }
+
+      if(t.includes("kyc controls overview") || t.includes("explain kyc controls")){
+        return [
+          "KYC Controls Overview focuses on risk-based onboarding controls:",
+          "• CDD vs EDD trigger logic",
+          "• File quality checks (completeness, validity, consistency)",
+          "• Audit-ready documentation standards (evidence + rationale + traceability)",
+          "",
+          "Want a short 5-bullet version suitable for LinkedIn too?"
+        ].join("\n");
+      }
+
+      if(t.includes("contact") || t.includes("how can i contact")){
+        return [
+          "You can reach Bhishek here:",
+          "• Email: " + EMAIL,
+          "• Phone: " + PHONE,
+          "• LinkedIn: " + LINKEDIN
+        ].join("\n");
+      }
+
+      if(t.includes("certification") || t.includes("certifications")){
+        return [
+          "Certifications shown here:",
+          "• Yale University (Coursera) — Financial Markets",
+          "• Financial Crime Academy — AML Essentials",
+          "• DELF B2 — French language diploma",
+          "",
+          "Want me to tell you which one to highlight on LinkedIn first?"
+        ].join("\n");
+      }
+
+      // fallback
+      return "Got it. Do you want to explore **Projects**, **Certifications**, or **Contact**?";
+    }
+
+    function handleSend(){
+      const text = input.value.trim();
+      if(!text) return;
+
+      addMsg("user", text);
+      input.value = "";
+
+      const intent = detectIntent(text);
+      routeChipsByIntent(intent);
+
+      // typing indicator + delayed reply (feels real)
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const delay = reduce ? 0 : Math.min(900, 380 + Math.random()*420);
+
+      setTyping(true);
+      setTimeout(() => {
+        setTyping(false);
+        addMsg("bot", makeReply(text));
+      }, delay);
+    }
+
+    send.addEventListener("click", handleSend);
+    input.addEventListener("keydown", (e) => {
+      if(e.key === "Enter"){
+        e.preventDefault();
+        handleSend();
+      }
+    });
+
+    // initial greeting + chips
+    function boot(){
+      addMsg("bot", "Hi 👋 I’m Bhishek’s assistant. Ask me about his projects, AML work, or how to contact him.");
+      routeChipsByIntent("start");
+    }
+    boot();
+
+    // auto-open once
+    if(AUTO_OPEN_ON_FIRST_VISIT){
+      try{
+        const already = localStorage.getItem(OPENED_KEY) === "1";
+        if(!already){
+          setTimeout(() => {
+            openChat();
+            localStorage.setItem(OPENED_KEY, "1");
+          }, AUTO_OPEN_DELAY_MS);
+        }
+      }catch(e){}
+    }
   })();
 </script>
 
