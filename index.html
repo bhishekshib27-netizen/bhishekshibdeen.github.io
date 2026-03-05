@@ -977,16 +977,56 @@
     box-shadow: var(--shadow2);
   }
 
-  /* Scroll dots */
-  .scroll-dots{
-    position: fixed;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: grid;
-    gap: 10px;
-    z-index: 80;
-  }
+  /* ===== Elevator Rail Navigation ===== */
+
+.scroll-rail{
+position: fixed;
+left: 20px;
+top: 50%;
+transform: translateY(-50%);
+height: 220px;
+width: 2px;
+
+background: rgba(255,255,255,.15);
+
+border-radius: 2px;
+z-index: 80;
+
+display:flex;
+align-items:flex-start;
+justify-content:center;
+}
+
+/* moving indicator */
+
+.rail-indicator{
+position:absolute;
+
+width:10px;
+height:10px;
+
+border-radius:50%;
+
+background: white;
+
+left:50%;
+transform:translateX(-50%);
+
+transition:
+top .45s cubic-bezier(.2,.8,.2,1),
+transform .25s ease;
+
+box-shadow:
+0 0 10px rgba(255,255,255,.35);
+}
+
+/* hide on mobile */
+
+@media (max-width:720px){
+.scroll-rail{
+display:none;
+}
+}
   .dotnav{
     width: 10px;
     height: 10px;
@@ -1266,14 +1306,10 @@
     </svg>
   </a>
 
-  <!-- Scroll dots -->
-  <div class="scroll-dots" aria-label="Section progress">
-    <a href="#intro" class="dotnav" data-target="intro" aria-label="Intro"></a>
-    <a href="#certs" class="dotnav" data-target="certs" aria-label="Certifications"></a>
-    <a href="#experience" class="dotnav" data-target="experience" aria-label="Experience"></a>
-    <a href="#projects" class="dotnav" data-target="projects" aria-label="Projects"></a>
-    <a href="#contact" class="dotnav" data-target="contact" aria-label="Contact"></a>
-  </div>
+  <!-- Elevator Rail Navigation -->
+<div class="scroll-rail" aria-hidden="true">
+  <div class="rail-indicator" id="railIndicator"></div>
+</div>
 
   <div class="wrap" id="top">
 
@@ -2295,6 +2331,33 @@
     resize();
     draw();
   })();
+/* ===== Elevator Rail Navigation ===== */
+
+const sections = document.querySelectorAll("section");
+const indicator = document.getElementById("railIndicator");
+
+window.addEventListener("scroll", () => {
+
+let index = 0;
+
+sections.forEach((section, i) => {
+
+const rect = section.getBoundingClientRect();
+
+if(rect.top <= window.innerHeight * 0.4){
+index = i;
+}
+
+});
+
+const total = sections.length;
+const railHeight = 220;
+
+const step = railHeight / (total - 1);
+
+indicator.style.top = `${index * step}px`;
+
+});
 </script>
 
 </body>
