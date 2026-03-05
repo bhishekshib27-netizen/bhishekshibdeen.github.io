@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Modern compliance portfolio: certifications, experience timeline, projects, searchable content, cinematic grain + spotlight glow, command palette." />
+<meta name="description" content="Modern compliance portfolio: certifications, experience timeline, projects, searchable content, cinematic grain + spotlight glow, cinematic fog, command palette." />
 
 <!-- ✅ Premium fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
     --ease: cubic-bezier(.2,.8,.2,1);
   }
 
-  /* ✅ Dark mode tokens (kept; you can still use it) */
+  /* ✅ Dark mode tokens */
   [data-theme="dark"]{
     --bg:#0b0f14;
     --card:#0f151d;
@@ -80,20 +80,10 @@
   /* ===========================
      🎛 Premium background stack
      LAYER ORDER:
-     particles canvas -> bg-stage -> ambient -> spotlight -> grain -> content
+     bg-stage -> fog -> ambient -> spotlight -> grain -> content
      =========================== */
 
- 
-
   .bg-stage{
-    
-    <div class="bg-stage">
-  <div class="grid"></div>
-</div>
-
-<div class="fog-layer"></div>
-<div class="fog-layer fog2"></div>
-<div class="fog-layer fog3"></div>
     position:fixed;
     inset:0;
     pointer-events:none;
@@ -105,7 +95,6 @@
       radial-gradient(circle at 50% 92%, rgba(0,0,0,0.02), transparent 52%),
       radial-gradient(circle at 78% 72%, rgba(0,0,0,0.018), transparent 48%);
   }
-
   [data-theme="dark"] .bg-stage{
     background:
       radial-gradient(circle at 14% 18%, rgba(255,255,255,0.06), transparent 44%),
@@ -127,6 +116,68 @@
     background:
       linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/96px 96px,
       linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/96px 96px;
+  }
+
+  /* ===== Cinematic Fog (replaces particles) ===== */
+  .fog-layer{
+    position:fixed;
+    inset:-22%;
+    pointer-events:none;
+    z-index:0;
+    filter: blur(85px);
+    opacity:.62;
+    transform: translate3d(0,0,0);
+    background:
+      radial-gradient(620px 520px at 18% 24%, rgba(0,0,0,0.045), transparent 72%),
+      radial-gradient(760px 620px at 78% 28%, rgba(0,0,0,0.038), transparent 74%),
+      radial-gradient(840px 680px at 54% 84%, rgba(0,0,0,0.032), transparent 76%);
+    animation: fogMove 44s ease-in-out infinite alternate;
+  }
+  .fog2{
+    opacity:.48;
+    filter: blur(95px);
+    animation-duration: 62s;
+    background:
+      radial-gradient(760px 640px at 28% 62%, rgba(0,0,0,0.032), transparent 76%),
+      radial-gradient(860px 720px at 84% 64%, rgba(0,0,0,0.028), transparent 78%),
+      radial-gradient(720px 620px at 56% 18%, rgba(0,0,0,0.026), transparent 76%);
+  }
+  .fog3{
+    opacity:.38;
+    filter: blur(105px);
+    animation-duration: 78s;
+    background:
+      radial-gradient(860px 720px at 14% 84%, rgba(0,0,0,0.026), transparent 80%),
+      radial-gradient(900px 760px at 74% 86%, rgba(0,0,0,0.022), transparent 82%),
+      radial-gradient(780px 640px at 60% 36%, rgba(0,0,0,0.020), transparent 82%);
+  }
+
+  [data-theme="dark"] .fog-layer{
+    opacity:.56;
+    background:
+      radial-gradient(680px 560px at 18% 24%, rgba(255,255,255,0.060), transparent 74%),
+      radial-gradient(820px 680px at 78% 28%, rgba(255,255,255,0.050), transparent 76%),
+      radial-gradient(920px 740px at 54% 84%, rgba(255,255,255,0.042), transparent 78%);
+  }
+  [data-theme="dark"] .fog2{
+    opacity:.46;
+    background:
+      radial-gradient(820px 700px at 28% 62%, rgba(255,255,255,0.045), transparent 78%),
+      radial-gradient(920px 780px at 84% 64%, rgba(255,255,255,0.040), transparent 80%),
+      radial-gradient(780px 680px at 56% 18%, rgba(255,255,255,0.036), transparent 80%);
+  }
+  [data-theme="dark"] .fog3{
+    opacity:.38;
+    background:
+      radial-gradient(920px 800px at 14% 84%, rgba(255,255,255,0.040), transparent 82%),
+      radial-gradient(980px 860px at 74% 86%, rgba(255,255,255,0.034), transparent 84%),
+      radial-gradient(860px 740px at 60% 36%, rgba(255,255,255,0.030), transparent 84%);
+  }
+
+  @keyframes fogMove{
+    0%   { transform: translate(-2.6%, -1.8%) scale(1.06); }
+    50%  { transform: translate( 2.2%,  1.5%) scale(1.10); }
+    100% { transform: translate(-1.8%,  2.1%) scale(1.08); }
   }
 
   /* ✨ Ambient glow + spotlight */
@@ -181,7 +232,7 @@
   }
 
   @media (max-width: 720px){
-    .spotlight, .ambient{ display:none; }
+    .spotlight, .ambient, .fog-layer{ display:none; }
   }
 
   /* 🎬 Grain overlay */
@@ -218,7 +269,7 @@
 
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
-    .ambient, .spotlight{ display:none !important; }
+    .ambient, .spotlight, .fog-layer{ display:none !important; }
     .reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
     .tiltable{ transform:none !important; }
     .grain{ animation:none !important; }
@@ -256,7 +307,6 @@
     border-radius: var(--r);
     box-shadow: var(--shadow2);
     backdrop-filter: blur(10px);
-
     transition: transform .35s var(--ease), background .18s var(--ease);
   }
   .nav.hide{ transform: translateY(-140%); }
@@ -267,6 +317,7 @@
     gap:10px;
     font-weight: 950;
     letter-spacing: -0.2px;
+    white-space:nowrap;
   }
   .brand-mark{
     width:11px; height:11px;
@@ -397,7 +448,7 @@
   .themebtn:hover{ background: var(--soft); transform: translateY(-1px); }
   .themebtn svg{ width:16px; height:16px; opacity:.9; }
 
-  /* ✅ CmdK micro button (subtle + corporate) */
+  /* ✅ CmdK micro button */
   .cmdkbtn{
     display:inline-flex;
     align-items:center;
@@ -436,7 +487,6 @@
     transform: translate(calc(var(--mx)), calc(var(--my) + var(--hoverLift)));
     will-change: transform;
   }
-
   .tiltable{
     --rx: 0deg;
     --ry: 0deg;
@@ -575,8 +625,6 @@
     box-shadow: 0 14px 38px rgba(0,0,0,0.45);
   }
   .btn.primary:hover{ --hoverLift: -2px; box-shadow: 0 18px 48px rgba(0,0,0,0.22); }
-
-  .li-ico{ width:14px; height:14px; display:inline-block; opacity:.9; }
 
   /* Top-right panel */
   .panel{
@@ -1043,7 +1091,7 @@
     box-shadow: var(--shadow2);
     font-weight: 900;
     font-size: 12px;
-    opacity:.0;
+    opacity:0;
     transform: translateY(8px);
     pointer-events:none;
     transition: .22s var(--ease);
@@ -1242,1456 +1290,923 @@
     transition: 0.2s var(--ease);
     color: var(--text);
   }
-  .toast.show{ opacity:1; transform: translateY(0); }
-
-  /* Mobile bottom nav */
-  #mobileNav{
-    position:fixed;
-    left:50%;
-    transform:translateX(-50%);
-    bottom:12px;
-    z-index:80;
-    background: var(--card);
-    border:1px solid var(--line);
-    border-radius: 12px;
-    box-shadow: var(--shadow2);
-    padding:8px;
-    display:none;
-    gap:6px;
+  .toast.show{
+    opacity:1;
+    transform: translateY(0);
   }
 
-  /* ✅ Press-ready footer */
-  footer{
-    margin-top: 18px;
-    border: 1px solid var(--line);
-    border-radius: var(--r);
-    background: var(--card);
-    box-shadow: var(--shadow2);
-    overflow:hidden;
-  }
-  .foot-inner{
-    padding: 14px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 12px;
-    flex-wrap:wrap;
-  }
-  .foot-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    min-width:0;
-  }
-  .foot-title{
-    font-weight: 950;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    font-size: 11px;
-    opacity:.82;
-    white-space:nowrap;
-  }
-  .foot-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding: 8px 10px;
-    border:1px solid var(--line);
-    border-radius: 12px;
-    background: var(--soft);
-    font-weight: 800;
-    font-size: 12px;
-    white-space:nowrap;
-  }
-  .foot-actions{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .foot-actions .btn{ padding: 9px 12px; border-radius: 12px; font-size: 12px; }
-  .foot-sub{
-    padding: 10px 16px 14px;
-    border-top: 1px dashed var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 10px;
-    flex-wrap:wrap;
-    color: var(--muted);
-    font-weight: 650;
-    font-size: 12px;
-  }
-  .foot-sub strong{ color: color-mix(in srgb, var(--text) 82%, transparent); font-weight: 900; }
-
-  /* ✅ Project credibility badges (bottom of page) */
-  .cred{
-    padding: 12px 16px 0;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
-  }
-  .cred .label{
-    border:1px solid var(--line);
-    background: var(--soft);
-    border-radius: 999px;
-    padding: 7px 10px;
-    font-size: 11px;
-    font-weight: 950;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    opacity:.9;
-  }
-
-  /* ✅ Search filtering helper */
-  .search-hidden{ display:none !important; }
-
-  /* ============================
-     ⌘K Command Palette
-     ============================ */
+  /* ===== Command Palette ===== */
   .palette{
-    position: fixed;
-    inset: 0;
-    z-index: 200;
+    position:fixed;
+    inset:0;
+    z-index:200;
     display:none;
-    place-items:center;
+    align-items:center;
+    justify-content:center;
     padding: 18px;
-  }
-  .palette.open{ display:grid; }
-  .palette .backdrop{
-    position:absolute; inset:0;
-    background: rgba(0,0,0,.25);
+    background: rgba(0,0,0,.22);
     backdrop-filter: blur(10px);
   }
-  [data-theme="dark"] .palette .backdrop{ background: rgba(0,0,0,.55); }
+  [data-theme="dark"] .palette{ background: rgba(0,0,0,.45); }
+  .palette.open{ display:flex; }
 
-  .palette .panel{
-    position:relative;
-    width: min(720px, 92vw);
+  .pal-box{
+    width:min(780px, 96vw);
     border:1px solid var(--line);
     border-radius: 16px;
-    background: color-mix(in srgb, var(--card) 92%, transparent);
+    background: var(--card);
     box-shadow: var(--shadow);
     overflow:hidden;
+    transform: translateY(6px);
+    opacity:0;
+    transition: .22s var(--ease);
   }
-  .palette .top{
-    padding: 12px 14px;
+  .palette.open .pal-box{
+    transform: translateY(0);
+    opacity:1;
+  }
+  .pal-top{
+    padding: 12px 12px 10px;
     border-bottom:1px solid var(--line);
     display:flex;
     gap:10px;
     align-items:center;
+    background: var(--soft);
   }
-  .palette .top .hint{
-    margin-left:auto;
+  .pal-input{
+    flex:1;
+    border:1px solid var(--line);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 800;
+    outline:none;
+    color: var(--text);
+  }
+  .pal-input::placeholder{ color: var(--muted); font-weight: 650; }
+  .pal-hint{
     font-size: 11px;
     font-weight: 900;
     opacity:.75;
-    display:flex;
-    gap:8px;
-    align-items:center;
     white-space:nowrap;
   }
-  .palette .top .hint kbd{
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 8px;
-    border: 1px solid var(--line);
-    background: var(--soft);
-  }
-  .palette input{
-    width: 100%;
-    border:1px solid var(--line);
-    border-radius: 12px;
-    padding: 12px 12px;
-    outline:none;
-    background: var(--card);
-    color: var(--text);
-    font-weight: 850;
-    font-size: 13px;
-  }
-  .palette .list{
-    max-height: 380px;
+  .pal-list{
+    max-height: 360px;
     overflow:auto;
-    padding: 10px;
+    padding: 8px;
     display:grid;
-    gap:8px;
+    gap: 8px;
   }
-  .palette .item{
+  .pal-item{
     border:1px solid var(--line);
-    border-radius: 12px;
-    padding: 10px 12px;
+    border-radius: 14px;
     background: var(--card);
+    padding: 10px 12px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap: 10px;
+    gap: 12px;
     cursor:pointer;
     transition: background .18s var(--ease), transform .18s var(--ease);
   }
-  .palette .item:hover{
-    background: var(--soft);
-    transform: translateY(-1px);
-  }
-  .palette .item .left{
-    display:grid;
-    gap:3px;
-    min-width:0;
-  }
-  .palette .item .t{
-    font-weight: 950;
-    font-size: 13px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .palette .item .s{
-    font-weight: 650;
-    font-size: 12px;
-    color: var(--muted);
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .palette .item .kbd{
+  .pal-item:hover{ background: var(--soft); transform: translateY(-1px); }
+  .pal-left{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .pal-title{ font-weight: 950; font-size: 13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pal-sub{ font-weight: 650; font-size: 12px; color: var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pal-key{
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 10px;
-    padding: 2px 7px;
+    font-weight: 900;
+    font-size: 11px;
+    border:1px solid var(--line);
     border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--soft);
-    opacity:.9;
+    padding: 4px 8px;
+    opacity:.82;
     white-space:nowrap;
   }
+
+  .muted{ color: var(--muted); }
 </style>
 </head>
 
 <body>
-  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  <!-- progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
+  <!-- background stack -->
+  <div class="bg-stage" aria-hidden="true"><div class="grid"></div></div>
 
-  <div class="bg-stage" aria-hidden="true">
-    <div class="grid"></div>
-  </div>
+  <!-- Cinematic fog (replaces particles) -->
+  <div class="fog-layer" aria-hidden="true"></div>
+  <div class="fog-layer fog2" aria-hidden="true"></div>
+  <div class="fog-layer fog3" aria-hidden="true"></div>
 
   <div class="ambient" aria-hidden="true"></div>
-  <div class="spotlight" aria-hidden="true"></div>
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- ✅ Scroll cue -->
-  <div class="nav-cue" id="scrollCue" aria-hidden="true">
-    <span class="arr" id="cueArrow">↓</span>
-    <span id="cueText">Scroll</span>
+  <!-- Elevator rail + labels -->
+  <div class="scroll-rail" aria-hidden="true">
+    <div class="rail-indicator" id="railDot" style="top:0px"></div>
   </div>
-
-  <!-- ✅ Live section label -->
-  <div class="section-label" aria-hidden="true">
+  <div class="section-label" id="sectionLabel" aria-hidden="true">
     <span class="dot"></span>
-    <span id="sectionLabel">Intro</span>
+    <span id="sectionLabelText">Intro</span>
+  </div>
+  <div class="nav-cue" id="navCue" aria-hidden="true">
+    <span class="arr" id="navCueArr">↓</span>
+    <span id="navCueText">Scrolling down</span>
   </div>
 
-  <!-- Back to top -->
-  <a href="#top" class="topbtn" id="topBtn" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M12 5l7 7-1.4 1.4L13 8.8V20h-2V8.8L6.4 13.4 5 12l7-7z"/>
+  <!-- top -->
+  <a class="topbtn" id="topBtn" href="#top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path>
     </svg>
   </a>
 
-  <!-- Elevator Rail -->
-  <div class="scroll-rail" aria-hidden="true">
-    <div class="rail-indicator" id="railIndicator"></div>
+  <!-- contact -->
+  <div class="contact-fab">
+    <div class="contact-pop" id="contactPop" role="dialog" aria-modal="true" aria-label="Contact">
+      <div class="head">
+        <div class="title">Contact</div>
+        <button class="xbtn" id="contactClose" type="button">Close</button>
+      </div>
+      <div class="body">
+        <div class="field">
+          <div class="label">Email</div>
+          <div class="value-row">
+            <a href="mailto:bhishek.shibdeen@icloud.com" id="emailVal">bhishek.shibdeen@icloud.com</a>
+            <button class="copy" type="button" data-copy="bhishek.shibdeen@icloud.com">Copy</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="label">Phone</div>
+          <div class="value-row">
+            <a href="tel:+2300000000" id="phoneVal">+230 000 0000</a>
+            <button class="copy" type="button" data-copy="+230 000 0000">Copy</button>
+          </div>
+        </div>
+        <div class="field">
+          <div class="label">LinkedIn</div>
+          <div class="value-row">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">Open profile</a>
+            <button class="copy" type="button" data-copy="https://www.linkedin.com/">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="contact-btn" id="contactBtn" type="button" aria-label="Open contact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <path d="M7 10l5 5 5-5"></path>
+        <path d="M12 15V3"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="toast" id="toast" aria-live="polite">Copied ✅</div>
+
+  <!-- command palette -->
+  <div class="palette" id="palette" aria-hidden="true">
+    <div class="pal-box">
+      <div class="pal-top">
+        <input class="pal-input" id="palInput" placeholder="Type to jump… (e.g., projects, contact, certifications)" />
+        <div class="pal-hint">Enter ↵ · Esc</div>
+      </div>
+      <div class="pal-list" id="palList"></div>
+    </div>
   </div>
 
   <div class="wrap" id="top">
-
     <!-- NAV -->
-    <div class="nav">
+    <header class="nav" id="nav">
       <div class="brand">
         <span class="brand-mark"></span>
         <span>Bhishek Shibdeen</span>
       </div>
 
       <div class="controls">
-        <!-- Search -->
-        <div class="search-wrap" aria-label="Search portfolio">
-          <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M10 2a8 8 0 1 1 5.29 14.01l4.35 4.35-1.42 1.42-4.35-4.35A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12a6 6 0 0 0 0-12z"/>
-          </svg>
-          <input id="searchInput" class="search" type="search" placeholder="Search: CDD, sanctions, STR…" autocomplete="off" />
-          <button class="clearbtn" id="clearSearch" type="button" title="Clear search">Clear</button>
+        <div class="navlinks" id="navLinks">
+          <a href="#about" data-section="About">About</a>
+          <a href="#certifications" data-section="Certifications">Certifications</a>
+          <a href="#experience" data-section="Experience">Experience</a>
+          <a href="#projects" data-section="Projects">Projects</a>
+          <a href="#contact" data-section="Contact">Contact</a>
         </div>
 
-        <!-- ⌘K -->
-        <button class="cmdkbtn" id="cmdkBtn" type="button" aria-label="Open command palette">
-          <span style="font-weight:950;">Search</span>
-          <kbd>⌘K</kbd>
+        <div class="search-wrap">
+          <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path>
+          </svg>
+          <input class="search" id="search" placeholder="Search sections & cards…" />
+          <button class="clearbtn" id="clearSearch" type="button">Clear</button>
+        </div>
+
+        <button class="cmdkbtn" id="cmdkBtn" type="button" title="Open Command Palette">
+          CmdK <kbd>⌘</kbd><kbd>K</kbd>
         </button>
 
-        <!-- Theme -->
-        <button class="themebtn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM6.22 6.22a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42L6.22 7.64a1 1 0 0 1 0-1.42zm9.14 9.14a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42l-1.42-1.42a1 1 0 0 1 0-1.41zM17.78 6.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM8.64 15.36a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>
+        <button class="themebtn" id="themeBtn" type="button" title="Toggle theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V4a1 1 0 0 1 1-1Z"/>
+            <path d="M12 18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1Z"/>
+            <path d="M4 11a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H5a1 1 0 0 1-1-1Z"/>
+            <path d="M17 11a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1Z"/>
+            <path d="M7.05 7.05a1 1 0 0 1 1.41 0l1.42 1.42A1 1 0 1 1 8.46 9.9L7.05 8.46a1 1 0 0 1 0-1.41Z"/>
+            <path d="M14.12 14.12a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 1 1-1.41 1.41l-1.42-1.42a1 1 0 0 1 0-1.41Z"/>
+            <path d="M16.95 7.05a1 1 0 0 1 0 1.41l-1.42 1.42a1 1 0 0 1-1.41-1.41l1.42-1.42a1 1 0 0 1 1.41 0Z"/>
+            <path d="M9.88 14.12a1 1 0 0 1 0 1.41l-1.42 1.42a1 1 0 1 1-1.41-1.41l1.42-1.42a1 1 0 0 1 1.41 0Z"/>
+            <circle cx="12" cy="12" r="3"></circle>
           </svg>
-          <span id="themeLabel">Dark</span>
+          Theme
         </button>
 
-        <div class="navlinks">
-          <a href="#intro" class="nav-item">Intro</a>
-          <a href="#certs" class="nav-item">Certifications</a>
-          <a href="#experience" class="nav-item">Experience</a>
-          <a href="#projects" class="nav-item">Projects</a>
-          <a href="#contact" class="nav-item">Contact</a>
+        <div class="kbd-hint"><kbd>⌘</kbd><kbd>K</kbd> palette</div>
+      </div>
+    </header>
 
-          <div class="kbd-hint" title="Keyboard navigation">
-            <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev
+    <!-- HERO -->
+    <section class="hero card glow tiltable reveal" data-search="intro bhishek shibdeen compliance aml risk kaizen">
+      <div class="hero-main">
+        <div class="hero-grid">
+          <div>
+            <h1>Compliance • AML • Risk</h1>
+            <div class="motto-row">
+              <span class="kaizen"><span class="kaizen-dot"></span> Kaizen</span>
+              <span class="pillmini"><span class="sq"></span> Proof-first portfolio</span>
+            </div>
+            <p class="subtitle">
+              I’m <strong>Bhishek Shibdeen</strong> — focused on operational excellence in KYC, AML, and risk controls.
+              I build <strong>audit-ready documentation</strong>, structured onboarding standards, and clean compliance workflows.
+            </p>
+
+            <div class="cta">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn" href="#contact">Contact</a>
+              <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+
+            <div class="search-status" id="searchStatus">
+              <span id="searchStatusText">Filtering…</span>
+              <span class="pillmini"><span class="sq"></span> ESC to clear</span>
+            </div>
           </div>
+
+          <aside class="panel tiltable" data-search="quick links downloads cv portfolio pack">
+            <h3>Quick Links</h3>
+            <p>Fast navigation + downloads. Keep it simple, professional, and evidence-driven.</p>
+            <div class="quicklinks">
+              <div class="ql">
+                <a href="#certifications">
+                  <div class="left">
+                    <div class="ico">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 7l-8-4-8 4v10l8 4 8-4V7Z"></path>
+                        <path d="M12 22V12"></path>
+                        <path d="M20 7l-8 5-8-5"></path>
+                      </svg>
+                    </div>
+                    <div class="txt">
+                      <div class="t">Certifications</div>
+                      <div class="s">Yale • FCA • DELF</div>
+                    </div>
+                  </div>
+                  <div class="go">→</div>
+                </a>
+              </div>
+
+              <div class="ql">
+                <a href="#projects">
+                  <div class="left">
+                    <div class="ico">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16v6H4z"></path>
+                        <path d="M4 14h10v6H4z"></path>
+                        <path d="M16 14h4v6h-4z"></path>
+                      </svg>
+                    </div>
+                    <div class="txt">
+                      <div class="t">Featured Project</div>
+                      <div class="s">KYC Controls Overview</div>
+                    </div>
+                  </div>
+                  <div class="go">→</div>
+                </a>
+              </div>
+
+              <div class="ql">
+                <a href="#contact">
+                  <div class="left">
+                    <div class="ico">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <path d="M7 10l5 5 5-5"></path>
+                        <path d="M12 15V3"></path>
+                      </svg>
+                    </div>
+                    <div class="txt">
+                      <div class="t">Contact</div>
+                      <div class="s">Email + phone (copy)</div>
+                    </div>
+                  </div>
+                  <div class="go">→</div>
+                </a>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Search status -->
-    <div class="search-status" id="searchStatus" aria-live="polite">
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <span class="pillmini"><span class="sq"></span> Search</span>
-        <span id="searchText">—</span>
-      </div>
-      <div id="searchCounts" style="font-weight:900; color: var(--text); opacity:.9;">0 results</div>
-    </div>
-
-    <!-- INTRO -->
-    <section class="card glow hero hero-main anchor reveal tiltable" id="intro">
-      <div class="hero-grid">
-        <div>
-          <h1>Bhishek Shibdeen</h1>
-
-          <div class="motto-row">
-            <span class="kaizen"><span class="kaizen-dot"></span>Kaizen</span>
-            <span style="font-weight:820; opacity:0.70;">Compliance • AML/CFT • Risk</span>
-          </div>
-
-          <p class="subtitle">
-            I build competence in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> through structured work:
-            risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
-          </p>
-
-          <div class="cta">
-            <a class="btn primary" href="#projects">View projects ↓</a>
-            <a class="btn" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
-            <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
-              <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-              </svg>
-              LinkedIn
-            </a>
-          </div>
+    <!-- ABOUT -->
+    <section class="section card glow tiltable reveal anchor" id="about" data-search="about profile summary compliance aml risk">
+      <div class="section-head">
+        <div class="section-title">
+          <svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <h2>About</h2>
         </div>
-
-        <aside class="panel reveal" aria-label="Quick Links">
-          <h3>Quick Links</h3>
-          <p>Fast access to key items: CV, featured work, and contact.</p>
-
-          <div class="quicklinks">
-            <div class="ql tiltable" data-search-item data-type="certification" data-search-text="CV download curriculum vitae pdf Bhishek Shibdeen">
-              <a href="CV_Bhishek_Shibdeen.pdf" target="_blank" rel="noreferrer">
-                <div class="left">
-                  <span class="ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h9l3 3v17H6V2zm8 1.5V6h2.5L14 3.5zM8 9h8v2H8V9zm0 4h8v2H8v-2zm0 4h6v2H8v-2z"/></svg>
-                  </span>
-                  <span class="txt">
-                    <span class="t">Download CV</span>
-                    <span class="s">CV_Bhishek_Shibdeen.pdf</span>
-                  </span>
-                </div>
-                <span class="go">↗</span>
-              </a>
-            </div>
-
-            <div class="ql tiltable" data-search-item data-type="project" data-search-text="AML regulations Mauritius featured PDF AML CFT reporting flow FIU FSC BoM STR CDD EDD RBA">
-              <a href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">
-                <div class="left">
-                  <span class="ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h12v20H6V2zm2 2v16h8V4H8zm1 2h6v2H9V6zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/></svg>
-                  </span>
-                  <span class="txt">
-                    <span class="t">Featured PDF</span>
-                    <span class="s">AML Regulations in Mauritius</span>
-                  </span>
-                </div>
-                <span class="go">↗</span>
-              </a>
-            </div>
-
-            <div class="ql tiltable" data-search-item data-type="contact" data-search-text="Email bhishek.shibdeen@icloud.com contact">
-              <a href="mailto:bhishek.shibdeen@icloud.com">
-                <div class="left">
-                  <span class="ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                  </span>
-                  <span class="txt">
-                    <span class="t">Email</span>
-                    <span class="s">bhishek.shibdeen@icloud.com</span>
-                  </span>
-                </div>
-                <span class="go">↗</span>
-              </a>
-            </div>
-          </div>
-        </aside>
+        <div class="accent"></div>
       </div>
-
+      <div class="section-body">
+        I’m building a career in financial crime compliance with a focus on <strong>KYC operations</strong>, <strong>CDD/EDD triggers</strong>, and <strong>audit-ready documentation discipline</strong>.
+        I enjoy translating regulatory expectations into clear, repeatable workflows that teams can execute consistently.
+      </div>
       <div class="section-foot">
-        <a class="nextbtn" href="#certs" aria-label="Next: Certifications">
-          Next: Certifications <span class="mini">J</span> →
-        </a>
+        <a class="nextbtn" href="#certifications">Next: Certifications <span class="mini">↓</span></a>
       </div>
     </section>
 
     <!-- CERTIFICATIONS -->
-    <section class="card glow section anchor reveal tiltable" id="certs">
+    <section class="section card glow tiltable reveal anchor" id="certifications" data-search="certifications yale fca verdian delf france education international">
       <div class="section-head">
         <div class="section-title">
-          <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M12 2l3 7 7 .6-5.3 4.6 1.6 7.2L12 17.8 5.7 21.4l1.6-7.2L2 9.6 9 9z"/>
+          <svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7l3-7Z"></path>
           </svg>
           <h2>Certifications</h2>
         </div>
-        <span class="accent" aria-hidden="true"></span>
+        <div class="accent"></div>
       </div>
-
       <div class="section-body">
         <div class="cert-grid">
-          <div class="cert-card tiltable" data-search-item data-type="certification"
-               data-search-text="Financial Markets Yale University Coursera certificate finance markets">
-            <div class="cert-logo"><img src="yale.jpeg" alt="Yale University logo" loading="lazy" /></div>
-            <div class="cert-info">
-              <h3>Financial Markets — Yale University (Coursera)</h3>
-              <p>Issued Feb 2026 • PDF</p>
+          <div class="cert-card tiltable" data-search="yale university certification">
+            <div class="cert-logo">
+              <img src="assets/yale.svg" alt="Yale University logo">
             </div>
-            <div class="cert-actions">
-              <a class="btn" href="Certificate_Yale_Financial_Markets.pdf" target="_blank" rel="noreferrer">View ↗</a>
+            <div class="cert-info">
+              <h3>Yale University</h3>
+              <p>Credential / course title</p>
             </div>
           </div>
 
-          <div class="cert-card tiltable" data-search-item data-type="certification"
-               data-search-text="AML Essentials Financial Crime Academy Verdian KYC CDD EDD sanctions PEP compliance certificate">
-            <div class="cert-logo"><img src="fca.jpeg" alt="Financial Crime Academy by Verdian logo" loading="lazy" /></div>
-            <div class="cert-info">
-              <h3>AML Essentials — Financial Crime Academy</h3>
-              <p>Issued Feb 2026 • PDF</p>
+          <div class="cert-card tiltable" data-search="financial crime academy verdian fca certification">
+            <div class="cert-logo">
+              <img src="assets/fca-verdian.svg" alt="Financial Crime Academy by Verdian logo">
             </div>
-            <div class="cert-actions">
-              <a class="btn" href="Certificate_FCA_AML_Essentials.pdf" target="_blank" rel="noreferrer">View ↗</a>
+            <div class="cert-info">
+              <h3>Financial Crime Academy</h3>
+              <p>AML / compliance credential</p>
             </div>
           </div>
 
-          <div class="cert-card tiltable" data-search-item data-type="certification"
-               data-search-text="DELF B2 Diplome d'Etudes en Langue Francaise France Education International French language certificate">
-            <div class="cert-logo"><img src="fei.png" alt="France Éducation international logo" loading="lazy" /></div>
-            <div class="cert-info">
-              <h3>DELF B2 — Diplôme d’Études en Langue Française</h3>
-              <p>Issued Mar 2025 • PDF</p>
+          <div class="cert-card tiltable" data-search="delf b2 france education international">
+            <div class="cert-logo">
+              <img src="assets/fei.svg" alt="France Éducation international logo">
             </div>
-            <div class="cert-actions">
-              <a class="btn" href="Certificate_DELF_B2.pdf" target="_blank" rel="noreferrer">View ↗</a>
+            <div class="cert-info">
+              <h3>DELF B2</h3>
+              <p>French language certification</p>
             </div>
           </div>
         </div>
       </div>
-
       <div class="section-foot">
-        <a class="nextbtn" href="#experience" aria-label="Next: Experience">
-          Next: Experience <span class="mini">J</span> →
-        </a>
+        <a class="nextbtn" href="#experience">Next: Experience <span class="mini">↓</span></a>
       </div>
     </section>
 
     <!-- EXPERIENCE -->
-    <section class="card glow section anchor reveal tiltable" id="experience">
+    <section class="section card glow tiltable reveal anchor" id="experience" data-search="experience kyc compliance intern arie finance onboarding screening sanctions pep">
       <div class="section-head">
         <div class="section-title">
-          <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M7 2h10v2h3v18H4V4h3V2zm2 2h6V3H9v1zm-3 4v12h12V8H6zm2 2h8v2H8v-2zm0 4h8v2H8v-2z"/>
+          <svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 7h18"></path><path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"></path>
+            <path d="M6 7v14"></path><path d="M18 7v14"></path><path d="M3 21h18"></path>
           </svg>
           <h2>Experience</h2>
         </div>
-        <span class="accent" aria-hidden="true"></span>
+        <div class="accent"></div>
       </div>
-
       <div class="section-body">
         <div class="timeline">
-          <div class="t-item reveal tiltable" data-search-item data-type="experience"
-               data-search-text="KYC Compliance Operations Intern ARIE Finance Ebene Mauritius onboarding CDD EDD sanctions PEP screening ongoing monitoring remediation documentation quality">
+          <div class="t-item tiltable" data-search="arie finance kyc compliance operations intern kycp cdd sanctions pep">
             <div class="t-head">
               <div>
-                <p class="t-title">KYC & Compliance Operations Intern — ARIE Finance</p>
-                <p class="t-sub">Ébène, Mauritius • On-site</p>
+                <div class="t-title">KYC & Compliance Operations Intern</div>
+                <div class="t-sub">ARIE Finance</div>
               </div>
-              <div class="t-meta">Dec 2025 — Present</div>
+              <div class="t-meta">2025 – Present</div>
             </div>
-            <p class="t-desc">
-              Conduct KYC & CDD reviews for corporate/retail clients, perform sanctions & PEP screening,
-              manage ongoing monitoring and remediation, and validate onboarding documentation against internal policy and regulatory expectations.
-            </p>
+            <div class="t-desc">
+              Conduct KYC/CDD reviews for retail and corporate clients in a regulated fintech environment, including screening (sanctions/PEP), documentation monitoring, discrepancy resolution, and onboarding support aligned to internal policy standards.
+            </div>
             <div class="t-tags">
-              <span class="tagchip">KYC / CDD</span>
-              <span class="tagchip">Screening</span>
-              <span class="tagchip">Ongoing Monitoring</span>
-              <span class="tagchip">Documentation Quality</span>
+              <span class="tagchip">CDD/EDD</span>
+              <span class="tagchip">Sanctions & PEP</span>
+              <span class="tagchip">Onboarding controls</span>
+              <span class="tagchip">Documentation QA</span>
             </div>
           </div>
         </div>
       </div>
-
       <div class="section-foot">
-        <a class="nextbtn" href="#projects" aria-label="Next: Projects">
-          Next: Projects <span class="mini">J</span> →
-        </a>
+        <a class="nextbtn" href="#projects">Next: Projects <span class="mini">↓</span></a>
       </div>
     </section>
 
     <!-- PROJECTS -->
-    <section class="card glow section anchor reveal tiltable" id="projects">
+    <section class="section card glow tiltable reveal anchor" id="projects" data-search="projects case study kyc controls overview cdd edd triggers file quality checks audit-ready standards">
       <div class="section-head">
         <div class="section-title">
-          <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M4 5h16v14H4V5zm2 2v10h12V7H6zm2 2h8v2H8V9zm0 4h6v2H8v-2z"/>
+          <svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16v6H4z"></path>
+            <path d="M4 14h10v6H4z"></path>
+            <path d="M16 14h4v6h-4z"></path>
           </svg>
           <h2>Projects</h2>
         </div>
-        <span class="accent" aria-hidden="true"></span>
+        <div class="accent"></div>
       </div>
 
       <div class="section-body">
-        <div class="pub tiltable" role="button" tabindex="0" aria-label="Open AML Regulations in Mauritius PDF"
-             data-search-item data-type="project"
-             data-search-text="AML Regulations in Mauritius AML CFT reporting flow FIU FSC BoM STR CDD EDD risk-based approach governance overview"
-             onclick="window.open('AML_Regulations_Mauritius.pdf','_blank')"
-             onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('AML_Regulations_Mauritius.pdf','_blank'); }">
-
-          <div class="pub-preview" aria-hidden="true">
+        <div class="pub tiltable" id="projectFeatured" data-search="featured project kyc controls overview risk-based onboarding cdd edd triggers audit-ready documentation standards">
+          <div class="pub-preview">
             <div class="pub-minihead">
-              <span class="pill"><span class="sq"></span>Featured PDF</span>
-              <span class="pill" style="border-radius:10px; letter-spacing:1px; text-transform:none;">AML/CFT</span>
+              <span class="pill"><span class="sq"></span> Featured</span>
+              <span class="pill">Case Study</span>
             </div>
-
             <div class="thumb-frame">
-              <img src="aml-thumb.jpeg" alt="Preview of AML Regulations in Mauritius PDF" loading="lazy" />
-            </div>
-
-            <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-end;">
-              <div style="font-weight:950; letter-spacing:1.8px; text-transform:uppercase; font-size:11px; opacity:0.72;">
-                Mauritius
-              </div>
-              <div class="btn primary" style="padding:9px 12px; border-radius:10px; font-size:12px;">
-                Open PDF ↗
-              </div>
+              <!-- Replace with your actual thumbnail path -->
+              <img src="assets/aml-thumb.jpg" alt="Project thumbnail">
             </div>
           </div>
 
           <div class="pub-body">
-            <h3>AML Regulations in Mauritius</h3>
+            <h3>KYC Controls Overview</h3>
             <p>
-              A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius:
-              reporting flow, core obligations (CDD/EDD, STR, RBA), and how key bodies interact across supervision and intelligence.
+              Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards —
+              presented as a visual workflow to make expectations clear for operations teams.
             </p>
-
             <div class="badge-row">
-              <span class="tagchip">FATF-Aligned</span>
-              <span class="tagchip">Mauritius Regulatory Context</span>
-              <span class="tagchip">Educational Framework</span>
-            </div>
-
-            <div class="badge-row" style="margin-top:10px;">
-              <span class="tagchip">Reporting Flow</span>
-              <span class="tagchip">CDD / EDD</span>
-              <span class="tagchip">STR</span>
-              <span class="tagchip">Risk-Based Approach</span>
-              <span class="tagchip">Governance</span>
-            </div>
-
-            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-              <span class="btn primary" onclick="event.stopPropagation(); window.open('AML_Regulations_Mauritius.pdf','_blank');">Open PDF ↗</span>
-              <span class="btn" onclick="event.stopPropagation(); window.location.hash='#contact';">Contact me</span>
+              <span class="pill"><span class="sq"></span> CDD/EDD</span>
+              <span class="pill"><span class="sq"></span> Documentation QA</span>
+              <span class="pill"><span class="sq"></span> Audit readiness</span>
             </div>
           </div>
         </div>
 
         <div class="grid3">
-          <div class="tile reveal tiltable" data-search-item data-type="project"
-               data-search-text="KYC Controls Overview risk-based onboarding CDD EDD triggers file quality checks audit-ready documentation standards">
-            <div class="tag"><span class="sq"></span>Project</div>
-            <h4>KYC Controls Overview</h4>
-            <p>Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.</p>
+          <div class="tile tiltable" data-search="problem statement onboarding inconsistency file quality issues">
+            <div class="tag"><span class="sq"></span> Problem</div>
+            <h4>Inconsistent onboarding decisions</h4>
+            <p>Different reviewers interpret triggers differently, leading to uneven file quality and rework risk.</p>
           </div>
 
-          <div class="tile reveal tiltable" data-search-item data-type="project"
-               data-search-text="Screening Escalation Logic sanctions PEP adverse media escalation decision rationale record keeping defensible">
-            <div class="tag"><span class="sq"></span>Project</div>
-            <h4>Screening & Escalation Logic</h4>
-            <p>Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
+          <div class="tile tiltable" data-search="solution controls triggers checklist standards">
+            <div class="tag"><span class="sq"></span> What I did</div>
+            <h4>Standardized triggers + QA gates</h4>
+            <p>Built a clear control map: CDD/EDD triggers, mandatory fields, and quality checks aligned to audit expectations.</p>
           </div>
 
-          <div class="tile reveal tiltable" data-search-item data-type="project"
-               data-search-text="Documentation Discipline checklist review-ready files evidence rationale consistency onboarding KYC">
-            <div class="tag"><span class="sq"></span>Project</div>
-            <h4>Documentation Discipline</h4>
-            <p>A practical checklist for maintaining review-ready files: evidence, rationale, and consistency across onboarding.</p>
+          <div class="tile tiltable" data-search="outcome audit-ready faster onboarding reduced rework">
+            <div class="tag"><span class="sq"></span> Outcome</div>
+            <h4>Cleaner files, faster reviews</h4>
+            <p>Reduced ambiguity and created a repeatable process that helps teams stay consistent and documentation-ready.</p>
           </div>
         </div>
       </div>
 
       <div class="section-foot">
-        <a class="nextbtn" href="#contact" aria-label="Next: Contact">
-          Next: Contact <span class="mini">J</span> →
-        </a>
+        <a class="nextbtn" href="#contact">Next: Contact <span class="mini">↓</span></a>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="card glow section anchor reveal tiltable" id="contact">
+    <section class="section card glow tiltable reveal anchor" id="contact" data-search="contact email phone linkedin">
       <div class="section-head">
         <div class="section-title">
-          <svg class="sec-ico" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M21 8V7l-3 2-2-1-2 1-2-1-2 1-2-1-2 1-3-2v1l3 2 2-1 2 1 2-1 2 1 2-1 2 1 3-2zM3 10v9h18v-9l-3 2-2-1-2 1-2-1-2 1-2-1-2 1-3-2z"/>
+          <svg class="sec-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <path d="M7 10l5 5 5-5"></path>
+            <path d="M12 15V3"></path>
           </svg>
           <h2>Contact</h2>
         </div>
-        <span class="accent" aria-hidden="true"></span>
+        <div class="accent"></div>
       </div>
-
       <div class="section-body">
         <div class="two-col">
-          <div class="mini reveal tiltable" data-search-item data-type="contact" data-search-text="Email bhishek.shibdeen@icloud.com Phone +230 55024085">
-            <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Email</div>
-            <div style="margin-top:6px; font-weight:950;">
-              <a href="mailto:bhishek.shibdeen@icloud.com" style="text-decoration:none;">
-                bhishek.shibdeen@icloud.com
-              </a>
-            </div>
-
-            <div style="margin-top:14px; font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">Phone</div>
-            <div style="margin-top:6px; font-weight:950;">
-              <a href="tel:+23055024085" style="text-decoration:none;">+230 55024085</a>
-            </div>
+          <div class="mini tiltable" data-search="email contact">
+            <strong>Email</strong><br>
+            <span class="muted">bhishek.shibdeen@icloud.com</span>
           </div>
-
-          <div class="mini reveal tiltable" data-search-item data-type="contact" data-search-text="LinkedIn Bhishek Shibdeen profile">
-            <div style="font-weight:950; letter-spacing:2.4px; text-transform:uppercase; font-size:11px; opacity:0.76;">LinkedIn</div>
-            <div style="margin-top:10px;">
-              <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">
-                <svg class="li-ico" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fill="currentColor" d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.41v1.56h.05c.47-.9 1.63-1.86 3.36-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.44c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
-                </svg>
-                View Profile ↗
-              </a>
-            </div>
+          <div class="mini tiltable" data-search="phone contact">
+            <strong>Phone</strong><br>
+            <span class="muted">+230 000 0000</span>
           </div>
         </div>
-      </div>
 
-      <div class="section-foot" style="justify-content:space-between;">
-        <a class="nextbtn" href="#top" aria-label="Back to top">
-          ← Back to top <span class="mini">Home</span>
-        </a>
-        <a class="nextbtn" href="#top" aria-label="Restart">
-          Restart <span class="mini">K</span>
-        </a>
+        <div style="margin-top:14px" class="mini tiltable" data-search="footer last updated">
+          <strong>Press-ready</strong><br>
+          <span class="muted">Last updated: Mar 2026 · Portfolio maintained and evidence-first.</span>
+        </div>
+      </div>
+      <div class="section-foot">
+        <a class="nextbtn" href="#top">Back to top <span class="mini">↑</span></a>
       </div>
     </section>
-
-    <!-- ✅ Press-ready footer -->
-    <footer class="reveal tiltable" id="press" data-search-item data-type="contact" data-search-text="Press-ready footer email bhishek.shibdeen@icloud.com last updated Mar 2026">
-      <div class="cred">
-        <span class="label">Credibility</span>
-        <span class="tagchip">Risk-Based</span>
-        <span class="tagchip">Audit-Ready Files</span>
-        <span class="tagchip">Screening Discipline</span>
-        <span class="tagchip">FATF-Aligned Thinking</span>
-        <span class="tagchip">Process Clarity</span>
-      </div>
-
-      <div class="foot-inner">
-        <div class="foot-left">
-          <div class="foot-title">Press-Ready</div>
-          <div class="foot-chip">Email: <strong id="pressEmail">bhishek.shibdeen@icloud.com</strong></div>
-          <div class="foot-chip">Last updated: <strong>Mar 2026</strong></div>
-        </div>
-
-        <div class="foot-actions">
-          <button class="btn" id="copyEmailBtn" type="button">Copy email</button>
-          <a class="btn" href="CV_Bhishek_Shibdeen.pdf" download>Download CV</a>
-          <a class="btn primary" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        </div>
-      </div>
-
-      <div class="foot-sub">
-        <div>© 2026 Bhishek Shibdeen</div>
-        <div style="opacity:.9;">Tip: use <strong>⌘K</strong> and <strong>J</strong>/<strong>K</strong></div>
-      </div>
-    </footer>
-
-  </div>
-
-  <!-- Mobile bottom nav -->
-  <div id="mobileNav">
-    <a class="btn" href="#intro">Intro</a>
-    <a class="btn" href="#certs">Certs</a>
-    <a class="btn" href="#experience">Experience</a>
-    <a class="btn primary" href="#projects">Projects</a>
-    <a class="btn" href="#contact">Contact</a>
-  </div>
-
-  <!-- Bottom-right contact -->
-  <div class="contact-fab" aria-label="Quick contact">
-    <div class="contact-pop" id="contactPop" role="dialog" aria-label="Contact details">
-      <div class="head">
-        <div class="title">Contact</div>
-        <button class="xbtn" id="closePop" aria-label="Close contact panel">✕</button>
-      </div>
-      <div class="body">
-        <div class="field">
-          <div class="label">Email</div>
-          <div class="value-row">
-            <a href="mailto:bhishek.shibdeen@icloud.com" id="emailLink">bhishek.shibdeen@icloud.com</a>
-            <button class="copy" data-copy="bhishek.shibdeen@icloud.com" type="button">Copy</button>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="label">Phone</div>
-          <div class="value-row">
-            <a href="tel:+23055024085" id="phoneLink">+230 55024085</a>
-            <button class="copy" data-copy="+230 55024085" type="button">Copy</button>
-          </div>
-        </div>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn primary" href="mailto:bhishek.shibdeen@icloud.com">Email me</a>
-          <a class="btn" href="tel:+23055024085">Call</a>
-        </div>
-      </div>
-    </div>
-
-    <button class="contact-btn" id="contactBtn" aria-label="Open contact details" type="button">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
-      </svg>
-    </button>
-  </div>
-
-  <div class="toast" id="toast" aria-hidden="true">Copied ✅</div>
-
-  <!-- ⌘K Command Palette -->
-  <div class="palette" id="palette" aria-hidden="true">
-    <div class="backdrop" id="paletteBackdrop"></div>
-    <div class="panel" role="dialog" aria-label="Command palette">
-      <div class="top">
-        <input id="paletteInput" type="text" placeholder="Search sections or actions… (e.g., projects, cv, pdf, email)" autocomplete="off" />
-        <div class="hint"><kbd>↑</kbd><kbd>↓</kbd> select · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</div>
-      </div>
-      <div class="list" id="paletteList"></div>
-    </div>
   </div>
 
 <script>
-  // ===== Theme (dark mode toggle) =====
-  (function(){
-    const root = document.documentElement;
-    const btn = document.getElementById("themeToggle");
-    const label = document.getElementById("themeLabel");
-    const icon = document.getElementById("themeIcon");
+/* ============================
+   Helpers
+============================ */
+const $ = (sel, parent=document) => parent.querySelector(sel);
+const $$ = (sel, parent=document) => Array.from(parent.querySelectorAll(sel));
 
-    function setTheme(mode){
-      if(mode === "dark") root.setAttribute("data-theme","dark");
-      else root.removeAttribute("data-theme");
-      localStorage.setItem("theme", mode);
+/* ============================
+   Theme toggle (persist)
+============================ */
+const themeBtn = $("#themeBtn");
+const root = document.documentElement;
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) root.setAttribute("data-theme", savedTheme);
 
-      const isDark = mode === "dark";
-      label.textContent = isDark ? "Light" : "Dark";
+themeBtn.addEventListener("click", () => {
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+});
 
-      icon.innerHTML = isDark
-        ? '<path fill="currentColor" d="M21 14.5A7.5 7.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5z"/>'
-        : '<path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM6.22 6.22a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42L6.22 7.64a1 1 0 0 1 0-1.42zm9.14 9.14a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42l-1.42-1.42a1 1 0 0 1 0-1.41zM17.78 6.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM8.64 15.36a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>';
+/* ============================
+   Spotlight follows cursor
+============================ */
+const spotlight = $("#spotlight");
+let spx = 0.5, spy = 0.3;
+let targetX = spx, targetY = spy;
+
+window.addEventListener("pointermove", (e) => {
+  targetX = e.clientX / window.innerWidth;
+  targetY = e.clientY / window.innerHeight;
+}, { passive:true });
+
+function spotlightTick(){
+  spx += (targetX - spx) * 0.08;
+  spy += (targetY - spy) * 0.08;
+  spotlight.style.setProperty("--sx", (spx*100).toFixed(2) + "vw");
+  spotlight.style.setProperty("--sy", (spy*100).toFixed(2) + "vh");
+  requestAnimationFrame(spotlightTick);
+}
+spotlightTick();
+
+/* ============================
+   Scroll progress bar
+============================ */
+const progressBar = $("#progressBar");
+function updateProgress(){
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - doc.clientHeight;
+  const p = max <= 0 ? 0 : (doc.scrollTop / max);
+  progressBar.style.width = (p*100).toFixed(2) + "%";
+}
+window.addEventListener("scroll", updateProgress, { passive:true });
+updateProgress();
+
+/* ============================
+   Nav active + section label
+============================ */
+const sections = ["about","certifications","experience","projects","contact"].map(id => $("#"+id));
+const navLinks = $$("#navLinks a");
+const sectionLabelText = $("#sectionLabelText");
+
+function setActiveSection(id){
+  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#"+id));
+  const label = (navLinks.find(a => a.getAttribute("href")==="#"+id)?.dataset.section) || "Intro";
+  sectionLabelText.textContent = label;
+}
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(ent => {
+    if(ent.isIntersecting){
+      setActiveSection(ent.target.id);
     }
+  });
+}, { rootMargin: "-45% 0px -50% 0px", threshold: 0.01 });
 
-    const saved = localStorage.getItem("theme");
-    if(saved === "dark") setTheme("dark");
-    else setTheme("light");
+sections.forEach(s => io.observe(s));
 
-    btn.addEventListener("click", () => {
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      setTheme(isDark ? "light" : "dark");
-    });
-  })();
-
-  // ===== Scroll progress =====
-  (function(){
-    const bar = document.getElementById("bar");
-    function update(){
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
-      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-      bar.style.width = pct.toFixed(2) + "%";
+/* ============================
+   Reveal animations
+============================ */
+const revealEls = $$(".reveal");
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(ent => {
+    if(ent.isIntersecting){
+      ent.target.classList.add("in");
+      revealIO.unobserve(ent.target);
     }
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
-  })();
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealIO.observe(el));
 
-  // ===== Reveal on scroll =====
-  (function(){
-    const els = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          e.target.classList.add("in");
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
-  })();
+/* ============================
+   Scroll velocity blur (cinematic)
+============================ */
+const wrap = $(".wrap");
+let lastY = window.scrollY;
+let lastT = performance.now();
+let blurTimeout;
 
-  // ===== Active nav highlight + live section label + rail =====
-  (function(){
-    const links = Array.from(document.querySelectorAll(".nav-item"));
-    const label = document.getElementById("sectionLabel");
-    const indicator = document.getElementById("railIndicator");
+function velocityBlur(){
+  const y = window.scrollY;
+  const t = performance.now();
+  const dy = Math.abs(y - lastY);
+  const dt = Math.max(1, t - lastT);
+  const v = dy / dt;
+  const blur = Math.min(2.2, v * 10);
+  wrap.style.setProperty("--svb", blur.toFixed(2) + "px");
 
-    const map = [
-      { id:"intro", name:"Intro" },
-      { id:"certs", name:"Certifications" },
-      { id:"experience", name:"Experience" },
-      { id:"projects", name:"Projects" },
-      { id:"contact", name:"Contact" },
-      { id:"press", name:"Press" }
-    ];
+  clearTimeout(blurTimeout);
+  blurTimeout = setTimeout(() => wrap.style.setProperty("--svb","0px"), 80);
 
-    const sections = map.map(x => document.getElementById(x.id)).filter(Boolean);
+  lastY = y; lastT = t;
+}
+window.addEventListener("scroll", velocityBlur, { passive:true });
 
-    const railHeight = 220; // must match CSS
-    function setRail(idx){
-      const total = sections.length;
-      const step = total > 1 ? (railHeight - 10) / (total - 1) : 0;
-      // -10 keeps dot from clipping; CSS dot is 10px
-      indicator.style.top = `${idx * step}px`;
-    }
+/* ============================
+   Nav auto-hide on scroll down
+============================ */
+const nav = $("#nav");
+let prevScroll = window.scrollY;
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  const goingDown = y > prevScroll && y > 220;
+  nav.classList.toggle("hide", goingDown);
+  prevScroll = y;
+}, { passive:true });
 
-    let activeId = "intro";
+/* ============================
+   Top button show/hide
+============================ */
+const topBtn = $("#topBtn");
+window.addEventListener("scroll", () => {
+  topBtn.classList.toggle("show", window.scrollY > 520);
+}, { passive:true });
 
-    const io = new IntersectionObserver((entries) => {
-      // pick the most visible intersecting
-      const vis = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+/* ============================
+   Elevator rail indicator
+============================ */
+const railDot = $("#railDot");
+function updateRail(){
+  const doc = document.documentElement;
+  const max = doc.scrollHeight - doc.clientHeight;
+  const p = max <= 0 ? 0 : (doc.scrollTop / max);
+  const railH = 220;
+  railDot.style.top = (p * (railH - 10)).toFixed(1) + "px";
+}
+window.addEventListener("scroll", updateRail, { passive:true });
+updateRail();
 
-      if(!vis) return;
+/* ============================
+   Scroll direction cue
+============================ */
+const navCue = $("#navCue");
+const navCueArr = $("#navCueArr");
+const navCueText = $("#navCueText");
+let lastDirY = window.scrollY;
+let cueTimer;
 
-      activeId = vis.target.id;
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  const dir = y > lastDirY ? "down" : "up";
+  lastDirY = y;
 
-      // nav active
-      links.forEach(l => l.classList.remove("active"));
-      const active = links.find(l => l.getAttribute("href") === "#" + activeId);
-      if(active) active.classList.add("active");
+  navCueArr.textContent = (dir === "down") ? "↓" : "↑";
+  navCueText.textContent = (dir === "down") ? "Scrolling down" : "Scrolling up";
+  navCue.classList.add("show");
 
-      // label
-      const found = map.find(x => x.id === activeId);
-      if(found && label) label.textContent = found.name;
+  clearTimeout(cueTimer);
+  cueTimer = setTimeout(() => navCue.classList.remove("show"), 650);
+}, { passive:true });
 
-      // rail
-      const idx = map.findIndex(x => x.id === activeId);
-      if(idx >= 0) setRail(idx);
-    }, { threshold: [0.35, 0.45, 0.55, 0.65] });
+/* ============================
+   Contact FAB popover + toast copy
+============================ */
+const contactBtn = $("#contactBtn");
+const contactPop = $("#contactPop");
+const contactClose = $("#contactClose");
+const toast = $("#toast");
 
-    sections.forEach(s => io.observe(s));
+function showToast(msg="Copied ✅"){
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 1100);
+}
+function openContact(){ contactPop.classList.add("open"); }
+function closeContact(){ contactPop.classList.remove("open"); }
 
-    // initial
-    const startIdx = map.findIndex(x => x.id === "intro");
-    setRail(Math.max(0, startIdx));
-  })();
+contactBtn.addEventListener("click", () => contactPop.classList.toggle("open"));
+contactClose.addEventListener("click", closeContact);
+document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeContact(); });
 
-  // ===== Mobile nav show =====
-  (function(){
-    const m = document.getElementById("mobileNav");
-    function check(){ m.style.display = window.innerWidth < 720 ? "flex" : "none"; }
-    window.addEventListener("resize", check);
-    check();
-  })();
-
-  // ===== Back-to-top show/hide =====
-  (function(){
-    const topBtn = document.getElementById("topBtn");
-    function toggle(){
-      const y = window.scrollY || 0;
-      if(y > 520) topBtn.classList.add("show");
-      else topBtn.classList.remove("show");
-    }
-    window.addEventListener("scroll", toggle, { passive:true });
-    toggle();
-  })();
-
-  // ===== Contact popover + copy =====
-  (function(){
-    const btn = document.getElementById("contactBtn");
-    const pop = document.getElementById("contactPop");
-    const close = document.getElementById("closePop");
-    const toast = document.getElementById("toast");
-
-    function closePop(){ pop.classList.remove("open"); }
-
-    btn.addEventListener("click", () => { pop.classList.toggle("open"); });
-    close.addEventListener("click", closePop);
-
-    document.addEventListener("click", (e) => {
-      const within = pop.contains(e.target) || btn.contains(e.target);
-      if(!within) closePop();
-    });
-
-    function showToast(msg){
-      toast.textContent = msg || "Copied ✅";
-      toast.classList.add("show");
-      clearTimeout(window.__t);
-      window.__t = setTimeout(()=> toast.classList.remove("show"), 1100);
-    }
-
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        showToast("Copied ✅");
-      }catch(e){
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-        showToast("Copied ✅");
-      }
-    }
-
-    document.querySelectorAll(".copy").forEach(b => {
-      b.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        copyText(b.dataset.copy || "");
-      });
-    });
-
-    const copyEmailBtn = document.getElementById("copyEmailBtn");
-    if(copyEmailBtn){
-      copyEmailBtn.addEventListener("click", () => copyText("bhishek.shibdeen@icloud.com"));
-    }
-  })();
-
-  // ===== Micro-interactions: magnetic buttons + tilt cards =====
-  (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if(reduce) return;
-
-    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn, .cmdkbtn");
-    const strength = 9;
-    magnets.forEach(el => {
-      el.addEventListener("mousemove", (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - (r.left + r.width/2)) / (r.width/2);
-        const y = (e.clientY - (r.top + r.height/2)) / (r.height/2);
-        el.style.setProperty("--mx", `${x * strength}px`);
-        el.style.setProperty("--my", `${y * strength}px`);
-      });
-      el.addEventListener("mouseleave", () => {
-        el.style.setProperty("--mx", `0px`);
-        el.style.setProperty("--my", `0px`);
-      });
-    });
-
-    const tilts = document.querySelectorAll(".tiltable");
-    const maxTilt = 4;
-    tilts.forEach(el => {
-      el.addEventListener("mousemove", (e) => {
-        const r = el.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;
-        const py = (e.clientY - r.top) / r.height;
-        const ry = (px - 0.5) * (maxTilt * 2);
-        const rx = (0.5 - py) * (maxTilt * 2);
-        el.style.setProperty("--rx", `${rx.toFixed(2)}deg`);
-        el.style.setProperty("--ry", `${ry.toFixed(2)}deg`);
-      });
-      el.addEventListener("mouseleave", () => {
-        el.style.setProperty("--rx", `0deg`);
-        el.style.setProperty("--ry", `0deg`);
-      });
-    });
-  })();
-
-  // ===== Keyboard navigation: J/K + arrows + Home/End =====
-  (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const order = ["intro","certs","experience","projects","contact","press"]
-      .map(id => document.getElementById(id))
-      .filter(Boolean);
-
-    function currentIndex(){
-      const y = window.scrollY + 120;
-      let idx = 0;
-      for(let i=0;i<order.length;i++){
-        const top = order[i].getBoundingClientRect().top + window.scrollY;
-        if(top <= y) idx = i;
-      }
-      return idx;
-    }
-    function scrollToIdx(i){
-      if(i < 0) i = 0;
-      if(i >= order.length) i = order.length - 1;
-      order[i].scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    }
-
-    document.addEventListener("keydown", (e) => {
-      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
-      const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
-      if(typing) return;
-
-      const key = e.key;
-      if(key === "Home"){ e.preventDefault(); document.getElementById("top").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); return; }
-      if(key === "End"){ e.preventDefault(); document.getElementById("press")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); return; }
-
-      if(e.metaKey || e.ctrlKey || e.altKey) return;
-
-      const idx = currentIndex();
-      if(key === "j" || key === "J" || key === "ArrowDown" || key === "PageDown"){ e.preventDefault(); scrollToIdx(idx + 1); }
-      if(key === "k" || key === "K" || key === "ArrowUp" || key === "PageUp"){ e.preventDefault(); scrollToIdx(idx - 1); }
-    });
-  })();
-
-  // ✅ Search: filters anything with data-search-item
-  (function(){
-    const input = document.getElementById("searchInput");
-    const clear = document.getElementById("clearSearch");
-    const status = document.getElementById("searchStatus");
-    const statusText = document.getElementById("searchText");
-    const statusCounts = document.getElementById("searchCounts");
-    const items = Array.from(document.querySelectorAll("[data-search-item]"));
-
-    function norm(s){ return (s || "").toLowerCase().replace(/\s+/g," ").trim(); }
-
-    function apply(q){
-      const query = norm(q);
-      try{ localStorage.setItem("portfolio_search", query); }catch(e){}
-
-      if(!query){
-        status.classList.remove("show");
-        statusText.textContent = "—";
-        statusCounts.textContent = "";
-        items.forEach(el => el.classList.remove("search-hidden"));
-        return;
-      }
-
-      status.classList.add("show");
-      statusText.textContent = `“${query}”`;
-
-      let visible = 0;
-      items.forEach(el => {
-        const text = norm(el.getAttribute("data-search-text") || el.textContent);
-        const hit = text.includes(query);
-        if(hit){ el.classList.remove("search-hidden"); visible++; }
-        else{ el.classList.add("search-hidden"); }
-      });
-
-      statusCounts.textContent = visible === 1 ? "1 result" : `${visible} results`;
-    }
-
-    input.addEventListener("input", () => apply(input.value));
-    clear.addEventListener("click", () => {
-      input.value = "";
-      apply("");
-      input.focus();
-    });
-
+$$(".copy").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    const text = btn.getAttribute("data-copy") || "";
     try{
-      const saved = localStorage.getItem("portfolio_search") || "";
-      if(saved){
-        input.value = saved;
-        apply(saved);
-      }
-    }catch(e){}
-  })();
-
-  // ✨ Spotlight follows cursor
-  (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if(reduce || isTouch) return;
-
-    const spot = document.querySelector(".spotlight");
-    if(!spot) return;
-
-    let tx = window.innerWidth * 0.5;
-    let ty = window.innerHeight * 0.32;
-    let x = tx, y = ty;
-    let raf = null;
-
-    function render(){
-      raf = null;
-      x += (tx - x) * 0.14;
-      y += (ty - y) * 0.14;
-      spot.style.setProperty("--sx", x.toFixed(1) + "px");
-      spot.style.setProperty("--sy", y.toFixed(1) + "px");
-
-      if(Math.abs(tx - x) > 0.25 || Math.abs(ty - y) > 0.25){
-        raf = requestAnimationFrame(render);
-      }
+      await navigator.clipboard.writeText(text);
+      showToast("Copied ✅");
+    }catch{
+      showToast("Copy failed");
     }
+  });
+});
 
-    window.addEventListener("mousemove", (e) => {
-      tx = e.clientX;
-      ty = e.clientY;
-      if(!raf) raf = requestAnimationFrame(render);
-    }, { passive: true });
-  })();
+/* ============================
+   Search filter (sections + cards)
+============================ */
+const search = $("#search");
+const clearSearch = $("#clearSearch");
+const searchStatus = $("#searchStatus");
+const searchStatusText = $("#searchStatusText");
+const searchable = $$("[data-search]");
 
-  // ✅ Hide navbar on scroll down / show on scroll up
-  (function(){
-    const nav = document.querySelector(".nav");
-    if(!nav) return;
-    let last = window.scrollY || 0;
+function applySearch(q){
+  const query = q.trim().toLowerCase();
+  if(!query){
+    searchable.forEach(el => el.style.display = "");
+    searchStatus.classList.remove("show");
+    return;
+  }
+  searchStatus.classList.add("show");
+  searchStatusText.textContent = `Filtering for: "${query}"`;
+  searchable.forEach(el => {
+    const hay = (el.getAttribute("data-search") || "").toLowerCase();
+    el.style.display = hay.includes(query) ? "" : "none";
+  });
+}
+search.addEventListener("input", () => applySearch(search.value));
+clearSearch.addEventListener("click", () => { search.value=""; applySearch(""); search.focus(); });
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape" && document.activeElement === search){
+    search.value=""; applySearch("");
+  }
+});
 
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY || 0;
+/* ============================
+   Magnetic hover (buttons)
+============================ */
+function magnetic(el, strength=0.18){
+  el.addEventListener("pointermove", (e) => {
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - (r.left + r.width/2));
+    const y = (e.clientY - (r.top + r.height/2));
+    el.style.setProperty("--mx", (x*strength).toFixed(2) + "px");
+    el.style.setProperty("--my", (y*strength).toFixed(2) + "px");
+  });
+  el.addEventListener("pointerleave", () => {
+    el.style.setProperty("--mx", "0px");
+    el.style.setProperty("--my", "0px");
+  });
+}
+$$(".btn, .nextbtn, .themebtn, .cmdkbtn, .clearbtn, .topbtn, .contact-btn, .copy, .xbtn").forEach(el => magnetic(el));
 
-      if(y <= 10){
-        nav.classList.remove("hide");
-        last = y;
-        return;
-      }
+/* ============================
+   Tilt cards (subtle)
+============================ */
+function tilt(el){
+  el.addEventListener("pointermove", (e) => {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    const rx = (py - 0.5) * -6;
+    const ry = (px - 0.5) *  8;
+    el.style.setProperty("--rx", rx.toFixed(2) + "deg");
+    el.style.setProperty("--ry", ry.toFixed(2) + "deg");
+  });
+  el.addEventListener("pointerleave", () => {
+    el.style.setProperty("--rx","0deg");
+    el.style.setProperty("--ry","0deg");
+  });
+}
+$$(".tiltable").forEach(tilt);
 
-      if(y > last + 6){ nav.classList.add("hide"); }
-      else if(y < last - 6){ nav.classList.remove("hide"); }
+/* ============================
+   Command Palette (Cmd/Ctrl+K)
+============================ */
+const palette = $("#palette");
+const palInput = $("#palInput");
+const palList = $("#palList");
+const cmdkBtn = $("#cmdkBtn");
 
-      last = y;
-    }, { passive:true });
-  })();
+const actions = [
+  { title:"About", sub:"Profile summary", key:"A", href:"#about" },
+  { title:"Certifications", sub:"Yale • FCA • DELF", key:"C", href:"#certifications" },
+  { title:"Experience", sub:"Timeline", key:"E", href:"#experience" },
+  { title:"Projects", sub:"Featured case study", key:"P", href:"#projects" },
+  { title:"Contact", sub:"Email + phone", key:"K", href:"#contact" },
+  { title:"Toggle Theme", sub:"Light / Dark", key:"T", action: () => themeBtn.click() },
+  { title:"Open Contact Popover", sub:"Bottom-right panel", key:"O", action: () => openContact() },
+];
 
-  // 🎬 Scroll velocity blur
-  (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if(reduce) return;
+function renderPalette(filter=""){
+  const f = filter.trim().toLowerCase();
+  const list = actions.filter(a => {
+    if(!f) return true;
+    return (a.title + " " + a.sub).toLowerCase().includes(f);
+  });
 
-    const wrap = document.querySelector(".wrap");
-    if(!wrap) return;
+  palList.innerHTML = list.map((a, idx) => `
+    <div class="pal-item" data-idx="${idx}">
+      <div class="pal-left">
+        <div class="pal-title">${a.title}</div>
+        <div class="pal-sub">${a.sub}</div>
+      </div>
+      <div class="pal-key">${a.key}</div>
+    </div>
+  `).join("");
 
-    let lastY = window.scrollY || 0;
-    let lastT = performance.now();
-    let blur = 0;
-    let raf = null;
-    let settleTimer = null;
+  palList.dataset.count = list.length;
+  palList.dataset.filtered = JSON.stringify(list.map(a => actions.indexOf(a)));
+}
 
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+function openPalette(){
+  palette.classList.add("open");
+  palette.setAttribute("aria-hidden","false");
+  renderPalette("");
+  palInput.value = "";
+  setTimeout(() => palInput.focus(), 40);
+}
+function closePalette(){
+  palette.classList.remove("open");
+  palette.setAttribute("aria-hidden","true");
+}
+function runAction(a){
+  closePalette();
+  if(a.href){
+    location.hash = a.href;
+    return;
+  }
+  if(a.action) a.action();
+}
 
-    function apply(){
-      raf = null;
-      blur *= 0.82;
-      if(blur < 0.03) blur = 0;
-      wrap.style.setProperty("--svb", blur.toFixed(2) + "px");
-      if(blur > 0) raf = requestAnimationFrame(apply);
-    }
+cmdkBtn.addEventListener("click", openPalette);
 
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY || 0;
-      const t = performance.now();
-      const dy = Math.abs(y - lastY);
-      const dt = Math.max(16, t - lastT);
-      const v = dy / dt;
+document.addEventListener("keydown", (e) => {
+  const isK = e.key.toLowerCase() === "k";
+  const cmd = e.metaKey || e.ctrlKey;
+  if(cmd && isK){
+    e.preventDefault();
+    if(palette.classList.contains("open")) closePalette();
+    else openPalette();
+  }
+  if(e.key === "Escape" && palette.classList.contains("open")){
+    closePalette();
+  }
+});
 
-      const target = clamp(v * 6.2, 0, 2.0);
-      blur = Math.max(blur, target);
+palette.addEventListener("click", (e) => {
+  if(e.target === palette) closePalette();
+});
+palInput.addEventListener("input", () => renderPalette(palInput.value));
 
-      lastY = y;
-      lastT = t;
+palList.addEventListener("click", (e) => {
+  const item = e.target.closest(".pal-item");
+  if(!item) return;
+  const idx = Number(item.dataset.idx);
+  const filteredIdxs = JSON.parse(palList.dataset.filtered || "[]");
+  const actionIndex = filteredIdxs[idx];
+  const a = actions[actionIndex];
+  if(a) runAction(a);
+});
 
-      if(!raf) raf = requestAnimationFrame(apply);
+palInput.addEventListener("keydown", (e) => {
+  if(e.key === "Enter"){
+    const filteredIdxs = JSON.parse(palList.dataset.filtered || "[]");
+    const first = actions[filteredIdxs[0]];
+    if(first) runAction(first);
+  }
+});
 
-      clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => {
-        blur = Math.min(blur, 0.6);
-        if(!raf) raf = requestAnimationFrame(apply);
-      }, 90);
-    }, { passive:true });
-  })();
-
-  // ✅ Scroll direction cue (micro hint)
-  (function(){
-    const cue = document.getElementById("scrollCue");
-    const arrow = document.getElementById("cueArrow");
-    const text = document.getElementById("cueText");
-
-    let last = window.scrollY || 0;
-    let showTimer = null;
-
-    function show(){
-      cue.classList.add("show");
-      clearTimeout(showTimer);
-      showTimer = setTimeout(() => cue.classList.remove("show"), 850);
-    }
-
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY || 0;
-      const dirDown = y > last + 4;
-      const dirUp = y < last - 4;
-
-      if(dirDown){
-        arrow.textContent = "↓";
-        text.textContent = "Scroll";
-        show();
-      }else if(dirUp){
-        arrow.textContent = "↑";
-        text.textContent = "Scroll";
-        show();
-      }
-
-      last = y;
-    }, { passive:true });
-  })();
-
-  // ✅ Particles (white bg, black particles)
-  (function(){
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if(reduce) return;
-
-    const canvas = document.getElementById("particleCanvas");
-    if(!canvas) return;
-
-    const ctx = canvas.getContext("2d", { alpha: true });
-    const DPR = Math.min(2, window.devicePixelRatio || 1);
-
-    let W = 0, H = 0;
-    let particles = [];
-    let raf = null;
-
-    const COUNT_DESKTOP = 70;
-    const COUNT_MOBILE = 42;
-    const LINK_DIST = 140;
-    const SPEED = 0.35;
-    const DOT_ALPHA = 0.55;
-    const LINE_ALPHA = 0.10;
-    const DOT_SIZE = 1.35;
-    const PARALLAX = 0.015;
-
-    let mx = 0, my = 0;
-
-    function resize(){
-      W = canvas.width = Math.floor(window.innerWidth * DPR);
-      H = canvas.height = Math.floor(window.innerHeight * DPR);
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(1,0,0,1,0,0);
-
-      const count = (window.innerWidth < 720) ? COUNT_MOBILE : COUNT_DESKTOP;
-      particles = Array.from({ length: count }, () => makeParticle(true));
-    }
-
-    function makeParticle(randomPos){
-      const x = randomPos ? Math.random() * W : 0;
-      const y = randomPos ? Math.random() * H : 0;
-      const a = Math.random() * Math.PI * 2;
-      const sp = SPEED * (0.55 + Math.random() * 0.9) * DPR;
-
-      return {
-        x, y,
-        vx: Math.cos(a) * sp,
-        vy: Math.sin(a) * sp,
-        r: (DOT_SIZE + Math.random() * 0.8) * DPR
-      };
-    }
-
-    function themeIsDark(){
-      return document.documentElement.getAttribute("data-theme") === "dark";
-    }
-
-    function draw(){
-      raf = null;
-      ctx.clearRect(0,0,W,H);
-
-      const dark = themeIsDark();
-      const dotColor = dark ? `rgba(255,255,255,${DOT_ALPHA})` : `rgba(0,0,0,${DOT_ALPHA})`;
-      const lineBase = dark ? `rgba(255,255,255,${LINE_ALPHA})` : `rgba(0,0,0,${LINE_ALPHA})`;
-
-      for(const p of particles){
-        p.x += p.vx + (mx - 0.5) * PARALLAX * W * 0.02;
-        p.y += p.vy + (my - 0.5) * PARALLAX * H * 0.02;
-
-        if(p.x < -40) p.x = W + 40;
-        if(p.x > W + 40) p.x = -40;
-        if(p.y < -40) p.y = H + 40;
-        if(p.y > H + 40) p.y = -40;
-      }
-
-      for(let i=0;i<particles.length;i++){
-        for(let j=i+1;j<particles.length;j++){
-          const a = particles[i], b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d2 = dx*dx + dy*dy;
-          const max2 = (LINK_DIST*DPR) * (LINK_DIST*DPR);
-          if(d2 < max2){
-            const d = Math.sqrt(d2);
-            const t = 1 - (d / (LINK_DIST*DPR));
-            ctx.strokeStyle = lineBase.replace(/[\d.]+\)$/,(LINE_ALPHA * t).toFixed(3)+")");
-            ctx.lineWidth = 1 * DPR;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      ctx.fillStyle = dotColor;
-      for(const p of particles){
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fill();
-      }
-
-      raf = requestAnimationFrame(draw);
-    }
-
-    window.addEventListener("mousemove", (e) => {
-      mx = e.clientX / window.innerWidth;
-      my = e.clientY / window.innerHeight;
-    }, { passive:true });
-
-    window.addEventListener("resize", resize);
-    resize();
-    draw();
-  })();
-
-  // ============================
-  // ⌘K Command Palette
-  // ============================
-  (function(){
-    const palette = document.getElementById("palette");
-    const backdrop = document.getElementById("paletteBackdrop");
-    const input = document.getElementById("paletteInput");
-    const list = document.getElementById("paletteList");
-    const openBtn = document.getElementById("cmdkBtn");
-
-    const actions = [
-      { title:"Go to Intro", subtitle:"Jump to #intro", kbd:"G", run:()=>location.hash="#intro" },
-      { title:"Go to Certifications", subtitle:"Jump to #certs", kbd:"G", run:()=>location.hash="#certs" },
-      { title:"Go to Experience", subtitle:"Jump to #experience", kbd:"G", run:()=>location.hash="#experience" },
-      { title:"Go to Projects", subtitle:"Jump to #projects", kbd:"G", run:()=>location.hash="#projects" },
-      { title:"Go to Contact", subtitle:"Jump to #contact", kbd:"G", run:()=>location.hash="#contact" },
-
-      { title:"Open CV (PDF)", subtitle:"CV_Bhishek_Shibdeen.pdf", kbd:"↗", run:()=>window.open("CV_Bhishek_Shibdeen.pdf","_blank") },
-      { title:"Open Featured PDF", subtitle:"AML_Regulations_Mauritius.pdf", kbd:"↗", run:()=>window.open("AML_Regulations_Mauritius.pdf","_blank") },
-
-      { title:"Email Bhishek", subtitle:"bhishek.shibdeen@icloud.com", kbd:"↗", run:()=>window.location.href="mailto:bhishek.shibdeen@icloud.com" },
-      { title:"Open LinkedIn", subtitle:"/in/bhishekshibdeen", kbd:"↗", run:()=>window.open("https://www.linkedin.com/in/bhishekshibdeen/","_blank") }
-    ];
-
-    let filtered = [...actions];
-    let idx = 0;
-
-    function render(){
-      list.innerHTML = "";
-      filtered.forEach((a,i)=>{
-        const el = document.createElement("div");
-        el.className = "item";
-        el.setAttribute("role","button");
-        el.tabIndex = 0;
-        el.dataset.index = i;
-
-        el.innerHTML = `
-          <div class="left">
-            <div class="t">${a.title}</div>
-            <div class="s">${a.subtitle}</div>
-          </div>
-          <div class="kbd">${a.kbd || ""}</div>
-        `;
-
-        if(i === idx){
-          el.style.background = "var(--soft)";
-          el.style.borderColor = "color-mix(in srgb, var(--line) 100%, transparent)";
-        }
-
-        el.addEventListener("click", ()=> { a.run(); close(); });
-        el.addEventListener("keydown", (e)=> {
-          if(e.key === "Enter"){ a.run(); close(); }
-        });
-
-        list.appendChild(el);
-      });
-
-      // ensure selected visible
-      const selected = list.querySelector(`[data-index="${idx}"]`);
-      if(selected) selected.scrollIntoView({ block: "nearest" });
-    }
-
-    function filter(q){
-      const s = (q || "").toLowerCase().trim();
-      filtered = actions.filter(a =>
-        (a.title + " " + a.subtitle).toLowerCase().includes(s)
-      );
-      idx = 0;
-      render();
-    }
-
-    function open(){
-      palette.classList.add("open");
-      palette.setAttribute("aria-hidden","false");
-      input.value = "";
-      filter("");
-      setTimeout(()=> input.focus(), 0);
-    }
-
-    function close(){
-      palette.classList.remove("open");
-      palette.setAttribute("aria-hidden","true");
-    }
-
-    function toggle(){
-      if(palette.classList.contains("open")) close();
-      else open();
-    }
-
-    openBtn?.addEventListener("click", open);
-    backdrop.addEventListener("click", close);
-
-    document.addEventListener("keydown", (e)=>{
-      const isMac = navigator.platform.toUpperCase().includes("MAC");
-      const cmdk = isMac ? (e.metaKey && e.key.toLowerCase() === "k") : (e.ctrlKey && e.key.toLowerCase() === "k");
-      if(cmdk){
-        e.preventDefault();
-        toggle();
-        return;
-      }
-
-      if(!palette.classList.contains("open")) return;
-
-      if(e.key === "Escape"){ e.preventDefault(); close(); return; }
-
-      if(e.key === "ArrowDown"){
-        e.preventDefault();
-        idx = Math.min(idx + 1, Math.max(0, filtered.length - 1));
-        render();
-      }
-      if(e.key === "ArrowUp"){
-        e.preventDefault();
-        idx = Math.max(idx - 1, 0);
-        render();
-      }
-      if(e.key === "Enter"){
-        e.preventDefault();
-        const a = filtered[idx];
-        if(a){ a.run(); close(); }
-      }
-    });
-
-    input.addEventListener("input", ()=> filter(input.value));
-  })();
+/* ============================
+   Featured project click (demo)
+============================ */
+$("#projectFeatured").addEventListener("click", () => {
+  showToast("Project opened ✅");
+});
 </script>
-
 </body>
 </html>
