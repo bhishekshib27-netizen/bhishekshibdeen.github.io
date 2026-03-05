@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
-<meta name="description" content="Modern compliance portfolio: certifications, experience timeline, projects, searchable content, dark mode, cinematic grain + spotlight glow." />
+<meta name="description" content="Modern compliance portfolio: certifications, experience timeline, projects, searchable content, cinematic grain + spotlight glow, command palette." />
 
 <!-- ✅ Premium fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
     --ease: cubic-bezier(.2,.8,.2,1);
   }
 
-  /* ✅ Dark mode tokens */
+  /* ✅ Dark mode tokens (kept; you can still use it) */
   [data-theme="dark"]{
     --bg:#0b0f14;
     --card:#0f151d;
@@ -78,12 +78,11 @@
   }
 
   /* ===========================
-     🎛 50k background stack
+     🎛 Premium background stack
      LAYER ORDER:
      particles canvas -> bg-stage -> ambient -> spotlight -> grain -> content
      =========================== */
 
-  /* ✅ Particle canvas */
   #particleCanvas{
     position:fixed;
     inset:0;
@@ -92,7 +91,6 @@
     display:block;
   }
 
-  /* ✅ Soft paper background layer (white mode) */
   .bg-stage{
     position:fixed;
     inset:0;
@@ -114,7 +112,6 @@
       radial-gradient(circle at 78% 72%, rgba(255,255,255,0.04), transparent 48%);
   }
 
-  /* Optional subtle grid (very light) */
   .grid{
     position:absolute; inset:0;
     opacity:0.06;
@@ -130,11 +127,7 @@
       linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/96px 96px;
   }
 
-  /* ===========================
-     ✨ Ambient glow + Spotlight
-     =========================== */
-
-  /* 1) Low ambient drift (white: soft shadows) */
+  /* ✨ Ambient glow + spotlight */
   .ambient{
     position: fixed;
     inset:-10%;
@@ -162,7 +155,6 @@
     100% { transform: translate(-0.6%,  1.0%) scale(1.03); }
   }
 
-  /* 2) Cursor-follow spotlight (white: subtle shadow spotlight) */
   .spotlight{
     position: fixed;
     inset: 0;
@@ -186,17 +178,16 @@
         transparent 74%);
   }
 
-  /* ✅ Hide glow layers on touch / small screens */
   @media (max-width: 720px){
     .spotlight, .ambient{ display:none; }
   }
 
-  /* 🎬 Cinematic film grain overlay */
+  /* 🎬 Grain overlay */
   .grain{
     position: fixed;
     inset: -40%;
     pointer-events: none;
-    z-index: 1; /* between background/glow and content */
+    z-index: 1;
     opacity: .045;
     mix-blend-mode: multiply;
     background-image:
@@ -223,15 +214,13 @@
     100% { transform: translate(0%,0%); }
   }
 
-  /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
-    .grain{ animation:none !important; }
     .ambient, .spotlight{ display:none !important; }
     .reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
     .tiltable{ transform:none !important; }
     #particleCanvas{ display:none !important; }
-    .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn{ transform:none !important; }
+    .grain{ animation:none !important; }
   }
 
   /* ===== Layout ===== */
@@ -250,7 +239,7 @@
   }
 
   /* Keep key UI sharp even if wrap blurs */
-  .nav, .topbtn, .contact-fab, .scroll-dots, .toast{ filter:none !important; }
+  .nav, .topbtn, .contact-fab, .scroll-rail, .nav-cue, .section-label, .palette, .toast{ filter:none !important; }
 
   /* ===== Nav ===== */
   .nav{
@@ -269,7 +258,6 @@
 
     transition: transform .35s var(--ease), background .18s var(--ease);
   }
-  /* ✅ Hide on scroll down / show on scroll up */
   .nav.hide{ transform: translateY(-140%); }
 
   .brand{
@@ -408,10 +396,39 @@
   .themebtn:hover{ background: var(--soft); transform: translateY(-1px); }
   .themebtn svg{ width:16px; height:16px; opacity:.9; }
 
+  /* ✅ CmdK micro button (subtle + corporate) */
+  .cmdkbtn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 9px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--text);
+    font-weight: 900;
+    font-size: 12px;
+    cursor:pointer;
+    transition: background .18s var(--ease), transform .18s var(--ease);
+    user-select:none;
+    opacity:.9;
+  }
+  .cmdkbtn:hover{ background: var(--soft); transform: translateY(-1px); }
+  .cmdkbtn kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--soft);
+    opacity: .95;
+  }
+  @media (max-width: 980px){ .cmdkbtn{ display:none; } }
+
   /* ============================
      Micro-interactions core
      ============================ */
-  .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn{
+  .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn, .cmdkbtn{
     --mx: 0px;
     --my: 0px;
     --hoverLift: 0px;
@@ -428,7 +445,6 @@
     will-change: transform;
   }
 
-  /* Cards */
   .card{
     background: var(--card);
     border: 1px solid var(--line);
@@ -978,73 +994,104 @@
   }
 
   /* ===== Elevator Rail Navigation ===== */
-
-.scroll-rail{
-position: fixed;
-left: 20px;
-top: 50%;
-transform: translateY(-50%);
-height: 220px;
-width: 2px;
-
-background: rgba(255,255,255,.15);
-
-border-radius: 2px;
-z-index: 80;
-
-display:flex;
-align-items:flex-start;
-justify-content:center;
-}
-
-/* moving indicator */
-
-.rail-indicator{
-position:absolute;
-
-width:10px;
-height:10px;
-
-border-radius:50%;
-
-background: white;
-
-left:50%;
-transform:translateX(-50%);
-
-transition:
-top .45s cubic-bezier(.2,.8,.2,1),
-transform .25s ease;
-
-box-shadow:
-0 0 10px rgba(255,255,255,.35);
-}
-
-/* hide on mobile */
-
-@media (max-width:720px){
-.scroll-rail{
-display:none;
-}
-}
-  .dotnav{
-    width: 10px;
-    height: 10px;
+  .scroll-rail{
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 220px;
+    width: 2px;
+    background: rgba(0,0,0,.18);
     border-radius: 2px;
-    border: 1px solid color-mix(in srgb, var(--text) 26%, transparent);
-    background: color-mix(in srgb, var(--card) 95%, transparent);
+    z-index: 80;
+  }
+  [data-theme="dark"] .scroll-rail{ background: rgba(255,255,255,.18); }
+
+  .rail-indicator{
+    position:absolute;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background: rgba(0,0,0,.92);
+    left:50%;
+    transform:translateX(-50%);
+    transition: top .45s cubic-bezier(.2,.8,.2,1), transform .25s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,.22);
+  }
+  [data-theme="dark"] .rail-indicator{
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 0 10px rgba(255,255,255,.22);
+  }
+
+  @media (max-width:720px){ .scroll-rail{ display:none; } }
+
+  /* ✅ Scroll direction cue */
+  .nav-cue{
+    position:fixed;
+    left: 12px;
+    bottom: 78px;
+    z-index: 90;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 10px 12px;
+    border:1px solid var(--line);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    backdrop-filter: blur(10px);
     box-shadow: var(--shadow2);
-    opacity: .65;
-    transition: transform .18s var(--ease), opacity .18s var(--ease), background .18s var(--ease);
+    font-weight: 900;
+    font-size: 12px;
+    opacity:.0;
+    transform: translateY(8px);
+    pointer-events:none;
+    transition: .22s var(--ease);
   }
-  .dotnav:hover{ opacity:1; transform: scale(1.12); }
-  .dotnav.active{
-    opacity: 1;
-    border-color: color-mix(in srgb, var(--text) 35%, transparent);
-    background: linear-gradient(135deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 28%, transparent));
-    transform: scale(1.18);
+  .nav-cue.show{
+    opacity:.92;
+    transform: translateY(0);
   }
-  @media (max-width: 720px){ .scroll-dots{ display:none; } }
+  .nav-cue .arr{
+    width: 22px; height: 22px;
+    border-radius: 999px;
+    border:1px solid var(--line);
+    background: var(--soft);
+    display:grid;
+    place-items:center;
+    font-size: 13px;
+    line-height:1;
+  }
+  @media (max-width: 720px){ .nav-cue{ display:none; } }
+
+  /* ✅ Live section label */
+  .section-label{
+    position:fixed;
+    left: 44px;
+    top: calc(50% - 140px);
+    z-index: 90;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 9px 10px;
+    border:1px solid var(--line);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow2);
+    font-weight: 950;
+    font-size: 12px;
+    opacity:.92;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .section-label .dot{
+    width:10px; height:10px; border-radius: 3px;
+    background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
+  }
+  [data-theme="dark"] .section-label .dot{
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  }
+  @media (max-width: 860px){ .section-label{ display:none; } }
 
   /* Reveal with blur */
   .reveal{
@@ -1277,27 +1324,173 @@ display:none;
   }
   .foot-sub strong{ color: color-mix(in srgb, var(--text) 82%, transparent); font-weight: 900; }
 
+  /* ✅ Project credibility badges (bottom of page) */
+  .cred{
+    padding: 12px 16px 0;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .cred .label{
+    border:1px solid var(--line);
+    background: var(--soft);
+    border-radius: 999px;
+    padding: 7px 10px;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    opacity:.9;
+  }
+
   /* ✅ Search filtering helper */
   .search-hidden{ display:none !important; }
+
+  /* ============================
+     ⌘K Command Palette
+     ============================ */
+  .palette{
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display:none;
+    place-items:center;
+    padding: 18px;
+  }
+  .palette.open{ display:grid; }
+  .palette .backdrop{
+    position:absolute; inset:0;
+    background: rgba(0,0,0,.25);
+    backdrop-filter: blur(10px);
+  }
+  [data-theme="dark"] .palette .backdrop{ background: rgba(0,0,0,.55); }
+
+  .palette .panel{
+    position:relative;
+    width: min(720px, 92vw);
+    border:1px solid var(--line);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--card) 92%, transparent);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+  .palette .top{
+    padding: 12px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .palette .top .hint{
+    margin-left:auto;
+    font-size: 11px;
+    font-weight: 900;
+    opacity:.75;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    white-space:nowrap;
+  }
+  .palette .top .hint kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--soft);
+  }
+  .palette input{
+    width: 100%;
+    border:1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 12px;
+    outline:none;
+    background: var(--card);
+    color: var(--text);
+    font-weight: 850;
+    font-size: 13px;
+  }
+  .palette .list{
+    max-height: 380px;
+    overflow:auto;
+    padding: 10px;
+    display:grid;
+    gap:8px;
+  }
+  .palette .item{
+    border:1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: var(--card);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+    cursor:pointer;
+    transition: background .18s var(--ease), transform .18s var(--ease);
+  }
+  .palette .item:hover{
+    background: var(--soft);
+    transform: translateY(-1px);
+  }
+  .palette .item .left{
+    display:grid;
+    gap:3px;
+    min-width:0;
+  }
+  .palette .item .t{
+    font-weight: 950;
+    font-size: 13px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .palette .item .s{
+    font-weight: 650;
+    font-size: 12px;
+    color: var(--muted);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .palette .item .kbd{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--soft);
+    opacity:.9;
+    white-space:nowrap;
+  }
 </style>
 </head>
 
 <body>
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
-  <!-- ✅ 50k premium particle background -->
   <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <div class="bg-stage" aria-hidden="true">
     <div class="grid"></div>
   </div>
 
-  <!-- ✨ Ambient glow + Spotlight -->
   <div class="ambient" aria-hidden="true"></div>
   <div class="spotlight" aria-hidden="true"></div>
-
-  <!-- 🎬 Grain overlay -->
   <div class="grain" aria-hidden="true"></div>
+
+  <!-- ✅ Scroll cue -->
+  <div class="nav-cue" id="scrollCue" aria-hidden="true">
+    <span class="arr" id="cueArrow">↓</span>
+    <span id="cueText">Scroll</span>
+  </div>
+
+  <!-- ✅ Live section label -->
+  <div class="section-label" aria-hidden="true">
+    <span class="dot"></span>
+    <span id="sectionLabel">Intro</span>
+  </div>
 
   <!-- Back to top -->
   <a href="#top" class="topbtn" id="topBtn" aria-label="Back to top">
@@ -1306,10 +1499,10 @@ display:none;
     </svg>
   </a>
 
-  <!-- Elevator Rail Navigation -->
-<div class="scroll-rail" aria-hidden="true">
-  <div class="rail-indicator" id="railIndicator"></div>
-</div>
+  <!-- Elevator Rail -->
+  <div class="scroll-rail" aria-hidden="true">
+    <div class="rail-indicator" id="railIndicator"></div>
+  </div>
 
   <div class="wrap" id="top">
 
@@ -1321,7 +1514,7 @@ display:none;
       </div>
 
       <div class="controls">
-        <!-- ✅ Search -->
+        <!-- Search -->
         <div class="search-wrap" aria-label="Search portfolio">
           <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true">
             <path fill="currentColor" d="M10 2a8 8 0 1 1 5.29 14.01l4.35 4.35-1.42 1.42-4.35-4.35A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12a6 6 0 0 0 0-12z"/>
@@ -1330,7 +1523,13 @@ display:none;
           <button class="clearbtn" id="clearSearch" type="button" title="Clear search">Clear</button>
         </div>
 
-        <!-- ✅ Dark mode toggle -->
+        <!-- ⌘K -->
+        <button class="cmdkbtn" id="cmdkBtn" type="button" aria-label="Open command palette">
+          <span style="font-weight:950;">Search</span>
+          <kbd>⌘K</kbd>
+        </button>
+
+        <!-- Theme -->
         <button class="themebtn" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
           <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true">
             <path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM6.22 6.22a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42L6.22 7.64a1 1 0 0 1 0-1.42zm9.14 9.14a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42l-1.42-1.42a1 1 0 0 1 0-1.41zM17.78 6.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM8.64 15.36a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 1 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>
@@ -1352,7 +1551,7 @@ display:none;
       </div>
     </div>
 
-    <!-- ✅ Search status strip (appears when searching) -->
+    <!-- Search status -->
     <div class="search-status" id="searchStatus" aria-live="polite">
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
         <span class="pillmini"><span class="sq"></span> Search</span>
@@ -1389,7 +1588,6 @@ display:none;
           </div>
         </div>
 
-        <!-- Top-right panel -->
         <aside class="panel reveal" aria-label="Quick Links">
           <h3>Quick Links</h3>
           <p>Fast access to key items: CV, featured work, and contact.</p>
@@ -1705,6 +1903,15 @@ display:none;
 
     <!-- ✅ Press-ready footer -->
     <footer class="reveal tiltable" id="press" data-search-item data-type="contact" data-search-text="Press-ready footer email bhishek.shibdeen@icloud.com last updated Mar 2026">
+      <div class="cred">
+        <span class="label">Credibility</span>
+        <span class="tagchip">Risk-Based</span>
+        <span class="tagchip">Audit-Ready Files</span>
+        <span class="tagchip">Screening Discipline</span>
+        <span class="tagchip">FATF-Aligned Thinking</span>
+        <span class="tagchip">Process Clarity</span>
+      </div>
+
       <div class="foot-inner">
         <div class="foot-left">
           <div class="foot-title">Press-Ready</div>
@@ -1721,7 +1928,7 @@ display:none;
 
       <div class="foot-sub">
         <div>© 2026 Bhishek Shibdeen</div>
-        <div style="opacity:.9;">Tip: use <strong>J</strong>/<strong>K</strong> to navigate sections</div>
+        <div style="opacity:.9;">Tip: use <strong>⌘K</strong> and <strong>J</strong>/<strong>K</strong></div>
       </div>
     </footer>
 
@@ -1736,7 +1943,7 @@ display:none;
     <a class="btn" href="#contact">Contact</a>
   </div>
 
-  <!-- Bottom-right contact icon + popover -->
+  <!-- Bottom-right contact -->
   <div class="contact-fab" aria-label="Quick contact">
     <div class="contact-pop" id="contactPop" role="dialog" aria-label="Contact details">
       <div class="head">
@@ -1775,6 +1982,18 @@ display:none;
   </div>
 
   <div class="toast" id="toast" aria-hidden="true">Copied ✅</div>
+
+  <!-- ⌘K Command Palette -->
+  <div class="palette" id="palette" aria-hidden="true">
+    <div class="backdrop" id="paletteBackdrop"></div>
+    <div class="panel" role="dialog" aria-label="Command palette">
+      <div class="top">
+        <input id="paletteInput" type="text" placeholder="Search sections or actions… (e.g., projects, cv, pdf, email)" autocomplete="off" />
+        <div class="hint"><kbd>↑</kbd><kbd>↓</kbd> select · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</div>
+      </div>
+      <div class="list" id="paletteList"></div>
+    </div>
+  </div>
 
 <script>
   // ===== Theme (dark mode toggle) =====
@@ -1836,22 +2055,62 @@ display:none;
     els.forEach(el => io.observe(el));
   })();
 
-  // ===== Active nav highlight =====
+  // ===== Active nav highlight + live section label + rail =====
   (function(){
     const links = Array.from(document.querySelectorAll(".nav-item"));
-    const sections = links.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    const label = document.getElementById("sectionLabel");
+    const indicator = document.getElementById("railIndicator");
+
+    const map = [
+      { id:"intro", name:"Intro" },
+      { id:"certs", name:"Certifications" },
+      { id:"experience", name:"Experience" },
+      { id:"projects", name:"Projects" },
+      { id:"contact", name:"Contact" },
+      { id:"press", name:"Press" }
+    ];
+
+    const sections = map.map(x => document.getElementById(x.id)).filter(Boolean);
+
+    const railHeight = 220; // must match CSS
+    function setRail(idx){
+      const total = sections.length;
+      const step = total > 1 ? (railHeight - 10) / (total - 1) : 0;
+      // -10 keeps dot from clipping; CSS dot is 10px
+      indicator.style.top = `${idx * step}px`;
+    }
+
+    let activeId = "intro";
 
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          links.forEach(l => l.classList.remove("active"));
-          const active = links.find(l => l.getAttribute("href") === "#" + entry.target.id);
-          if(active) active.classList.add("active");
-        }
-      });
-    }, { threshold: 0.45 });
+      // pick the most visible intersecting
+      const vis = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if(!vis) return;
+
+      activeId = vis.target.id;
+
+      // nav active
+      links.forEach(l => l.classList.remove("active"));
+      const active = links.find(l => l.getAttribute("href") === "#" + activeId);
+      if(active) active.classList.add("active");
+
+      // label
+      const found = map.find(x => x.id === activeId);
+      if(found && label) label.textContent = found.name;
+
+      // rail
+      const idx = map.findIndex(x => x.id === activeId);
+      if(idx >= 0) setRail(idx);
+    }, { threshold: [0.35, 0.45, 0.55, 0.65] });
 
     sections.forEach(s => io.observe(s));
+
+    // initial
+    const startIdx = map.findIndex(x => x.id === "intro");
+    setRail(Math.max(0, startIdx));
   })();
 
   // ===== Mobile nav show =====
@@ -1860,24 +2119,6 @@ display:none;
     function check(){ m.style.display = window.innerWidth < 720 ? "flex" : "none"; }
     window.addEventListener("resize", check);
     check();
-  })();
-
-  // ===== Scroll dots active state =====
-  (function(){
-    const dots = Array.from(document.querySelectorAll(".dotnav"));
-    const sections = dots.map(d => document.getElementById(d.dataset.target)).filter(Boolean);
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          dots.forEach(d => d.classList.remove("active"));
-          const active = dots.find(d => d.dataset.target === entry.target.id);
-          if(active) active.classList.add("active");
-        }
-      });
-    }, { threshold: 0.5 });
-
-    sections.forEach(s => io.observe(s));
   })();
 
   // ===== Back-to-top show/hide =====
@@ -1950,7 +2191,7 @@ display:none;
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(reduce) return;
 
-    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn");
+    const magnets = document.querySelectorAll(".btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn, .cmdkbtn");
     const strength = 9;
     magnets.forEach(el => {
       el.addEventListener("mousemove", (e) => {
@@ -1988,7 +2229,6 @@ display:none;
   // ===== Keyboard navigation: J/K + arrows + Home/End =====
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     const order = ["intro","certs","experience","projects","contact","press"]
       .map(id => document.getElementById(id))
       .filter(Boolean);
@@ -2012,35 +2252,20 @@ display:none;
       const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
       const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
       if(typing) return;
-      if(e.metaKey || e.ctrlKey || e.altKey) return;
 
       const key = e.key;
+      if(key === "Home"){ e.preventDefault(); document.getElementById("top").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); return; }
+      if(key === "End"){ e.preventDefault(); document.getElementById("press")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); return; }
 
-      if(key === "Home"){
-        e.preventDefault();
-        document.getElementById("top").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
-        return;
-      }
-      if(key === "End"){
-        e.preventDefault();
-        document.getElementById("press")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
-        return;
-      }
+      if(e.metaKey || e.ctrlKey || e.altKey) return;
 
       const idx = currentIndex();
-
-      if(key === "j" || key === "J" || key === "ArrowDown" || key === "PageDown"){
-        e.preventDefault();
-        scrollToIdx(idx + 1);
-      }
-      if(key === "k" || key === "K" || key === "ArrowUp" || key === "PageUp"){
-        e.preventDefault();
-        scrollToIdx(idx - 1);
-      }
+      if(key === "j" || key === "J" || key === "ArrowDown" || key === "PageDown"){ e.preventDefault(); scrollToIdx(idx + 1); }
+      if(key === "k" || key === "K" || key === "ArrowUp" || key === "PageUp"){ e.preventDefault(); scrollToIdx(idx - 1); }
     });
   })();
 
-  // ✅ Search: filters Certifications, Experience entries, Projects (anything with data-search-item)
+  // ✅ Search: filters anything with data-search-item
   (function(){
     const input = document.getElementById("searchInput");
     const clear = document.getElementById("clearSearch");
@@ -2093,7 +2318,7 @@ display:none;
     }catch(e){}
   })();
 
-  // ✨ Spotlight follows cursor (smooth + subtle)
+  // ✨ Spotlight follows cursor
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -2124,9 +2349,6 @@ display:none;
       ty = e.clientY;
       if(!raf) raf = requestAnimationFrame(render);
     }, { passive: true });
-
-    spot.style.setProperty("--sx", tx + "px");
-    spot.style.setProperty("--sy", ty + "px");
   })();
 
   // ✅ Hide navbar on scroll down / show on scroll up
@@ -2144,17 +2366,14 @@ display:none;
         return;
       }
 
-      if(y > last + 6){
-        nav.classList.add("hide");
-      }else if(y < last - 6){
-        nav.classList.remove("hide");
-      }
+      if(y > last + 6){ nav.classList.add("hide"); }
+      else if(y < last - 6){ nav.classList.remove("hide"); }
 
       last = y;
     }, { passive:true });
   })();
 
-  // 🎬 Scroll velocity blur (subtle, premium)
+  // 🎬 Scroll velocity blur
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(reduce) return;
@@ -2183,9 +2402,9 @@ display:none;
       const t = performance.now();
       const dy = Math.abs(y - lastY);
       const dt = Math.max(16, t - lastT);
-      const v = dy / dt; // px per ms
+      const v = dy / dt;
 
-      const target = clamp(v * 6.2, 0, 2.0); // cap blur
+      const target = clamp(v * 6.2, 0, 2.0);
       blur = Math.max(blur, target);
 
       lastY = y;
@@ -2201,7 +2420,41 @@ display:none;
     }, { passive:true });
   })();
 
-  // ✅ 50k background particles (white bg, black particles)
+  // ✅ Scroll direction cue (micro hint)
+  (function(){
+    const cue = document.getElementById("scrollCue");
+    const arrow = document.getElementById("cueArrow");
+    const text = document.getElementById("cueText");
+
+    let last = window.scrollY || 0;
+    let showTimer = null;
+
+    function show(){
+      cue.classList.add("show");
+      clearTimeout(showTimer);
+      showTimer = setTimeout(() => cue.classList.remove("show"), 850);
+    }
+
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY || 0;
+      const dirDown = y > last + 4;
+      const dirUp = y < last - 4;
+
+      if(dirDown){
+        arrow.textContent = "↓";
+        text.textContent = "Scroll";
+        show();
+      }else if(dirUp){
+        arrow.textContent = "↑";
+        text.textContent = "Scroll";
+        show();
+      }
+
+      last = y;
+    }, { passive:true });
+  })();
+
+  // ✅ Particles (white bg, black particles)
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(reduce) return;
@@ -2216,15 +2469,14 @@ display:none;
     let particles = [];
     let raf = null;
 
-    // Tunables (premium subtle)
     const COUNT_DESKTOP = 70;
     const COUNT_MOBILE = 42;
-    const LINK_DIST = 140;         // max distance for lines
-    const SPEED = 0.35;            // base drift
-    const DOT_ALPHA = 0.55;        // particle dot opacity
-    const LINE_ALPHA = 0.10;       // line opacity
-    const DOT_SIZE = 1.35;         // dot radius
-    const PARALLAX = 0.015;        // slight mouse influence
+    const LINK_DIST = 140;
+    const SPEED = 0.35;
+    const DOT_ALPHA = 0.55;
+    const LINE_ALPHA = 0.10;
+    const DOT_SIZE = 1.35;
+    const PARALLAX = 0.015;
 
     let mx = 0, my = 0;
 
@@ -2242,8 +2494,6 @@ display:none;
     function makeParticle(randomPos){
       const x = randomPos ? Math.random() * W : 0;
       const y = randomPos ? Math.random() * H : 0;
-
-      // slightly varied drift
       const a = Math.random() * Math.PI * 2;
       const sp = SPEED * (0.55 + Math.random() * 0.9) * DPR;
 
@@ -2261,19 +2511,13 @@ display:none;
 
     function draw(){
       raf = null;
-
       ctx.clearRect(0,0,W,H);
 
-      // colors
       const dark = themeIsDark();
-
-      // black particles on white bg, white particles on dark bg
       const dotColor = dark ? `rgba(255,255,255,${DOT_ALPHA})` : `rgba(0,0,0,${DOT_ALPHA})`;
       const lineBase = dark ? `rgba(255,255,255,${LINE_ALPHA})` : `rgba(0,0,0,${LINE_ALPHA})`;
 
-      // move + wrap
       for(const p of particles){
-        // subtle mouse influence (premium)
         p.x += p.vx + (mx - 0.5) * PARALLAX * W * 0.02;
         p.y += p.vy + (my - 0.5) * PARALLAX * H * 0.02;
 
@@ -2283,7 +2527,6 @@ display:none;
         if(p.y > H + 40) p.y = -40;
       }
 
-      // lines
       for(let i=0;i<particles.length;i++){
         for(let j=i+1;j<particles.length;j++){
           const a = particles[i], b = particles[j];
@@ -2304,7 +2547,6 @@ display:none;
         }
       }
 
-      // dots
       ctx.fillStyle = dotColor;
       for(const p of particles){
         ctx.beginPath();
@@ -2320,44 +2562,135 @@ display:none;
       my = e.clientY / window.innerHeight;
     }, { passive:true });
 
-    window.addEventListener("resize", () => {
-      resize();
-    });
-
-    // If theme changes, just redraw (same loop handles it)
-    const mo = new MutationObserver(() => {});
-    mo.observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] });
-
+    window.addEventListener("resize", resize);
     resize();
     draw();
   })();
-/* ===== Elevator Rail Navigation ===== */
 
-const sections = document.querySelectorAll("section");
-const indicator = document.getElementById("railIndicator");
+  // ============================
+  // ⌘K Command Palette
+  // ============================
+  (function(){
+    const palette = document.getElementById("palette");
+    const backdrop = document.getElementById("paletteBackdrop");
+    const input = document.getElementById("paletteInput");
+    const list = document.getElementById("paletteList");
+    const openBtn = document.getElementById("cmdkBtn");
 
-window.addEventListener("scroll", () => {
+    const actions = [
+      { title:"Go to Intro", subtitle:"Jump to #intro", kbd:"G", run:()=>location.hash="#intro" },
+      { title:"Go to Certifications", subtitle:"Jump to #certs", kbd:"G", run:()=>location.hash="#certs" },
+      { title:"Go to Experience", subtitle:"Jump to #experience", kbd:"G", run:()=>location.hash="#experience" },
+      { title:"Go to Projects", subtitle:"Jump to #projects", kbd:"G", run:()=>location.hash="#projects" },
+      { title:"Go to Contact", subtitle:"Jump to #contact", kbd:"G", run:()=>location.hash="#contact" },
 
-let index = 0;
+      { title:"Open CV (PDF)", subtitle:"CV_Bhishek_Shibdeen.pdf", kbd:"↗", run:()=>window.open("CV_Bhishek_Shibdeen.pdf","_blank") },
+      { title:"Open Featured PDF", subtitle:"AML_Regulations_Mauritius.pdf", kbd:"↗", run:()=>window.open("AML_Regulations_Mauritius.pdf","_blank") },
 
-sections.forEach((section, i) => {
+      { title:"Email Bhishek", subtitle:"bhishek.shibdeen@icloud.com", kbd:"↗", run:()=>window.location.href="mailto:bhishek.shibdeen@icloud.com" },
+      { title:"Open LinkedIn", subtitle:"/in/bhishekshibdeen", kbd:"↗", run:()=>window.open("https://www.linkedin.com/in/bhishekshibdeen/","_blank") }
+    ];
 
-const rect = section.getBoundingClientRect();
+    let filtered = [...actions];
+    let idx = 0;
 
-if(rect.top <= window.innerHeight * 0.4){
-index = i;
-}
+    function render(){
+      list.innerHTML = "";
+      filtered.forEach((a,i)=>{
+        const el = document.createElement("div");
+        el.className = "item";
+        el.setAttribute("role","button");
+        el.tabIndex = 0;
+        el.dataset.index = i;
 
-});
+        el.innerHTML = `
+          <div class="left">
+            <div class="t">${a.title}</div>
+            <div class="s">${a.subtitle}</div>
+          </div>
+          <div class="kbd">${a.kbd || ""}</div>
+        `;
 
-const total = sections.length;
-const railHeight = 220;
+        if(i === idx){
+          el.style.background = "var(--soft)";
+          el.style.borderColor = "color-mix(in srgb, var(--line) 100%, transparent)";
+        }
 
-const step = railHeight / (total - 1);
+        el.addEventListener("click", ()=> { a.run(); close(); });
+        el.addEventListener("keydown", (e)=> {
+          if(e.key === "Enter"){ a.run(); close(); }
+        });
 
-indicator.style.top = `${index * step}px`;
+        list.appendChild(el);
+      });
 
-});
+      // ensure selected visible
+      const selected = list.querySelector(`[data-index="${idx}"]`);
+      if(selected) selected.scrollIntoView({ block: "nearest" });
+    }
+
+    function filter(q){
+      const s = (q || "").toLowerCase().trim();
+      filtered = actions.filter(a =>
+        (a.title + " " + a.subtitle).toLowerCase().includes(s)
+      );
+      idx = 0;
+      render();
+    }
+
+    function open(){
+      palette.classList.add("open");
+      palette.setAttribute("aria-hidden","false");
+      input.value = "";
+      filter("");
+      setTimeout(()=> input.focus(), 0);
+    }
+
+    function close(){
+      palette.classList.remove("open");
+      palette.setAttribute("aria-hidden","true");
+    }
+
+    function toggle(){
+      if(palette.classList.contains("open")) close();
+      else open();
+    }
+
+    openBtn?.addEventListener("click", open);
+    backdrop.addEventListener("click", close);
+
+    document.addEventListener("keydown", (e)=>{
+      const isMac = navigator.platform.toUpperCase().includes("MAC");
+      const cmdk = isMac ? (e.metaKey && e.key.toLowerCase() === "k") : (e.ctrlKey && e.key.toLowerCase() === "k");
+      if(cmdk){
+        e.preventDefault();
+        toggle();
+        return;
+      }
+
+      if(!palette.classList.contains("open")) return;
+
+      if(e.key === "Escape"){ e.preventDefault(); close(); return; }
+
+      if(e.key === "ArrowDown"){
+        e.preventDefault();
+        idx = Math.min(idx + 1, Math.max(0, filtered.length - 1));
+        render();
+      }
+      if(e.key === "ArrowUp"){
+        e.preventDefault();
+        idx = Math.max(idx - 1, 0);
+        render();
+      }
+      if(e.key === "Enter"){
+        e.preventDefault();
+        const a = filtered[idx];
+        if(a){ a.run(); close(); }
+      }
+    });
+
+    input.addEventListener("input", ()=> filter(input.value));
+  })();
 </script>
 
 </body>
