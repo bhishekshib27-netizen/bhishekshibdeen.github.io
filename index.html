@@ -29,7 +29,7 @@
     --ease: cubic-bezier(.2,.8,.2,1);
   }
 
-  /* ✅ Dark mode tokens (kept; you can still use it) */
+  /* ✅ Dark mode tokens */
   [data-theme="dark"]{
     --bg:#0b0f14;
     --card:#0f151d;
@@ -79,8 +79,6 @@
 
   /* ===========================
      🎛 Premium background stack
-     LAYER ORDER:
-     particles canvas -> bg-stage -> ambient -> spotlight -> grain -> content
      =========================== */
 
   #particleCanvas{
@@ -396,7 +394,7 @@
   .themebtn:hover{ background: var(--soft); transform: translateY(-1px); }
   .themebtn svg{ width:16px; height:16px; opacity:.9; }
 
-  /* ✅ CmdK micro button (subtle + corporate) */
+  /* ✅ CmdK micro button */
   .cmdkbtn{
     display:inline-flex;
     align-items:center;
@@ -632,6 +630,24 @@
     align-items:center;
     justify-content:space-between;
     width:100%;
+  }
+
+  /* ✅ Featured rotator: fade + subtle glow pulse */
+  .featured-ql.swap .txt{
+    opacity:0;
+    transform: translateY(2px);
+    transition: opacity .22s var(--ease), transform .22s var(--ease);
+  }
+  .featured-ql .txt{
+    opacity:1;
+    transform: translateY(0);
+    transition: opacity .22s var(--ease), transform .22s var(--ease);
+  }
+  .featured-ql.pulse{
+    box-shadow: 0 18px 55px rgba(0,0,0,0.12);
+  }
+  [data-theme="dark"] .featured-ql.pulse{
+    box-shadow: 0 18px 55px rgba(0,0,0,0.50);
   }
 
   /* ✅ Search status strip */
@@ -1608,38 +1624,27 @@
               </a>
             </div>
 
-            <div class="ql tiltable" data-search-item data-type="project" data-search-text="AML regulations Mauritius featured PDF AML CFT reporting flow FIU FSC BoM STR CDD EDD RBA">
-              <a href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">
+            <!-- ✅ ROTATING FEATURED PDF (AML ↔ KYC every 5s) -->
+            <div
+              class="ql tiltable featured-ql"
+              id="featuredRotator"
+              data-search-item
+              data-type="project"
+              data-search-text="Featured PDF AML Regulations in Mauritius KYC Controls Overview risk-based onboarding CDD EDD STR RBA"
+            >
+              <a href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer" id="featuredLink">
                 <div class="left">
                   <span class="ico" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h12v20H6V2zm2 2v16h8V4H8zm1 2h6v2H9V6zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/></svg>
                   </span>
-                  <span class="txt">
-                    <span class="t">Featured PDF</span>
-                    <span class="s">AML Regulations in Mauritius</span>
+                  <span class="txt" id="featuredTxt">
+                    <span class="t" id="featuredTitle">Featured PDF</span>
+                    <span class="s" id="featuredSub">AML Regulations in Mauritius</span>
                   </span>
                 </div>
-                <span class="go">↗</span>
+                <span class="go" id="featuredGo">↗</span>
               </a>
             </div>
-            <div class="ql tiltable" data-search-item data-type="project" data-search-text="KYC Controls Overview risk-based onboarding CDD EDD triggers documentation compliance financial crime">
-  <a href="KYC_Controls_Overview.pdf" target="_blank" rel="noreferrer">
-    <div class="left">
-      <span class="ico" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path fill="currentColor" d="M6 2h12v20H6V2zm2 2v16h8V4H8zm1 2h6v2H9V6zm0 4h6v2H9v-2zm0 4h4v2H9v-2z"/>
-        </svg>
-      </span>
-
-      <span class="txt">
-        <span class="t">Featured PDF</span>
-        <span class="s">KYC Controls Overview</span>
-      </span>
-    </div>
-
-    <span class="go">↗</span>
-  </a>
-</div>
 
             <div class="ql tiltable" data-search-item data-type="contact" data-search-text="Email bhishek.shibdeen@icloud.com contact">
               <a href="mailto:bhishek.shibdeen@icloud.com">
@@ -1837,14 +1842,21 @@
         </div>
 
         <div class="grid3">
-          <div class="tile reveal tiltable" data-search-item data-type="project"
-               data-search-text="KYC Controls Overview risk-based onboarding CDD EDD triggers file quality checks audit-ready documentation standards">
+          <!-- (kept as image tile; click-to-open added) -->
+          <div class="tile reveal tiltable" role="button" tabindex="0"
+               onclick="window.open('KYC_Controls_Overview.pdf','_blank')"
+               onkeydown="if(event.key==='Enter' || event.key===' '){ window.open('KYC_Controls_Overview.pdf','_blank'); }"
+               data-search-item data-type="project"
+               data-search-text="KYC Controls Overview risk-based onboarding CDD EDD triggers file quality checks audit-ready documentation standards PDF">
             <div class="tag"><span class="sq"></span>Project</div>
             <div class="thumb-frame">
-  <img src="kyc-controls-overview.jpeg" alt="KYC Controls Overview" loading="lazy">
-</div>
+              <img src="kyc-controls-overview.jpeg" alt="KYC Controls Overview" loading="lazy">
+            </div>
             <h4>KYC Controls Overview</h4>
             <p>Risk-based onboarding outline: CDD/EDD triggers, file quality checks, and audit-ready documentation standards.</p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="btn primary" onclick="event.stopPropagation(); window.open('KYC_Controls_Overview.pdf','_blank');">Open PDF ↗</span>
+            </div>
           </div>
 
           <div class="tile reveal tiltable" data-search-item data-type="project"
@@ -2093,45 +2105,35 @@
 
     const sections = map.map(x => document.getElementById(x.id)).filter(Boolean);
 
-    const railHeight = 220; // must match CSS
+    const railHeight = 220;
     function setRail(idx){
       const total = sections.length;
       const step = total > 1 ? (railHeight - 10) / (total - 1) : 0;
-      // -10 keeps dot from clipping; CSS dot is 10px
       indicator.style.top = `${idx * step}px`;
     }
 
-    let activeId = "intro";
-
     const io = new IntersectionObserver((entries) => {
-      // pick the most visible intersecting
       const vis = entries
         .filter(e => e.isIntersecting)
         .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
 
       if(!vis) return;
 
-      activeId = vis.target.id;
+      const activeId = vis.target.id;
 
-      // nav active
       links.forEach(l => l.classList.remove("active"));
       const active = links.find(l => l.getAttribute("href") === "#" + activeId);
       if(active) active.classList.add("active");
 
-      // label
       const found = map.find(x => x.id === activeId);
       if(found && label) label.textContent = found.name;
 
-      // rail
       const idx = map.findIndex(x => x.id === activeId);
       if(idx >= 0) setRail(idx);
     }, { threshold: [0.35, 0.45, 0.55, 0.65] });
 
     sections.forEach(s => io.observe(s));
-
-    // initial
-    const startIdx = map.findIndex(x => x.id === "intro");
-    setRail(Math.max(0, startIdx));
+    setRail(0);
   })();
 
   // ===== Mobile nav show =====
@@ -2205,6 +2207,55 @@
     if(copyEmailBtn){
       copyEmailBtn.addEventListener("click", () => copyText("bhishek.shibdeen@icloud.com"));
     }
+  })();
+
+  // ✅ Rotating Featured PDF (every 5s, smooth transition + subtle pulse)
+  (function(){
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce) return;
+
+    const card = document.getElementById("featuredRotator");
+    const link = document.getElementById("featuredLink");
+    const sub = document.getElementById("featuredSub");
+
+    if(!card || !link || !sub) return;
+
+    const items = [
+      {
+        href: "AML_Regulations_Mauritius.pdf",
+        subtitle: "AML Regulations in Mauritius",
+        search: "AML regulations Mauritius featured PDF AML CFT reporting flow FIU FSC BoM STR CDD EDD RBA"
+      },
+      {
+        href: "KYC_Controls_Overview.pdf",
+        subtitle: "KYC Controls Overview",
+        search: "KYC Controls Overview featured PDF risk-based onboarding CDD EDD triggers file quality checks audit-ready documentation standards"
+      }
+    ];
+
+    let i = 0;
+
+    function apply(idx){
+      const it = items[idx];
+      link.href = it.href;
+      sub.textContent = it.subtitle;
+      card.setAttribute("data-search-text", it.search);
+    }
+
+    apply(i);
+
+    setInterval(() => {
+      card.classList.add("swap");
+      card.classList.add("pulse");
+
+      setTimeout(() => {
+        i = (i + 1) % items.length;
+        apply(i);
+        card.classList.remove("swap");
+      }, 230);
+
+      setTimeout(() => card.classList.remove("pulse"), 700);
+    }, 5000);
   })();
 
   // ===== Micro-interactions: magnetic buttons + tilt cards =====
@@ -2475,7 +2526,7 @@
     }, { passive:true });
   })();
 
-  // ✅ Particles (white bg, black particles)
+  // ✅ Particles
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(reduce) return;
@@ -2598,6 +2649,12 @@
     const list = document.getElementById("paletteList");
     const openBtn = document.getElementById("cmdkBtn");
 
+    function openFeaturedCurrent(){
+      const a = document.getElementById("featuredLink");
+      const href = a ? a.getAttribute("href") : "AML_Regulations_Mauritius.pdf";
+      window.open(href, "_blank");
+    }
+
     const actions = [
       { title:"Go to Intro", subtitle:"Jump to #intro", kbd:"G", run:()=>location.hash="#intro" },
       { title:"Go to Certifications", subtitle:"Jump to #certs", kbd:"G", run:()=>location.hash="#certs" },
@@ -2606,7 +2663,9 @@
       { title:"Go to Contact", subtitle:"Jump to #contact", kbd:"G", run:()=>location.hash="#contact" },
 
       { title:"Open CV (PDF)", subtitle:"CV_Bhishek_Shibdeen.pdf", kbd:"↗", run:()=>window.open("CV_Bhishek_Shibdeen.pdf","_blank") },
-      { title:"Open Featured PDF", subtitle:"AML_Regulations_Mauritius.pdf", kbd:"↗", run:()=>window.open("AML_Regulations_Mauritius.pdf","_blank") },
+      { title:"Open Featured PDF (current)", subtitle:"Opens whatever is showing in Quick Links", kbd:"↗", run:openFeaturedCurrent },
+      { title:"Open AML PDF", subtitle:"AML_Regulations_Mauritius.pdf", kbd:"↗", run:()=>window.open("AML_Regulations_Mauritius.pdf","_blank") },
+      { title:"Open KYC PDF", subtitle:"KYC_Controls_Overview.pdf", kbd:"↗", run:()=>window.open("KYC_Controls_Overview.pdf","_blank") },
 
       { title:"Email Bhishek", subtitle:"bhishek.shibdeen@icloud.com", kbd:"↗", run:()=>window.location.href="mailto:bhishek.shibdeen@icloud.com" },
       { title:"Open LinkedIn", subtitle:"/in/bhishekshibdeen", kbd:"↗", run:()=>window.open("https://www.linkedin.com/in/bhishekshibdeen/","_blank") }
@@ -2645,7 +2704,6 @@
         list.appendChild(el);
       });
 
-      // ensure selected visible
       const selected = list.querySelector(`[data-index="${idx}"]`);
       if(selected) selected.scrollIntoView({ block: "nearest" });
     }
