@@ -13,35 +13,21 @@
 
 <style>
   :root{
-  --bg:#0b0f14;
-  --card:#11161d;
-  --text:#f3f4f6;
-  --muted: rgba(243,244,246,.65);
-  --line: rgba(255,255,255,.10);
-  --soft: rgba(255,255,255,.04);
+    --bg:#ffffff;
+    --card:#ffffff;
+    --text:#0b0b0b;
+    --muted: rgba(0,0,0,.62);
+    --line: rgba(0,0,0,.14);
+    --soft: rgba(0,0,0,.04);
 
-  .accent{
-width:140px;
-height:6px;
+    --r:12px;
+    --r2:10px;
 
-background:
-linear-gradient(
-90deg,
-rgba(255,255,255,.9),
-rgba(255,255,255,.25)
-);
+    --shadow: 0 20px 60px rgba(0,0,0,0.10);
+    --shadow2: 0 10px 26px rgba(0,0,0,0.075);
 
-opacity:.85;
-}
-
-  --r:12px;
-  --r2:10px;
-
-  --shadow: 0 20px 60px rgba(0,0,0,0.55);
-  --shadow2: 0 10px 26px rgba(0,0,0,0.45);
-
-  --ease: cubic-bezier(.2,.8,.2,1);
-}
+    --ease: cubic-bezier(.2,.8,.2,1);
+  }
 
   /* ✅ Dark mode tokens */
   [data-theme="dark"]{
@@ -66,6 +52,7 @@ opacity:.85;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.15px;
+    overflow-x:hidden;
   }
 
   h1, h2, h3, .brand span{
@@ -82,71 +69,72 @@ opacity:.85;
     background: transparent;
   }
   .progress > span{
-background:
-linear-gradient(
-90deg,
-rgba(255,255,255,.95),
-rgba(255,255,255,.25)
-);
-}
+    display:block; height:100%; width:0%;
+    background: linear-gradient(90deg, rgba(0,0,0,.90), rgba(0,0,0,.25));
+    transform-origin:left;
+  }
   [data-theme="dark"] .progress > span{
     background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
   }
 
-  /* ===== Background ===== */
+  /* ===========================
+     🎛 50k background stack
+     LAYER ORDER:
+     particles canvas -> bg-stage -> ambient -> spotlight -> grain -> content
+     =========================== */
+
+  /* ✅ Particle canvas */
+  #particleCanvas{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    display:block;
+  }
+
+  /* ✅ Soft paper background layer (white mode) */
   .bg-stage{
-    position:fixed; inset:0;
+    position:fixed;
+    inset:0;
     pointer-events:none;
     z-index:0;
     overflow:hidden;
     background:
-      radial-gradient(circle at 12% 18%, rgba(0,0,0,0.04), transparent 44%),
-      radial-gradient(circle at 88% 20%, rgba(0,0,0,0.035), transparent 46%),
-      radial-gradient(circle at 50% 92%, rgba(0,0,0,0.03), transparent 52%),
-      radial-gradient(circle at 78% 72%, rgba(0,0,0,0.03), transparent 48%);
+      radial-gradient(circle at 14% 18%, rgba(0,0,0,0.03), transparent 44%),
+      radial-gradient(circle at 88% 20%, rgba(0,0,0,0.02), transparent 46%),
+      radial-gradient(circle at 50% 92%, rgba(0,0,0,0.02), transparent 52%),
+      radial-gradient(circle at 78% 72%, rgba(0,0,0,0.018), transparent 48%);
   }
+
   [data-theme="dark"] .bg-stage{
-position:fixed;
-inset:0;
-pointer-events:none;
-z-index:0;
+    background:
+      radial-gradient(circle at 14% 18%, rgba(255,255,255,0.06), transparent 44%),
+      radial-gradient(circle at 88% 20%, rgba(255,255,255,0.05), transparent 46%),
+      radial-gradient(circle at 50% 92%, rgba(255,255,255,0.04), transparent 52%),
+      radial-gradient(circle at 78% 72%, rgba(255,255,255,0.04), transparent 48%);
+  }
 
-background:
-linear-gradient(
-180deg,
-#0b0f14 0%,
-#0e141b 35%,
-#0b0f14 70%,
-#070b10 100%
-);
-}
-
+  /* Optional subtle grid (very light) */
   .grid{
     position:absolute; inset:0;
-    opacity:0.085;
+    opacity:0.06;
     background:
-      linear-gradient(rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/86px 86px,
-      linear-gradient(90deg, rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/86px 86px;
+      linear-gradient(rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/96px 96px,
+      linear-gradient(90deg, rgba(0,0,0,0.10) 1px, transparent 1px) 0 0/96px 96px;
     mask-image: radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
   }
   [data-theme="dark"] .grid{
+    opacity:0.08;
     background:
-      linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/86px 86px,
-      linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/86px 86px;
+      linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/96px 96px,
+      linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px) 0 0/96px 96px;
   }
-
-  .rail{ position:absolute; width:14px; border-radius:0; }
-  .rail.r1{ left: 6.5%; top: 0; bottom: 0; background: rgba(0,0,0,0.055); }
-  .rail.r2{ right: 7%; top: 12%; height: 56%; background: rgba(0,0,0,0.05); }
-  .rail.r3{ left: 22%; bottom: 0; height: 34%; background: rgba(0,0,0,0.04); }
-  [data-theme="dark"] .rail.r1{ background: rgba(255,255,255,0.08); }
-  [data-theme="dark"] .rail.r2{ background: rgba(255,255,255,0.07); }
-  [data-theme="dark"] .rail.r3{ background: rgba(255,255,255,0.06); }
 
   /* ===========================
      ✨ Ambient glow + Spotlight
      =========================== */
 
+  /* 1) Low ambient drift (white: soft shadows) */
   .ambient{
     position: fixed;
     inset:-10%;
@@ -156,9 +144,9 @@ linear-gradient(
     filter: blur(18px);
     transform: translate3d(0,0,0);
     background:
-      radial-gradient(520px 420px at 18% 22%, rgba(0,0,0,0.06), transparent 70%),
-      radial-gradient(620px 520px at 84% 26%, rgba(0,0,0,0.045), transparent 72%),
-      radial-gradient(760px 560px at 56% 86%, rgba(0,0,0,0.04), transparent 74%);
+      radial-gradient(520px 420px at 18% 22%, rgba(0,0,0,0.05), transparent 70%),
+      radial-gradient(620px 520px at 84% 26%, rgba(0,0,0,0.04), transparent 72%),
+      radial-gradient(760px 560px at 56% 86%, rgba(0,0,0,0.035), transparent 74%);
     animation: ambientDrift 18s ease-in-out infinite alternate;
   }
   [data-theme="dark"] .ambient{
@@ -174,6 +162,7 @@ linear-gradient(
     100% { transform: translate(-0.6%,  1.0%) scale(1.03); }
   }
 
+  /* 2) Cursor-follow spotlight (white: subtle shadow spotlight) */
   .spotlight{
     position: fixed;
     inset: 0;
@@ -181,12 +170,12 @@ linear-gradient(
     z-index:0;
     --sx: 50vw;
     --sy: 30vh;
-    --a: 0.11;
+    --a: 0.10;
     background:
-      radial-gradient(620px 460px at var(--sx) var(--sy),
+      radial-gradient(760px 560px at var(--sx) var(--sy),
         rgba(0,0,0,var(--a)),
-        transparent 72%);
-    filter: blur(6px);
+        transparent 74%);
+    filter: blur(7px);
     transform: translate3d(0,0,0);
   }
   [data-theme="dark"] .spotlight{
@@ -197,17 +186,18 @@ linear-gradient(
         transparent 74%);
   }
 
+  /* ✅ Hide glow layers on touch / small screens */
   @media (max-width: 720px){
     .spotlight, .ambient{ display:none; }
   }
 
-  /* 🎬 Grain overlay */
+  /* 🎬 Cinematic film grain overlay */
   .grain{
     position: fixed;
     inset: -40%;
     pointer-events: none;
-    z-index: 1;
-    opacity: .055;
+    z-index: 1; /* between background/glow and content */
+    opacity: .045;
     mix-blend-mode: multiply;
     background-image:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
@@ -240,6 +230,7 @@ linear-gradient(
     .ambient, .spotlight{ display:none !important; }
     .reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
     .tiltable{ transform:none !important; }
+    #particleCanvas{ display:none !important; }
     .btn, .contact-btn, .xbtn, .copy, .topbtn, .nextbtn, .themebtn, .clearbtn{ transform:none !important; }
   }
 
@@ -250,19 +241,37 @@ linear-gradient(
     padding: 18px 0 140px;
     position:relative;
     z-index: 2;
+
+    /* 🎬 Scroll velocity blur */
+    --svb:0px;
+    filter: blur(var(--svb));
+    transition: filter .18s var(--ease);
+    will-change: filter;
   }
+
+  /* Keep key UI sharp even if wrap blurs */
+  .nav, .topbtn, .contact-fab, .scroll-dots, .toast{ filter:none !important; }
 
   /* ===== Nav ===== */
   .nav{
-  position: sticky;
-  top:14px;
-  z-index:60;
+    position:sticky; top:14px;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding: 12px 14px;
+    background: color-mix(in srgb, var(--card) 88%, transparent);
+    border:1px solid var(--line);
+    border-radius: var(--r);
+    box-shadow: var(--shadow2);
+    backdrop-filter: blur(10px);
 
-  transition: transform .35s cubic-bezier(.2,.8,.2,1);
-}
-  .nav.hide{
-  transform: translateY(-120%);
-}
+    transition: transform .35s var(--ease), background .18s var(--ease);
+  }
+  /* ✅ Hide on scroll down / show on scroll up */
+  .nav.hide{ transform: translateY(-140%); }
+
   .brand{
     display:flex;
     align-items:center;
@@ -428,11 +437,9 @@ linear-gradient(
     transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     position:relative;
   }
- .card:hover{
---lift:-3px;
-box-shadow:
-0 20px 70px rgba(0,0,0,.55);
-}
+  .card:hover{
+    --lift: -3px;
+    box-shadow: var(--shadow);
   }
 
   .glow::before{
@@ -499,8 +506,9 @@ box-shadow:
     background: linear-gradient(135deg, rgba(0,0,0,.9), rgba(0,0,0,.25));
   }
   [data-theme="dark"] .kaizen-dot{
-background: var(--accent);
-}
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+  }
+
   .subtitle{
     margin: 12px 0 0;
     line-height: 1.85;
@@ -746,9 +754,8 @@ background: var(--accent);
     transition: transform .22s var(--ease), box-shadow .22s var(--ease);
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
-  .cert-card:hover{
-border-color: rgba(255,255,255,.18);
-}
+  .cert-card:hover{ --lift:-3px; box-shadow: 0 18px 55px rgba(0,0,0,0.10); }
+  [data-theme="dark"] .cert-card:hover{ box-shadow: 0 18px 55px rgba(0,0,0,0.45); }
 
   .cert-logo{
     width: 56px;
@@ -1232,301 +1239,25 @@ border-color: rgba(255,255,255,.18);
 
   /* ✅ Search filtering helper */
   .search-hidden{ display:none !important; }
-
-  /* ============================
-     🧭 Navigation vibe upgrade
-     - Section label (live)
-     - Scroll direction hint
-     - Command palette (⌘K)
-     ============================ */
-
-  .nav-hud{
-    position: fixed;
-    top: 66px;
-    left: 18px;
-    z-index: 120;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    pointer-events: none;
-  }
-  @media (max-width: 720px){
-    .nav-hud{ top: 12px; left: 12px; }
-  }
-
-  .hud-pill{
-    pointer-events: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--card) 88%, transparent);
-    backdrop-filter: blur(8px);
-    box-shadow: var(--shadow2);
-    color: var(--text);
-    font-weight: 900;
-    font-size: 12px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    opacity: .92;
-    transition: opacity .2s var(--ease), transform .2s var(--ease);
-  }
-
-  .hud-pill .dot{
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--text) 92%, transparent), color-mix(in srgb, var(--text) 28%, transparent));
-    opacity: .9;
-  }
-
-  .hud-muted{
-    opacity: .78;
-    font-weight: 850;
-    letter-spacing: 1.1px;
-  }
-
-  .scroll-hint{
-    pointer-events: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--card) 88%, transparent);
-    backdrop-filter: blur(8px);
-    box-shadow: var(--shadow2);
-    color: var(--text);
-    font-weight: 900;
-    font-size: 12px;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity .2s var(--ease), transform .2s var(--ease);
-  }
-  .scroll-hint.show{
-    opacity: .92;
-    transform: translateY(0);
-  }
-  .scroll-hint .arr{
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 13px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--card);
-    opacity: .92;
-  }
-
-  .cmdk{
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    display: none;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 18px;
-    background: rgba(0,0,0,.35);
-    backdrop-filter: blur(8px);
-  }
-  [data-theme="dark"] .cmdk{ background: rgba(0,0,0,.55); }
-  .cmdk.open{ display: flex; }
-
-  .cmdk-panel{
-    width: min(720px, 92vw);
-    margin-top: 64px;
-    border-radius: 16px;
-    border: 1px solid var(--line);
-    background: var(--card);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transform: translateY(8px);
-    opacity: 0;
-    transition: transform .2s var(--ease), opacity .2s var(--ease);
-  }
-  .cmdk.open .cmdk-panel{
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .cmdk-top{
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--soft);
-  }
-  .cmdk-top svg{ width: 18px; height: 18px; opacity: .9; }
-  .cmdk-input{
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: var(--text);
-    font-weight: 850;
-    font-size: 14px;
-    letter-spacing: -.1px;
-  }
-  .cmdk-input::placeholder{ color: var(--muted); font-weight: 700; }
-
-  .cmdk-meta{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 10px 14px;
-    color: var(--muted);
-    font-weight: 750;
-    font-size: 12px;
-    border-bottom: 1px dashed var(--line);
-  }
-  .cmdk-kbd{
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--card);
-    color: var(--text);
-    opacity: .92;
-  }
-
-  .cmdk-list{
-    max-height: 54vh;
-    overflow: auto;
-    padding: 8px;
-  }
-  .cmdk-item{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 12px 12px;
-    border-radius: 12px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: background .16s var(--ease), transform .16s var(--ease), border-color .16s var(--ease);
-  }
-  .cmdk-item:hover{
-    background: var(--soft);
-    transform: translateY(-1px);
-    border-color: var(--line);
-  }
-  .cmdk-item.active{
-    background: var(--soft);
-    border-color: color-mix(in srgb, var(--line) 100%, transparent);
-  }
-
-  .cmdk-left{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-  .cmdk-ico{
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: color-mix(in srgb, var(--card) 92%, var(--soft));
-    display: grid;
-    place-items: center;
-    flex: 0 0 auto;
-  }
-  .cmdk-ico svg{ width: 18px; height: 18px; opacity: .92; }
-
-  .cmdk-txt{
-    display: grid;
-    gap: 2px;
-    min-width: 0;
-  }
-  .cmdk-title{
-    font-weight: 950;
-    font-size: 13px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .cmdk-sub{
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .cmdk-right{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    flex: 0 0 auto;
-    color: var(--muted);
-    font-weight: 900;
-    font-size: 12px;
-  }
-
-  .cmdk-empty{
-    padding: 16px 14px 18px;
-    color: var(--muted);
-    font-weight: 750;
-    font-size: 13px;
-  }
 </style>
 </head>
 
 <body>
   <div class="progress" aria-hidden="true"><span id="bar"></span></div>
 
+  <!-- ✅ 50k premium particle background -->
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
   <div class="bg-stage" aria-hidden="true">
     <div class="grid"></div>
-    <div class="rail r1"></div>
-    <div class="rail r2"></div>
-    <div class="rail r3"></div>
   </div>
 
+  <!-- ✨ Ambient glow + Spotlight -->
   <div class="ambient" aria-hidden="true"></div>
   <div class="spotlight" aria-hidden="true"></div>
+
+  <!-- 🎬 Grain overlay -->
   <div class="grain" aria-hidden="true"></div>
-
-  <!-- 🧭 HUD: live section label + scroll direction cue -->
-  <div class="nav-hud" aria-hidden="true">
-    <div class="hud-pill" id="sectionPill">
-      <span class="dot"></span>
-      <span id="sectionLabel">Intro</span>
-      <span class="hud-muted" id="sectionMini">/</span>
-      <span class="hud-muted" id="sectionSub">Overview</span>
-    </div>
-
-    <div class="scroll-hint" id="scrollHint">
-      <span class="arr" id="scrollArrow">↓</span>
-      <span id="scrollText">Scroll</span>
-    </div>
-  </div>
-
-  <!-- ⌘K Command Palette -->
-  <div class="cmdk" id="cmdk" role="dialog" aria-label="Command palette" aria-modal="true">
-    <div class="cmdk-panel" role="document">
-      <div class="cmdk-top">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M10 2a8 8 0 1 1 5.29 14.01l4.35 4.35-1.42 1.42-4.35-4.35A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12a6 6 0 0 0 0-12z"/>
-        </svg>
-        <input id="cmdkInput" class="cmdk-input" type="text" placeholder="Search sections & links… (e.g., projects, CV, email)" autocomplete="off" />
-      </div>
-
-      <div class="cmdk-meta">
-        <span class="cmdk-kbd">Enter</span> open
-        <span class="cmdk-kbd">↑</span><span class="cmdk-kbd">↓</span> navigate
-        <span class="cmdk-kbd">Esc</span> close
-        <span style="margin-left:auto;" class="cmdk-kbd">⌘K / Ctrl K</span>
-      </div>
-
-      <div class="cmdk-list" id="cmdkList"></div>
-      <div class="cmdk-empty" id="cmdkEmpty" style="display:none;">No matches. Try “projects”, “cv”, “email”, “linkedin”.</div>
-    </div>
-  </div>
 
   <!-- Back to top -->
   <a href="#top" class="topbtn" id="topBtn" aria-label="Back to top">
@@ -1579,13 +1310,13 @@ border-color: rgba(255,255,255,.18);
           <a href="#contact" class="nav-item">Contact</a>
 
           <div class="kbd-hint" title="Keyboard navigation">
-            <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev · <kbd>⌘K</kbd> palette
+            <kbd>J</kbd>/<kbd>↓</kbd> next · <kbd>K</kbd>/<kbd>↑</kbd> prev
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ✅ Search status strip -->
+    <!-- ✅ Search status strip (appears when searching) -->
     <div class="search-status" id="searchStatus" aria-live="polite">
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
         <span class="pillmini"><span class="sq"></span> Search</span>
@@ -1833,6 +1564,12 @@ border-color: rgba(255,255,255,.18);
             </p>
 
             <div class="badge-row">
+              <span class="tagchip">FATF-Aligned</span>
+              <span class="tagchip">Mauritius Regulatory Context</span>
+              <span class="tagchip">Educational Framework</span>
+            </div>
+
+            <div class="badge-row" style="margin-top:10px;">
               <span class="tagchip">Reporting Flow</span>
               <span class="tagchip">CDD / EDD</span>
               <span class="tagchip">STR</span>
@@ -1948,7 +1685,7 @@ border-color: rgba(255,255,255,.18);
 
       <div class="foot-sub">
         <div>© 2026 Bhishek Shibdeen</div>
-        <div style="opacity:.9;">Tip: use <strong>J</strong>/<strong>K</strong> to navigate sections · <strong>⌘K</strong> palette</div>
+        <div style="opacity:.9;">Tip: use <strong>J</strong>/<strong>K</strong> to navigate sections</div>
       </div>
     </footer>
 
@@ -2267,7 +2004,7 @@ border-color: rgba(255,255,255,.18);
     });
   })();
 
-  // ✅ Search: filters items with data-search-item
+  // ✅ Search: filters Certifications, Experience entries, Projects (anything with data-search-item)
   (function(){
     const input = document.getElementById("searchInput");
     const clear = document.getElementById("clearSearch");
@@ -2320,7 +2057,7 @@ border-color: rgba(255,255,255,.18);
     }catch(e){}
   })();
 
-  // ✨ Spotlight follows cursor
+  // ✨ Spotlight follows cursor (smooth + subtle)
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -2356,237 +2093,208 @@ border-color: rgba(255,255,255,.18);
     spot.style.setProperty("--sy", ty + "px");
   })();
 
-  // ============================
-  // 🧭 Live Section Label + Scroll Direction Cue
-  // ============================
+  // ✅ Hide navbar on scroll down / show on scroll up
   (function(){
-    const label = document.getElementById("sectionLabel");
-    const sub = document.getElementById("sectionSub");
-    const hint = document.getElementById("scrollHint");
-    const arrow = document.getElementById("scrollArrow");
-    const text = document.getElementById("scrollText");
+    const nav = document.querySelector(".nav");
+    if(!nav) return;
+    let last = window.scrollY || 0;
 
-    const map = [
-      { id:"intro", name:"Intro", sub:"Overview" },
-      { id:"certs", name:"Certs", sub:"Credentials" },
-      { id:"experience", name:"Experience", sub:"Timeline" },
-      { id:"projects", name:"Projects", sub:"Work" },
-      { id:"contact", name:"Contact", sub:"Reach me" },
-      { id:"press", name:"Press", sub:"Footer" }
-    ];
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY || 0;
 
-    const sections = map.map(x => ({...x, el: document.getElementById(x.id)})).filter(x => x.el);
+      if(y <= 10){
+        nav.classList.remove("hide");
+        last = y;
+        return;
+      }
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          const hit = sections.find(s => s.el === entry.target);
-          if(hit){
-            label.textContent = hit.name;
-            sub.textContent = hit.sub;
-          }
-        }
-      });
-    }, { threshold: 0.52 });
+      if(y > last + 6){
+        nav.classList.add("hide");
+      }else if(y < last - 6){
+        nav.classList.remove("hide");
+      }
 
-    sections.forEach(s => io.observe(s.el));
+      last = y;
+    }, { passive:true });
+  })();
+
+  // 🎬 Scroll velocity blur (subtle, premium)
+  (function(){
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(reduce) return;
+
+    const wrap = document.querySelector(".wrap");
+    if(!wrap) return;
 
     let lastY = window.scrollY || 0;
-    let t;
-    function show(dir){
-      arrow.textContent = dir === "down" ? "↓" : "↑";
-      text.textContent = dir === "down" ? "Scroll" : "Back";
-      hint.classList.add("show");
-      clearTimeout(t);
-      t = setTimeout(()=> hint.classList.remove("show"), 550);
+    let lastT = performance.now();
+    let blur = 0;
+    let raf = null;
+    let settleTimer = null;
+
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+    function apply(){
+      raf = null;
+      blur *= 0.82;
+      if(blur < 0.03) blur = 0;
+      wrap.style.setProperty("--svb", blur.toFixed(2) + "px");
+      if(blur > 0) raf = requestAnimationFrame(apply);
     }
 
     window.addEventListener("scroll", () => {
       const y = window.scrollY || 0;
-      const dy = y - lastY;
-      if(Math.abs(dy) > 6){
-        show(dy > 0 ? "down" : "up");
-        lastY = y;
-      }
+      const t = performance.now();
+      const dy = Math.abs(y - lastY);
+      const dt = Math.max(16, t - lastT);
+      const v = dy / dt; // px per ms
+
+      const target = clamp(v * 6.2, 0, 2.0); // cap blur
+      blur = Math.max(blur, target);
+
+      lastY = y;
+      lastT = t;
+
+      if(!raf) raf = requestAnimationFrame(apply);
+
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => {
+        blur = Math.min(blur, 0.6);
+        if(!raf) raf = requestAnimationFrame(apply);
+      }, 90);
     }, { passive:true });
   })();
 
-  // ============================
-  // ⌘K / Ctrl+K Command Palette
-  // ============================
+  // ✅ 50k background particles (white bg, black particles)
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const cmdk = document.getElementById("cmdk");
-    const input = document.getElementById("cmdkInput");
-    const list = document.getElementById("cmdkList");
-    const empty = document.getElementById("cmdkEmpty");
-    if(!cmdk || !input || !list || !empty) return;
+    if(reduce) return;
 
-    const actions = [
-      { type:"Section", title:"Intro", sub:"Overview", key:"Go", run: ()=> jump("#intro") },
-      { type:"Section", title:"Certifications", sub:"Credentials", key:"Go", run: ()=> jump("#certs") },
-      { type:"Section", title:"Experience", sub:"Timeline", key:"Go", run: ()=> jump("#experience") },
-      { type:"Section", title:"Projects", sub:"Work", key:"Go", run: ()=> jump("#projects") },
-      { type:"Section", title:"Contact", sub:"Reach me", key:"Go", run: ()=> jump("#contact") },
-      { type:"Section", title:"Press-Ready Footer", sub:"Downloads & last updated", key:"Go", run: ()=> jump("#press") },
+    const canvas = document.getElementById("particleCanvas");
+    if(!canvas) return;
 
-      { type:"Link", title:"Download CV", sub:"CV_Bhishek_Shibdeen.pdf", key:"↗", run: ()=> openUrl("CV_Bhishek_Shibdeen.pdf") },
-      { type:"Link", title:"Featured PDF", sub:"AML Regulations in Mauritius", key:"↗", run: ()=> openUrl("AML_Regulations_Mauritius.pdf") },
-      { type:"Link", title:"Email", sub:"bhishek.shibdeen@icloud.com", key:"↗", run: ()=> openUrl("mailto:bhishek.shibdeen@icloud.com") },
-      { type:"Link", title:"LinkedIn", sub:"/bhishekshibdeen", key:"↗", run: ()=> openUrl("https://www.linkedin.com/in/bhishekshibdeen/") },
+    const ctx = canvas.getContext("2d", { alpha: true });
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
 
-      { type:"Action", title:"Toggle Dark Mode", sub:"Switch theme", key:"↻", run: ()=> document.getElementById("themeToggle")?.click() },
-      { type:"Action", title:"Open Contact Panel", sub:"Bottom-right quick contact", key:"↻", run: ()=> document.getElementById("contactBtn")?.click() },
-      { type:"Action", title:"Focus Portfolio Search", sub:"Top nav search field", key:"↻", run: ()=> document.getElementById("searchInput")?.focus() },
-    ];
+    let W = 0, H = 0;
+    let particles = [];
+    let raf = null;
 
-    function norm(s){ return (s||"").toLowerCase().replace(/\s+/g," ").trim(); }
+    // Tunables (premium subtle)
+    const COUNT_DESKTOP = 70;
+    const COUNT_MOBILE = 42;
+    const LINK_DIST = 140;         // max distance for lines
+    const SPEED = 0.35;            // base drift
+    const DOT_ALPHA = 0.55;        // particle dot opacity
+    const LINE_ALPHA = 0.10;       // line opacity
+    const DOT_SIZE = 1.35;         // dot radius
+    const PARALLAX = 0.015;        // slight mouse influence
 
-    function iconFor(type){
-      if(type === "Section") return `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v4H4V5zm0 5h16v4H4v-4zm0 5h16v4H4v-4z"/></svg>`;
-      if(type === "Link") return `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H7v10h10v-4h2v6H5V5z"/></svg>`;
-      return `<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg>`;
+    let mx = 0, my = 0;
+
+    function resize(){
+      W = canvas.width = Math.floor(window.innerWidth * DPR);
+      H = canvas.height = Math.floor(window.innerHeight * DPR);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(1,0,0,1,0,0);
+
+      const count = (window.innerWidth < 720) ? COUNT_MOBILE : COUNT_DESKTOP;
+      particles = Array.from({ length: count }, () => makeParticle(true));
     }
 
-    function openUrl(url){
-      close();
-      if(url.startsWith("mailto:") || url.startsWith("tel:")){
-        window.location.href = url;
-      }else{
-        window.open(url, "_blank", "noopener,noreferrer");
+    function makeParticle(randomPos){
+      const x = randomPos ? Math.random() * W : 0;
+      const y = randomPos ? Math.random() * H : 0;
+
+      // slightly varied drift
+      const a = Math.random() * Math.PI * 2;
+      const sp = SPEED * (0.55 + Math.random() * 0.9) * DPR;
+
+      return {
+        x, y,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp,
+        r: (DOT_SIZE + Math.random() * 0.8) * DPR
+      };
+    }
+
+    function themeIsDark(){
+      return document.documentElement.getAttribute("data-theme") === "dark";
+    }
+
+    function draw(){
+      raf = null;
+
+      ctx.clearRect(0,0,W,H);
+
+      // colors
+      const dark = themeIsDark();
+
+      // black particles on white bg, white particles on dark bg
+      const dotColor = dark ? `rgba(255,255,255,${DOT_ALPHA})` : `rgba(0,0,0,${DOT_ALPHA})`;
+      const lineBase = dark ? `rgba(255,255,255,${LINE_ALPHA})` : `rgba(0,0,0,${LINE_ALPHA})`;
+
+      // move + wrap
+      for(const p of particles){
+        // subtle mouse influence (premium)
+        p.x += p.vx + (mx - 0.5) * PARALLAX * W * 0.02;
+        p.y += p.vy + (my - 0.5) * PARALLAX * H * 0.02;
+
+        if(p.x < -40) p.x = W + 40;
+        if(p.x > W + 40) p.x = -40;
+        if(p.y < -40) p.y = H + 40;
+        if(p.y > H + 40) p.y = -40;
       }
+
+      // lines
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d2 = dx*dx + dy*dy;
+          const max2 = (LINK_DIST*DPR) * (LINK_DIST*DPR);
+          if(d2 < max2){
+            const d = Math.sqrt(d2);
+            const t = 1 - (d / (LINK_DIST*DPR));
+            ctx.strokeStyle = lineBase.replace(/[\d.]+\)$/,(LINE_ALPHA * t).toFixed(3)+")");
+            ctx.lineWidth = 1 * DPR;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // dots
+      ctx.fillStyle = dotColor;
+      for(const p of particles){
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      raf = requestAnimationFrame(draw);
     }
 
-    function jump(hash){
-      close();
-      const el = document.querySelector(hash);
-      if(!el) return;
-      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block:"start" });
-      history.replaceState(null, "", hash);
-    }
+    window.addEventListener("mousemove", (e) => {
+      mx = e.clientX / window.innerWidth;
+      my = e.clientY / window.innerHeight;
+    }, { passive:true });
 
-    let filtered = [...actions];
-    let idx = 0;
-
-    function render(){
-      list.innerHTML = "";
-      empty.style.display = filtered.length ? "none" : "block";
-
-      filtered.forEach((a, i) => {
-        const item = document.createElement("div");
-        item.className = "cmdk-item" + (i === idx ? " active" : "");
-        item.innerHTML = `
-          <div class="cmdk-left">
-            <span class="cmdk-ico" aria-hidden="true">${iconFor(a.type)}</span>
-            <span class="cmdk-txt">
-              <span class="cmdk-title">${a.title}</span>
-              <span class="cmdk-sub">${a.sub}</span>
-            </span>
-          </div>
-          <div class="cmdk-right">${a.key}</div>
-        `;
-        item.addEventListener("click", () => a.run());
-        list.appendChild(item);
-      });
-
-      const active = list.querySelector(".cmdk-item.active");
-      if(active) active.scrollIntoView({ block: "nearest" });
-    }
-
-    function filter(q){
-      const query = norm(q);
-      filtered = actions.filter(a => norm(a.title + " " + a.sub + " " + a.type).includes(query));
-      idx = 0;
-      render();
-    }
-
-    function open(){
-      cmdk.classList.add("open");
-      input.value = "";
-      filter("");
-      setTimeout(()=> input.focus(), 0);
-      document.body.style.overflow = "hidden";
-    }
-
-    function close(){
-      cmdk.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-
-    function isOpen(){ return cmdk.classList.contains("open"); }
-
-    input.addEventListener("input", () => filter(input.value));
-
-    cmdk.addEventListener("click", (e) => {
-      if(e.target === cmdk) close();
+    window.addEventListener("resize", () => {
+      resize();
     });
 
-    document.addEventListener("keydown", (e) => {
-      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
-      const typing = tag === "input" || tag === "textarea" || e.target.isContentEditable;
+    // If theme changes, just redraw (same loop handles it)
+    const mo = new MutationObserver(() => {});
+    mo.observe(document.documentElement, { attributes:true, attributeFilter:["data-theme"] });
 
-      if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){
-        e.preventDefault();
-        if(isOpen()) close(); else open();
-        return;
-      }
-
-      if(!isOpen()) return;
-
-      if(e.key === "Escape"){
-        e.preventDefault();
-        close();
-        return;
-      }
-
-      if(e.key === "ArrowDown"){
-        e.preventDefault();
-        idx = Math.min(idx + 1, filtered.length - 1);
-        render();
-      }
-      if(e.key === "ArrowUp"){
-        e.preventDefault();
-        idx = Math.max(idx - 1, 0);
-        render();
-      }
-
-      if(e.key === "Enter"){
-        e.preventDefault();
-        const a = filtered[idx];
-        if(a) a.run();
-      }
-
-      if(!typing && (e.key === "Tab")){
-        e.preventDefault();
-      }
-    });
+    resize();
+    draw();
   })();
-/* Hide navbar on scroll down / show on scroll up */
-
-let lastScroll = 0;
-const navbar = document.querySelector(".nav");
-
-window.addEventListener("scroll", () => {
-
-  const currentScroll = window.pageYOffset;
-
-  if(currentScroll <= 0){
-    navbar.classList.remove("hide");
-    return;
-  }
-
-  if(currentScroll > lastScroll && !navbar.classList.contains("hide")){
-    // scrolling down
-    navbar.classList.add("hide");
-  } 
-  else if(currentScroll < lastScroll && navbar.classList.contains("hide")){
-    // scrolling up
-    navbar.classList.remove("hide");
-  }
-
-  lastScroll = currentScroll;
-
-});
 </script>
 
 </body>
