@@ -6,7 +6,7 @@
 <title>Bhishek Shibdeen | Compliance • AML • Risk</title>
 <meta name="description" content="Modern compliance portfolio: certifications, experience, projects, cinematic grain + spotlight glow, featured work." />
 
-<!-- ✅ Premium fonts -->
+<!-- Premium fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -430,7 +430,7 @@
     font-weight:520;
   }
 
-  /* ✅ Certifications (match screenshot) */
+  /* ===== Certifications ===== */
   .cert-grid{
     display:grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -667,6 +667,256 @@
     box-shadow: var(--shadow2);
   }
 
+    /* ===== AI Chat ===== */
+  .ai-chat-wrap{
+    position:fixed;
+    right:18px;
+    bottom:88px;
+    z-index:91;
+    display:grid;
+    justify-items:end;
+    pointer-events:none;
+  }
+
+  .ai-chat{
+    width:min(370px, calc(100vw - 36px));
+    border:1px solid var(--line);
+    border-radius:16px;
+    background: color-mix(in srgb, var(--card) 96%, transparent);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    overflow:hidden;
+    pointer-events:auto;
+    transform-origin:bottom right;
+    transition:
+      opacity .25s var(--ease),
+      transform .25s var(--ease),
+      box-shadow .22s var(--ease);
+  }
+
+  .ai-chat.closed{
+    opacity:0;
+    transform:translateY(12px) scale(.985);
+    pointer-events:none;
+  }
+
+  .ai-chat.open{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+  }
+
+  .ai-chat-head{
+    padding:12px 14px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    background: var(--soft);
+  }
+
+  .ai-chat-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+  }
+
+  .ai-dot{
+    width:10px;
+    height:10px;
+    border-radius:999px;
+    background: linear-gradient(135deg, rgba(0,0,0,.95), rgba(0,0,0,.35));
+    flex:0 0 auto;
+  }
+  [data-theme="dark"] .ai-dot{
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.35));
+  }
+
+  .ai-chat-title strong{
+    font-size:12px;
+    font-weight:950;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+
+  .ai-chat-title span{
+    display:block;
+    font-size:11px;
+    color:var(--muted);
+    font-weight:700;
+    margin-top:2px;
+  }
+
+  .ai-head-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  .ai-head-btn{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background: var(--card);
+    color:var(--text);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    font-weight:900;
+    transition: background .18s var(--ease), transform .18s var(--ease);
+  }
+  .ai-head-btn:hover{
+    background:var(--soft);
+    transform:translateY(-1px);
+  }
+
+  .ai-chat-body{
+    padding:12px;
+    display:grid;
+    gap:12px;
+  }
+
+  .ai-log{
+    display:grid;
+    gap:10px;
+    max-height:250px;
+    overflow:auto;
+    padding-right:2px;
+    scrollbar-width:thin;
+  }
+
+  .ai-msg{
+    max-width:92%;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 12px;
+    font-size:13px;
+    line-height:1.7;
+    font-weight:600;
+    word-wrap:break-word;
+  }
+
+  .ai-msg.bot{
+    background: var(--soft);
+    justify-self:start;
+  }
+
+  .ai-msg.user{
+    background: var(--card);
+    justify-self:end;
+  }
+
+  .ai-typing{
+    display:none;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    font-weight:800;
+    color:var(--muted);
+    padding:0 2px;
+  }
+
+  .ai-typing.show{
+    display:flex;
+  }
+
+  .typing-dots{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+  }
+
+  .typing-dots span{
+    width:6px;
+    height:6px;
+    border-radius:999px;
+    background: currentColor;
+    opacity:.35;
+    animation: typingBounce 1s infinite ease-in-out;
+  }
+  .typing-dots span:nth-child(2){ animation-delay:.15s; }
+  .typing-dots span:nth-child(3){ animation-delay:.3s; }
+
+  @keyframes typingBounce{
+    0%, 80%, 100%{ transform:translateY(0); opacity:.28; }
+    40%{ transform:translateY(-3px); opacity:.95; }
+  }
+
+  .ai-questions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .ai-chip{
+    border:1px solid var(--line);
+    background: var(--card);
+    color:var(--text);
+    border-radius:999px;
+    padding:8px 10px;
+    font-size:11px;
+    font-weight:900;
+    cursor:pointer;
+    transition: background .18s var(--ease), transform .18s var(--ease), border-color .18s var(--ease);
+  }
+  .ai-chip:hover{
+    background:var(--soft);
+    transform:translateY(-1px);
+  }
+
+  .ai-reset{
+    width:100%;
+    justify-content:center;
+    font-size:12px;
+    border-radius:12px;
+  }
+
+  .ai-launch{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background: var(--card);
+    box-shadow: var(--shadow2);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    pointer-events:auto;
+    transition: background .18s var(--ease), transform .18s var(--ease), opacity .22s var(--ease);
+  }
+  .ai-launch:hover{
+    background:var(--soft);
+    transform:translateY(-1px);
+  }
+  .ai-launch svg{
+    width:20px;
+    height:20px;
+  }
+
+  .ai-launch.hidden{
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(8px);
+  }
+
+  @media (max-width: 720px){
+    .ai-chat-wrap{
+      right:14px;
+      left:14px;
+      bottom:84px;
+      justify-items:stretch;
+    }
+    .ai-chat{
+      width:100%;
+    }
+    .ai-launch{
+      justify-self:end;
+    }
+  }
+
   /* ===== Bottom-right contact popover ===== */
   .contact-fab{
     position:fixed;
@@ -898,7 +1148,6 @@
               </a>
             </div>
 
-            <!-- FEATURED (Quick Links) — static -->
             <div class="ql" id="featuredQL">
               <a id="featuredQLLink" href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">
                 <div class="left">
@@ -1053,7 +1302,6 @@
       </div>
 
       <div class="section-body">
-        <!-- FEATURED (Main card) — static -->
         <div class="pub" id="featuredCard" role="button" tabindex="0" aria-label="Open featured PDF">
           <div class="pub-preview" aria-hidden="true">
             <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
@@ -1122,7 +1370,6 @@
         </div>
       </div>
     </section>
-
         <!-- CONTACT -->
     <section class="card section anchor reveal" id="contact">
       <div class="section-head">
@@ -1187,6 +1434,56 @@
     </footer>
   </div>
 
+   <!-- AI Chat Box -->
+  <div class="ai-chat-wrap" aria-label="AI quick chat">
+    <div class="ai-chat closed" id="aiChatBox">
+      <div class="ai-chat-head">
+        <div class="ai-chat-title">
+          <span class="ai-dot"></span>
+          <div>
+            <strong>AI Assistant</strong>
+            <span>Quick portfolio answers</span>
+          </div>
+        </div>
+
+        <div class="ai-head-actions">
+          <button class="ai-head-btn" id="aiMinBtn" type="button" aria-label="Minimize AI chat">−</button>
+        </div>
+      </div>
+
+      <div class="ai-chat-body">
+        <div class="ai-log" id="aiLog">
+          <div class="ai-msg bot">
+            Hi — choose a question below and I’ll answer instantly.
+          </div>
+        </div>
+
+        <div class="ai-typing" id="aiTyping">
+          <span>AI is typing...</span>
+          <span class="typing-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </div>
+
+        <div class="ai-questions" id="aiQuestions">
+          <button class="ai-chip" type="button" data-question="What does Bhishek do?">What does Bhishek do?</button>
+          <button class="ai-chip" type="button" data-question="What experience does he have?">What experience does he have?</button>
+          <button class="ai-chip" type="button" data-question="What certifications does he hold?">What certifications does he hold?</button>
+          <button class="ai-chip" type="button" data-question="What are his main projects?">What are his main projects?</button>
+          <button class="ai-chip" type="button" data-question="How can I contact him?">How can I contact him?</button>
+        </div>
+
+        <button class="btn ai-reset" id="aiResetBtn" type="button">Reset chat</button>
+      </div>
+    </div>
+
+    <button class="ai-launch" id="aiLaunchBtn" type="button" aria-label="Open AI chat">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 3c4.97 0 9 3.58 9 8c0 2.18-.98 4.16-2.58 5.6L19 21l-4.14-2.07c-.9.2-1.86.31-2.86.31c-4.97 0-9-3.58-9-8s4.03-8.24 9-8.24zm-4 7.5a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5zm4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5zm4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5z"/>
+      </svg>
+    </button>
+  </div>
+
   <!-- Bottom-right contact -->
   <div class="contact-fab" aria-label="Quick contact">
     <div class="contact-pop" id="contactPop" role="dialog" aria-label="Contact details">
@@ -1228,14 +1525,11 @@
   <div class="toast" id="toast" aria-hidden="true">Copied ✅</div>
 
 <script>
-  // ✅ Safe open helper (fixes "can't open PDF" on GitHub Pages / popup blockers)
+  // Safe open helper
   function safeOpen(url){
     const clean = encodeURI(url);
-    // Try window.open first
     const w = window.open(clean, "_blank", "noopener,noreferrer");
     if(w) return;
-
-    // Fallback: programmatically click an <a>
     const a = document.createElement("a");
     a.href = clean;
     a.target = "_blank";
@@ -1331,21 +1625,21 @@
     const close = document.getElementById("closePop");
     const toast = document.getElementById("toast");
 
-    function closePop(){ pop.classList.remove("open"); }
+    function closePopFn(){ pop.classList.remove("open"); }
 
     btn.addEventListener("click", () => { pop.classList.toggle("open"); });
-    close.addEventListener("click", closePop);
+    close.addEventListener("click", closePopFn);
 
     document.addEventListener("click", (e) => {
       const within = pop.contains(e.target) || btn.contains(e.target);
-      if(!within) closePop();
+      if(!within) closePopFn();
     });
 
     function showToast(msg){
       toast.textContent = msg || "Copied ✅";
       toast.classList.add("show");
-      clearTimeout(window.__t);
-      window.__t = setTimeout(()=> toast.classList.remove("show"), 1100);
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=> toast.classList.remove("show"), 1100);
     }
 
     async function copyText(text){
@@ -1377,7 +1671,7 @@
     }
   })();
 
-  // ✨ Spotlight follows cursor (desktop only)
+  // ===== Spotlight follows cursor =====
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -1410,7 +1704,7 @@
     }, { passive:true });
   })();
 
-  // ✅ Particles (theme-aware)
+  // ===== Particles =====
   (function(){
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(reduce) return;
@@ -1476,7 +1770,10 @@
             const t = 1 - (d / (LINK_DIST*DPR));
             ctx.strokeStyle = lineBase.replace(/[\d.]+\)$/,(LINE_ALPHA * t).toFixed(3)+")");
             ctx.lineWidth = 1 * DPR;
-            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y);
+            ctx.lineTo(b.x,b.y);
+            ctx.stroke();
           }
         }
       }
@@ -1497,10 +1794,11 @@
     }, { passive:true });
 
     window.addEventListener("resize", resize);
-    resize(); draw();
+    resize();
+    draw();
   })();
 
-  // ✅ Featured PDF (STATIC) — reliable open
+  // ===== Featured PDF =====
   (function(){
     const featuredHref = "AML_Regulations_Mauritius.pdf";
 
@@ -1508,16 +1806,6 @@
     const btn = document.getElementById("featuredOpenBtn");
     const ql = document.getElementById("featuredQLLink");
 
-    function bindOpen(el){
-      if(!el) return;
-      el.addEventListener("click", (e)=>{
-        // Let normal anchor clicks work, but also support card click
-        if(el.tagName !== "A") e.preventDefault();
-        safeOpen(featuredHref);
-      });
-    }
-
-    // Whole card opens
     if(card){
       card.addEventListener("click", (e)=>{ e.preventDefault(); safeOpen(featuredHref); });
       card.addEventListener("keydown", (e)=>{
@@ -1528,18 +1816,143 @@
       });
     }
 
-    // Button & quick link are standard anchors, but we bind safe fallback anyway
     if(btn){
       btn.addEventListener("click", (e)=>{
         e.preventDefault();
         safeOpen(featuredHref);
       });
     }
+
     if(ql){
       ql.addEventListener("click", (e)=>{
         e.preventDefault();
         safeOpen(featuredHref);
       });
+    }
+  })();
+
+   // ===== AI Chat =====
+  (function(){
+    const chatBox = document.getElementById("aiChatBox");
+    const launchBtn = document.getElementById("aiLaunchBtn");
+    const minBtn = document.getElementById("aiMinBtn");
+    const log = document.getElementById("aiLog");
+    const typing = document.getElementById("aiTyping");
+    const questionsWrap = document.getElementById("aiQuestions");
+    const resetBtn = document.getElementById("aiResetBtn");
+
+    if(!chatBox || !launchBtn || !minBtn || !log || !typing || !questionsWrap || !resetBtn) return;
+
+    const initialQuestions = [
+      "What does Bhishek do?",
+      "What experience does he have?",
+      "What certifications does he hold?",
+      "What are his main projects?",
+      "How can I contact him?"
+    ];
+
+    const answers = {
+      "What does Bhishek do?": {
+        text: "Bhishek is building his path in Compliance, AML/CFT, and Risk. His work focuses on risk-based onboarding, due diligence support, screening logic, and maintaining review-ready documentation.",
+        followups: ["What experience does he have?", "What are his main projects?"]
+      },
+      "What experience does he have?": {
+        text: "He is currently a KYC & Compliance Operations Intern at ARIE Finance in Ébène, Mauritius, where he conducts KYC and CDD reviews, performs sanctions and PEP screening, supports ongoing monitoring, and validates onboarding files against internal policy and regulatory expectations.",
+        followups: ["What does Bhishek do?", "How can I contact him?"]
+      },
+      "What certifications does he hold?": {
+        text: "His certifications include Financial Markets from Yale University on Coursera, AML Essentials from the Financial Crime Academy, and DELF B2 in French language proficiency.",
+        followups: ["What are his main projects?", "How can I contact him?"]
+      },
+      "What are his main projects?": {
+        text: "His featured work includes AML Regulations in Mauritius, a KYC Controls Overview, Screening & Escalation Logic, and Documentation Discipline — all focused on practical compliance and financial crime risk topics.",
+        followups: ["What certifications does he hold?", "How can I contact him?"]
+      },
+      "How can I contact him?": {
+        text: "You can contact Bhishek by email at bhishek.shibdeen@icloud.com, by phone at +230 55024085, or through his LinkedIn profile.",
+        followups: ["What does Bhishek do?", "What experience does he have?"]
+      }
+    };
+
+    function setOpen(open){
+      if(open){
+        chatBox.classList.remove("closed");
+        chatBox.classList.add("open");
+        launchBtn.classList.add("hidden");
+      }else{
+        chatBox.classList.remove("open");
+        chatBox.classList.add("closed");
+        launchBtn.classList.remove("hidden");
+      }
+    }
+
+    function addMessage(text, role){
+      const el = document.createElement("div");
+      el.className = "ai-msg " + role;
+      el.textContent = text;
+      log.appendChild(el);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function showTyping(){
+      typing.classList.add("show");
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function hideTyping(){
+      typing.classList.remove("show");
+    }
+
+    function renderQuestions(list){
+      questionsWrap.innerHTML = "";
+      list.forEach(question => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "ai-chip";
+        btn.dataset.question = question;
+        btn.textContent = question;
+        btn.addEventListener("click", () => handleQuestion(question));
+        questionsWrap.appendChild(btn);
+      });
+    }
+
+    function handleQuestion(question){
+      const entry = answers[question];
+      if(!entry) return;
+
+      addMessage(question, "user");
+      showTyping();
+
+      setTimeout(() => {
+        hideTyping();
+        addMessage(entry.text, "bot");
+        renderQuestions(entry.followups && entry.followups.length ? entry.followups : initialQuestions);
+      }, 950);
+    }
+
+    function resetChat(){
+      log.innerHTML = "";
+      addMessage("Hi — choose a question below and I’ll answer instantly.", "bot");
+      hideTyping();
+      renderQuestions(initialQuestions);
+    }
+
+    launchBtn.addEventListener("click", () => setOpen(true));
+    minBtn.addEventListener("click", () => setOpen(false));
+    resetBtn.addEventListener("click", resetChat);
+
+    const firstVisitKey = "bhishek_ai_chat_opened";
+    const alreadyOpened = localStorage.getItem(firstVisitKey);
+
+    resetChat();
+
+    if(!alreadyOpened){
+      setTimeout(() => {
+        setOpen(true);
+        localStorage.setItem(firstVisitKey, "yes");
+      }, 900);
+    }else{
+      setOpen(false);
     }
   })();
 </script>
