@@ -667,7 +667,7 @@
     box-shadow: var(--shadow2);
   }
 
-    /* ===== AI Chat ===== */
+  /* ===== AI Chat ===== */
   .ai-chat-wrap{
     position:fixed;
     right:18px;
@@ -679,7 +679,7 @@
   }
 
   .ai-chat{
-    width:min(370px, calc(100vw - 36px));
+    width:min(390px, calc(100vw - 36px));
     border:1px solid var(--line);
     border-radius:16px;
     background: color-mix(in srgb, var(--card) 96%, transparent);
@@ -782,14 +782,14 @@
   .ai-log{
     display:grid;
     gap:10px;
-    max-height:250px;
+    max-height:290px;
     overflow:auto;
     padding-right:2px;
     scrollbar-width:thin;
   }
 
   .ai-msg{
-    max-width:92%;
+    max-width:94%;
     border:1px solid var(--line);
     border-radius:14px;
     padding:10px 12px;
@@ -797,6 +797,18 @@
     line-height:1.7;
     font-weight:600;
     word-wrap:break-word;
+    animation: msgIn .22s var(--ease);
+  }
+
+  @keyframes msgIn{
+    from{
+      opacity:0;
+      transform:translateY(6px) scale(.99);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
   }
 
   .ai-msg.bot{
@@ -807,6 +819,23 @@
   .ai-msg.user{
     background: var(--card);
     justify-self:end;
+  }
+
+  .ai-msg.bot strong{
+    font-weight:900;
+  }
+
+  .ai-msg.bot a{
+    color:inherit;
+    text-decoration:none;
+    font-weight:900;
+  }
+
+  .ai-msg .mini-actions{
+    margin-top:10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
   }
 
   .ai-typing{
@@ -865,6 +894,29 @@
   .ai-chip:hover{
     background:var(--soft);
     transform:translateY(-1px);
+  }
+
+  .ai-input-row{
+    display:flex;
+    gap:8px;
+  }
+
+  .ai-input{
+    flex:1;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--text);
+    border-radius:12px;
+    padding:11px 12px;
+    font:inherit;
+    font-size:13px;
+    font-weight:600;
+    outline:none;
+  }
+
+  .ai-input:focus{
+    border-color: color-mix(in srgb, var(--text) 30%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--text) 8%, transparent);
   }
 
   .ai-reset{
@@ -1270,31 +1322,28 @@
             <div class="t-head">
               <div>
                 <div style="display:flex; align-items:center; gap:12px;">
+                  <img src="arie.jpeg"
+                       alt="ARIE Finance logo"
+                       style="width:32px;height:32px;object-fit:contain;border-radius:6px;border:1px solid var(--line);padding:3px;background:var(--card);">
+                  <div>
+                    <p class="t-title" style="margin:0;">ARIE Finance</p>
+                    <p style="margin:2px 0 0;font-size:13px;font-weight:700;opacity:.8;">
+                      KYC & Compliance Operations Intern
+                    </p>
+                  </div>
+                </div>
 
-  <img src="arie.jpeg"
-       alt="ARIE Finance logo"
-       style="width:32px;height:32px;object-fit:contain;border-radius:6px;border:1px solid var(--line);padding:3px;background:var(--card);">
-
-  <div>
-    <p class="t-title" style="margin:0;">ARIE Finance</p>
-    <p style="margin:2px 0 0;font-size:13px;font-weight:700;opacity:.8;">
-      KYC & Compliance Operations Intern
-    </p>
-  </div>
-
-</div>
-
-<p class="t-sub">Ébène, Mauritius • On-site</p>
+                <p class="t-sub">Ébène, Mauritius • On-site</p>
               </div>
               <div class="t-meta">Dec 2025 — Present</div>
             </div>
             <p class="t-desc">
-              Conduct KYC & CDD reviews for corporate/retail clients, perform sanctions & PEP screening,
-              manage ongoing monitoring and remediation, and validate onboarding documentation against internal policy and regulatory expectations.
+              Conduct KYC & CDD reviews for corporate and retail clients, perform sanctions and PEP screening,
+              support ongoing monitoring and remediation, and validate onboarding documentation against internal policy and regulatory expectations.
             </p>
             <div class="t-tags">
               <span class="tagchip">KYC / CDD</span>
-              <span class="tagchip">Screening</span>
+              <span class="tagchip">Sanctions & PEP Screening</span>
               <span class="tagchip">Ongoing Monitoring</span>
               <span class="tagchip">Documentation Quality</span>
             </div>
@@ -1341,7 +1390,7 @@
             <h3 id="featuredTitle">AML Regulations in Mauritius</h3>
             <p id="featuredDesc">
               A simplified, viewer-friendly overview of the AML/CFT ecosystem in Mauritius:
-              reporting flow, core obligations (CDD/EDD, STR, RBA), and how key bodies interact across supervision and intelligence.
+              reporting flow, core obligations, risk-based controls, and how key bodies interact across supervision and intelligence.
             </p>
 
             <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;" id="featuredBadges">
@@ -1373,7 +1422,7 @@
           <div class="tile reveal">
             <div class="tag"><span class="sq"></span>Project</div>
             <h4>Screening & Escalation Logic</h4>
-            <p>Mapping sanctions/PEP/adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
+            <p>Mapping sanctions, PEP, and adverse media checks into consistent escalation decisions and defensible record-keeping.</p>
           </div>
 
           <div class="tile reveal">
@@ -1384,6 +1433,7 @@
         </div>
       </div>
     </section>
+
         <!-- CONTACT -->
     <section class="card section anchor reveal" id="contact">
       <div class="section-head">
@@ -1443,37 +1493,37 @@
 
       <div class="foot-sub">
         <div>© 2026 Bhishek Shibdeen</div>
-        <div style="opacity:.9;">Tip: click the featured card to open the PDF ✨</div>
+        <div style="opacity:.9;">Tip: ask the portfolio assistant about projects, CV, or contact ✨</div>
       </div>
     </footer>
   </div>
 
-   <!-- AI Chat Box -->
-  <div class="ai-chat-wrap" aria-label="AI quick chat">
+  <!-- AI Chat Box -->
+  <div class="ai-chat-wrap" aria-label="Portfolio assistant">
     <div class="ai-chat closed" id="aiChatBox">
       <div class="ai-chat-head">
         <div class="ai-chat-title">
           <span class="ai-dot"></span>
           <div>
-            <strong>AI Assistant</strong>
-            <span>Quick portfolio answers</span>
+            <strong>Portfolio Assistant</strong>
+            <span>Quick answers about Bhishek</span>
           </div>
         </div>
 
         <div class="ai-head-actions">
-          <button class="ai-head-btn" id="aiMinBtn" type="button" aria-label="Minimize AI chat">−</button>
+          <button class="ai-head-btn" id="aiMinBtn" type="button" aria-label="Minimize portfolio assistant">−</button>
         </div>
       </div>
 
       <div class="ai-chat-body">
         <div class="ai-log" id="aiLog">
           <div class="ai-msg bot">
-            Hi — choose a question below and I’ll answer instantly.
+            Welcome — I’m Bhishek’s portfolio assistant. I can help you explore his background in Compliance, AML/CFT, Risk, certifications, project work, and contact options.
           </div>
         </div>
 
         <div class="ai-typing" id="aiTyping">
-          <span>AI is typing...</span>
+          <span>Assistant is typing...</span>
           <span class="typing-dots" aria-hidden="true">
             <span></span><span></span><span></span>
           </span>
@@ -1484,14 +1534,26 @@
           <button class="ai-chip" type="button" data-question="What experience does he have?">What experience does he have?</button>
           <button class="ai-chip" type="button" data-question="What certifications does he hold?">What certifications does he hold?</button>
           <button class="ai-chip" type="button" data-question="What are his main projects?">What are his main projects?</button>
+          <button class="ai-chip" type="button" data-question="Can I view his CV?">Can I view his CV?</button>
           <button class="ai-chip" type="button" data-question="How can I contact him?">How can I contact him?</button>
+        </div>
+
+        <div class="ai-input-row">
+          <input
+            id="aiInput"
+            class="ai-input"
+            type="text"
+            placeholder="Ask about experience, projects, certifications, CV..."
+            aria-label="Ask the portfolio assistant"
+          />
+          <button class="btn" id="aiSendBtn" type="button">Send</button>
         </div>
 
         <button class="btn ai-reset" id="aiResetBtn" type="button">Reset chat</button>
       </div>
     </div>
 
-    <button class="ai-launch" id="aiLaunchBtn" type="button" aria-label="Open AI chat">
+    <button class="ai-launch" id="aiLaunchBtn" type="button" aria-label="Open portfolio assistant">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path fill="currentColor" d="M12 3c4.97 0 9 3.58 9 8c0 2.18-.98 4.16-2.58 5.6L19 21l-4.14-2.07c-.9.2-1.86.31-2.86.31c-4.97 0-9-3.58-9-8s4.03-8.24 9-8.24zm-4 7.5a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5zm4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5zm4 0a1.25 1.25 0 1 0 0 2.5a1.25 1.25 0 0 0 0-2.5z"/>
       </svg>
@@ -1845,7 +1907,7 @@
     }
   })();
 
-   // ===== AI Chat =====
+  // ===== AI Chat =====
   (function(){
     const chatBox = document.getElementById("aiChatBox");
     const launchBtn = document.getElementById("aiLaunchBtn");
@@ -1854,37 +1916,104 @@
     const typing = document.getElementById("aiTyping");
     const questionsWrap = document.getElementById("aiQuestions");
     const resetBtn = document.getElementById("aiResetBtn");
+    const aiInput = document.getElementById("aiInput");
+    const aiSendBtn = document.getElementById("aiSendBtn");
 
-    if(!chatBox || !launchBtn || !minBtn || !log || !typing || !questionsWrap || !resetBtn) return;
+    if(!chatBox || !launchBtn || !minBtn || !log || !typing || !questionsWrap || !resetBtn || !aiInput || !aiSendBtn) return;
 
     const initialQuestions = [
       "What does Bhishek do?",
       "What experience does he have?",
       "What certifications does he hold?",
       "What are his main projects?",
+      "Can I view his CV?",
       "How can I contact him?"
     ];
 
     const answers = {
       "What does Bhishek do?": {
-        text: "Bhishek is building his path in Compliance, AML/CFT, and Risk. His work focuses on risk-based onboarding, due diligence support, screening logic, and maintaining review-ready documentation.",
-        followups: ["What experience does he have?", "What are his main projects?"]
+        text: `
+          <div>
+            Bhishek is building his path in <strong>Compliance, AML/CFT, and Risk</strong>, with practical exposure to onboarding, screening, and documentation controls.
+            <div class="mini-actions">
+              <button class="ai-chip" data-follow="What experience does he have?">Experience</button>
+              <button class="ai-chip" data-follow="What are his main projects?">Projects</button>
+            </div>
+          </div>
+        `,
+        followups: ["What experience does he have?", "What are his main projects?"],
+        html: true
       },
+
       "What experience does he have?": {
-        text: "He is currently a KYC & Compliance Operations Intern at ARIE Finance in Ébène, Mauritius, where he conducts KYC and CDD reviews, performs sanctions and PEP screening, supports ongoing monitoring, and validates onboarding files against internal policy and regulatory expectations.",
-        followups: ["What does Bhishek do?", "How can I contact him?"]
+        text: `
+          <div>
+            He is currently a <strong>KYC & Compliance Operations Intern at ARIE Finance</strong> in Ébène, Mauritius. His work includes KYC and CDD reviews, sanctions and PEP screening, ongoing monitoring support, and validation of onboarding files against internal policy and regulatory expectations.
+            <div class="mini-actions">
+              <button class="ai-chip" data-follow="What does Bhishek do?">What he does</button>
+              <button class="ai-chip" data-follow="How can I contact him?">Contact</button>
+            </div>
+          </div>
+        `,
+        followups: ["What does Bhishek do?", "How can I contact him?"],
+        html: true
       },
+
       "What certifications does he hold?": {
-        text: "His certifications include Financial Markets from Yale University on Coursera, AML Essentials from the Financial Crime Academy, and DELF B2 in French language proficiency.",
-        followups: ["What are his main projects?", "How can I contact him?"]
+        text: `
+          <div>
+            His certifications include <strong>Financial Markets by Yale University</strong>, <strong>AML Essentials from the Financial Crime Academy</strong>, and <strong>DELF B2</strong> in French language proficiency.
+            <div class="mini-actions">
+              <button class="ai-chip" data-follow="What are his main projects?">Projects</button>
+              <button class="ai-chip" data-follow="Can I view his CV?">Open CV</button>
+            </div>
+          </div>
+        `,
+        followups: ["What are his main projects?", "Can I view his CV?"],
+        html: true
       },
+
       "What are his main projects?": {
-        text: "His featured work includes AML Regulations in Mauritius, a KYC Controls Overview, Screening & Escalation Logic, and Documentation Discipline — all focused on practical compliance and financial crime risk topics.",
-        followups: ["What certifications does he hold?", "How can I contact him?"]
+        text: `
+          <div style="display:grid; gap:10px;">
+            <div>His main portfolio work includes the following:</div>
+            <div class="mini-actions">
+              <a class="btn" href="AML_Regulations_Mauritius.pdf" target="_blank" rel="noreferrer">AML Regulations in Mauritius ↗</a>
+              <a class="btn" href="KYC_Controls_Overview.pdf" target="_blank" rel="noreferrer">KYC Controls Overview ↗</a>
+            </div>
+            <div>He also highlights <strong>Screening & Escalation Logic</strong> and <strong>Documentation Discipline</strong> as practical compliance-focused projects.</div>
+          </div>
+        `,
+        followups: ["What certifications does he hold?", "How can I contact him?"],
+        html: true
       },
+
+      "Can I view his CV?": {
+        text: `
+          <div style="display:grid; gap:10px;">
+            <div>Yes — you can open Bhishek’s CV directly below.</div>
+            <div class="mini-actions">
+              <a class="btn primary" href="CV_Bhishek_Shibdeen.pdf" target="_blank" rel="noreferrer">Open CV ↗</a>
+            </div>
+          </div>
+        `,
+        followups: ["What experience does he have?", "How can I contact him?"],
+        html: true
+      },
+
       "How can I contact him?": {
-        text: "You can contact Bhishek by email at bhishek.shibdeen@icloud.com, by phone at +230 55024085, or through his LinkedIn profile.",
-        followups: ["What does Bhishek do?", "What experience does he have?"]
+        text: `
+          <div style="display:grid; gap:10px;">
+            <div>You can contact <strong>Bhishek</strong> through any of the options below:</div>
+            <div class="mini-actions">
+              <a class="btn" href="mailto:bhishek.shibdeen@icloud.com">Email</a>
+              <a class="btn" href="tel:+23055024085">Call</a>
+              <a class="btn" href="https://www.linkedin.com/in/bhishekshibdeen/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            </div>
+          </div>
+        `,
+        followups: ["What does Bhishek do?", "What experience does he have?"],
+        html: true
       }
     };
 
@@ -1900,12 +2029,28 @@
       }
     }
 
-    function addMessage(text, role){
+    function addMessage(content, role, isHTML = false){
       const el = document.createElement("div");
       el.className = "ai-msg " + role;
-      el.textContent = text;
+
+      if(isHTML){
+        el.innerHTML = content;
+      }else{
+        el.textContent = content;
+      }
+
       log.appendChild(el);
+      bindInlineFollowups(el);
       log.scrollTop = log.scrollHeight;
+    }
+
+    function bindInlineFollowups(scope){
+      scope.querySelectorAll("[data-follow]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const q = btn.getAttribute("data-follow");
+          if(q) handleQuestion(q);
+        });
+      });
     }
 
     function showTyping(){
@@ -1930,6 +2075,31 @@
       });
     }
 
+    function getAnswerFromInput(value){
+      const q = value.toLowerCase().trim();
+
+      if(q.includes("experience") || q.includes("intern") || q.includes("arie")){
+        return "What experience does he have?";
+      }
+      if(q.includes("cert") || q.includes("yale") || q.includes("delf") || q.includes("aml essentials")){
+        return "What certifications does he hold?";
+      }
+      if(q.includes("project") || q.includes("work") || q.includes("portfolio") || q.includes("pdf")){
+        return "What are his main projects?";
+      }
+      if(q.includes("contact") || q.includes("email") || q.includes("phone") || q.includes("linkedin") || q.includes("reach")){
+        return "How can I contact him?";
+      }
+      if(q.includes("cv") || q.includes("resume")){
+        return "Can I view his CV?";
+      }
+      if(q.includes("do") || q.includes("who") || q.includes("about") || q.includes("background")){
+        return "What does Bhishek do?";
+      }
+
+      return null;
+    }
+
     function handleQuestion(question){
       const entry = answers[question];
       if(!entry) return;
@@ -1939,23 +2109,58 @@
 
       setTimeout(() => {
         hideTyping();
-        addMessage(entry.text, "bot");
+        addMessage(entry.text, "bot", !!entry.html);
         renderQuestions(entry.followups && entry.followups.length ? entry.followups : initialQuestions);
-      }, 950);
+      }, 850);
+    }
+
+    function handleTypedQuestion(){
+      const value = aiInput.value.trim();
+      if(!value) return;
+
+      addMessage(value, "user");
+      aiInput.value = "";
+      showTyping();
+
+      setTimeout(() => {
+        hideTyping();
+
+        const matched = getAnswerFromInput(value);
+        if(matched && answers[matched]){
+          const entry = answers[matched];
+          addMessage(entry.text, "bot", !!entry.html);
+          renderQuestions(entry.followups && entry.followups.length ? entry.followups : initialQuestions);
+        } else {
+          addMessage(
+            "I can currently help with Bhishek’s experience, certifications, projects, CV, and contact details.",
+            "bot"
+          );
+          renderQuestions(initialQuestions);
+        }
+      }, 800);
     }
 
     function resetChat(){
       log.innerHTML = "";
-      addMessage("Hi — choose a question below and I’ll answer instantly.", "bot");
+      addMessage(
+        "Welcome — I’m Bhishek’s portfolio assistant. I can help you explore his background in Compliance, AML/CFT, Risk, certifications, project work, and contact options.",
+        "bot"
+      );
       hideTyping();
       renderQuestions(initialQuestions);
+      aiInput.value = "";
     }
 
     launchBtn.addEventListener("click", () => setOpen(true));
     minBtn.addEventListener("click", () => setOpen(false));
     resetBtn.addEventListener("click", resetChat);
+    aiSendBtn.addEventListener("click", handleTypedQuestion);
 
-    const firstVisitKey = "bhishek_ai_chat_opened";
+    aiInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") handleTypedQuestion();
+    });
+
+    const firstVisitKey = "bhishek_ai_chat_opened_v2";
     const alreadyOpened = localStorage.getItem(firstVisitKey);
 
     resetChat();
