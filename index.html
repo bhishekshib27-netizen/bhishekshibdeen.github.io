@@ -1163,10 +1163,9 @@
             <span style="font-weight:820; opacity:0.70;">Compliance • AML/CFT • Risk</span>
           </div>
 
-          <p class="subtitle">
-            I build competence in <strong>Compliance</strong> and <strong>Financial Crime Risk</strong> through structured work:
-            risk-based onboarding, due diligence support, screening logic, and documentation discipline that stays review-ready.
-          </p>
+     <p class="subtitle">
+  Aspiring <strong>AML</strong> and <strong>Compliance</strong> professional with practical exposure to risk-based onboarding, KYC/CDD reviews, screening controls, and documentation quality processes that support review-ready files.
+</p>
 
           <div class="cta">
             <a class="btn primary" href="#projects">View projects ↓</a>
@@ -1616,33 +1615,49 @@
   }
 
   // ===== Theme =====
-  (function(){
-    const root = document.documentElement;
-    const btn = document.getElementById("themeToggle");
-    const label = document.getElementById("themeLabel");
-    const icon = document.getElementById("themeIcon");
+(function(){
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+  const label = document.getElementById("themeLabel");
+  const icon = document.getElementById("themeIcon");
 
-    function setTheme(mode){
-      if(mode === "dark") root.setAttribute("data-theme","dark");
-      else root.removeAttribute("data-theme");
-      localStorage.setItem("theme", mode);
-
-      const isDark = mode === "dark";
-      label.textContent = isDark ? "Light" : "Dark";
-
-      icon.innerHTML = isDark
-        ? '<path fill="currentColor" d="M21 14.5A7.5 7.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5z"/>'
-        : '<path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>';
+  function setTheme(mode){
+    if(mode === "dark"){
+      root.setAttribute("data-theme","dark");
+    } else {
+      root.removeAttribute("data-theme");
     }
 
-    const saved = localStorage.getItem("theme");
-    setTheme(saved === "dark" ? "dark" : "light");
+    localStorage.setItem("theme", mode);
 
-    btn.addEventListener("click", () => {
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      setTheme(isDark ? "light" : "dark");
-    });
-  })();
+    const isDark = mode === "dark";
+    label.textContent = isDark ? "Light" : "Dark";
+
+    icon.innerHTML = isDark
+      ? '<path fill="currentColor" d="M21 14.5A7.5 7.5 0 0 1 9.5 3a6.5 6.5 0 1 0 11.5 11.5z"/>'
+      : '<path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4 11h2a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2zm14 0h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2zM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10z"/>';
+  }
+
+  // Check saved theme
+  let saved = localStorage.getItem("theme");
+
+  // If no saved preference → detect system preference
+  if(!saved){
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    saved = prefersDark ? "dark" : "light";
+  }
+
+  setTheme(saved);
+
+  btn.addEventListener("click", () => {
+    const isDark = root.getAttribute("data-theme") === "dark";
+    setTheme(isDark ? "light" : "dark");
+   body{
+  transition: background 0.35s ease, color 0.35s ease;
+}
+  });
+
+})();
 
   // ===== Scroll progress =====
   (function(){
