@@ -2063,12 +2063,19 @@
         }
       }
 
-      ctx.fillStyle = dotColor;
       for(const p of particles){
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-      }
+
+  // 7% of particles become red
+  if(Math.random() < 0.05){
+    ctx.fillStyle = "rgba(220,40,40,0.85)";
+  }else{
+    ctx.fillStyle = dotColor;
+  }
+
+  ctx.beginPath();
+  ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+  ctx.fill();
+}
 
       requestAnimationFrame(draw);
     }
